@@ -11,9 +11,9 @@ module "db_subnet_group" {
   tags = "${var.tags}"
 }
 
-##################################################
-# DB subnet group with all subnets in default VPC
-##################################################
+#####################
+# DB parameter group
+#####################
 module "db_parameter_group" {
   source = "./modules/db_parameter_group"
 
