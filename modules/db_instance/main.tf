@@ -22,6 +22,7 @@ resource "aws_db_instance" "this" {
   multi_az            = "${var.multi_az}"
   iops                = "${var.iops}"
   publicly_accessible = "${var.publicly_accessible}"
+  monitoring_interval = "${var.monitoring_interval}"
 
   allow_major_version_upgrade = "${var.allow_major_version_upgrade}"
   auto_minor_version_upgrade  = "${var.auto_minor_version_upgrade}"
