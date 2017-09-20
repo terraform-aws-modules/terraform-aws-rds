@@ -49,6 +49,17 @@ module "db" {
   
   # DB parameter group
   family = "mysql5.7"
+
+  parameters = [
+    { 
+      name = "character_set_client"
+      value = "utf8"
+    },
+    { 
+      name = "character_set_server"
+      value = "utf8"
+    }
+  ]
 }
 ```
 
