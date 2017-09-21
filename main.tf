@@ -21,7 +21,7 @@ module "db_parameter_group" {
   name_prefix = "${var.identifier}-"
   family      = "${var.family}"
 
-  //  parameter = ["${var.parameters}"]
+  parameters = ["${var.parameters}"]
 
   tags = "${var.tags}"
 }
