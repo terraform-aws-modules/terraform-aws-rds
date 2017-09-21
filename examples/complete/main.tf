@@ -52,4 +52,7 @@ module "db" {
 
   # DB parameter group
   family = "mysql5.7"
+
+  # Snapshot name upon DB deletion
+  final_snapshot_identifier = "demodb"
 }

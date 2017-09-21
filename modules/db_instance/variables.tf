@@ -39,6 +39,10 @@ variable "port" {
   description = "The port on which the DB accepts connections"
 }
 
+variable "final_snapshot_identifier" {
+  description = "The name of your final DB snapshot when this DB instance is deleted."
+}
+
 variable "vpc_security_group_ids" {
   description = "List of VPC security groups to associate"
   default     = []
