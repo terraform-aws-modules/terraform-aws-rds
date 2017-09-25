@@ -166,3 +166,8 @@ variable "tags" {
   description = "A mapping of tags to assign to all resources"
   default     = {}
 }
+
+variable "option_group_name" {
+  description = "Name of the DB option group to associate."
+  default     = ""
+}

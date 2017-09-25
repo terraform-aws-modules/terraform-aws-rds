@@ -58,6 +58,9 @@ module "db" {
   # DB parameter group
   family = "oracle-ee-12.1"
 
+  # DB option group
+  major_engine_version = "12.1"
+
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
 }

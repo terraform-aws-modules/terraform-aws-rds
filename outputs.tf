@@ -80,3 +80,14 @@ output "this_db_parameter_group_arn" {
   description = "The ARN of the db parameter group"
   value       = "${module.db_parameter_group.this_db_parameter_group_arn}"
 }
+
+# DB option group
+output "this_db_option_group_id" {
+  description = "The db option group id"
+  value       = "${module.db_option_group.this_db_option_group_id}"
+}
+
+output "this_db_option_group_arn" {
+  description = "The ARN of the db option group"
+  value       = "${module.db_option_group.this_db_option_group_arn}"
+}
