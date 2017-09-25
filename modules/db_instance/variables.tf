@@ -178,6 +178,11 @@ variable "tags" {
   default     = {}
 }
 
+variable "option_group_name" {
+  description = "Name of the DB option group to associate."
+  default     = ""
+}
+
 variable "timezone" {
   description = "(Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information."
   default     = ""
