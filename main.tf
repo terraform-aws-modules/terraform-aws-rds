@@ -39,6 +39,7 @@ module "db_instance" {
   instance_class    = "${var.instance_class}"
   allocated_storage = "${var.allocated_storage}"
   storage_type      = "${var.storage_type}"
+  storage_encrypted = "${var.storage_encrypted}"
 
   name     = "${var.name}"
   username = "${var.username}"

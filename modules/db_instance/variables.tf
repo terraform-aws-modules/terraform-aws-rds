@@ -11,6 +11,11 @@ variable "storage_type" {
   default     = "gp2"
 }
 
+variable "storage_encrypted" {
+  description = "Specifies whether the DB instance is encrypted"
+  default     = false
+}
+
 variable "engine" {
   description = "The database engine to use"
 }
