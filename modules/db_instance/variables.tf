@@ -126,8 +126,3 @@ variable "tags" {
   description = "A mapping of tags to assign to all resources"
   default     = {}
 }
-
-variable "storage_encrypted" {
-  description = "Defines if the storage should be encrypted or not"
-  default     = false
-}
