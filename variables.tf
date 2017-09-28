@@ -16,6 +16,11 @@ variable "storage_encrypted" {
   default     = false
 }
 
+variable "kms_key_id" {
+  description = "The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN."
+  default = ""
+}
+
 variable "engine" {
   description = "The database engine to use"
 }
