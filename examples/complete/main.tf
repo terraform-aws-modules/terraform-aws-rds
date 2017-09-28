@@ -30,7 +30,7 @@ module "db" {
   engine_version    = "5.7.11"
   instance_class    = "db.t2.large"
   allocated_storage = 5
-  storage_encrypted = true
+  storage_encrypted = false
   # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
 
   name     = "demodb"
