@@ -9,6 +9,8 @@ resource "aws_db_instance" "this" {
   instance_class    = "${var.instance_class}"
   allocated_storage = "${var.allocated_storage}"
   storage_type      = "${var.storage_type}"
+  storage_encrypted = "${var.storage_encrypted}"
+  kms_key_id        = "${var.kms_key_id}"
 
   name     = "${var.name}"
   username = "${var.username}"
