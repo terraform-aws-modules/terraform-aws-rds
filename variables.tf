@@ -122,6 +122,11 @@ variable "tags" {
   default     = {}
 }
 
+variable "encrypted" {
+  description = "Defines wether this instance should be encrypted or not"
+  default     = false
+}
+
 # DB subnet group
 variable "subnet_ids" {
   type        = "list"
