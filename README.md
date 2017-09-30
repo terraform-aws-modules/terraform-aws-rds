@@ -39,9 +39,9 @@ module "db" {
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
 
-  # Enhanced Monitoring
-  monitoring_interval = "${var.monitoring_interval}
-  monitoring_role_arn = "${var.monitoring_interval == "0" ? "" : aws_iam_role.rds_monitoring.arn}"
+  # Enhanced Monitoring - see example for details on how to create the role
+  # monitoring_interval = "10"
+  # monitoring_role_arn = "aws_iam_role.rds_enhanced_monitoring.arn"
   
   tags = {
     Owner       = "user"
