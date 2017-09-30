@@ -65,5 +65,8 @@ module "db_instance" {
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.backup_window}"
 
+  monitoring_interval = "${var.monitoring_interval}"
+  monitoring_role_arn = "${var.monitoring_role_arn}"
+
   tags = "${var.tags}"
 }
