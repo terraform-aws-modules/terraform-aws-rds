@@ -40,8 +40,8 @@ module "db" {
   backup_window      = "03:00-06:00"
 
   # Enhanced Monitoring - see example for details on how to create the role
-  # monitoring_interval = "10"
-  # monitoring_role_arn = "aws_iam_role.rds_enhanced_monitoring.arn"
+  monitoring_interval = "30"
+  monitoring_role_arn = "arn:aws:iam::123456789012:role/rds-monitoring-role"
   
   tags = {
     Owner       = "user"
