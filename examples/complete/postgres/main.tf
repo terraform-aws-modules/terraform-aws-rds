@@ -34,6 +34,9 @@ module "db" {
   # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
 
   name     = "demodb"
+  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
+  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
+  # user cannot be used as it is a reserved word used by the engine"
   username = "demouser"
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "5432"
