@@ -51,6 +51,7 @@ variable "port" {
 
 variable "final_snapshot_identifier" {
   description = "The name of your final DB snapshot when this DB instance is deleted."
+  default     = ""
 }
 
 variable "vpc_security_group_ids" {
