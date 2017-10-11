@@ -11,9 +11,9 @@ These types of resources are supported:
 
 Root module calls these modules which can also be used separately to create independent resources:
 
-* [db_instance](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_instance) - creates RDS DB instance
-* [db_subnet_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_subnet_group) - creates RDS DB subnet group
-* [db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) - creates RDS DB group
+* [db_instance](modules/db_instance) - creates RDS DB instance
+* [db_subnet_group](modules/db_subnet_group) - creates RDS DB subnet group
+* [db_parameter_group](modules/db_parameter_group) - creates RDS DB group
 
 Usage
 -----
@@ -70,13 +70,13 @@ module "db" {
 Examples
 --------
 
-* [Complete RDS example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete)
-* [Enhanced monitoring example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/enhanced_monitoring)
+* [Complete RDS example](examples/complete)
+* [Enhanced monitoring example](examples/enhanced_monitoring)
 
 Limitations
 -----------
 
-* [module db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) does not implement setting of parameters
+* [module db_parameter_group](modules/db_parameter_group) does not implement setting of parameters
 
 Notes
 -----
