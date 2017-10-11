@@ -66,7 +66,8 @@ module "db" {
 Examples
 --------
 
-* [Complete RDS example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete)
+* [Complete RDS example for MySQL](https://github.com/yamaszone/terraform-aws-rds/tree/master/examples/complete/mysql)
+* [Complete RDS example for PostgreSQL](https://github.com/yamaszone/terraform-aws-rds/tree/master/examples/complete/postgres)
 
 Limitations
 -----------
