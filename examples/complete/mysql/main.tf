@@ -22,7 +22,7 @@ data "aws_security_group" "default" {
 # DB
 #####
 module "db" {
-  source = "../../"
+  source = "../../../"
 
   identifier = "demodb"
 
