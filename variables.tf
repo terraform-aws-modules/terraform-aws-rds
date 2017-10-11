@@ -11,6 +11,16 @@ variable "storage_type" {
   default     = "gp2"
 }
 
+variable "storage_encrypted" {
+  description = "Specifies whether the DB instance is encrypted"
+  default     = false
+}
+
+variable "kms_key_id" {
+  description = "The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used"
+  default     = ""
+}
+
 variable "engine" {
   description = "The database engine to use"
 }
@@ -71,6 +81,16 @@ variable "iops" {
 variable "publicly_accessible" {
   description = "Bool to control if instance is publicly accessible"
   default     = false
+}
+
+variable "monitoring_interval" {
+  description = "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60."
+  default     = 0
+}
+
+variable "monitoring_role_arn" {
+  description = "The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. Must be specified if monitoring_interval is non-zero."
+  default     = ""
 }
 
 variable "allow_major_version_upgrade" {

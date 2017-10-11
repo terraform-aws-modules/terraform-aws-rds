@@ -39,6 +39,8 @@ module "db_instance" {
   instance_class    = "${var.instance_class}"
   allocated_storage = "${var.allocated_storage}"
   storage_type      = "${var.storage_type}"
+  storage_encrypted = "${var.storage_encrypted}"
+  kms_key_id        = "${var.kms_key_id}"
 
   name     = "${var.name}"
   username = "${var.username}"
@@ -63,6 +65,9 @@ module "db_instance" {
 
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.backup_window}"
+
+  monitoring_interval = "${var.monitoring_interval}"
+  monitoring_role_arn = "${var.monitoring_role_arn}"
 
   tags = "${var.tags}"
 }
