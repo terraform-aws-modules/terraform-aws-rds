@@ -71,6 +71,7 @@ Examples
 --------
 
 * [Complete RDS example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete)
+* [Enhanced monitoring example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/enhanced_monitoring)
 
 Limitations
 -----------
@@ -86,6 +87,7 @@ Authors
 -------
 
 Migrated from `terraform-community-modules/tf_aws_rds`, where it was maintained by [these awesome contributors](https://github.com/terraform-community-modules/tf_aws_rds/graphs/contributors).
+Currently maintained by [these awesome contributors](https://github.com/terraform-aws-modules/terraform-aws-rds/graphs/contributors).
 Module managed by [Anton Babenko](https://github.com/antonbabenko).
 
 License
