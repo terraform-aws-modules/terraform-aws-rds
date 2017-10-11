@@ -18,6 +18,34 @@ data "aws_security_group" "default" {
   name   = "default"
 }
 
+##################################################
+# Create an IAM role to allow enhanced monitoring
+##################################################
+resource "aws_iam_role" "rds_enhanced_monitoring" {
+  name               = "rds-enhanced_monitoring-role"
+  assume_role_policy = "${data.aws_iam_policy_document.rds_enhanced_monitoring.json}"
+}
+
+resource "aws_iam_role_policy_attachment" "rds_enhanced_monitoring" {
+  role       = "${aws_iam_role.rds_enhanced_monitoring.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+}
+
+data "aws_iam_policy_document" "rds_enhanced_monitoring" {
+  statement {
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["monitoring.rds.amazonaws.com"]
+    }
+  }
+}
+
 #####
 # DB
 #####
@@ -49,5 +77,7 @@ module "db" {
   # DB subnet group
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
   # DB parameter group
-  family = "mysql5.7"
+  family              = "mysql5.7"
+  monitoring_interval = "30"
+  monitoring_role_arn = "${aws_iam_role.rds_enhanced_monitoring.arn}"
 }
