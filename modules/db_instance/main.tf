@@ -25,6 +25,7 @@ resource "aws_db_instance" "this" {
   iops                = "${var.iops}"
   publicly_accessible = "${var.publicly_accessible}"
   monitoring_interval = "${var.monitoring_interval}"
+  monitoring_role_arn = "${var.monitoring_role_arn}"
 
   allow_major_version_upgrade = "${var.allow_major_version_upgrade}"
   auto_minor_version_upgrade  = "${var.auto_minor_version_upgrade}"
@@ -32,6 +33,7 @@ resource "aws_db_instance" "this" {
   maintenance_window          = "${var.maintenance_window}"
   skip_final_snapshot         = "${var.skip_final_snapshot}"
   copy_tags_to_snapshot       = "${var.copy_tags_to_snapshot}"
+  final_snapshot_identifier   = "${var.final_snapshot_identifier}"
 
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.backup_window}"
