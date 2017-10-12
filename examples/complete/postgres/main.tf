@@ -57,4 +57,7 @@ module "db" {
 
   # DB parameter group
   family = "postgres9.6"
+
+  # Snapshot name upon DB deletion
+  final_snapshot_identifier = "demodb"
 }
