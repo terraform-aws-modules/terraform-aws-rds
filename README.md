@@ -56,7 +56,7 @@ module "db" {
 
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
-  
+
   parameters = [
     {
       name = "character_set_client"
@@ -73,7 +73,8 @@ module "db" {
 Examples
 --------
 
-* [Complete RDS example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete)
+* [Complete RDS example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete/mysql)
+* [Complete RDS example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete/postgres)
 * [Enhanced monitoring example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/enhanced_monitoring)
 
 Limitations
