@@ -50,4 +50,7 @@ module "db" {
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
   # DB parameter group
   family = "mysql5.7"
+
+  # Snapshot name upon DB deletion
+  final_snapshot_identifier = "demodb"
 }
