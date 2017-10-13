@@ -57,6 +57,4 @@ module "db" {
 
   # DB parameter group
   family = "mysql5.7"
-
-  db_parameters_group = ["${var.db_parameters_group}"]
 }
