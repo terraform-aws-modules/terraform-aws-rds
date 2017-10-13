@@ -17,7 +17,7 @@ resource "aws_db_instance" "this" {
   password = "${var.password}"
   port     = "${var.port}"
 
-  replicate_source_db = "${var.source_db}"
+  replicate_source_db = "${var.replicate_source_db}"
 
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   db_subnet_group_name   = "${var.db_subnet_group_name}"

@@ -21,8 +21,8 @@ variable "kms_key_id" {
   default = ""
 }
 
-variable "source_db" {
-  description = "The master DB for replica"
+variable "replicate_source_db" {
+  description = "Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate."
   default     = ""
 }
 
