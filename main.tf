@@ -47,6 +47,8 @@ module "db_instance" {
   password = "${var.password}"
   port     = "${var.port}"
 
+  source_db = "${var.source_db}"
+
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   db_subnet_group_name   = "${module.db_subnet_group.this_db_subnet_group_id}"
   parameter_group_name   = "${module.db_parameter_group.this_db_parameter_group_id}"

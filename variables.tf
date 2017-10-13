@@ -21,6 +21,11 @@ variable "kms_key_id" {
   default = ""
 }
 
+variable "source_db" {
+  description = "The master DB for replica"
+  default     = ""
+}
+
 variable "engine" {
   description = "The database engine to use"
 }
