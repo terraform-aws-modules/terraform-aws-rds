@@ -44,6 +44,9 @@ module "db" {
   backup_window           = "03:00-06:00"
   backup_retention_period = 0                     // disable backups to create DB faster
 
+  # On replica option - Source DB for RDS replica 
+  replicate_source_db = "${var.replicate_source_db}"
+
   tags = {
     Owner       = "user"
     Environment = "dev"
