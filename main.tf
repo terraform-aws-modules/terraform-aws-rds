@@ -41,11 +41,13 @@ module "db_instance" {
   storage_type      = "${var.storage_type}"
   storage_encrypted = "${var.storage_encrypted}"
   kms_key_id        = "${var.kms_key_id}"
+  license_model     = "${var.license_model}"
 
-  name     = "${var.name}"
-  username = "${var.username}"
-  password = "${var.password}"
-  port     = "${var.port}"
+  name                                = "${var.name}"
+  username                            = "${var.username}"
+  password                            = "${var.password}"
+  port                                = "${var.port}"
+  iam_database_authentication_enabled = "${var.iam_database_authentication_enabled}"
 
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   db_subnet_group_name   = "${module.db_subnet_group.this_db_subnet_group_id}"
