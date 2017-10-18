@@ -21,6 +21,16 @@ variable "kms_key_id" {
   default     = ""
 }
 
+variable "license_model" {
+  description = "License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1"
+  default     = ""
+}
+
+variable "iam_database_authentication_enabled" {
+  description = "Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled"
+  default     = false
+}
+
 variable "engine" {
   description = "The database engine to use"
 }
