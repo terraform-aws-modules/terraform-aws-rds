@@ -34,6 +34,8 @@ module "db" {
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "3306"
 
+  iam_database_authentication_enabled = true
+
   vpc_security_group_ids = ["sg-12345678"]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
@@ -43,7 +45,6 @@ module "db" {
   # Enhanced Monitoring - see example for details on how to create the role
   monitoring_interval = "30"
   monitoring_role_arn = "arn:aws:iam::123456789012:role/rds-monitoring-role"
-  
 
   tags = {
     Owner       = "user"
@@ -77,23 +78,19 @@ Examples
 
 * [Complete RDS example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete/mysql)
 * [Complete RDS example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete/postgres)
+* [Complete RDS example for Oracle](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete/oracle)
 * [Enhanced monitoring example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/enhanced_monitoring)
-
-Limitations
------------
-
-* [module db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) does not implement setting of parameters
 
 Notes
 -----
 
-1. This module does not create RDS security group. Use [terraform-aws-sg](https://github.com/terraform-aws-modules/terraform-aws-sg) module for this.
+1. This module does not create RDS security group. Use [terraform-aws-security-group](https://github.com/terraform-aws-modules/terraform-aws-security-group) module for this.
 
 Authors
 -------
 
-Migrated from `terraform-community-modules/tf_aws_rds`, where it was maintained by [these awesome contributors](https://github.com/terraform-community-modules/tf_aws_rds/graphs/contributors).
 Currently maintained by [these awesome contributors](https://github.com/terraform-aws-modules/terraform-aws-rds/graphs/contributors).
+Migrated from `terraform-community-modules/tf_aws_rds`, where it was maintained by [these awesome contributors](https://github.com/terraform-community-modules/tf_aws_rds/graphs/contributors).
 Module managed by [Anton Babenko](https://github.com/antonbabenko).
 
 License

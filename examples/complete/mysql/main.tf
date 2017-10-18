@@ -33,21 +33,27 @@ module "db" {
   storage_encrypted = false
 
   # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
+  name     = "demodb"
+  username = "user"
+  password = "YourPwdShouldBeLongAndSecure!"
+  port     = "3306"
 
-  name                    = "demodb"
-  username                = "user"
-  password                = "YourPwdShouldBeLongAndSecure!"
-  port                    = "3306"
-  vpc_security_group_ids  = ["${data.aws_security_group.default.id}"]
-  maintenance_window      = "Mon:00:00-Mon:03:00"
-  backup_window           = "03:00-06:00"
-  backup_retention_period = 0                                         // disable backups to create DB faster
+  vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
+
+  maintenance_window = "Mon:00:00-Mon:03:00"
+  backup_window      = "03:00-06:00"
+
+  # disable backups to create DB faster
+  backup_retention_period = 0
+
   tags = {
     Owner       = "user"
     Environment = "dev"
   }
+
   # DB subnet group
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
+
   # DB parameter group
   family = "mysql5.7"
 

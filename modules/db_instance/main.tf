@@ -11,11 +11,13 @@ resource "aws_db_instance" "this" {
   storage_type      = "${var.storage_type}"
   storage_encrypted = "${var.storage_encrypted}"
   kms_key_id        = "${var.kms_key_id}"
+  license_model     = "${var.license_model}"
 
-  name     = "${var.name}"
-  username = "${var.username}"
-  password = "${var.password}"
-  port     = "${var.port}"
+  name                                = "${var.name}"
+  username                            = "${var.username}"
+  password                            = "${var.password}"
+  port                                = "${var.port}"
+  iam_database_authentication_enabled = "${var.iam_database_authentication_enabled}"
 
   replicate_source_db = "${var.replicate_source_db}"
 
