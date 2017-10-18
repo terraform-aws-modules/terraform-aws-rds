@@ -1,5 +1,5 @@
-Complete RDS example
-====================
+Complete RDS example for PostgreSQL
+===================================
 
 Configuration in this directory creates set of RDS resources including DB instance, DB subnet group and DB parameter group.
 

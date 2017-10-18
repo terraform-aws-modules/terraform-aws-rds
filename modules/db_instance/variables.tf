@@ -18,7 +18,7 @@ variable "storage_encrypted" {
 
 variable "kms_key_id" {
   description = "The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used"
-  default = ""
+  default     = ""
 }
 
 variable "replicate_source_db" {
@@ -52,6 +52,11 @@ variable "password" {
 
 variable "port" {
   description = "The port on which the DB accepts connections"
+}
+
+variable "final_snapshot_identifier" {
+  description = "The name of your final DB snapshot when this DB instance is deleted."
+  default     = false
 }
 
 variable "vpc_security_group_ids" {
@@ -89,6 +94,11 @@ variable "monitoring_interval" {
   default     = 0
 }
 
+variable "monitoring_role_arn" {
+  description = "The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. Must be specified if monitoring_interval is non-zero."
+  default     = ""
+}
+
 variable "allow_major_version_upgrade" {
   description = "Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible"
   default     = false
@@ -110,7 +120,7 @@ variable "maintenance_window" {
 
 variable "skip_final_snapshot" {
   description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier"
-  default     = false
+  default     = true
 }
 
 variable "copy_tags_to_snapshot" {
