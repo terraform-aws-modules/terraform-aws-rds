@@ -21,6 +21,8 @@ resource "aws_db_instance" "this" {
 
   replicate_source_db = "${var.replicate_source_db}"
 
+  snapshot_identifier = "${var.snapshot_identifier}"
+
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   db_subnet_group_name   = "${var.db_subnet_group_name}"
   parameter_group_name   = "${var.parameter_group_name}"
