@@ -26,6 +26,11 @@ variable "replicate_source_db" {
   default     = ""
 }
 
+variable "snapshot_identifier" {
+  description = "Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05."
+  default     = ""
+}
+
 variable "license_model" {
   description = "License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1"
   default     = ""
