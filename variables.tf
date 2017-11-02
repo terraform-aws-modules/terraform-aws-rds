@@ -114,6 +114,16 @@ variable "monitoring_role_arn" {
   default     = ""
 }
 
+variable "monitoring_role_name" {
+  description = "Name of the IAM role which will be created when create_monitoring_role is enabled."
+  default     = "rds-monitoring-role"
+}
+
+variable "create_monitoring_role" {
+  description = "Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs."
+  default     = false
+}
+
 variable "allow_major_version_upgrade" {
   description = "Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible"
   default     = false
