@@ -1,6 +1,22 @@
 ##############
 # DB instance
 ##############
+
+resource "aws_iam_role" "enhanced_monitoring" {
+  count = "${var.create_monitoring_role ? 1 : 0}"
+
+  name               = "${var.monitoring_role_name}"
+  assume_role_policy = "${file("${path.module}/policy/enhancedmonitoring.json")}"
+}
+
+resource "aws_iam_policy_attachment" "enhanced_monitoring" {
+  count = "${var.create_monitoring_role ? 1 : 0}"
+
+  name       = "${var.monitoring_role_name}"
+  roles      = ["${aws_iam_role.enhanced_monitoring.name}"]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+}
+
 resource "aws_db_instance" "this" {
   identifier = "${var.identifier}"
 
@@ -31,7 +47,7 @@ resource "aws_db_instance" "this" {
   iops                = "${var.iops}"
   publicly_accessible = "${var.publicly_accessible}"
   monitoring_interval = "${var.monitoring_interval}"
-  monitoring_role_arn = "${var.monitoring_role_arn}"
+  monitoring_role_arn = "${coalesce(var.monitoring_role_arn, join("", aws_iam_role.enhanced_monitoring.*.arn))}"
 
   allow_major_version_upgrade = "${var.allow_major_version_upgrade}"
   auto_minor_version_upgrade  = "${var.auto_minor_version_upgrade}"
