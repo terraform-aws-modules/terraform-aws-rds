@@ -113,6 +113,12 @@ variable "copy_tags_to_snapshot" {
   default     = false
 }
 
+variable "final_snapshot_identifier" {
+  description = "On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified)"
+  default     = "snapshot"
+}
+
+
 variable "backup_retention_period" {
   description = "The days to retain backups for"
   default     = 1
