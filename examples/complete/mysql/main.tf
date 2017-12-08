@@ -26,8 +26,9 @@ module "db" {
 
   identifier = "demodb"
 
+  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
   engine            = "mysql"
-  engine_version    = "5.7.11"
+  engine_version    = "5.7.19"
   instance_class    = "db.t2.large"
   allocated_storage = 5
   storage_encrypted = false
