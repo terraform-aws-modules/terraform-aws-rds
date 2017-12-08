@@ -11,4 +11,8 @@ resource "aws_db_parameter_group" "this" {
   parameter = ["${var.parameters}"]
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
