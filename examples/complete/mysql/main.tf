@@ -33,7 +33,7 @@ module "db" {
   allocated_storage = 5
   storage_encrypted = false
 
-  # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
+  # kms_key_arn        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
   name     = "demodb"
   username = "user"
   password = "YourPwdShouldBeLongAndSecure!"
