@@ -12,7 +12,7 @@ resource "aws_iam_role" "enhanced_monitoring" {
 resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
   count = "${var.create_monitoring_role ? 1 : 0}"
 
-  role      = "${aws_iam_role.enhanced_monitoring.name}"
+  role       = "${aws_iam_role.enhanced_monitoring.name}"
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
 }
 
@@ -42,6 +42,7 @@ resource "aws_db_instance" "this" {
   db_subnet_group_name   = "${var.db_subnet_group_name}"
   parameter_group_name   = "${var.parameter_group_name}"
 
+  availability_zone   = "${var.availability_zone}"
   multi_az            = "${var.multi_az}"
   iops                = "${var.iops}"
   publicly_accessible = "${var.publicly_accessible}"
