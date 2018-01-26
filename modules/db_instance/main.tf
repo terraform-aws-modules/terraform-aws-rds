@@ -17,6 +17,8 @@ resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
 }
 
 resource "aws_db_instance" "this" {
+  count = "${var.count}"
+
   identifier = "${var.identifier}"
 
   engine            = "${var.engine}"
