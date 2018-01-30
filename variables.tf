@@ -187,15 +187,15 @@ variable "parameters" {
 
 variable "create_db_subnet_group" {
   description = "Create a database subnet group"
-  default = 1
+  default     = 1
 }
 
 variable "create_db_parameter_group" {
   description = "Create a database parameter group"
-  default = 1
+  default     = 1
 }
 
 variable "create_db_instance" {
   description = "Create a database instance"
-  default = 1
+  default     = 1
 }
