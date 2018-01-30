@@ -60,6 +60,7 @@ variable "instance_class" {
 
 variable "name" {
   description = "The DB name to create. If omitted, no database is created initially"
+  default     = ""
 }
 
 variable "username" {
