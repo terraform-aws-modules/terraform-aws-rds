@@ -185,3 +185,19 @@ variable "parameters" {
   description = "A list of DB parameters (map) to apply"
   default     = []
 }
+
+# DB option group
+variable "option_group_description" {
+  description = "The description of the option group"
+  default     = ""
+}
+
+variable "major_engine_version" {
+  description = "Specifies the major version of the engine that this option group should be associated with"
+}
+
+variable "options" {
+  type        = "list"
+  description = "A list of Options to apply."
+  default     = []
+}

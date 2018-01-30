@@ -26,6 +26,22 @@ module "db_parameter_group" {
   tags = "${var.tags}"
 }
 
+#################
+# DB option group
+#################
+module "db_option_group" {
+  source = "./modules/db_option_group"
+
+  identifier               = "${var.identifier}"
+  name_prefix              = "${var.identifier}-"
+  engine_name              = "${var.engine}"
+  major_engine_version     = "${var.major_engine_version}"
+
+  options = ["${var.options}"]
+
+  tags = "${var.tags}"
+}
+
 ##############
 # DB instance
 ##############
@@ -56,6 +72,7 @@ module "db_instance" {
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   db_subnet_group_name   = "${module.db_subnet_group.this_db_subnet_group_id}"
   parameter_group_name   = "${module.db_parameter_group.this_db_parameter_group_id}"
+  option_group_name      = "${module.db_option_group.this_db_option_group_id}"
 
   multi_az            = "${var.multi_az}"
   iops                = "${var.iops}"
