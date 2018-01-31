@@ -1,3 +1,8 @@
+variable "count" {
+  description = "Whether to create this resource or not?"
+  default     = 1
+}
+
 variable "identifier" {
   description = "The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier"
 }

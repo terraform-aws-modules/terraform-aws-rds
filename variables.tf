@@ -185,3 +185,19 @@ variable "parameters" {
   description = "A list of DB parameters (map) to apply"
   default     = []
 }
+
+variable "create_db_subnet_group" {
+  description = "Whether to create a database subnet group"
+  default     = true
+}
+
+variable "create_db_parameter_group" {
+  description = "Whether to create a database parameter group"
+  default     = true
+}
+
+variable "create_db_instance" {
+  description = "Whether to create a database instance"
+  default     = true
+}
+
