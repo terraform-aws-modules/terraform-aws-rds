@@ -186,16 +186,17 @@ variable "parameters" {
 }
 
 variable "create_db_subnet_group" {
-  description = "Create a database subnet group"
-  default     = 1
+  description = "Whether to create a database subnet group"
+  default     = true
 }
 
 variable "create_db_parameter_group" {
-  description = "Create a database parameter group"
-  default     = 1
+  description = "Whether to create a database parameter group"
+  default     = true
 }
 
 variable "create_db_instance" {
-  description = "Create a database instance"
-  default     = 1
+  description = "Whether to create a database instance"
+  default     = true
 }
+
