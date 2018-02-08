@@ -1,3 +1,7 @@
+locals {
+  db_subnet_group_name = "${coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)}"
+}
+
 ##################
 # DB subnet group
 ##################
@@ -56,7 +60,7 @@ module "db_instance" {
   snapshot_identifier = "${var.snapshot_identifier}"
 
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
-  db_subnet_group_name   = "${module.db_subnet_group.this_db_subnet_group_id}"
+  db_subnet_group_name   = "${local.db_subnet_group_name}"
   parameter_group_name   = "${module.db_parameter_group.this_db_parameter_group_id}"
 
   multi_az            = "${var.multi_az}"
