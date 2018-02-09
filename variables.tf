@@ -80,11 +80,11 @@ variable "vpc_security_group_ids" {
   default     = []
 }
 
-//variable "db_subnet_group_name" {
-//  description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
-//  default     = ""
-//}
-//
+variable "db_subnet_group_name" {
+  description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
+  default     = ""
+}
+
 //variable "parameter_group_name" {
 //  description = "Name of the DB parameter group to associate"
 //  default     = ""
