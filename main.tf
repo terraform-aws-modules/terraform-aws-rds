@@ -1,5 +1,6 @@
 locals {
-  db_subnet_group_name = "${coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)}"
+  db_subnet_group_name          = "${coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)}"
+  enable_create_db_subnet_group = "${var.db_subnet_group_name == "" ? var.create_db_subnet_group : 0}"
 }
 
 ##################
@@ -8,7 +9,7 @@ locals {
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  count       = "${var.create_db_subnet_group}"
+  count       = "${local.enable_create_db_subnet_group}"
   identifier  = "${var.identifier}"
   name_prefix = "${var.identifier}-"
   subnet_ids  = ["${var.subnet_ids}"]
