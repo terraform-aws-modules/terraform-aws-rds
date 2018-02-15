@@ -90,6 +90,11 @@ variable "db_subnet_group_name" {
 //  default     = ""
 //}
 
+variable "availability_zone" {
+  description = "The Availability Zone of the RDS instance"
+  default     = ""
+}
+
 variable "multi_az" {
   description = "Specifies if the RDS instance is multi-AZ"
   default     = false
