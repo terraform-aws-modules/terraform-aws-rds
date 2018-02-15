@@ -64,6 +64,7 @@ module "db_instance" {
   db_subnet_group_name   = "${local.db_subnet_group_name}"
   parameter_group_name   = "${module.db_parameter_group.this_db_parameter_group_id}"
 
+  availability_zone   = "${var.availability_zone}"
   multi_az            = "${var.multi_az}"
   iops                = "${var.iops}"
   publicly_accessible = "${var.publicly_accessible}"
