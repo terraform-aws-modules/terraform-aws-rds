@@ -1,3 +1,8 @@
+variable "count" {
+  description = "Whether to create this resource or not?"
+  default     = 1
+}
+
 variable "identifier" {
   description = "The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier"
 }
@@ -55,6 +60,7 @@ variable "instance_class" {
 
 variable "name" {
   description = "The DB name to create. If omitted, no database is created initially"
+  default     = ""
 }
 
 variable "username" {
@@ -86,6 +92,11 @@ variable "db_subnet_group_name" {
 
 variable "parameter_group_name" {
   description = "Name of the DB parameter group to associate"
+  default     = ""
+}
+
+variable "availability_zone" {
+  description = "The Availability Zone of the RDS instance"
   default     = ""
 }
 

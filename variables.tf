@@ -60,6 +60,7 @@ variable "instance_class" {
 
 variable "name" {
   description = "The DB name to create. If omitted, no database is created initially"
+  default     = ""
 }
 
 variable "username" {
@@ -79,15 +80,20 @@ variable "vpc_security_group_ids" {
   default     = []
 }
 
-//variable "db_subnet_group_name" {
-//  description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
-//  default     = ""
-//}
-//
+variable "db_subnet_group_name" {
+  description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
+  default     = ""
+}
+
 //variable "parameter_group_name" {
 //  description = "Name of the DB parameter group to associate"
 //  default     = ""
 //}
+
+variable "availability_zone" {
+  description = "The Availability Zone of the RDS instance"
+  default     = ""
+}
 
 variable "multi_az" {
   description = "Specifies if the RDS instance is multi-AZ"
@@ -184,3 +190,19 @@ variable "parameters" {
   description = "A list of DB parameters (map) to apply"
   default     = []
 }
+
+variable "create_db_subnet_group" {
+  description = "Whether to create a database subnet group"
+  default     = true
+}
+
+variable "create_db_parameter_group" {
+  description = "Whether to create a database parameter group"
+  default     = true
+}
+
+variable "create_db_instance" {
+  description = "Whether to create a database instance"
+  default     = true
+}
+
