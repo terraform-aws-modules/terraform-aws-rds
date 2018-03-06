@@ -205,4 +205,3 @@ variable "create_db_instance" {
   description = "Whether to create a database instance"
   default     = true
 }
-
