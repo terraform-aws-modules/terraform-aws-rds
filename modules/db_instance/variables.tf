@@ -1,6 +1,6 @@
-variable "count" {
+variable "create" {
   description = "Whether to create this resource or not?"
-  default     = 1
+  default     = true
 }
 
 variable "identifier" {

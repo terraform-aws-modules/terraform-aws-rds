@@ -9,7 +9,7 @@ locals {
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  count       = "${local.enable_create_db_subnet_group}"
+  create      = "${local.enable_create_db_subnet_group}"
   identifier  = "${var.identifier}"
   name_prefix = "${var.identifier}-"
   subnet_ids  = ["${var.subnet_ids}"]
@@ -23,7 +23,7 @@ module "db_subnet_group" {
 module "db_parameter_group" {
   source = "./modules/db_parameter_group"
 
-  count       = "${var.create_db_parameter_group}"
+  create      = "${var.create_db_parameter_group}"
   identifier  = "${var.identifier}"
   name_prefix = "${var.identifier}-"
   family      = "${var.family}"
@@ -39,7 +39,7 @@ module "db_parameter_group" {
 module "db_instance" {
   source = "./modules/db_instance"
 
-  count             = "${var.create_db_instance}"
+  create            = "${var.create_db_instance}"
   identifier        = "${var.identifier}"
   engine            = "${var.engine}"
   engine_version    = "${var.engine_version}"
