@@ -85,10 +85,10 @@ variable "db_subnet_group_name" {
   default     = ""
 }
 
-//variable "parameter_group_name" {
-//  description = "Name of the DB parameter group to associate"
-//  default     = ""
-//}
+variable "parameter_group_name" {
+  description = "Name of the DB parameter group to associate. Setting this automatically disables parameter_group creation"
+  default     = ""
+}
 
 variable "availability_zone" {
   description = "The Availability Zone of the RDS instance"
