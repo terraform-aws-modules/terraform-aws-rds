@@ -74,6 +74,23 @@ module "db" {
 }
 ```
 
+Conditional creation
+--------------------
+
+There is also a way to specify an existing database subnet group and parameter group name instead of creating new resources like this:
+
+```hcl
+# This RDS instance will be created using default database subnet and parameter group
+module "db" {
+  source = "terraform-aws-modules/rds/aws"
+
+  db_subnet_group_name = "default"
+  parameter_group_name = "default.mysql5.7"
+
+  # ... omitted
+}
+```
+
 Examples
 --------
 
