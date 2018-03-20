@@ -186,6 +186,11 @@ variable "family" {
   default     = ""
 }
 
+variable "apply_method" {
+  description = "Some engines can't apply some parameters without a reboot, and you will need to specify pending-reboot here."
+  default     = "immediate"
+}
+
 variable "parameters" {
   description = "A list of DB parameters (map) to apply"
   default     = []

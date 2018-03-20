@@ -4,9 +4,10 @@
 resource "aws_db_parameter_group" "this" {
   count = "${var.create ? 1 : 0}"
 
-  name_prefix = "${var.name_prefix}"
-  description = "Database parameter group for ${var.identifier}"
-  family      = "${var.family}"
+  name_prefix  = "${var.name_prefix}"
+  description  = "Database parameter group for ${var.identifier}"
+  family       = "${var.family}"
+  apply_method = "${var.apply_method}"
 
   parameter = ["${var.parameters}"]
 

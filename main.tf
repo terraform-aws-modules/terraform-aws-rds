@@ -25,10 +25,11 @@ module "db_subnet_group" {
 module "db_parameter_group" {
   source = "./modules/db_parameter_group"
 
-  create      = "${local.enable_create_db_parameter_group}"
-  identifier  = "${var.identifier}"
-  name_prefix = "${var.identifier}-"
-  family      = "${var.family}"
+  create       = "${local.enable_create_db_parameter_group}"
+  identifier   = "${var.identifier}"
+  name_prefix  = "${var.identifier}-"
+  family       = "${var.family}"
+  apply_method = "${var.apply_method}"
 
   parameters = ["${var.parameters}"]
 
