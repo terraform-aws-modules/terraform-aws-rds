@@ -15,6 +15,11 @@ variable "family" {
   description = "The family of the DB parameter group"
 }
 
+variable "apply_method" {
+  description = "Some engines can't apply some parameters without a reboot, and you will need to specify pending-reboot here."
+  default     = "immediate"
+}
+
 variable "parameters" {
   description = "A list of DB parameter maps to apply"
   default     = []
