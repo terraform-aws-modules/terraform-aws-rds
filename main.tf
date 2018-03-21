@@ -88,4 +88,7 @@ module "db_instance" {
   create_monitoring_role = "${var.create_monitoring_role}"
 
   tags = "${var.tags}"
+
+  timezone           = "${var.timezone}"
+  character_set_name = "${var.character_set_name}"
 }

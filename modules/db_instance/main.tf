@@ -63,4 +63,7 @@ resource "aws_db_instance" "this" {
   backup_window           = "${var.backup_window}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+
+  timezone           = "${var.timezone}"
+  character_set_name = "${var.character_set_name}"
 }
