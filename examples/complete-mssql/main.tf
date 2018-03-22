@@ -26,10 +26,10 @@ module "db" {
 
   identifier = "demodb"
 
-  engine            = "sqlserver-se"
+  engine            = "sqlserver-ex"
   engine_version    = "14.00.1000.169.v1"
-  instance_class    = "db.t2.large"
-  allocated_storage = 5
+  instance_class    = "db.t2.medium"
+  allocated_storage = 20
   storage_encrypted = false
 
   username = "demouser"
@@ -55,6 +55,9 @@ module "db" {
 
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
+
+  create_db_parameter_group = false
+  license_model             = "license-included"
 
   timezone = "Central Standard Time"
 }
