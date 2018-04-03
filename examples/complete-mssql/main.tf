@@ -32,8 +32,8 @@ module "db" {
   allocated_storage = 20
   storage_encrypted = false
 
+  name     = "demodb"
   username = "demouser"
-
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "1433"
 
