@@ -3,7 +3,7 @@ locals {
   enable_create_db_subnet_group    = "${var.db_subnet_group_name == "" ? var.create_db_subnet_group : 0}"
   parameter_group_name             = "${coalesce(var.parameter_group_name, module.db_parameter_group.this_db_parameter_group_id)}"
   enable_create_db_parameter_group = "${var.parameter_group_name == "" ? var.create_db_parameter_group : 0}"
-  option_group_name                = "${coalesce(var.option_group_name, ${module.db_option_group.this_db_option_group_id}"
+  option_group_name                = "${coalesce(var.option_group_name, module.db_option_group.this_db_option_group_id)}"
   enable_create_db_option_group    = "${var.option_group_name == "" ? var.create_db_option_group : 0}"
 }
 
@@ -43,7 +43,7 @@ module "db_parameter_group" {
 module "db_option_group" {
   source = "./modules/db_option_group"
 
-  create      = "${local.enable_create_db_option_group}"
+  create                   = "${local.enable_create_db_option_group}"
   identifier               = "${var.identifier}"
   name_prefix              = "${var.identifier}-"
   engine_name              = "${var.engine}"
@@ -61,7 +61,7 @@ module "db_instance" {
   source = "./modules/db_instance"
 
   create            = "${var.create_db_instance}"
-  identifier = "${var.identifier}"
+  identifier        = "${var.identifier}"
   engine            = "${var.engine}"
   engine_version    = "${var.engine_version}"
   instance_class    = "${var.instance_class}"

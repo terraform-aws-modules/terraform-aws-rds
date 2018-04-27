@@ -204,6 +204,7 @@ variable "option_group_description" {
 
 variable "major_engine_version" {
   description = "Specifies the major version of the engine that this option group should be associated with"
+  default     = ""
 }
 
 variable "options" {
@@ -219,6 +220,11 @@ variable "create_db_subnet_group" {
 
 variable "create_db_parameter_group" {
   description = "Whether to create a database parameter group"
+  default     = true
+}
+
+variable "create_db_option_group" {
+  description = "Whether to create a database option group"
   default     = true
 }
 
