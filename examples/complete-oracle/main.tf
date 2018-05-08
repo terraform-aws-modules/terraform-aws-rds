@@ -22,7 +22,7 @@ data "aws_security_group" "default" {
 # DB
 #####
 module "db" {
-  source = "../../../"
+  source = "../../"
 
   identifier = "demodb"
 
@@ -60,4 +60,7 @@ module "db" {
 
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
+
+  # See here for support character sets https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html
+  character_set_name = "AL32UTF8"
 }

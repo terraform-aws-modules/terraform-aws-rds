@@ -22,26 +22,20 @@ data "aws_security_group" "default" {
 # DB
 #####
 module "db" {
-  source = "../../../"
+  source = "../../"
 
   identifier = "demodb"
 
-  engine            = "postgres"
-  engine_version    = "9.6.3"
-  instance_class    = "db.t2.large"
-  allocated_storage = 5
+  engine            = "sqlserver-ex"
+  engine_version    = "14.00.1000.169.v1"
+  instance_class    = "db.t2.medium"
+  allocated_storage = 20
   storage_encrypted = false
 
-  # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
-  name = "demodb"
-
-  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
-  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
-  # user cannot be used as it is a reserved word used by the engine"
+  name     = "demodb"
   username = "demouser"
-
   password = "YourPwdShouldBeLongAndSecure!"
-  port     = "5432"
+  port     = "1433"
 
   vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
 
@@ -59,9 +53,11 @@ module "db" {
   # DB subnet group
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
 
-  # DB parameter group
-  family = "postgres9.6"
-
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
+
+  create_db_parameter_group = false
+  license_model             = "license-included"
+
+  timezone = "Central Standard Time"
 }

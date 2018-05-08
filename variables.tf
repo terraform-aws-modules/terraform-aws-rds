@@ -85,10 +85,10 @@ variable "db_subnet_group_name" {
   default     = ""
 }
 
-//variable "parameter_group_name" {
-//  description = "Name of the DB parameter group to associate"
-//  default     = ""
-//}
+variable "parameter_group_name" {
+  description = "Name of the DB parameter group to associate. Setting this automatically disables parameter_group creation"
+  default     = ""
+}
 
 variable "availability_zone" {
   description = "The Availability Zone of the RDS instance"
@@ -206,3 +206,12 @@ variable "create_db_instance" {
   default     = true
 }
 
+variable "timezone" {
+  description = "(Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information."
+  default     = ""
+}
+
+variable "character_set_name" {
+  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information."
+  default     = ""
+}

@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = "us-west-1"
 }
 
 ##############################################################
@@ -22,22 +22,26 @@ data "aws_security_group" "default" {
 # DB
 #####
 module "db" {
-  source = "../../../"
+  source = "../../"
 
   identifier = "demodb"
 
-  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-  engine            = "mysql"
-  engine_version    = "5.7.19"
+  engine            = "postgres"
+  engine_version    = "9.6.3"
   instance_class    = "db.t2.large"
   allocated_storage = 5
   storage_encrypted = false
 
   # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
-  name     = "demodb"
-  username = "user"
+  name = "demodb"
+
+  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
+  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
+  # user cannot be used as it is a reserved word used by the engine"
+  username = "demouser"
+
   password = "YourPwdShouldBeLongAndSecure!"
-  port     = "3306"
+  port     = "5432"
 
   vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
 
@@ -56,7 +60,7 @@ module "db" {
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
 
   # DB parameter group
-  family = "mysql5.7"
+  family = "postgres9.6"
 
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"

@@ -2,7 +2,7 @@
 # DB subnet group
 ##################
 resource "aws_db_subnet_group" "this" {
-  count = "${var.count ? 1 : 0}"
+  count = "${var.create ? 1 : 0}"
 
   name_prefix = "${var.name_prefix}"
   description = "Database subnet group for ${var.identifier}"
