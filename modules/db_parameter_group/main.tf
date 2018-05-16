@@ -1,6 +1,3 @@
-#####################
-# DB parameter group
-#####################
 resource "aws_db_parameter_group" "this" {
   count = "${var.create ? 1 : 0}"
 

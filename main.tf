@@ -5,9 +5,6 @@ locals {
   enable_create_db_parameter_group = "${var.parameter_group_name == "" ? var.create_db_parameter_group : 0}"
 }
 
-##################
-# DB subnet group
-##################
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
@@ -19,9 +16,6 @@ module "db_subnet_group" {
   tags = "${var.tags}"
 }
 
-#####################
-# DB parameter group
-#####################
 module "db_parameter_group" {
   source = "./modules/db_parameter_group"
 
@@ -35,9 +29,6 @@ module "db_parameter_group" {
   tags = "${var.tags}"
 }
 
-##############
-# DB instance
-##############
 module "db_instance" {
   source = "./modules/db_instance"
 

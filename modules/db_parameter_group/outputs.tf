@@ -1,4 +1,3 @@
-# DB parameter group
 output "this_db_parameter_group_id" {
   description = "The db parameter group id"
   value       = "${element(split(",", join(",", aws_db_parameter_group.this.*.id)), 0)}"
