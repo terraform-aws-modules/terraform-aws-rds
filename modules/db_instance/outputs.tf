@@ -13,7 +13,6 @@ locals {
   this_db_instance_port              = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.port, list("")), 0) : element(concat(aws_db_instance.this.*.port, list("")), 0)}"
 }
 
-# DB instance
 output "this_db_instance_address" {
   description = "The address of the RDS instance"
   value       = "${local.this_db_instance_address}"
