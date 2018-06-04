@@ -3,6 +3,8 @@ locals {
   enable_create_db_subnet_group    = "${var.db_subnet_group_name == "" ? var.create_db_subnet_group : 0}"
   parameter_group_name             = "${coalesce(var.parameter_group_name, module.db_parameter_group.this_db_parameter_group_id)}"
   enable_create_db_parameter_group = "${var.parameter_group_name == "" ? var.create_db_parameter_group : 0}"
+  option_group_name                = "${coalesce(var.option_group_name, module.db_option_group.this_db_option_group_id)}"
+  enable_create_db_option_group    = "${var.option_group_name == "" ? var.create_db_option_group : 0}"
 }
 
 module "db_subnet_group" {
@@ -25,6 +27,20 @@ module "db_parameter_group" {
   family      = "${var.family}"
 
   parameters = ["${var.parameters}"]
+
+  tags = "${var.tags}"
+}
+
+module "db_option_group" {
+  source = "./modules/db_option_group"
+
+  create                   = "${local.enable_create_db_option_group}"
+  identifier               = "${var.identifier}"
+  name_prefix              = "${var.identifier}-"
+  engine_name              = "${var.engine}"
+  major_engine_version     = "${var.major_engine_version}"
+
+  options = ["${var.options}"]
 
   tags = "${var.tags}"
 }
@@ -56,6 +72,7 @@ module "db_instance" {
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   db_subnet_group_name   = "${local.db_subnet_group_name}"
   parameter_group_name   = "${local.parameter_group_name}"
+  option_group_name      = "${local.option_group_name}"
 
   availability_zone   = "${var.availability_zone}"
   multi_az            = "${var.multi_az}"

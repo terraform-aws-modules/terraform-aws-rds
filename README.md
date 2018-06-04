@@ -7,12 +7,14 @@ These types of resources are supported:
 * [DB Instance](https://www.terraform.io/docs/providers/aws/r/db_instance.html)
 * [DB Subnet Group](https://www.terraform.io/docs/providers/aws/r/db_subnet_group.html)
 * [DB Parameter Group](https://www.terraform.io/docs/providers/aws/r/db_parameter_group.html)
+* [DB Option Group](https://www.terraform.io/docs/providers/aws/r/db_option_group.html)
 
 Root module calls these modules which can also be used separately to create independent resources:
 
 * [db_instance](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_instance) - creates RDS DB instance
 * [db_subnet_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_subnet_group) - creates RDS DB subnet group
-* [db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) - creates RDS DB group
+* [db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) - creates RDS DB parameter group
+* [db_option_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_option_group) - creates RDS DB option group
 
 ## Usage
 
@@ -56,6 +58,9 @@ module "db" {
   # DB parameter group
   family = "mysql5.7"
 
+  # DB option group
+  major_engine_version = "5.7"
+
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
 
@@ -67,6 +72,12 @@ module "db" {
     {
       name = "character_set_server"
       value = "utf8"
+    }
+  ]
+
+  options = [
+    {
+      option_name = "MARIADB_AUDIT_PLUGIN"
     }
   ]
 }

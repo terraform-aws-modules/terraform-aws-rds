@@ -62,6 +62,9 @@ module "db" {
   # DB parameter group
   family = "postgres9.6"
 
+  # DB option group
+  major_engine_version = "9.6"
+
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
 }

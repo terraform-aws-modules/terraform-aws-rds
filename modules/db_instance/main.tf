@@ -43,6 +43,7 @@ resource "aws_db_instance" "this" {
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   db_subnet_group_name   = "${var.db_subnet_group_name}"
   parameter_group_name   = "${var.parameter_group_name}"
+  option_group_name      = "${var.option_group_name}"
 
   availability_zone   = "${var.availability_zone}"
   multi_az            = "${var.multi_az}"
@@ -94,6 +95,7 @@ resource "aws_db_instance" "this_mssql" {
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   db_subnet_group_name   = "${var.db_subnet_group_name}"
   parameter_group_name   = "${var.parameter_group_name}"
+  option_group_name      = "${var.option_group_name}"
 
   availability_zone   = "${var.availability_zone}"
   multi_az            = "${var.multi_az}"
