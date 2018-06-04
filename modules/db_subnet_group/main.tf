@@ -1,6 +1,3 @@
-##################
-# DB subnet group
-##################
 resource "aws_db_subnet_group" "this" {
   count = "${var.create ? 1 : 0}"
 

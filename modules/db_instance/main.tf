@@ -1,7 +1,3 @@
-##############
-# DB instance
-##############
-
 locals {
   is_mssql = "${element(split("-",var.engine), 0) == "sqlserver"}"
 }

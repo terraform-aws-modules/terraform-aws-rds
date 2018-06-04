@@ -1,4 +1,3 @@
-# DB instance
 output "this_db_instance_address" {
   description = "The address of the RDS instance"
   value       = "${module.db.this_db_instance_address}"
@@ -59,7 +58,6 @@ output "this_db_instance_port" {
   value       = "${module.db.this_db_instance_port}"
 }
 
-# DB subnet group
 output "this_db_subnet_group_id" {
   description = "The db subnet group name"
   value       = "${module.db.this_db_subnet_group_id}"
@@ -70,7 +68,6 @@ output "this_db_subnet_group_arn" {
   value       = "${module.db.this_db_subnet_group_arn}"
 }
 
-# DB parameter group
 output "this_db_parameter_group_id" {
   description = "The db parameter group id"
   value       = "${module.db.this_db_parameter_group_id}"
