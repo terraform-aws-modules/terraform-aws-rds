@@ -32,7 +32,7 @@ module "db" {
   allocated_storage = 5
   storage_encrypted = false
 
-  # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
+  # kms_key_id        = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
   name = "demodb"
 
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
