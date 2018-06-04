@@ -33,6 +33,7 @@
 | monitoring_role_name | Name of the IAM role which will be created when create_monitoring_role is enabled. | string | `rds-monitoring-role` | no |
 | multi_az | Specifies if the RDS instance is multi-AZ | string | `false` | no |
 | name | The DB name to create. If omitted, no database is created initially | string | `` | no |
+| option_group_name | Name of the DB option group to associate. | string | `` | no |
 | parameter_group_name | Name of the DB parameter group to associate | string | `` | no |
 | password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | string | - | yes |
 | port | The port on which the DB accepts connections | string | - | yes |

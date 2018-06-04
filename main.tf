@@ -37,6 +37,7 @@ module "db_option_group" {
   create                   = "${local.enable_create_db_option_group}"
   identifier               = "${var.identifier}"
   name_prefix              = "${var.identifier}-"
+  option_group_description = "${var.option_group_description}"
   engine_name              = "${var.engine}"
   major_engine_version     = "${var.major_engine_version}"
 

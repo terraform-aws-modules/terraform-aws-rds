@@ -1,6 +1,3 @@
-#####################
-# DB option group
-#####################
 resource "aws_db_option_group" "this" {
   count = "${var.create ? 1 : 0}"
 
@@ -12,4 +9,8 @@ resource "aws_db_option_group" "this" {
   option = ["${var.options}"]
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }

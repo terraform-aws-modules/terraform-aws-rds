@@ -26,7 +26,7 @@ variable "major_engine_version" {
 
 variable "options" {
   type        = "list"
-  description = "A list of Options to apply."
+  description = "A list of Options to apply"
   default     = []
 }
 

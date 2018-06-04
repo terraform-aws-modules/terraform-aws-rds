@@ -127,6 +127,7 @@ module "db" {
 | character_set_name | (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information. | string | `` | no |
 | copy_tags_to_snapshot | On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified) | string | `false` | no |
 | create_db_instance | Whether to create a database instance | string | `true` | no |
+| create_db_option_group | Whether to create a database option group | string | `true` | no |
 | create_db_parameter_group | Whether to create a database parameter group | string | `true` | no |
 | create_db_subnet_group | Whether to create a database subnet group | string | `true` | no |
 | create_monitoring_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | string | `false` | no |
@@ -142,11 +143,15 @@ module "db" {
 | kms_key_id | The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used | string | `` | no |
 | license_model | License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1 | string | `` | no |
 | maintenance_window | The window to perform maintenance in. Syntax: 'ddd:hh24:mi-ddd:hh24:mi'. Eg: 'Mon:00:00-Mon:03:00' | string | - | yes |
+| major_engine_version | Specifies the major version of the engine that this option group should be associated with | string | `` | no |
 | monitoring_interval | The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60. | string | `0` | no |
 | monitoring_role_arn | The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. Must be specified if monitoring_interval is non-zero. | string | `` | no |
 | monitoring_role_name | Name of the IAM role which will be created when create_monitoring_role is enabled. | string | `rds-monitoring-role` | no |
 | multi_az | Specifies if the RDS instance is multi-AZ | string | `false` | no |
 | name | The DB name to create. If omitted, no database is created initially | string | `` | no |
+| option_group_description | The description of the option group | string | `` | no |
+| option_group_name | Name of the DB option group to associate. Setting this automatically disables option_group creation | string | `` | no |
+| options | A list of Options to apply. | list | `<list>` | no |
 | parameter_group_name | Name of the DB parameter group to associate. Setting this automatically disables parameter_group creation | string | `` | no |
 | parameters | A list of DB parameters (map) to apply | string | `<list>` | no |
 | password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | string | - | yes |
@@ -179,6 +184,8 @@ module "db" {
 | this_db_instance_resource_id | The RDS Resource ID of this instance |
 | this_db_instance_status | The RDS instance status |
 | this_db_instance_username | The master username for the database |
+| this_db_option_group_arn | The ARN of the db option group |
+| this_db_option_group_id | DB option group |
 | this_db_parameter_group_arn | The ARN of the db parameter group |
 | this_db_parameter_group_id | The db parameter group id |
 | this_db_subnet_group_arn | The ARN of the db subnet group |

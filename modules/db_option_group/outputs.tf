@@ -1,4 +1,3 @@
-# DB option group
 output "this_db_option_group_id" {
   description = "The db option group id"
   value       = "${element(split(",", join(",", aws_db_option_group.this.*.id)), 0)}"

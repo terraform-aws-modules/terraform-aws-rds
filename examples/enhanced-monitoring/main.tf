@@ -77,9 +77,9 @@ module "db" {
   # DB subnet group
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
   # DB parameter group
-  family              = "mysql5.7"
+  family = "mysql5.7"
   # DB option group
   major_engine_version = "5.7"
-  monitoring_interval = "30"
-  monitoring_role_arn = "${aws_iam_role.rds_enhanced_monitoring.arn}"
+  monitoring_interval  = "30"
+  monitoring_role_arn  = "${aws_iam_role.rds_enhanced_monitoring.arn}"
 }
