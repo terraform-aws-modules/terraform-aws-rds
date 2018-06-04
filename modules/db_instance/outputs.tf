@@ -1,16 +1,16 @@
 locals {
-  this_db_instance_address           = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.address, list("")), 0) : element(concat(aws_db_instance.this.*.address, list("")), 0)}"
-  this_db_instance_arn               = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.arn, list("")), 0) : element(concat(aws_db_instance.this.*.arn, list("")), 0)}"
-  this_db_instance_availability_zone = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.availability_zone, list("")), 0) : element(concat(aws_db_instance.this.*.availability_zone, list("")), 0)}"
-  this_db_instance_endpoint          = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.endpoint, list("")), 0) : element(concat(aws_db_instance.this.*.endpoint, list("")), 0)}"
-  this_db_instance_hosted_zone_id    = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.hosted_zone_id, list("")), 0) : element(concat(aws_db_instance.this.*.hosted_zone_id, list("")), 0)}"
-  this_db_instance_id                = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.id, list("")), 0) : element(concat(aws_db_instance.this.*.id, list("")), 0)}"
-  this_db_instance_resource_id       = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.resource_id, list("")), 0) : element(concat(aws_db_instance.this.*.resource_id, list("")), 0)}"
-  this_db_instance_status            = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.status, list("")), 0) : element(concat(aws_db_instance.this.*.status, list("")), 0)}"
-  this_db_instance_name              = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.name, list("")), 0) : element(concat(aws_db_instance.this.*.name, list("")), 0)}"
-  this_db_instance_username          = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.username, list("")), 0) : element(concat(aws_db_instance.this.*.username, list("")), 0)}"
-  this_db_instance_password          = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.password, list("")), 0) : element(concat(aws_db_instance.this.*.password, list("")), 0)}"
-  this_db_instance_port              = "${local.is_mssql ? element(concat(aws_db_instance.this_mssql.*.port, list("")), 0) : element(concat(aws_db_instance.this.*.port, list("")), 0)}"
+  this_db_instance_address           = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.address, aws_db_instance.this.*.address), list("")), 0)}"
+  this_db_instance_arn               = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.arn, aws_db_instance.this.*.arn), list("")), 0)}"
+  this_db_instance_availability_zone = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.availability_zone, aws_db_instance.this.*.availability_zone), list("")), 0)}"
+  this_db_instance_endpoint          = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.endpoint, aws_db_instance.this.*.endpoint), list("")), 0)}"
+  this_db_instance_hosted_zone_id    = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.hosted_zone_id, aws_db_instance.this.*.hosted_zone_id), list("")), 0)}"
+  this_db_instance_id                = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.id, aws_db_instance.this.*.id), list("")), 0)}"
+  this_db_instance_resource_id       = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.resource_id, aws_db_instance.this.*.resource_id), list("")), 0)}"
+  this_db_instance_status            = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.status, aws_db_instance.this.*.status), list("")), 0)}"
+  this_db_instance_name              = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.name, aws_db_instance.this.*.name), list("")), 0)}"
+  this_db_instance_username          = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.username, aws_db_instance.this.*.username), list("")), 0)}"
+  this_db_instance_password          = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.password, aws_db_instance.this.*.password), list("")), 0)}"
+  this_db_instance_port              = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.port, aws_db_instance.this.*.port), list("")), 0)}"
 }
 
 output "this_db_instance_address" {
