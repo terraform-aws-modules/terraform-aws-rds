@@ -242,3 +242,13 @@ variable "character_set_name" {
   description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information."
   default     = ""
 }
+
+variable "tf_resource_timeouts" {
+  description = "(Optional) Updated Terraform resource management timeouts.  Applies to `aws_db_instance` in particular to permit resource management times over 10 minutes"
+  type = "map"
+  default = {
+      create = "10m"
+      update = "10m"
+      delete = "10m"
+    }
+}
