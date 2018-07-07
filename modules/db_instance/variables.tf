@@ -195,10 +195,11 @@ variable "character_set_name" {
 
 variable "tf_resource_timeouts" {
   description = "(Optional) Updated Terraform resource management timeouts.  Applies to `aws_db_instance` in particular to permit resource management times over 10 minutes."
-  type = "map"
+  type        = "map"
+
   default = {
-      create = "10m"
-      update = "10m"
-      delete = "10m"
-    }
+    create = "40m"
+    update = "80m"
+    delete = "40m"
+  }
 }
