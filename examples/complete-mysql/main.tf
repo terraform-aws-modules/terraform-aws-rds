@@ -52,6 +52,8 @@ module "db" {
     Environment = "dev"
   }
 
+  enabled_cloudwatch_logs_exports = ["general", "audit"]
+
   # DB subnet group
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
 
