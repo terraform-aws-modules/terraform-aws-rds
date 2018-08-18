@@ -193,6 +193,11 @@ variable "character_set_name" {
   default     = ""
 }
 
+variable "enabled_cloudwatch_logs_exports" {
+  description = "List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine): alert, audit, error, general, listener, slowquery, trace."
+  default     = []
+}
+
 variable "timeouts" {
   description = "(Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
   type        = "map"
