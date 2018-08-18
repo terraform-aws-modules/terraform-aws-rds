@@ -65,6 +65,8 @@ resource "aws_db_instance" "this" {
 
   character_set_name = "${var.character_set_name}"
 
+  timeouts = "${var.timeouts}"
+
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
 }
 
@@ -116,6 +118,8 @@ resource "aws_db_instance" "this_mssql" {
   backup_window           = "${var.backup_window}"
 
   timezone = "${var.timezone}"
+
+  timeouts = "${var.timeouts}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
 }

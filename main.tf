@@ -101,5 +101,7 @@ module "db_instance" {
   timezone           = "${var.timezone}"
   character_set_name = "${var.character_set_name}"
 
+  timeouts = "${var.timeouts}"
+
   tags = "${var.tags}"
 }

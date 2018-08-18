@@ -135,7 +135,7 @@ module "db" {
 | availability_zone | The Availability Zone of the RDS instance | string | `` | no |
 | backup_retention_period | The days to retain backups for | string | `1` | no |
 | backup_window | The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance_window | string | - | yes |
-| character_set_name | (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information. | string | `` | no |
+| character_set_name | (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information | string | `` | no |
 | copy_tags_to_snapshot | On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified) | string | `false` | no |
 | create_db_instance | Whether to create a database instance | string | `true` | no |
 | create_db_option_group | Whether to create a database option group | string | `true` | no |
@@ -175,6 +175,7 @@ module "db" {
 | storage_type | One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'standard' if not. Note that this behaviour is different from the AWS web console, where the default is 'gp2'. | string | `gp2` | no |
 | subnet_ids | A list of VPC subnet IDs | list | `<list>` | no |
 | tags | A mapping of tags to assign to all resources | string | `<map>` | no |
+| timeouts | (Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times | map | `<map>` | no |
 | timezone | (Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information. | string | `` | no |
 | username | Username for the master DB user | string | - | yes |
 | vpc_security_group_ids | List of VPC security groups to associate | string | `<list>` | no |
