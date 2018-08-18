@@ -65,9 +65,9 @@ resource "aws_db_instance" "this" {
 
   character_set_name = "${var.character_set_name}"
 
-  tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+  timeouts = "${var.timeouts}"
 
-  timeouts = "${var.tf_resource_timeouts}"
+  tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
 }
 
 resource "aws_db_instance" "this_mssql" {
@@ -119,7 +119,7 @@ resource "aws_db_instance" "this_mssql" {
 
   timezone = "${var.timezone}"
 
-  tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+  timeouts = "${var.timeouts}"
 
-  timeouts = "${var.tf_resource_timeouts}"
+  tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
 }

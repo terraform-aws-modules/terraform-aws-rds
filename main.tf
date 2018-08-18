@@ -46,7 +46,6 @@ module "db_option_group" {
   options = ["${var.options}"]
 
   tags = "${var.tags}"
-
 }
 
 module "db_instance" {
@@ -102,7 +101,7 @@ module "db_instance" {
   timezone           = "${var.timezone}"
   character_set_name = "${var.character_set_name}"
 
-  tags = "${var.tags}"
+  timeouts = "${var.timeouts}"
 
-  tf_resource_timeouts = "${var.tf_resource_timeouts}"
+  tags = "${var.tags}"
 }
