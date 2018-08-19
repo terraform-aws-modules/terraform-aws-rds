@@ -44,6 +44,8 @@ module "db" {
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
 
+  multi_az = true
+
   # disable backups to create DB faster
   backup_retention_period = 0
 
@@ -52,7 +54,7 @@ module "db" {
     Environment = "dev"
   }
 
-  enabled_cloudwatch_logs_exports = ["general", "audit"]
+  enabled_cloudwatch_logs_exports = ["audit", "general"]
 
   # DB subnet group
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
