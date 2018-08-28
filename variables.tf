@@ -188,7 +188,6 @@ variable "subnet_ids" {
 # DB parameter group
 variable "family" {
   description = "The family of the DB parameter group"
-  default     = ""
 }
 
 variable "parameters" {
@@ -204,7 +203,6 @@ variable "option_group_description" {
 
 variable "major_engine_version" {
   description = "Specifies the major version of the engine that this option group should be associated with"
-  default     = ""
 }
 
 variable "options" {
