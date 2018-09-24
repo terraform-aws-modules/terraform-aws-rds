@@ -61,9 +61,6 @@ module "db" {
   # DB option group
   major_engine_version = "5.7"
 
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = "demodb"
-
   parameters = [
     {
       name = "character_set_client"
@@ -147,7 +144,6 @@ module "db" {
 | engine | The database engine to use | string | - | yes |
 | engine_version | The engine version to use | string | - | yes |
 | family | The family of the DB parameter group | string | `` | no |
-| final_snapshot_identifier | The name of your final DB snapshot when this DB instance is deleted. | string | `false` | no |
 | iam_database_authentication_enabled | Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled | string | `false` | no |
 | identifier | The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier | string | - | yes |
 | instance_class | The instance type of the RDS instance | string | - | yes |

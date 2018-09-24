@@ -88,7 +88,7 @@ module "db_instance" {
   maintenance_window          = "${var.maintenance_window}"
   skip_final_snapshot         = "${var.skip_final_snapshot}"
   copy_tags_to_snapshot       = "${var.copy_tags_to_snapshot}"
-  final_snapshot_identifier   = "${var.final_snapshot_identifier}"
+  final_snapshot_identifier   = "${var.name}-final-snapshot-${md5(timestamp())}"
 
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.backup_window}"
@@ -105,4 +105,9 @@ module "db_instance" {
   timeouts = "${var.timeouts}"
 
   tags = "${var.tags}"
+
+  lifecycle {
+    ignore_changes = ["final_snapshot_identifier"]
+  }
+
 }
