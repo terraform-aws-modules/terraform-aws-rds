@@ -64,6 +64,9 @@ module "db" {
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
 
+  # Database Deletion Protection
+  deletion_protection = true
+
   parameters = [
     {
       name = "character_set_client"
