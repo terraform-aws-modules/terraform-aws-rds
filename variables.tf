@@ -258,3 +258,8 @@ variable "timeouts" {
     delete = "40m"
   }
 }
+
+variable "deletion_protection" {
+  description = "The database can't be deleted when this value is set to true."
+  default     = false
+}

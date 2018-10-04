@@ -60,4 +60,7 @@ module "db" {
   license_model             = "license-included"
 
   timezone = "Central Standard Time"
+
+  # Database Deletion Protection
+  deletion_protection = true
 }
