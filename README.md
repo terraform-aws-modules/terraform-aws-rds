@@ -146,6 +146,7 @@ module "db" {
 | create_db_subnet_group | Whether to create a database subnet group | string | `true` | no |
 | create_monitoring_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | string | `false` | no |
 | db_subnet_group_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | string | `` | no |
+| deletion_protection | The database can't be deleted when this value is set to true. | string | `false` | no |
 | enabled_cloudwatch_logs_exports | List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine): alert, audit, error, general, listener, slowquery, trace. | string | `<list>` | no |
 | engine | The database engine to use | string | - | yes |
 | engine_version | The engine version to use | string | - | yes |
