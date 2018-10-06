@@ -82,4 +82,6 @@ module "db" {
   major_engine_version = "5.7"
   monitoring_interval  = "30"
   monitoring_role_arn  = "${aws_iam_role.rds_enhanced_monitoring.arn}"
+  # Database Deletion Protection
+  deletion_protection = true
 }

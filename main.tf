@@ -104,5 +104,7 @@ module "db_instance" {
 
   timeouts = "${var.timeouts}"
 
+  deletion_protection = "${var.deletion_protection}"
+
   tags = "${var.tags}"
 }

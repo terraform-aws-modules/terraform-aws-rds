@@ -68,6 +68,9 @@ module "db" {
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
 
+  # Database Deletion Protection
+  deletion_protection = true
+
   options = [
     {
       option_name = "MARIADB_AUDIT_PLUGIN"
