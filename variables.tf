@@ -166,7 +166,7 @@ variable "copy_tags_to_snapshot" {
 
 variable "backup_retention_period" {
   description = "The days to retain backups for"
-  default     = 1
+  default     = 7
 }
 
 variable "backup_window" {
