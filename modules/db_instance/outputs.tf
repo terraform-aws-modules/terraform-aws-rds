@@ -66,6 +66,7 @@ output "this_db_instance_username" {
 output "this_db_instance_password" {
   description = "The database password (this password may be old, because Terraform doesn't track it after initial creation)"
   value       = "${local.this_db_instance_password}"
+  sensitive   = true
 }
 
 output "this_db_instance_port" {
