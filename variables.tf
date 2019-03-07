@@ -85,6 +85,11 @@ variable "db_subnet_group_name" {
   default     = ""
 }
 
+variable "parameter_group_description" {
+  description = "Description of the DB parameter group to create"
+  default     = ""
+}
+
 variable "parameter_group_name" {
   description = "Name of the DB parameter group to associate or create"
   default     = ""

@@ -26,6 +26,7 @@ module "db_parameter_group" {
   create          = "${var.create_db_parameter_group}"
   identifier      = "${var.identifier}"
   name            = "${var.parameter_group_name}"
+  description     = "${var.parameter_group_description}"
   name_prefix     = "${var.identifier}-"
   use_name_prefix = "${var.use_parameter_group_name_prefix}"
   family          = "${var.family}"

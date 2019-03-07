@@ -2,7 +2,7 @@ resource "aws_db_parameter_group" "this_no_prefix" {
   count = "${var.create && ! var.use_name_prefix ? 1 : 0}"
 
   name        = "${var.name}"
-  description = "Database parameter group for ${var.identifier}"
+  description = "${local.description}"
   family      = "${var.family}"
 
   parameter = ["${var.parameters}"]
@@ -18,7 +18,7 @@ resource "aws_db_parameter_group" "this" {
   count = "${var.create && var.use_name_prefix ? 1 : 0}"
 
   name_prefix = "${var.name_prefix}"
-  description = "Database parameter group for ${var.identifier}"
+  description = "${local.description}"
   family      = "${var.family}"
 
   parameter = ["${var.parameters}"]

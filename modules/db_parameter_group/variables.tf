@@ -3,6 +3,11 @@ variable "create" {
   default     = true
 }
 
+variable "description" {
+  default     = ""
+  description = "The description of the DB parameter group"
+}
+
 variable "name" {
   default     = ""
   description = "The name of the DB parameter group"
