@@ -1,5 +1,21 @@
+resource "aws_db_parameter_group" "this_no_prefix" {
+  count = "${var.create && ! var.use_name_prefix ? 1 : 0}"
+
+  name        = "${var.name}"
+  description = "Database parameter group for ${var.identifier}"
+  family      = "${var.family}"
+
+  parameter = ["${var.parameters}"]
+
+  tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_db_parameter_group" "this" {
-  count = "${var.create ? 1 : 0}"
+  count = "${var.create && var.use_name_prefix ? 1 : 0}"
 
   name_prefix = "${var.name_prefix}"
   description = "Database parameter group for ${var.identifier}"
