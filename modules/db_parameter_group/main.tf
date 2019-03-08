@@ -1,3 +1,7 @@
+locals {
+  description = "${coalesce(var.description, "Database parameter group for ${var.identifier}")}"
+}
+
 resource "aws_db_parameter_group" "this_no_prefix" {
   count = "${var.create && ! var.use_name_prefix ? 1 : 0}"
 
