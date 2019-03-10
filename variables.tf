@@ -85,8 +85,13 @@ variable "db_subnet_group_name" {
   default     = ""
 }
 
+variable "parameter_group_description" {
+  description = "Description of the DB parameter group to create"
+  default     = ""
+}
+
 variable "parameter_group_name" {
-  description = "Name of the DB parameter group to associate. Setting this automatically disables parameter_group creation"
+  description = "Name of the DB parameter group to associate or create"
   default     = ""
 }
 
@@ -262,4 +267,9 @@ variable "timeouts" {
 variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true."
   default     = false
+}
+
+variable "use_parameter_group_name_prefix" {
+  description = "Whether to use the parameter group name prefix or not"
+  default     = true
 }
