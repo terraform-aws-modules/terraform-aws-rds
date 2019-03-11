@@ -4,8 +4,9 @@
 
 
 <a name="v1.24.0"></a>
-## [v1.24.0] - 0001-01-01
+## [v1.24.0] - 2019-03-11
 
+- Add Changelog ([#100](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/100))
 
 
 <a name="v1.23.0"></a>
