@@ -15,6 +15,7 @@ Root module calls these modules which can also be used separately to create inde
 * [db_subnet_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_subnet_group) - creates RDS DB subnet group
 * [db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) - creates RDS DB parameter group
 * [db_option_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_option_group) - creates RDS DB option group
+* [db_instance_replica](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_option_group) - creates RDS read replica
 
 ## Usage
 
@@ -119,6 +120,7 @@ module "db" {
 * [Complete RDS example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-postgres)
 * [Complete RDS example for Oracle](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-oracle)
 * [Complete RDS example for MSSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-mssql)
+* [Complete RDS example with read replicas](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-postgress-replicas)
 * [Enhanced monitoring example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/enhanced-monitoring)
 
 ## Notes
@@ -155,6 +157,7 @@ module "db" {
 | identifier | The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier | string | n/a | yes |
 | instance\_class | The instance type of the RDS instance | string | n/a | yes |
 | iops | The amount of provisioned IOPS. Setting this implies a storage_type of 'io1' | string | `"0"` | no |
+| is\_replica | Specifies that this resource is a Replicate database. Optional, but required for Read Replicas. Requires replicate\_source\_db | string | `"false"` | no |
 | kms\_key\_id | The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used | string | `""` | no |
 | license\_model | License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1 | string | `""` | no |
 | maintenance\_window | The window to perform maintenance in. Syntax: 'ddd:hh24:mi-ddd:hh24:mi'. Eg: 'Mon:00:00-Mon:03:00' | string | n/a | yes |
@@ -170,7 +173,7 @@ module "db" {
 | parameter\_group\_description | Description of the DB parameter group to create | string | `""` | no |
 | parameter\_group\_name | Name of the DB parameter group to associate or create | string | `""` | no |
 | parameters | A list of DB parameters (map) to apply | list | `<list>` | no |
-| password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | string | n/a | yes |
+| password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. It will be ignored on read replica creation. | string | n/a | yes |
 | port | The port on which the DB accepts connections | string | n/a | yes |
 | publicly\_accessible | Bool to control if instance is publicly accessible | string | `"false"` | no |
 | replicate\_source\_db | Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate. | string | `""` | no |
@@ -183,7 +186,7 @@ module "db" {
 | timeouts | (Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times | map | `<map>` | no |
 | timezone | (Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information. | string | `""` | no |
 | use\_parameter\_group\_name\_prefix | Whether to use the parameter group name prefix or not | string | `"true"` | no |
-| username | Username for the master DB user | string | n/a | yes |
+| username | Username for the master DB user. It will be ignored on read replica creation. | string | n/a | yes |
 | vpc\_security\_group\_ids | List of VPC security groups to associate | list | `<list>` | no |
 
 ## Outputs
@@ -208,6 +211,8 @@ module "db" {
 | this\_db\_parameter\_group\_id | The db parameter group id |
 | this\_db\_subnet\_group\_arn | The ARN of the db subnet group |
 | this\_db\_subnet\_group\_id | The db subnet group name |
+| this\_db\_instance_replica\_arn | The ARN of the RDS replica instance |
+| this\_db\_instance_cross-region_replica\_arn | The ARN of the RDS Cross-Region replica instance |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

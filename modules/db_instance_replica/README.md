@@ -66,5 +66,7 @@
 | this\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
 | this\_db\_instance\_status | The RDS instance status |
 | this\_db\_instance\_username | The master username for the database |
+| this\_db\_instance_replica\_arn | The ARN of the RDS replica instance |
+| this\_db\_instance_cross-region_replica\_arn | The ARN of the RDS Cross-Region replica instance |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
