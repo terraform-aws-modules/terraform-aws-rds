@@ -1,3 +1,8 @@
+variable "create" {
+  description = "Whether to create this resource or not?"
+  default     = true
+}
+
 variable "identifier" {
   description = "The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier"
 }
@@ -49,11 +54,6 @@ variable "engine_version" {
   description = "The engine version to use"
 }
 
-variable "final_snapshot_identifier" {
-  description = "The name of your final DB snapshot when this DB instance is deleted."
-  default     = false
-}
-
 variable "instance_class" {
   description = "The instance type of the RDS instance"
 }
@@ -63,16 +63,13 @@ variable "name" {
   default     = ""
 }
 
-variable "username" {
-  description = "Username for the master DB user"
-}
-
-variable "password" {
-  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
-}
-
 variable "port" {
   description = "The port on which the DB accepts connections"
+}
+
+variable "final_snapshot_identifier" {
+  description = "The name of your final DB snapshot when this DB instance is deleted."
+  default     = false
 }
 
 variable "vpc_security_group_ids" {
@@ -85,18 +82,8 @@ variable "db_subnet_group_name" {
   default     = ""
 }
 
-variable "parameter_group_description" {
-  description = "Description of the DB parameter group to create"
-  default     = ""
-}
-
 variable "parameter_group_name" {
-  description = "Name of the DB parameter group to associate or create"
-  default     = ""
-}
-
-variable "option_group_name" {
-  description = "Name of the DB option group to associate. Setting this automatically disables option_group creation"
+  description = "Name of the DB parameter group to associate"
   default     = ""
 }
 
@@ -183,59 +170,9 @@ variable "tags" {
   default     = {}
 }
 
-# DB subnet group
-variable "subnet_ids" {
-  type        = "list"
-  description = "A list of VPC subnet IDs"
-  default     = []
-}
-
-# DB parameter group
-variable "family" {
-  description = "The family of the DB parameter group"
+variable "option_group_name" {
+  description = "Name of the DB option group to associate."
   default     = ""
-}
-
-variable "parameters" {
-  description = "A list of DB parameters (map) to apply"
-  default     = []
-}
-
-# DB option group
-variable "option_group_description" {
-  description = "The description of the option group"
-  default     = ""
-}
-
-variable "major_engine_version" {
-  description = "Specifies the major version of the engine that this option group should be associated with"
-  default     = ""
-}
-
-variable "options" {
-  type        = "list"
-  description = "A list of Options to apply."
-  default     = []
-}
-
-variable "create_db_subnet_group" {
-  description = "Whether to create a database subnet group"
-  default     = true
-}
-
-variable "create_db_parameter_group" {
-  description = "Whether to create a database parameter group"
-  default     = true
-}
-
-variable "create_db_option_group" {
-  description = "Whether to create a database option group"
-  default     = true
-}
-
-variable "create_db_instance" {
-  description = "Whether to create a database instance"
-  default     = true
 }
 
 variable "timezone" {
@@ -267,14 +204,4 @@ variable "timeouts" {
 variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true."
   default     = false
-}
-
-variable "use_parameter_group_name_prefix" {
-  description = "Whether to use the parameter group name prefix or not"
-  default     = true
-}
-
-variable "is_replica" {
-  description = "Specifies whether the instance to be created is a replica or not"
-  default     = "false"
 }
