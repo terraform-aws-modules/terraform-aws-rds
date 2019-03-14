@@ -154,7 +154,7 @@ module "db-replica" {
   source = "../../"
 
   is_replica = "true"
-  replicate_source_db = "${module.db.this_db_instance_arn}"
+  replicate_source_db = "${module.db.this_db_instance_name}"
 
   identifier = "demodb-replica"
 
@@ -168,7 +168,7 @@ module "db-replica" {
   backup_retention_period = 0
 
   # kms_key_id        = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
-  name = "demodb-replica"
+  name = "demodb"
 
   # User and password are ignored on DB replica creation
   username = ""
