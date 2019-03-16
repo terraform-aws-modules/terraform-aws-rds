@@ -7,6 +7,7 @@ resource "aws_iam_role" "enhanced_monitoring" {
 
   name               = "${var.monitoring_role_name}"
   assume_role_policy = "${file("${path.module}/policy/enhancedmonitoring.json")}"
+  tags               = "${merge(map("Name", format("%s", var.monitoring_role_name)), var.tags)}"
 }
 
 resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
