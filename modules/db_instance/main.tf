@@ -73,6 +73,8 @@ resource "aws_db_instance" "this" {
   deletion_protection = "${var.deletion_protection}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+
+  depends_on = ["aws_cloudwatch_log_stream.stream"]
 }
 
 resource "aws_db_instance" "this_mssql" {
@@ -131,4 +133,19 @@ resource "aws_db_instance" "this_mssql" {
   deletion_protection = "${var.deletion_protection}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+
+  depends_on = ["aws_cloudwatch_log_stream.stream"]
+}
+
+resource "aws_cloudwatch_log_group" "group" {
+  count             = "${var.create ? length(var.enabled_cloudwatch_logs_exports) : 0}"
+  name              = "/aws/rds/instance/${var.identifier}/${element(var.enabled_cloudwatch_logs_exports, count.index)}"
+  retention_in_days = "${var.enabled_cloudwatch_logs_exports_retention_in_days}"
+  tags              = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+}
+
+resource "aws_cloudwatch_log_stream" "stream" {
+  count          = "${var.create ? length(var.enabled_cloudwatch_logs_exports) : 0}"
+  name           = "${var.identifier}"
+  log_group_name = "${element(aws_cloudwatch_log_group.group.*.name, count.index)}"
 }

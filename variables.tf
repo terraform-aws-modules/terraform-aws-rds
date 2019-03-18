@@ -253,6 +253,11 @@ variable "enabled_cloudwatch_logs_exports" {
   default     = []
 }
 
+variable "enabled_cloudwatch_logs_exports_retention_in_days" {
+  description = "Specifies the number of days you want to retain cloudwatch log events."
+  default     = 0
+}
+
 variable "timeouts" {
   description = "(Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
   type        = "map"

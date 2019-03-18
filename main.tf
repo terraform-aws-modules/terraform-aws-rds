@@ -101,9 +101,10 @@ module "db_instance" {
   monitoring_role_name   = "${var.monitoring_role_name}"
   create_monitoring_role = "${var.create_monitoring_role}"
 
-  timezone                        = "${var.timezone}"
-  character_set_name              = "${var.character_set_name}"
-  enabled_cloudwatch_logs_exports = "${var.enabled_cloudwatch_logs_exports}"
+  timezone                                          = "${var.timezone}"
+  character_set_name                                = "${var.character_set_name}"
+  enabled_cloudwatch_logs_exports                   = "${var.enabled_cloudwatch_logs_exports}"
+  enabled_cloudwatch_logs_exports_retention_in_days = "${var.enabled_cloudwatch_logs_exports_retention_in_days}"
 
   timeouts = "${var.timeouts}"
 
