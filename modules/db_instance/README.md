@@ -61,7 +61,6 @@
 | this\_db\_instance\_hosted\_zone\_id | The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record) |
 | this\_db\_instance\_id | The RDS instance ID |
 | this\_db\_instance\_name | The database name |
-| this\_db\_instance\_password | The database password (this password may be old, because Terraform doesn't track it after initial creation) |
 | this\_db\_instance\_port | The database port |
 | this\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
 | this\_db\_instance\_status | The RDS instance status |
