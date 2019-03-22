@@ -9,7 +9,6 @@ locals {
   this_db_instance_status            = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.status, aws_db_instance.this.*.status), list("")), 0)}"
   this_db_instance_name              = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.name, aws_db_instance.this.*.name), list("")), 0)}"
   this_db_instance_username          = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.username, aws_db_instance.this.*.username), list("")), 0)}"
-  this_db_instance_password          = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.password, aws_db_instance.this.*.password), list("")), 0)}"
   this_db_instance_port              = "${element(concat(coalescelist(aws_db_instance.this_mssql.*.port, aws_db_instance.this.*.port), list("")), 0)}"
 }
 
@@ -61,11 +60,6 @@ output "this_db_instance_name" {
 output "this_db_instance_username" {
   description = "The master username for the database"
   value       = "${local.this_db_instance_username}"
-}
-
-output "this_db_instance_password" {
-  description = "The database password (this password may be old, because Terraform doesn't track it after initial creation)"
-  value       = "${local.this_db_instance_password}"
 }
 
 output "this_db_instance_port" {
