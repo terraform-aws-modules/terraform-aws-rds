@@ -3,9 +3,28 @@
 
 
 
+<a name="v1.27.0"></a>
+## [v1.27.0] - 2019-03-22
+
+- Remove unused submodule output ([#108](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/108))
+
+
+<a name="v1.26.0"></a>
+## [v1.26.0] - 2019-03-18
+
+- allowing custom parameter_group to pass down the stack ([#106](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/106))
+
+
+<a name="v1.25.0"></a>
+## [v1.25.0] - 2019-03-16
+
+- Add tags to enhanced_monitoring iam_role ([#102](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/102))
+
+
 <a name="v1.24.0"></a>
 ## [v1.24.0] - 2019-03-11
 
+- Added changelog after changelog feature is added
 - Add Changelog ([#100](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/100))
 
 
@@ -244,7 +263,10 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.24.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.27.0...HEAD
+[v1.27.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.26.0...v1.27.0
+[v1.26.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.25.0...v1.26.0
+[v1.25.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.24.0...v1.25.0
 [v1.24.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.23.0...v1.24.0
 [v1.23.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.22.0...v1.23.0
 [v1.22.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.21.0...v1.22.0
