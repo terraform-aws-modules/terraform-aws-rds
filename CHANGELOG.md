@@ -3,9 +3,16 @@
 
 
 
+<a name="v1.28.0"></a>
+## [v1.28.0] - 2019-03-29
+
+- Updates cloudwatch logs exports for PostgreSQL ([#110](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/110))
+
+
 <a name="v1.27.0"></a>
 ## [v1.27.0] - 2019-03-22
 
+- Updated CHANGELOG
 - Remove unused submodule output ([#108](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/108))
 
 
@@ -263,7 +270,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.27.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.28.0...HEAD
+[v1.28.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.27.0...v1.28.0
 [v1.27.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.26.0...v1.27.0
 [v1.26.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.25.0...v1.26.0
 [v1.25.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.24.0...v1.25.0
