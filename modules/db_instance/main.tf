@@ -73,6 +73,8 @@ resource "aws_db_instance" "this" {
   deletion_protection = "${var.deletion_protection}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+
+  depends_on = ["${var.db_instance_denpends_on}"]
 }
 
 resource "aws_db_instance" "this_mssql" {
@@ -131,4 +133,6 @@ resource "aws_db_instance" "this_mssql" {
   deletion_protection = "${var.deletion_protection}"
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
+
+  depends_on = ["${var.db_instance_denpends_on}"]
 }
