@@ -74,7 +74,7 @@ resource "aws_db_instance" "this" {
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
 
-  depends_on = ["${var.db_instance_denpends_on}"]
+  depends_on = "${var.db_instance_denpends_on}"
 }
 
 resource "aws_db_instance" "this_mssql" {
@@ -134,5 +134,5 @@ resource "aws_db_instance" "this_mssql" {
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
 
-  depends_on = ["${var.db_instance_denpends_on}"]
+  depends_on = "${var.db_instance_denpends_on}"
 }
