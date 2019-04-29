@@ -1,12 +1,12 @@
 locals {
   db_subnet_group_name          = "${coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)}"
-  enable_create_db_subnet_group = "${var.db_subnet_group_name == "" ? var.create_db_subnet_group : 0}"
+  enable_create_db_subnet_group = "${var.db_subnet_group_name == "" ? var.create_db_subnet_group : false}"
 
   parameter_group_name    = "${coalesce(var.parameter_group_name, var.identifier)}"
   parameter_group_name_id = "${coalesce(var.parameter_group_name, module.db_parameter_group.this_db_parameter_group_id)}"
 
   option_group_name             = "${coalesce(var.option_group_name, module.db_option_group.this_db_option_group_id)}"
-  enable_create_db_option_group = "${var.option_group_name == "" && var.engine != "postgres" ? var.create_db_option_group : 0}"
+  enable_create_db_option_group = "${var.option_group_name == "" && var.engine != "postgres" ? var.create_db_option_group : false}"
 }
 
 module "db_subnet_group" {
