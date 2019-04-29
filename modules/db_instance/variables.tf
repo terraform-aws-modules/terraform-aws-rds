@@ -213,3 +213,8 @@ variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true."
   default     = false
 }
+
+variable "lifecycle_ignore_changes" {
+  description = "List of attribute names to ignore when planning updates to the remote object"
+  default     = []
+}

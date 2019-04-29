@@ -273,3 +273,8 @@ variable "use_parameter_group_name_prefix" {
   description = "Whether to use the parameter group name prefix or not"
   default     = true
 }
+
+variable "db_instance_lifecycle_ignore_changes" {
+  description = "List of attribute names to ignore when planning updates to the remote object"
+  default     = []
+}
