@@ -215,6 +215,6 @@ variable "deletion_protection" {
 }
 
 variable "lifecycle_ignore_changes" {
-  description = "List of attribute names to ignore when planning updates to the remote object"
+  description = "List of attribute names to ignore when planning updates to the remote db instance"
   default     = []
 }

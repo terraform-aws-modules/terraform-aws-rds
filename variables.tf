@@ -275,6 +275,6 @@ variable "use_parameter_group_name_prefix" {
 }
 
 variable "db_instance_lifecycle_ignore_changes" {
-  description = "List of attribute names to ignore when planning updates to the remote object"
+  description = "List of attribute names to ignore when planning updates to the remote db instance"
   default     = []
 }

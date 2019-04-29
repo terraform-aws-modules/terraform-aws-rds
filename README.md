@@ -150,7 +150,7 @@ module "db" {
 | create\_db\_parameter\_group | Whether to create a database parameter group | string | `"true"` | no |
 | create\_db\_subnet\_group | Whether to create a database subnet group | string | `"true"` | no |
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | string | `"false"` | no |
-| db\_instance\_lifecycle\_ignore\_changes | List of attribute names to ignore when planning updates to the remote object | list | `<list>` | no |
+| db\_instance\_lifecycle\_ignore\_changes | List of attribute names to ignore when planning updates to the remote db instance | list | `<list>` | no |
 | db\_subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | string | `""` | no |
 | deletion\_protection | The database can't be deleted when this value is set to true. | string | `"false"` | no |
 | enabled\_cloudwatch\_logs\_exports | List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine): alert, audit, error, general, listener, slowquery, trace, postgresql (PostgreSQL), upgrade (PostgreSQL). | list | `<list>` | no |
