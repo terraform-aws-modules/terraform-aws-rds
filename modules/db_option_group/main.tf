@@ -16,7 +16,6 @@ resource "aws_db_option_group" "this_no_prefix" {
 }
 
 resource "aws_db_option_group" "this" {
-
   count = "${var.create && var.use_name_prefix ? 1 : 0}"
 
   name_prefix              = "${var.name_prefix}"
