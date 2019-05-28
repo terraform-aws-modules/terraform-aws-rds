@@ -27,12 +27,13 @@ variable "family" {
 }
 
 variable "parameters" {
+  type        = "list(string)"
   description = "A list of DB parameter maps to apply"
   default     = []
 }
 
 variable "tags" {
-  type        = map(string)
+  type        = "map(string)"
   description = "A mapping of tags to assign to the resource"
   default     = {}
 }
