@@ -81,9 +81,9 @@ variable "final_snapshot_identifier" {
 }
 
 variable "vpc_security_group_ids" {
-  type        = "map(string)"
+  type        = "list(string)"
   description = "List of VPC security groups to associate"
-  default     = {}
+  default     = []
 }
 
 variable "db_subnet_group_name" {
