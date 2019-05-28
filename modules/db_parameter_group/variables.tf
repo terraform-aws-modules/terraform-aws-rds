@@ -27,7 +27,7 @@ variable "family" {
 }
 
 variable "parameters" {
-  type        = "tuple(string)"
+  type        = "map"
   description = "A list of DB parameter maps to apply"
   default     = []
 }
