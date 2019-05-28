@@ -13,7 +13,7 @@ resource "aws_db_parameter_group" "this_no_prefix" {
   family      = var.family
 
   dynamic "parameter" {
-    for_each = [var.parameters]
+    for_each = var.parameters
     content {
       # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
       # which keys might be set in maps assigned here, so it has
