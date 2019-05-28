@@ -24,7 +24,7 @@ module "db_subnet_group" {
   create      = local.enable_create_db_subnet_group
   identifier  = var.identifier
   name_prefix = "${var.identifier}-"
-  subnet_ids  = ["var.subnet_ids"]
+  subnet_ids  = var.subnet_ids
 
   tags = var.tags
 }
@@ -40,7 +40,7 @@ module "db_parameter_group" {
   use_name_prefix = var.use_parameter_group_name_prefix
   family          = var.family
 
-  parameters = ["var.parameters"]
+  parameters = var.parameters
 
   tags = var.tags
 }
@@ -55,7 +55,7 @@ module "db_option_group" {
   engine_name              = var.engine
   major_engine_version     = var.major_engine_version
 
-  options = ["var.options"]
+  options = var.options
 
   tags = var.tags
 }

@@ -6,30 +6,8 @@ resource "aws_db_option_group" "this" {
   engine_name              = var.engine_name
   major_engine_version     = var.major_engine_version
 
-  dynamic "option" {
-    for_each = [var.options]
-    content {
-      # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
-      # which keys might be set in maps assigned here, so it has
-      # produced a comprehensive set here. Consider simplifying
-      # this after confirming which keys can be set in practice.
-
-      db_security_group_memberships  = lookup(option.value, "db_security_group_memberships", null)
-      option_name                    = option.value.option_name
-      port                           = lookup(option.value, "port", null)
-      version                        = lookup(option.value, "version", null)
-      vpc_security_group_memberships = lookup(option.value, "vpc_security_group_memberships", null)
-
-      dynamic "option_settings" {
-        for_each = lookup(option.value, "option_settings", [])
-        content {
-          name  = option_settings.value.name
-          value = option_settings.value.value
-        }
-      }
-    }
-  }
-
+ option = var.options
+ 
   tags = merge(
     var.tags,
     {
