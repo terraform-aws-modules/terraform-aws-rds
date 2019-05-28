@@ -6,7 +6,7 @@ resource "aws_db_option_group" "this" {
   engine_name              = var.engine_name
   major_engine_version     = var.major_engine_version
 
-  option = ["${var.options}"]
+  option = [var.options]
 
   tags = merge(
     var.tags,
