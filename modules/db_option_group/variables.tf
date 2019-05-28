@@ -25,13 +25,14 @@ variable "major_engine_version" {
 }
 
 variable "options" {
-  type        = "list"
+  type        = list(string)
   description = "A list of Options to apply"
   default     = []
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   description = "A mapping of tags to assign to the resource"
   default     = {}
 }
+

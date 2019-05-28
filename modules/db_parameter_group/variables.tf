@@ -32,7 +32,7 @@ variable "parameters" {
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   description = "A mapping of tags to assign to the resource"
   default     = {}
 }
@@ -41,3 +41,4 @@ variable "use_name_prefix" {
   description = "Whether to use name_prefix or not"
   default     = true
 }
+

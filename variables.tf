@@ -185,7 +185,7 @@ variable "tags" {
 
 # DB subnet group
 variable "subnet_ids" {
-  type        = "list"
+  type        = list(string)
   description = "A list of VPC subnet IDs"
   default     = []
 }
@@ -213,7 +213,7 @@ variable "major_engine_version" {
 }
 
 variable "options" {
-  type        = "list"
+  type        = list(string)
   description = "A list of Options to apply."
   default     = []
 }
@@ -255,7 +255,7 @@ variable "enabled_cloudwatch_logs_exports" {
 
 variable "timeouts" {
   description = "(Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
-  type        = "map"
+  type        = map(string)
 
   default = {
     create = "40m"
@@ -273,3 +273,4 @@ variable "use_parameter_group_name_prefix" {
   description = "Whether to use the parameter group name prefix or not"
   default     = true
 }
+
