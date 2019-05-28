@@ -40,7 +40,7 @@ module "db_parameter_group" {
   use_name_prefix = var.use_parameter_group_name_prefix
   family          = var.family
 
-  parameters = [var.parameters]
+  parameters = var.parameters
 
   tags = var.tags
 }
