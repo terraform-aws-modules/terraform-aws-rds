@@ -81,7 +81,7 @@ variable "final_snapshot_identifier" {
 }
 
 variable "vpc_security_group_ids" {
-  type        = "list"
+  type        = "list(string)"
   description = "List of VPC security groups to associate"
   default     = []
 }

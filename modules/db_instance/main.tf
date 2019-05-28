@@ -76,20 +76,6 @@ resource "aws_db_instance" "this" {
 
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
-  dynamic "timeouts" {
-    for_each = var.timeouts
-    content {
-      # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
-      # which keys might be set in maps assigned here, so it has
-      # produced a comprehensive set here. Consider simplifying
-      # this after confirming which keys can be set in practice.
-
-      create = lookup(timeouts.value, "create", null)
-      delete = lookup(timeouts.value, "delete", null)
-      update = lookup(timeouts.value, "update", null)
-    }
-  }
-
   deletion_protection = var.deletion_protection
 
   tags = merge(
