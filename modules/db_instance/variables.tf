@@ -81,8 +81,9 @@ variable "final_snapshot_identifier" {
 }
 
 variable "vpc_security_group_ids" {
+  type        = "map(string)"
   description = "List of VPC security groups to associate"
-  default     = []
+  default     = {}
 }
 
 variable "db_subnet_group_name" {
@@ -200,7 +201,7 @@ variable "enabled_cloudwatch_logs_exports" {
 
 variable "timeouts" {
   description = "(Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
-  type        = map(string)
+  type        = "map(string)"
 
   default = {
     create = "40m"
