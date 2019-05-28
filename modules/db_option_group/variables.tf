@@ -25,9 +25,9 @@ variable "major_engine_version" {
 }
 
 variable "options" {
-  type        = "list(string)"
+  type        = "map(string)"
   description = "A list of Options to apply"
-  default     = []
+  default     = {}
 }
 
 variable "tags" {
