@@ -12,13 +12,14 @@ variable "identifier" {
 }
 
 variable "subnet_ids" {
-  type        = "list"
+  type        = list(string)
   description = "A list of VPC subnet IDs"
   default     = []
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   description = "A mapping of tags to assign to the resource"
   default     = {}
 }
+
