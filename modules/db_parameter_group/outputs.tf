@@ -5,6 +5,7 @@ output "this_db_parameter_group_id" {
       coalescelist(
         aws_db_parameter_group.this.*.id,
         aws_db_parameter_group.this_no_prefix.*.id,
+        [""],
       ),
       [""],
     ),
@@ -19,6 +20,7 @@ output "this_db_parameter_group_arn" {
       coalescelist(
         aws_db_parameter_group.this.*.arn,
         aws_db_parameter_group.this_no_prefix.*.arn,
+        [""],
       ),
       [""],
     ),
