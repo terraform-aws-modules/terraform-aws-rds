@@ -61,7 +61,6 @@ module "db" {
   storage_encrypted = false
 
   # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
-
   name                    = "demodb"
   username                = "user"
   password                = "YourPwdShouldBeLongAndSecure!"
@@ -69,19 +68,24 @@ module "db" {
   vpc_security_group_ids  = ["${data.aws_security_group.default.id}"]
   maintenance_window      = "Mon:00:00-Mon:03:00"
   backup_window           = "03:00-06:00"
-  backup_retention_period = 0                                         // disable backups to create DB faster
+  backup_retention_period = 0 // disable backups to create DB faster
+
   tags = {
     Owner       = "user"
     Environment = "dev"
   }
+
   # DB subnet group
   subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
+
   # DB parameter group
   family = "mysql5.7"
+
   # DB option group
   major_engine_version = "5.7"
   monitoring_interval  = "30"
   monitoring_role_arn  = "${aws_iam_role.rds_enhanced_monitoring.arn}"
+
   # Database Deletion Protection
   deletion_protection = true
 }

@@ -1,5 +1,5 @@
 locals {
-  is_mssql = "${element(split("-",var.engine), 0) == "sqlserver"}"
+  is_mssql = "${element(split("-", var.engine), 0) == "sqlserver"}"
 }
 
 resource "aws_iam_role" "enhanced_monitoring" {
@@ -18,7 +18,7 @@ resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
 }
 
 resource "aws_db_instance" "this" {
-  count = "${var.create && !local.is_mssql ? 1 : 0}"
+  count = "${var.create && ! local.is_mssql ? 1 : 0}"
 
   identifier = "${var.identifier}"
 
