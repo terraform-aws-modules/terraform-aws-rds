@@ -3,9 +3,17 @@
 
 
 
+<a name="v2.0.0"></a>
+## [v2.0.0] - 2019-06-11
+
+- Upgraded module to support Terraform 0.12 ([#126](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/126))
+- Fixed formatting
+
+
 <a name="v1.28.0"></a>
 ## [v1.28.0] - 2019-03-29
 
+- Updated CHANGELOG
 - Updates cloudwatch logs exports for PostgreSQL ([#110](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/110))
 
 
@@ -270,7 +278,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.28.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.0.0...HEAD
+[v2.0.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.28.0...v2.0.0
 [v1.28.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.27.0...v1.28.0
 [v1.27.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.26.0...v1.27.0
 [v1.26.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.25.0...v1.26.0
