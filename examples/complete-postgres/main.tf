@@ -10,11 +10,11 @@ data "aws_vpc" "default" {
 }
 
 data "aws_subnet_ids" "all" {
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
 }
 
 data "aws_security_group" "default" {
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
   name   = "default"
 }
 
@@ -24,10 +24,10 @@ data "aws_security_group" "default" {
 module "db" {
   source = "../../"
 
-  identifier = "demodb"
+  identifier = "demodb-postgres"
 
   engine            = "postgres"
-  engine_version    = "9.6.3"
+  engine_version    = "9.6.9"
   instance_class    = "db.t2.large"
   allocated_storage = 5
   storage_encrypted = false
@@ -43,7 +43,7 @@ module "db" {
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "5432"
 
-  vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
+  vpc_security_group_ids = [data.aws_security_group.default.id]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -59,7 +59,7 @@ module "db" {
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
   # DB subnet group
-  subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
+  subnet_ids = data.aws_subnet_ids.all.ids
 
   # DB parameter group
   family = "postgres9.6"
@@ -71,5 +71,5 @@ module "db" {
   final_snapshot_identifier = "demodb"
 
   # Database Deletion Protection
-  deletion_protection = true
+  deletion_protection = false
 }

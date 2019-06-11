@@ -10,11 +10,11 @@ data "aws_vpc" "default" {
 }
 
 data "aws_subnet_ids" "all" {
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
 }
 
 data "aws_security_group" "default" {
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
   name   = "default"
 }
 
@@ -32,12 +32,12 @@ module "db" {
   allocated_storage = 20
   storage_encrypted = false
 
-  name     = "demodb"
+  name     = null # "demodb"
   username = "demouser"
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "1433"
 
-  vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
+  vpc_security_group_ids = [data.aws_security_group.default.id]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -51,7 +51,7 @@ module "db" {
   }
 
   # DB subnet group
-  subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
+  subnet_ids = data.aws_subnet_ids.all.ids
 
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
@@ -62,5 +62,10 @@ module "db" {
   timezone = "Central Standard Time"
 
   # Database Deletion Protection
-  deletion_protection = true
+  deletion_protection = false
+
+  # DB options
+  major_engine_version = "14.00"
+
+  options = []
 }

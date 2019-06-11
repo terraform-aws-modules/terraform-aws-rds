@@ -10,11 +10,11 @@ data "aws_vpc" "default" {
 }
 
 data "aws_subnet_ids" "all" {
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
 }
 
 data "aws_security_group" "default" {
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
   name   = "default"
 }
 
@@ -24,7 +24,7 @@ data "aws_security_group" "default" {
 module "db" {
   source = "../../"
 
-  identifier = "demodb"
+  identifier = "demodb-oracle"
 
   engine            = "oracle-ee"
   engine_version    = "12.1.0.2.v8"
@@ -40,7 +40,7 @@ module "db" {
   port                                = "1521"
   iam_database_authentication_enabled = false
 
-  vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
+  vpc_security_group_ids = [data.aws_security_group.default.id]
   maintenance_window     = "Mon:00:00-Mon:03:00"
   backup_window          = "03:00-06:00"
 
@@ -53,7 +53,7 @@ module "db" {
   }
 
   # DB subnet group
-  subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
+  subnet_ids = data.aws_subnet_ids.all.ids
 
   # DB parameter group
   family = "oracle-ee-12.1"
@@ -68,5 +68,5 @@ module "db" {
   character_set_name = "AL32UTF8"
 
   # Database Deletion Protection
-  deletion_protection = true
+  deletion_protection = false
 }

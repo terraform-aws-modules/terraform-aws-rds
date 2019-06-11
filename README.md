@@ -26,7 +26,8 @@ Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraf
 
 ```hcl
 module "db" {
-  source = "terraform-aws-modules/rds/aws"
+  source  = "terraform-aws-modules/rds/aws"
+  version = "~> 2.0"
 
   identifier = "demodb"
 
