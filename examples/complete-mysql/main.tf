@@ -10,11 +10,11 @@ data "aws_vpc" "default" {
 }
 
 data "aws_subnet_ids" "all" {
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
 }
 
 data "aws_security_group" "default" {
-  vpc_id = "${data.aws_vpc.default.id}"
+  vpc_id = data.aws_vpc.default.id
   name   = "default"
 }
 
@@ -39,7 +39,7 @@ module "db" {
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "3306"
 
-  vpc_security_group_ids = ["${data.aws_security_group.default.id}"]
+  vpc_security_group_ids = [data.aws_security_group.default.id]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -57,7 +57,7 @@ module "db" {
   enabled_cloudwatch_logs_exports = ["audit", "general"]
 
   # DB subnet group
-  subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
+  subnet_ids = data.aws_subnet_ids.all.ids
 
   # DB parameter group
   family = "mysql5.7"
@@ -69,7 +69,18 @@ module "db" {
   final_snapshot_identifier = "demodb"
 
   # Database Deletion Protection
-  deletion_protection = true
+  deletion_protection = false
+
+  parameters = [
+    {
+      name  = "character_set_client"
+      value = "utf8"
+    },
+    {
+      name  = "character_set_server"
+      value = "utf8"
+    }
+  ]
 
   options = [
     {

@@ -1,108 +1,15 @@
 locals {
-  this_db_instance_address = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.address,
-        aws_db_instance.this.*.address,
-      ),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_arn = element(
-    concat(
-      coalescelist(aws_db_instance.this_mssql.*.arn, aws_db_instance.this.*.arn),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_availability_zone = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.availability_zone,
-        aws_db_instance.this.*.availability_zone,
-      ),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_endpoint = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.endpoint,
-        aws_db_instance.this.*.endpoint,
-      ),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_hosted_zone_id = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.hosted_zone_id,
-        aws_db_instance.this.*.hosted_zone_id,
-      ),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_id = element(
-    concat(
-      coalescelist(aws_db_instance.this_mssql.*.id, aws_db_instance.this.*.id),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_resource_id = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.resource_id,
-        aws_db_instance.this.*.resource_id,
-      ),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_status = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.status,
-        aws_db_instance.this.*.status,
-      ),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_name = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.name,
-        aws_db_instance.this.*.name,
-      ),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_username = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.username,
-        aws_db_instance.this.*.username,
-      ),
-      [""],
-    ),
-    0,
-  )
-  this_db_instance_port = element(
-    concat(
-      coalescelist(
-        aws_db_instance.this_mssql.*.port,
-        aws_db_instance.this.*.port,
-      ),
-      [""],
-    ),
-    0,
-  )
+  this_db_instance_address           = element(concat(aws_db_instance.this_mssql.*.address, aws_db_instance.this.*.address, [""]), 0)
+  this_db_instance_arn               = element(concat(aws_db_instance.this_mssql.*.arn, aws_db_instance.this.*.arn, [""]), 0)
+  this_db_instance_availability_zone = element(concat(aws_db_instance.this_mssql.*.availability_zone, aws_db_instance.this.*.availability_zone, [""]), 0)
+  this_db_instance_endpoint          = element(concat(aws_db_instance.this_mssql.*.endpoint, aws_db_instance.this.*.endpoint, [""]), 0)
+  this_db_instance_hosted_zone_id    = element(concat(aws_db_instance.this_mssql.*.hosted_zone_id, aws_db_instance.this.*.hosted_zone_id, [""]), 0)
+  this_db_instance_id                = element(concat(aws_db_instance.this_mssql.*.id, aws_db_instance.this.*.id, [""]), 0)
+  this_db_instance_resource_id       = element(concat(aws_db_instance.this_mssql.*.resource_id, aws_db_instance.this.*.resource_id, [""]), 0)
+  this_db_instance_status            = element(concat(aws_db_instance.this_mssql.*.status, aws_db_instance.this.*.status, [""]), 0)
+  this_db_instance_name              = element(concat(aws_db_instance.this_mssql.*.name, aws_db_instance.this.*.name, [""]), 0)
+  this_db_instance_username          = element(concat(aws_db_instance.this_mssql.*.username, aws_db_instance.this.*.username, [""]), 0)
+  this_db_instance_port              = element(concat(aws_db_instance.this_mssql.*.port, aws_db_instance.this.*.port, [""]), 0)
 }
 
 output "this_db_instance_address" {

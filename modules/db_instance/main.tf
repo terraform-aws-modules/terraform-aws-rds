@@ -2,11 +2,25 @@ locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
 }
 
+data "aws_iam_policy_document" "enhanced_monitoring" {
+  statement {
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["monitoring.rds.amazonaws.com"]
+    }
+  }
+}
+
 resource "aws_iam_role" "enhanced_monitoring" {
   count = var.create_monitoring_role ? 1 : 0
 
   name               = var.monitoring_role_name
-  assume_role_policy = file("${path.module}/policy/enhancedmonitoring.json")
+  assume_role_policy = data.aws_iam_policy_document.enhanced_monitoring.json
+
   tags = merge(
     {
       "Name" = format("%s", var.monitoring_role_name)
@@ -56,7 +70,7 @@ resource "aws_db_instance" "this" {
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
   monitoring_interval = var.monitoring_interval
-  monitoring_role_arn = var.monitoring_role_arn != "" ? var.monitoring_role_arn : join("", aws_iam_role.enhanced_monitoring.*.arn) != "" ? join("", aws_iam_role.enhanced_monitoring.*.arn) : ""
+  monitoring_role_arn = coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null)
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
@@ -81,6 +95,12 @@ resource "aws_db_instance" "this" {
       "Name" = format("%s", var.identifier)
     },
   )
+
+  timeouts {
+    create = lookup(var.timeouts, "create", null)
+    delete = lookup(var.timeouts, "delete", null)
+    update = lookup(var.timeouts, "update", null)
+  }
 }
 
 resource "aws_db_instance" "this_mssql" {
@@ -117,10 +137,7 @@ resource "aws_db_instance" "this_mssql" {
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
   monitoring_interval = var.monitoring_interval
-  monitoring_role_arn = coalesce(
-    var.monitoring_role_arn,
-    join("", aws_iam_role.enhanced_monitoring.*.arn),
-  )
+  monitoring_role_arn = coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null)
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
@@ -137,20 +154,6 @@ resource "aws_db_instance" "this_mssql" {
 
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
-  dynamic "timeouts" {
-    for_each = var.timeouts
-    content {
-      # TF-UPGRADE-TODO: The automatic upgrade tool can't predict
-      # which keys might be set in maps assigned here, so it has
-      # produced a comprehensive set here. Consider simplifying
-      # this after confirming which keys can be set in practice.
-
-      create = lookup(timeouts.value, "create", null)
-      delete = lookup(timeouts.value, "delete", null)
-      update = lookup(timeouts.value, "update", null)
-    }
-  }
-
   deletion_protection = var.deletion_protection
 
   tags = merge(
@@ -159,5 +162,11 @@ resource "aws_db_instance" "this_mssql" {
       "Name" = format("%s", var.identifier)
     },
   )
+
+  timeouts {
+    create = lookup(var.timeouts, "create", null)
+    delete = lookup(var.timeouts, "delete", null)
+    update = lookup(var.timeouts, "update", null)
+  }
 }
 

@@ -1,8 +1,5 @@
 locals {
-  description = coalesce(
-    var.description,
-    "Database parameter group for ${var.identifier}",
-  )
+  description = coalesce(var.description, "Database parameter group for ${var.identifier}")
 }
 
 resource "aws_db_parameter_group" "this_no_prefix" {
@@ -15,9 +12,9 @@ resource "aws_db_parameter_group" "this_no_prefix" {
   dynamic "parameter" {
     for_each = var.parameters
     content {
-      apply_method = lookup(parameter.value, "apply_method", null)
       name         = parameter.value.name
       value        = parameter.value.value
+      apply_method = lookup(parameter.value, "apply_method", null)
     }
   }
 
@@ -43,9 +40,9 @@ resource "aws_db_parameter_group" "this" {
   dynamic "parameter" {
     for_each = var.parameters
     content {
-      apply_method = lookup(parameter.value, "apply_method", null)
       name         = parameter.value.name
       value        = parameter.value.value
+      apply_method = lookup(parameter.value, "apply_method", null)
     }
   }
 
