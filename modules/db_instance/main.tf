@@ -122,6 +122,8 @@ resource "aws_db_instance" "this_mssql" {
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.backup_window}"
 
+  performance_insights_enabled = "${var.performance_insights_enabled}"
+
   timezone = "${var.timezone}"
 
   enabled_cloudwatch_logs_exports = "${var.enabled_cloudwatch_logs_exports}"
