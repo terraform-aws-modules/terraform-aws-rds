@@ -216,5 +216,5 @@ variable "deletion_protection" {
 
 variable "performance_insights_enabled" {
   description = "Specifies whether Performance Insights are enabled"
-  default     = "false"
+  default     = false
 }
