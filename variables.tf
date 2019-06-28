@@ -197,7 +197,7 @@ variable "family" {
 }
 
 variable "parameters" {
-  description = "A list of DB parameters (mp) to apply"
+  description = "A list of DB parameters (map) to apply"
   default     = []
 }
 
