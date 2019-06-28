@@ -3,7 +3,7 @@ repos:
   rev: v1.17.0
   hooks:
     - id: terraform_fmt
-#    - id: terraform_docs
+    - id: terraform_docs
 - repo: git://github.com/pre-commit/pre-commit-hooks
   rev: v2.2.3
   hooks:

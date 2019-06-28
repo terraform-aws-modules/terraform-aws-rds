@@ -325,3 +325,8 @@ variable "use_parameter_group_name_prefix" {
   default     = true
 }
 
+variable "performance_insights_enabled" {
+  description = "Specifies whether Performance Insights are enabled"
+  type        = bool
+  default     = false
+}
