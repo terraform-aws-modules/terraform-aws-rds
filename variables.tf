@@ -197,7 +197,7 @@ variable "family" {
 }
 
 variable "parameters" {
-  description = "A list of DB parameters (map) to apply"
+  description = "A list of DB parameters (mp) to apply"
   default     = []
 }
 
@@ -276,5 +276,5 @@ variable "use_parameter_group_name_prefix" {
 
 variable "performance_insights_enabled" {
   description = "Specifies whether Performance Insights are enabled"
-  default     = "false"
+  default     = false
 }
