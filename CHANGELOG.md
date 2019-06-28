@@ -3,9 +3,31 @@
 
 
 
+<a name="v2.2.0"></a>
+## [v2.2.0] - 2019-06-28
+
+- Added performance_insights support ([#139](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/139))
+- Updated CHANGELOG
+- Updated pre-commit
+- Fixed variable default for parameters ([#138](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/138))
+- Updated CHANGELOG
+- Upgraded module to support Terraform 0.12 ([#126](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/126))
+
+
+<a name="v1.29.0"></a>
+## [v1.29.0] - 2019-06-28
+
+- Updated CHANGELOG
+- Update documentation a bit after merge
+- Use false instead of 0 in enable_create_db_option_group flag ([#137](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/137))
+- Add support of performance_insights_enabled ([#132](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/132))
+- Use false instead of 0 in enable_create_db_option_group flag
+
+
 <a name="v2.1.0"></a>
 ## [v2.1.0] - 2019-06-28
 
+- Updated CHANGELOG
 - Updated pre-commit
 - Fixed variable default for parameters ([#138](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/138))
 
@@ -286,7 +308,9 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.2.0...HEAD
+[v2.2.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.29.0...v2.2.0
+[v1.29.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.1.0...v1.29.0
 [v2.1.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.0.0...v2.1.0
 [v2.0.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.28.0...v2.0.0
 [v1.28.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.27.0...v1.28.0
