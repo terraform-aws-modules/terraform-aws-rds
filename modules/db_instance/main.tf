@@ -51,7 +51,7 @@ resource "aws_db_instance" "this" {
   iops                = "${var.iops}"
   publicly_accessible = "${var.publicly_accessible}"
   monitoring_interval = "${var.monitoring_interval}"
-  monitoring_role_arn = "${coalesce(var.monitoring_role_arn, join("", aws_iam_role.enhanced_monitoring.*.arn))}"
+  monitoring_role_arn = "${var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, join("", aws_iam_role.enhanced_monitoring.*.arn)) : "" }"
 
   allow_major_version_upgrade = "${var.allow_major_version_upgrade}"
   auto_minor_version_upgrade  = "${var.auto_minor_version_upgrade}"
@@ -111,7 +111,7 @@ resource "aws_db_instance" "this_mssql" {
   iops                = "${var.iops}"
   publicly_accessible = "${var.publicly_accessible}"
   monitoring_interval = "${var.monitoring_interval}"
-  monitoring_role_arn = "${coalesce(var.monitoring_role_arn, join("", aws_iam_role.enhanced_monitoring.*.arn))}"
+  monitoring_role_arn = "${var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, join("", aws_iam_role.enhanced_monitoring.*.arn)) : "" }"
 
   allow_major_version_upgrade = "${var.allow_major_version_upgrade}"
   auto_minor_version_upgrade  = "${var.auto_minor_version_upgrade}"
