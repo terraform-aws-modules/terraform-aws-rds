@@ -148,7 +148,7 @@ resource "aws_db_instance" "this_mssql" {
   skip_final_snapshot         = var.skip_final_snapshot
   copy_tags_to_snapshot       = var.copy_tags_to_snapshot
   final_snapshot_identifier   = var.final_snapshot_identifier
-
+  max_allocated_storage       = var.max_allocated_storage
   performance_insights_enabled = var.performance_insights_enabled
 
   backup_retention_period = var.backup_retention_period
