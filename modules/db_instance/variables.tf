@@ -264,5 +264,6 @@ variable "performance_insights_enabled" {
 
 variable "max_allocated_storage" {
   description = "Specifies the value for Storage Autoscaling"
-  type = number
+  type        = number
+  default     = 0
 }

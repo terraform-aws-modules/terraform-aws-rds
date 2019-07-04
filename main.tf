@@ -98,10 +98,10 @@ module "db_instance" {
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
   max_allocated_storage   = var.max_allocated_storage
-  monitoring_interval    = var.monitoring_interval
-  monitoring_role_arn    = var.monitoring_role_arn
-  monitoring_role_name   = var.monitoring_role_name
-  create_monitoring_role = var.create_monitoring_role
+  monitoring_interval     = var.monitoring_interval
+  monitoring_role_arn     = var.monitoring_role_arn
+  monitoring_role_name    = var.monitoring_role_name
+  create_monitoring_role  = var.create_monitoring_role
 
   timezone                        = var.timezone
   character_set_name              = var.character_set_name
