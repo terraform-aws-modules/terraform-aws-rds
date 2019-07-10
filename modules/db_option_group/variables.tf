@@ -35,3 +35,12 @@ variable "tags" {
   description = "A mapping of tags to assign to the resource"
   default     = {}
 }
+
+variable "timeouts" {
+  description = "(Optional) Applies to `aws_db_option_group` in particular to allow AWS enough time to delete resource"
+  type        = "map"
+
+  default = {
+    delete = "15m"
+  }
+}

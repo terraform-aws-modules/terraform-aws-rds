@@ -174,6 +174,7 @@ module "db" {
 | name | The DB name to create. If omitted, no database is created initially | string | `""` | no |
 | option\_group\_description | The description of the option group | string | `""` | no |
 | option\_group\_name | Name of the DB option group to associate. Setting this automatically disables option_group creation | string | `""` | no |
+| option_group_timeouts | (Optional) Applies to `aws_db_option_group` in particular to allow AWS enough time to delete resource | map | `{ "delete": "15m" }` | no |
 | options | A list of Options to apply. | list | `[]` | no |
 | parameter\_group\_description | Description of the DB parameter group to create | string | `""` | no |
 | parameter\_group\_name | Name of the DB parameter group to associate or create | string | `""` | no |

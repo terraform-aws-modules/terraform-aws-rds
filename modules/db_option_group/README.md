@@ -13,6 +13,7 @@
 | option\_group\_description | The description of the option group | string | `""` | no |
 | options | A list of Options to apply | list | `[]` | no |
 | tags | A mapping of tags to assign to the resource | map | `{}` | no |
+| timeouts | A mapping of timeouts for resource deletion | map | `{ "delete": "15m" }`  | no |
 
 ## Outputs
 

@@ -264,6 +264,15 @@ variable "timeouts" {
   }
 }
 
+variable "option_group_timeouts" {
+  description = "(Optional) Applies to `aws_db_option_group` in particular to allow AWS enough time to delete resource"
+  type        = "map"
+
+  default = {
+    delete = "15m"
+  }
+}
+
 variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true."
   default     = false

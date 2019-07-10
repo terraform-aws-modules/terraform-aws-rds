@@ -13,4 +13,6 @@ resource "aws_db_option_group" "this" {
   lifecycle {
     create_before_destroy = true
   }
+
+  timeouts = "${var.timeouts}"
 }
