@@ -330,3 +330,9 @@ variable "performance_insights_enabled" {
   type        = bool
   default     = false
 }
+
+variable "performance_insights_retention_period" {
+  description = "The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years)."
+  type        = number
+  default     = 7
+}
