@@ -93,7 +93,8 @@ module "db_instance" {
   copy_tags_to_snapshot       = var.copy_tags_to_snapshot
   final_snapshot_identifier   = var.final_snapshot_identifier
 
-  performance_insights_enabled = var.performance_insights_enabled
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_retention_period = var.performance_insights_retention_period
 
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window

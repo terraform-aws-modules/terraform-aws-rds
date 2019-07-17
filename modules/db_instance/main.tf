@@ -81,7 +81,8 @@ resource "aws_db_instance" "this" {
   final_snapshot_identifier   = var.final_snapshot_identifier
   max_allocated_storage       = var.max_allocated_storage
 
-  performance_insights_enabled = var.performance_insights_enabled
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_retention_period = var.performance_insights_retention_period
 
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
@@ -142,15 +143,17 @@ resource "aws_db_instance" "this_mssql" {
   monitoring_interval = var.monitoring_interval
   monitoring_role_arn = coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null)
 
-  allow_major_version_upgrade  = var.allow_major_version_upgrade
-  auto_minor_version_upgrade   = var.auto_minor_version_upgrade
-  apply_immediately            = var.apply_immediately
-  maintenance_window           = var.maintenance_window
-  skip_final_snapshot          = var.skip_final_snapshot
-  copy_tags_to_snapshot        = var.copy_tags_to_snapshot
-  final_snapshot_identifier    = var.final_snapshot_identifier
+  allow_major_version_upgrade = var.allow_major_version_upgrade
+  auto_minor_version_upgrade  = var.auto_minor_version_upgrade
+  apply_immediately           = var.apply_immediately
+  maintenance_window          = var.maintenance_window
+  skip_final_snapshot         = var.skip_final_snapshot
+  copy_tags_to_snapshot       = var.copy_tags_to_snapshot
+  final_snapshot_identifier   = var.final_snapshot_identifier
   max_allocated_storage        = var.max_allocated_storage
-  performance_insights_enabled = var.performance_insights_enabled
+
+  performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_retention_period = var.performance_insights_retention_period
 
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
