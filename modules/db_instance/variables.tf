@@ -14,6 +14,12 @@ variable "allocated_storage" {
   type        = string
 }
 
+variable "max_allocated_storage" {
+  description = "The allocated storage in gigabytes to which Amazon RDS can automatically scale the storage of the DB instance"
+  type        = string
+  default     = "100"
+}
+
 variable "storage_type" {
   description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'standard' if not. Note that this behaviour is different from the AWS web console, where the default is 'gp2'."
   type        = string

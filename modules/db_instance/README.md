@@ -6,6 +6,7 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | allocated\_storage | The allocated storage in gigabytes | string | n/a | yes |
+| max\_allocated\_storage | The allocated storage in gigabytes to which Amazon RDS can automatically scale the storage of the DB instance | string | `"100"`| no |
 | allow\_major\_version\_upgrade | Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible | bool | `"false"` | no |
 | apply\_immediately | Specifies whether any database modifications are applied immediately, or during the next maintenance window | bool | `"false"` | no |
 | auto\_minor\_version\_upgrade | Indicates that minor engine upgrades will be applied automatically to the DB instance during the maintenance window | bool | `"true"` | no |
