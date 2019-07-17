@@ -267,3 +267,9 @@ variable "performance_insights_retention_period" {
   type        = number
   default     = 7
 }
+
+variable "max_allocated_storage" {
+  description = "Specifies the value for Storage Autoscaling"
+  type        = number
+  default     = 0
+}

@@ -168,6 +168,7 @@ module "db" {
 | license\_model | License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1 | string | `""` | no |
 | maintenance\_window | The window to perform maintenance in. Syntax: 'ddd:hh24:mi-ddd:hh24:mi'. Eg: 'Mon:00:00-Mon:03:00' | string | n/a | yes |
 | major\_engine\_version | Specifies the major version of the engine that this option group should be associated with | string | `""` | no |
+| max\_allocated\_storage | Specifies the value for Storage Autoscaling | number | `"0"` | no |
 | monitoring\_interval | The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0. Valid Values: 0, 1, 5, 10, 15, 30, 60. | number | `"0"` | no |
 | monitoring\_role\_arn | The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. Must be specified if monitoring_interval is non-zero. | string | `""` | no |
 | monitoring\_role\_name | Name of the IAM role which will be created when create_monitoring_role is enabled. | string | `"rds-monitoring-role"` | no |

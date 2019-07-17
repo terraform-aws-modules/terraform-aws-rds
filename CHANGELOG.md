@@ -3,9 +3,17 @@
 
 
 
+<a name="v2.3.0"></a>
+## [v2.3.0] - 2019-07-17
+
+- Update documentation a bit after merge
+- Support for max_allocated_storage ([#146](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/146))
+
+
 <a name="v2.2.0"></a>
 ## [v2.2.0] - 2019-06-28
 
+- Updated CHANGELOG
 - Added performance_insights support ([#139](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/139))
 - Updated CHANGELOG
 - Updated pre-commit
@@ -308,7 +316,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.3.0...HEAD
+[v2.3.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.29.0...v2.2.0
 [v1.29.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.1.0...v1.29.0
 [v2.1.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.0.0...v2.1.0
