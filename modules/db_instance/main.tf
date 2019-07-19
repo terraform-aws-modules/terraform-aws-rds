@@ -82,7 +82,7 @@ resource "aws_db_instance" "this" {
   max_allocated_storage       = var.max_allocated_storage
 
   performance_insights_enabled          = var.performance_insights_enabled
-  performance_insights_retention_period = var.performance_insights_retention_period
+  performance_insights_retention_period = var.performance_insights_enabled == true ? var.performance_insights_retention_period : null
 
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
@@ -153,7 +153,7 @@ resource "aws_db_instance" "this_mssql" {
   max_allocated_storage       = var.max_allocated_storage
 
   performance_insights_enabled          = var.performance_insights_enabled
-  performance_insights_retention_period = var.performance_insights_retention_period
+  performance_insights_retention_period = var.performance_insights_enabled == true ? var.performance_insights_retention_period : null
 
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
