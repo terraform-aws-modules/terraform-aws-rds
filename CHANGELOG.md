@@ -3,9 +3,16 @@
 
 
 
+<a name="v2.5.0"></a>
+## [v2.5.0] - 2019-07-21
+
+- Disable perf insights ret period when disabled ([#153](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/153))
+
+
 <a name="v2.4.0"></a>
 ## [v2.4.0] - 2019-07-17
 
+- Updated CHANGELOG
 - Update documentation a bit after merge
 - Add support for performance insights retention period ([#147](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/147))
 - Updated CHANGELOG
@@ -296,13 +303,13 @@
 - support final_snapshot_identifier
 
 
-<a name="v1.0.5"></a>
-## [v1.0.5] - 2017-10-11
-
-
-
 <a name="v1.0.4"></a>
 ## [v1.0.4] - 2017-10-11
+
+
+
+<a name="v1.0.5"></a>
+## [v1.0.5] - 2017-10-11
 
 - Merge pull request [#6](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/6) from yo61/enable_enhanced_monitoring
 - Tweak README.md examples
@@ -346,7 +353,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.4.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.5.0...HEAD
+[v2.5.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.30.0...v2.4.0
 [v1.30.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.3.0...v1.30.0
 [v2.3.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.2.0...v2.3.0
@@ -385,9 +393,9 @@
 [v1.1.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.8...v1.1.0
 [v1.0.8]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.7...v1.0.8
 [v1.0.7]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.6...v1.0.7
-[v1.0.6]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.5...v1.0.6
-[v1.0.5]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.4...v1.0.5
-[v1.0.4]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.3...v1.0.4
+[v1.0.6]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.4...v1.0.6
+[v1.0.4]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.5...v1.0.4
+[v1.0.5]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.3...v1.0.5
 [v1.0.3]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.2...v1.0.3
 [v1.0.2]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.1...v1.0.2
 [v1.0.1]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.0.0...v1.0.1
