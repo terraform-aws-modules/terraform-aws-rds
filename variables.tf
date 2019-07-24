@@ -8,6 +8,7 @@ variable "allocated_storage" {
 
 variable "max_allocated_storage" {
   description = "Specifies the value for Storage Autoscaling"
+  default     = 0
 }
 
 variable "storage_type" {
