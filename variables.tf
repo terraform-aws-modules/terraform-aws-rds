@@ -278,3 +278,8 @@ variable "performance_insights_enabled" {
   description = "Specifies whether Performance Insights are enabled"
   default     = false
 }
+
+variable "performance_insights_retention_period" {
+  description = "The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years)."
+  default     = 7
+}

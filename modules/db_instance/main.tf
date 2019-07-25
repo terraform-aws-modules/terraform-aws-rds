@@ -62,6 +62,7 @@ resource "aws_db_instance" "this" {
   final_snapshot_identifier   = "${var.final_snapshot_identifier}"
 
   performance_insights_enabled = "${var.performance_insights_enabled}"
+  performance_insights_retention_period = "${var.performance_insights_enabled ? var.performance_insights_retention_period : 0}"
 
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.backup_window}"
@@ -122,6 +123,7 @@ resource "aws_db_instance" "this_mssql" {
   final_snapshot_identifier   = "${var.final_snapshot_identifier}"
 
   performance_insights_enabled = "${var.performance_insights_enabled}"
+  performance_insights_retention_period = "${var.performance_insights_enabled ? var.performance_insights_retention_period : 0}"
 
   backup_retention_period = "${var.backup_retention_period}"
   backup_window           = "${var.backup_window}"
