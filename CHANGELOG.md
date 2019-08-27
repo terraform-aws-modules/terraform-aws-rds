@@ -3,9 +3,16 @@
 
 
 
+<a name="v1.32.0"></a>
+## [v1.32.0] - 2019-08-27
+
+- Fix formatting for 0.11.14 ([#161](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/161))
+
+
 <a name="v1.31.0"></a>
 ## [v1.31.0] - 2019-07-28
 
+- Updated CHANGELOG
 - feat(storage): added support for max_allocated_storage ([#155](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/155))
 - Updated CHANGELOG
 - Use boolean value in condition ([#148](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/148))
@@ -367,7 +374,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.31.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.32.0...HEAD
+[v1.32.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.31.0...v1.32.0
 [v1.31.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.5.0...v1.31.0
 [v2.5.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.30.0...v2.4.0
