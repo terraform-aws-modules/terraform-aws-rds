@@ -30,6 +30,12 @@ variable "major_engine_version" {
   type        = string
 }
 
+variable "ignore_changes" {
+  description = "A list of attribute names that terraform ignores. Terraform will not destroy/create RDS if these attributes values changes."
+  type        = any
+  default     = []
+}
+
 variable "options" {
   description = "A list of Options to apply"
   type        = any

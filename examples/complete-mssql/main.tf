@@ -68,4 +68,8 @@ module "db" {
   major_engine_version = "14.00"
 
   options = []
+
+  ignore_changes = [
+      "password",
+    ]
 }

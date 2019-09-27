@@ -84,6 +84,10 @@ module "db" {
       value = "utf8"
     }
   ]
+  ignore_changes = [
+    "password",
+  ]
+
 
   options = [
     {

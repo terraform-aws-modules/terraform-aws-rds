@@ -34,6 +34,7 @@ resource "aws_db_option_group" "this" {
 
   lifecycle {
     create_before_destroy = true
+    ignore_changes = var.ignore_changes
   }
 }
 

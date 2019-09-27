@@ -261,6 +261,12 @@ variable "options" {
   default     = []
 }
 
+variable "ignore_changes" {
+  description = "A list of attribute names that terraform ignores. Terraform will not destroy/create RDS if these attributes values changes."
+  type        = any
+  default     = []
+}
+
 variable "create_db_subnet_group" {
   description = "Whether to create a database subnet group"
   type        = bool
