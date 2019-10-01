@@ -85,6 +85,11 @@ variable "final_snapshot_identifier" {
   default     = false
 }
 
+variable "security_group_names" {
+  description = "List of DB Security Groups to associate. Only used for DB Instances on the EC2-Classic Platform."
+  default     = []
+}
+
 variable "vpc_security_group_ids" {
   description = "List of VPC security groups to associate"
   default     = []

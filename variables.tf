@@ -80,6 +80,11 @@ variable "port" {
   description = "The port on which the DB accepts connections"
 }
 
+variable "security_group_names" {
+  description = "List of DB Security Groups to associate. Only used for DB Instances on the EC2-Classic Platform."
+  default     = []
+}
+
 variable "vpc_security_group_ids" {
   description = "List of VPC security groups to associate"
   default     = []
