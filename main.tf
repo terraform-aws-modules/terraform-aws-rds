@@ -1,3 +1,7 @@
+data "aws_subnet" "selected" {
+  id = var.subnet_ids[0]
+}
+
 locals {
   db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
   enable_create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
@@ -75,7 +79,7 @@ module "db_instance" {
 
   snapshot_identifier = var.snapshot_identifier
 
-  vpc_security_group_ids = var.vpc_security_group_ids
+  vpc_security_group_ids = compact(concat([module.db_sg.this_security_group_id], var.vpc_security_group_ids))
   db_subnet_group_name   = local.db_subnet_group_name
   parameter_group_name   = local.parameter_group_name_id
   option_group_name      = local.option_group_name
@@ -115,3 +119,17 @@ module "db_instance" {
   tags = var.tags
 }
 
+###################
+# DB security group
+###################
+module "db_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+
+  create          = var.sg_create
+  name            = var.sg_name == "" ? "${var.identifier}-sg" : var.sg_name
+  description     = var.sg_description
+  use_name_prefix = var.sg_use_name_prefix
+  vpc_id          = data.aws_subnet.selected.vpc_id
+
+  tags = var.tags
+}

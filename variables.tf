@@ -342,3 +342,28 @@ variable "max_allocated_storage" {
   type        = number
   default     = 0
 }
+
+# DB security group
+variable "sg_create" {
+  description = "create a security group for the db: true/false"
+  type        = bool
+  default     = false
+}
+
+variable "sg_description" {
+  description = "Description for the db security group"
+  type        = string
+  default     = "Security Group managed by Terraform"
+}
+
+variable "sg_name" {
+  description = "Name for the db security group"
+  type        = string
+  default     = ""
+}
+
+variable "sg_use_name_prefix" {
+  description = "Whether to use name prefix for the security group"
+  type        = string
+  default     = "true"
+}

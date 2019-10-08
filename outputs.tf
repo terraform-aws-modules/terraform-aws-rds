@@ -89,3 +89,13 @@ output "this_db_option_group_arn" {
   value       = module.db_option_group.this_db_option_group_arn
 }
 
+# DB security group
+output "this_db_security_group_description" {
+  description = "The db security group description"
+  value       = "${module.db_sg.this_security_group_description}"
+}
+
+output "this_db_security_group_id" {
+  description = "The db security group id"
+  value       = "${module.db_sg.this_security_group_id}"
+}
