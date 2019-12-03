@@ -86,6 +86,8 @@ module "db_instance" {
   iops                = "${var.iops}"
   publicly_accessible = "${var.publicly_accessible}"
 
+  ca_cert_identifier = "${var.ca_cert_identifier}"
+
   allow_major_version_upgrade = "${var.allow_major_version_upgrade}"
   auto_minor_version_upgrade  = "${var.auto_minor_version_upgrade}"
   apply_immediately           = "${var.apply_immediately}"
