@@ -33,7 +33,7 @@ resource "aws_db_parameter_group" "this_no_prefix" {
 resource "aws_db_parameter_group" "this" {
   count = var.create && var.use_name_prefix ? 1 : 0
 
-  name_prefix = var.name_prefix
+  name_prefix = lower(var.name_prefix)
   description = local.description
   family      = var.family
 

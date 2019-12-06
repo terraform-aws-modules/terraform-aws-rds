@@ -39,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
 resource "aws_db_instance" "this" {
   count = var.create && false == local.is_mssql ? 1 : 0
 
-  identifier = var.identifier
+  identifier = lower(var.identifier)
 
   engine            = var.engine
   engine_version    = var.engine_version
