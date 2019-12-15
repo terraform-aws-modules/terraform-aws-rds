@@ -155,6 +155,8 @@ module "db" {
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | bool | `"false"` | no |
 | db\_subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | string | `""` | no |
 | deletion\_protection | The database can't be deleted when this value is set to true. | bool | `"false"` | no |
+| domain | The ID of the Directory Service Active Directory domain to create the instance in | string | `""` | no |
+| domain\_iam\_role\_name | \(Required if domain is provided\) The name of the IAM role to be used when making API calls to the Directory Service | string | `""` | no |
 | enabled\_cloudwatch\_logs\_exports | List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values \(depending on engine\): alert, audit, error, general, listener, slowquery, trace, postgresql \(PostgreSQL\), upgrade \(PostgreSQL\). | list(string) | `[]` | no |
 | engine | The database engine to use | string | n/a | yes |
 | engine\_version | The engine version to use | string | n/a | yes |
