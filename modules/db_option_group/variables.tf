@@ -48,3 +48,12 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "timeouts" {
+  description = "(Optional) Applies to `aws_db_option_group` in particular to allow AWS enough time to delete resource"
+  type        = map(string)
+
+  default = {
+    delete = "15m"
+  }
+}

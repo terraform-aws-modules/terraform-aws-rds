@@ -13,6 +13,7 @@
 | option\_group\_description | The description of the option group | string | `""` | no |
 | options | A list of Options to apply | any | `[]` | no |
 | tags | A mapping of tags to assign to the resource | map(string) | `{}` | no |
+| timeouts | \(Optional\) Applies to `aws\_db\_option\_group` in particular to allow AWS enough time to delete resource | map(string) | `{ "delete": "15m" }` | no |
 | use\_name\_prefix | Whether to use name as a prefix or not | bool | `"true"` | no |
 
 ## Outputs

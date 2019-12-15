@@ -279,6 +279,15 @@ variable "options" {
   default     = []
 }
 
+variable "option_group_timeouts" {
+  description = "(Optional) Applies to `aws_db_option_group` in particular to allow AWS enough time to delete resource"
+  type        = map(string)
+
+  default = {
+    delete = "15m"
+  }
+}
+
 variable "create_db_subnet_group" {
   description = "Whether to create a database subnet group"
   type        = bool

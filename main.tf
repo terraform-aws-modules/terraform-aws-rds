@@ -50,6 +50,8 @@ module "db_option_group" {
   options = var.options
 
   tags = var.tags
+
+  timeouts = var.option_group_timeouts
 }
 
 module "db_instance" {
