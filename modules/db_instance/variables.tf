@@ -56,6 +56,18 @@ variable "iam_database_authentication_enabled" {
   default     = false
 }
 
+variable "domain" {
+  description = "The ID of the Directory Service Active Directory domain to create the instance in"
+  type        = string
+  default     = ""
+}
+
+variable "domain_iam_role_name" {
+  description = ""
+  type        = string
+  default     = "(Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service"
+}
+
 variable "engine" {
   description = "The database engine to use"
   type        = string
