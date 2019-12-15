@@ -66,4 +66,3 @@ output "this_db_instance_port" {
   description = "The database port"
   value       = local.this_db_instance_port
 }
-
