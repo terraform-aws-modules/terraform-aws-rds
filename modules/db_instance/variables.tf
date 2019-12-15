@@ -63,9 +63,9 @@ variable "domain" {
 }
 
 variable "domain_iam_role_name" {
-  description = ""
+  description = "(Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service"
   type        = string
-  default     = "(Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service"
+  default     = ""
 }
 
 variable "engine" {
