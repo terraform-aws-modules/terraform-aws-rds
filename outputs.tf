@@ -19,7 +19,7 @@ output "this_db_instance_endpoint" {
 }
 
 output "this_db_instance_hosted_zone_id" {
-  description = "The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record)"
+  description = "The canonical hosted zone ID of the database instance (to be used in a Route 53 Alias record)"
   value       = module.db_instance.this_db_instance_hosted_zone_id
 }
 
@@ -59,34 +59,39 @@ output "this_db_instance_port" {
   value       = module.db_instance.this_db_instance_port
 }
 
+output "this_db_instance_ca_cert_identifier" {
+  description = "The database instance identifier for the CA certificate"
+  value       = module.db_instance.this_db_instance_ca_cert_identifier
+}
+
 output "this_db_subnet_group_id" {
-  description = "The db subnet group name"
+  description = "The database subnet group name"
   value       = module.db_subnet_group.this_db_subnet_group_id
 }
 
 output "this_db_subnet_group_arn" {
-  description = "The ARN of the db subnet group"
+  description = "The ARN of the database subnet group"
   value       = module.db_subnet_group.this_db_subnet_group_arn
 }
 
 output "this_db_parameter_group_id" {
-  description = "The db parameter group id"
+  description = "The database parameter group id"
   value       = module.db_parameter_group.this_db_parameter_group_id
 }
 
 output "this_db_parameter_group_arn" {
-  description = "The ARN of the db parameter group"
+  description = "The ARN of the database parameter group"
   value       = module.db_parameter_group.this_db_parameter_group_arn
 }
 
-# DB option group
+# Database option group
 output "this_db_option_group_id" {
-  description = "The db option group id"
+  description = "The database option group id"
   value       = module.db_option_group.this_db_option_group_id
 }
 
 output "this_db_option_group_arn" {
-  description = "The ARN of the db option group"
+  description = "The ARN of the database option group"
   value       = module.db_option_group.this_db_option_group_arn
 }
 

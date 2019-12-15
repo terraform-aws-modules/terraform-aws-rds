@@ -209,8 +209,9 @@ module "db" {
 | this\_db\_instance\_address | The address of the RDS instance |
 | this\_db\_instance\_arn | The ARN of the RDS instance |
 | this\_db\_instance\_availability\_zone | The availability zone of the RDS instance |
+| this\_db\_instance\_ca\_cert\_identifier | The database instance identifier for the CA certificate |
 | this\_db\_instance\_endpoint | The connection endpoint |
-| this\_db\_instance\_hosted\_zone\_id | The canonical hosted zone ID of the DB instance \(to be used in a Route 53 Alias record\) |
+| this\_db\_instance\_hosted\_zone\_id | The canonical hosted zone ID of the database instance \(to be used in a Route 53 Alias record\) |
 | this\_db\_instance\_id | The RDS instance ID |
 | this\_db\_instance\_name | The database name |
 | this\_db\_instance\_password | The database password \(this password may be old, because Terraform doesn't track it after initial creation\) |
@@ -218,12 +219,12 @@ module "db" {
 | this\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
 | this\_db\_instance\_status | The RDS instance status |
 | this\_db\_instance\_username | The master username for the database |
-| this\_db\_option\_group\_arn | The ARN of the db option group |
-| this\_db\_option\_group\_id | The db option group id |
-| this\_db\_parameter\_group\_arn | The ARN of the db parameter group |
-| this\_db\_parameter\_group\_id | The db parameter group id |
-| this\_db\_subnet\_group\_arn | The ARN of the db subnet group |
-| this\_db\_subnet\_group\_id | The db subnet group name |
+| this\_db\_option\_group\_arn | The ARN of the database option group |
+| this\_db\_option\_group\_id | The database option group id |
+| this\_db\_parameter\_group\_arn | The ARN of the database parameter group |
+| this\_db\_parameter\_group\_id | The database parameter group id |
+| this\_db\_subnet\_group\_arn | The ARN of the database subnet group |
+| this\_db\_subnet\_group\_id | The database subnet group name |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
