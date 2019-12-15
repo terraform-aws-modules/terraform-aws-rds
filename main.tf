@@ -1,6 +1,5 @@
 locals {
-  db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
-  enable_create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
+  db_subnet_group_name = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
 
   parameter_group_name    = var.parameter_group_name != "" ? var.parameter_group_name : var.identifier
   parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
@@ -12,7 +11,7 @@ locals {
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  create          = local.enable_create_db_subnet_group
+  create          = var.create_db_subnet_group
   identifier      = var.identifier
   name            = var.db_subnet_group_name
   use_name_prefix = var.use_subnet_group_name_prefix
