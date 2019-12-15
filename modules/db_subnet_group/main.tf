@@ -1,7 +1,8 @@
 resource "aws_db_subnet_group" "this" {
   count = var.create ? 1 : 0
 
-  name_prefix = var.name_prefix
+  name        = var.use_name_prefix ? null : lower(var.name)
+  name_prefix = var.use_name_prefix ? "${lower(var.name)}-" : null
   description = "Database subnet group for ${var.identifier}"
   subnet_ids  = var.subnet_ids
 
@@ -11,5 +12,9 @@ resource "aws_db_subnet_group" "this" {
       "Name" = format("%s", var.identifier)
     },
   )
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 

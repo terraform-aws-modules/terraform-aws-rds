@@ -4,9 +4,16 @@ variable "create" {
   default     = true
 }
 
-variable "name_prefix" {
-  description = "Creates a unique name beginning with the specified prefix"
+variable "name" {
+  description = "The name of the DB option group. If omitted, Terraform will assign a random, unique name. If use_name_prefix = true, creates a unique name beginning with the specified prefix"
   type        = string
+  default     = null
+}
+
+variable "use_name_prefix" {
+  description = "Whether to use name as a prefix or not"
+  type        = bool
+  default     = true
 }
 
 variable "identifier" {
@@ -41,4 +48,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-

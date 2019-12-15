@@ -1,7 +1,8 @@
 resource "aws_db_option_group" "this" {
   count = var.create ? 1 : 0
 
-  name_prefix              = var.name_prefix
+  name                     = var.use_name_prefix ? null : lower(var.name)
+  name_prefix              = var.use_name_prefix ? "${lower(var.name)}-" : null
   option_group_description = var.option_group_description == "" ? format("Option group for %s", var.identifier) : var.option_group_description
   engine_name              = var.engine_name
   major_engine_version     = var.major_engine_version
@@ -36,4 +37,3 @@ resource "aws_db_option_group" "this" {
     create_before_destroy = true
   }
 }
-

@@ -12,10 +12,11 @@ locals {
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  create      = local.enable_create_db_subnet_group
-  identifier  = var.identifier
-  name_prefix = "${var.identifier}-"
-  subnet_ids  = var.subnet_ids
+  create          = local.enable_create_db_subnet_group
+  identifier      = var.identifier
+  name            = var.db_subnet_group_name
+  use_name_prefix = var.use_subnet_group_name_prefix
+  subnet_ids      = var.subnet_ids
 
   tags = var.tags
 }
@@ -26,9 +27,8 @@ module "db_parameter_group" {
   create          = var.create_db_parameter_group
   identifier      = var.identifier
   name            = var.parameter_group_name
-  description     = var.parameter_group_description
-  name_prefix     = "${var.identifier}-"
   use_name_prefix = var.use_parameter_group_name_prefix
+  description     = var.parameter_group_description
   family          = var.family
 
   parameters = var.parameters
@@ -41,7 +41,8 @@ module "db_option_group" {
 
   create                   = local.enable_create_db_option_group
   identifier               = var.identifier
-  name_prefix              = "${var.identifier}-"
+  name                     = var.option_group_name
+  use_name_prefix          = var.use_option_group_name_prefix
   option_group_description = var.option_group_description
   engine_name              = var.engine
   major_engine_version     = var.major_engine_version
@@ -116,4 +117,3 @@ module "db_instance" {
 
   tags = var.tags
 }
-

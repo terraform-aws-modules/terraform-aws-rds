@@ -11,9 +11,15 @@ variable "description" {
 }
 
 variable "name" {
-  description = "The name of the DB parameter group"
+  description = "The name of the DB parameter group. If omitted, Terraform will assign a random, unique name. If use_name_prefix = true, creates a unique name beginning with the specified prefix"
   type        = string
-  default     = ""
+  default     = null
+}
+
+variable "use_name_prefix" {
+  description = "Whether to use name as a prefix or not"
+  type        = bool
+  default     = true
 }
 
 variable "name_prefix" {
@@ -43,10 +49,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
-variable "use_name_prefix" {
-  description = "Whether to use name_prefix or not"
-  type        = bool
-  default     = true
-}
-

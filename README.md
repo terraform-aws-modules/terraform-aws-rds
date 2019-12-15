@@ -196,7 +196,9 @@ module "db" {
 | tags | A mapping of tags to assign to all resources | map(string) | `{}` | no |
 | timeouts | \(Optional\) Updated Terraform resource management timeouts. Applies to `aws\_db\_instance` in particular to permit resource management times | map(string) | `{ "create": "40m", "delete": "40m", "update": "80m" }` | no |
 | timezone | \(Optional\) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information. | string | `""` | no |
+| use\_option\_group\_name\_prefix | Whether to use the option group name prefix or not | string | `"true"` | no |
 | use\_parameter\_group\_name\_prefix | Whether to use the parameter group name prefix or not | bool | `"true"` | no |
+| use\_subnet\_group\_name\_prefix | Whether to use the option group name prefix or not | string | `"true"` | no |
 | username | Username for the master DB user | string | n/a | yes |
 | vpc\_security\_group\_ids | List of VPC security groups to associate | list(string) | `[]` | no |
 
