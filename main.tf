@@ -86,6 +86,7 @@ module "db_instance" {
   availability_zone   = var.availability_zone
   multi_az            = var.multi_az
   iops                = var.iops
+  ca_cert_identifier  = var.ca_cert_identifier
   publicly_accessible = var.publicly_accessible
 
   allow_major_version_upgrade = var.allow_major_version_upgrade

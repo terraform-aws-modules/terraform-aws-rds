@@ -146,6 +146,12 @@ variable "iops" {
   default     = 0
 }
 
+variable "ca_cert_identifier" {
+  description = "Specifies the identifier of the CA certificate for the DB instance"
+  type        = string
+  default     = "rds-ca-2019"
+}
+
 variable "publicly_accessible" {
   description = "Bool to control if instance is publicly accessible"
   type        = bool
