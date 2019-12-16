@@ -6,10 +6,10 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | create | Whether to create this resource or not? | bool | `"true"` | no |
-| description | The description of the DB parameter group | string | `""` | no |
+| description | Description of the parameter group | string | `""` | no |
 | family | The family of the DB parameter group | string | n/a | yes |
 | identifier | The identifier of the resource | string | n/a | yes |
-| name | The name of the DB parameter group. If omitted, Terraform will assign a random, unique name. If use\_name\_prefix = true, creates a unique name beginning with the specified prefix | string | `"null"` | no |
+| name | The name of the DB parameter group | string | n/a | yes |
 | name\_prefix | Creates a unique name beginning with the specified prefix | string | `""` | no |
 | parameters | A list of DB parameter maps to apply | list(map(string)) | `[]` | no |
 | tags | A mapping of tags to assign to the resource | map(string) | `{}` | no |

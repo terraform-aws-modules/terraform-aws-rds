@@ -113,7 +113,7 @@ variable "vpc_security_group_ids" {
 variable "db_subnet_group_name" {
   description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "parameter_group_description" {
@@ -352,14 +352,32 @@ variable "use_parameter_group_name_prefix" {
   default     = true
 }
 
+variable "parameter_group_name_prefix" {
+  description = "Creates a unique name beginning with the specified prefix"
+  type        = string
+  default     = ""
+}
+
 variable "use_option_group_name_prefix" {
   description = "Whether to use the option group name prefix or not"
   default     = true
 }
 
+variable "option_group_name_prefix" {
+  description = "Creates a unique name beginning with the specified prefix"
+  type        = string
+  default     = ""
+}
+
 variable "use_subnet_group_name_prefix" {
   description = "Whether to use the option group name prefix or not"
   default     = true
+}
+
+variable "db_subnet_group_name_prefix" {
+  description = "Creates a unique name beginning with the specified prefix"
+  type        = string
+  default     = ""
 }
 
 variable "performance_insights_enabled" {

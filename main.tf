@@ -1,10 +1,7 @@
 locals {
-  db_subnet_group_name = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
-
-  parameter_group_name    = var.parameter_group_name != "" ? var.parameter_group_name : var.identifier
-  parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
-
-  option_group_name             = var.option_group_name != "" ? var.option_group_name : module.db_option_group.this_db_option_group_id
+  db_subnet_group_name          = var.create_db_subnet_group ? module.db_subnet_group.this_db_subnet_group_id : var.db_subnet_group_name
+  parameter_group_name          = var.create_db_parameter_group ? module.db_parameter_group.this_db_parameter_group_id : var.parameter_group_name
+  option_group_name             = var.create_db_option_group ? module.db_option_group.this_db_option_group_id : var.option_group_name
   enable_create_db_option_group = var.option_group_name == "" && var.engine != "postgres" ? var.create_db_option_group : false
 }
 
@@ -14,6 +11,7 @@ module "db_subnet_group" {
   create          = var.create_db_subnet_group
   identifier      = var.identifier
   name            = var.db_subnet_group_name
+  name_prefix     = var.db_subnet_group_name_prefix
   use_name_prefix = var.use_subnet_group_name_prefix
   subnet_ids      = var.subnet_ids
 
@@ -26,6 +24,7 @@ module "db_parameter_group" {
   create          = var.create_db_parameter_group
   identifier      = var.identifier
   name            = var.parameter_group_name
+  name_prefix     = var.parameter_group_name_prefix
   use_name_prefix = var.use_parameter_group_name_prefix
   description     = var.parameter_group_description
   family          = var.family
@@ -38,13 +37,14 @@ module "db_parameter_group" {
 module "db_option_group" {
   source = "./modules/db_option_group"
 
-  create                   = local.enable_create_db_option_group
-  identifier               = var.identifier
-  name                     = var.option_group_name
-  use_name_prefix          = var.use_option_group_name_prefix
-  option_group_description = var.option_group_description
-  engine_name              = var.engine
-  major_engine_version     = var.major_engine_version
+  create               = local.enable_create_db_option_group
+  identifier           = var.identifier
+  name                 = var.option_group_name
+  name_prefix          = var.option_group_name_prefix
+  use_name_prefix      = var.use_option_group_name_prefix
+  description          = var.option_group_description
+  engine_name          = var.engine
+  major_engine_version = var.major_engine_version
 
   options = var.options
 
@@ -81,7 +81,7 @@ module "db_instance" {
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = local.db_subnet_group_name
-  parameter_group_name   = local.parameter_group_name_id
+  parameter_group_name   = local.parameter_group_name
   option_group_name      = local.option_group_name
 
   availability_zone   = var.availability_zone

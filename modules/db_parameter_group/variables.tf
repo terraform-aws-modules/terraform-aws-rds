@@ -4,16 +4,9 @@ variable "create" {
   default     = true
 }
 
-variable "description" {
-  description = "The description of the DB parameter group"
-  type        = string
-  default     = ""
-}
-
 variable "name" {
-  description = "The name of the DB parameter group. If omitted, Terraform will assign a random, unique name. If use_name_prefix = true, creates a unique name beginning with the specified prefix"
+  description = "The name of the DB parameter group"
   type        = string
-  default     = null
 }
 
 variable "use_name_prefix" {
@@ -31,6 +24,12 @@ variable "name_prefix" {
 variable "identifier" {
   description = "The identifier of the resource"
   type        = string
+}
+
+variable "description" {
+  description = "Description of the parameter group"
+  type        = string
+  default     = ""
 }
 
 variable "family" {

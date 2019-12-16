@@ -155,6 +155,7 @@ module "db" {
 | create\_db\_subnet\_group | Whether to create a database subnet group | bool | `"true"` | no |
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | bool | `"false"` | no |
 | db\_subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | string | `""` | no |
+| db\_subnet\_group\_name\_prefix | Creates a unique name beginning with the specified prefix | string | `""` | no |
 | deletion\_protection | The database can't be deleted when this value is set to true. | bool | `"false"` | no |
 | domain | The ID of the Directory Service Active Directory domain to create the instance in | string | `""` | no |
 | domain\_iam\_role\_name | \(Required if domain is provided\) The name of the IAM role to be used when making API calls to the Directory Service | string | `""` | no |
@@ -179,10 +180,12 @@ module "db" {
 | name | The DB name to create. If omitted, no database is created initially | string | `""` | no |
 | option\_group\_description | The description of the option group | string | `""` | no |
 | option\_group\_name | Name of the DB option group to associate. Setting this automatically disables option\_group creation | string | `""` | no |
+| option\_group\_name\_prefix | Creates a unique name beginning with the specified prefix | string | `""` | no |
 | option\_group\_timeouts | \(Optional\) Applies to `aws\_db\_option\_group` in particular to allow AWS enough time to delete resource | map(string) | `{ "delete": "15m" }` | no |
 | options | A list of Options to apply. | any | `[]` | no |
 | parameter\_group\_description | Description of the DB parameter group to create | string | `""` | no |
 | parameter\_group\_name | Name of the DB parameter group to associate or create | string | `""` | no |
+| parameter\_group\_name\_prefix | Creates a unique name beginning with the specified prefix | string | `""` | no |
 | parameters | A list of DB parameters \(map\) to apply | list(map(string)) | `[]` | no |
 | password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | string | n/a | yes |
 | performance\_insights\_enabled | Specifies whether Performance Insights are enabled | bool | `"false"` | no |

@@ -1,15 +1,20 @@
-resource "aws_db_subnet_group" "this" {
-  count = var.create ? 1 : 0
+locals {
+  description = coalesce(var.description, "Database subnet group for ${var.identifier}")
+  name_prefix = coalesce(var.name_prefix, var.identifier)
+  name        = coalesce(var.name, var.identifier)
+}
 
-  name        = var.use_name_prefix ? null : lower(var.name)
-  name_prefix = var.use_name_prefix ? "${lower(var.name)}-" : null
-  description = "Database subnet group for ${var.identifier}"
+resource "aws_db_subnet_group" "this" {
+  count = var.create && var.use_name_prefix ? 1 : 0
+
+  name_prefix = "${lower(local.name_prefix)}-"
+  description = local.description
   subnet_ids  = var.subnet_ids
 
   tags = merge(
     var.tags,
     {
-      "Name" = format("%s", var.identifier)
+      "Name" = format("%s", local.name_prefix)
     },
   )
 
@@ -18,3 +23,21 @@ resource "aws_db_subnet_group" "this" {
   }
 }
 
+resource "aws_db_subnet_group" "this_no_prefix" {
+  count = var.create && ! var.use_name_prefix ? 1 : 0
+
+  name        = lower(local.name)
+  description = local.description
+  subnet_ids  = var.subnet_ids
+
+  tags = merge(
+    var.tags,
+    {
+      "Name" = format("%s", local.name)
+    },
+  )
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}

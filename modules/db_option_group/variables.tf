@@ -5,9 +5,8 @@ variable "create" {
 }
 
 variable "name" {
-  description = "The name of the DB option group. If omitted, Terraform will assign a random, unique name. If use_name_prefix = true, creates a unique name beginning with the specified prefix"
+  description = "The name of the DB option group"
   type        = string
-  default     = null
 }
 
 variable "use_name_prefix" {
@@ -16,13 +15,19 @@ variable "use_name_prefix" {
   default     = true
 }
 
+variable "name_prefix" {
+  description = "Creates a unique name beginning with the specified prefix"
+  type        = string
+  default     = ""
+}
+
 variable "identifier" {
   description = "The identifier of the resource"
   type        = string
 }
 
-variable "option_group_description" {
-  description = "The description of the option group"
+variable "description" {
+  description = "Description of the option group"
   type        = string
   default     = ""
 }

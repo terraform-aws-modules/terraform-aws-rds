@@ -6,8 +6,10 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | create | Whether to create this resource or not? | bool | `"true"` | no |
+| description | Description of the subnet group | string | `""` | no |
 | identifier | The identifier of the resource | string | n/a | yes |
-| name | The name of the DB subnet group. If omitted, Terraform will assign a random, unique name. If use\_name\_prefix = true, creates a unique name beginning with the specified prefix | string | `"null"` | no |
+| name | The name of the DB subnet group | string | n/a | yes |
+| name\_prefix | Creates a unique name beginning with the specified prefix | string | `""` | no |
 | subnet\_ids | A list of VPC subnet IDs | list(string) | `[]` | no |
 | tags | A mapping of tags to assign to the resource | map(string) | `{}` | no |
 | use\_name\_prefix | Whether to use name as a prefix or not | bool | `"true"` | no |
