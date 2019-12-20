@@ -223,3 +223,9 @@ variable "performance_insights_enabled" {
   description = "Specifies whether Performance Insights are enabled"
   default     = false
 }
+
+variable "ca_cert_identifier" {
+  description = "Specifies the identifier of the CA certificate for the DB instance"
+  type        = "string"
+  default     = "rds-ca-2015"
+}
