@@ -58,6 +58,11 @@ output "this_db_instance_port" {
   value       = module.db_instance.this_db_instance_port
 }
 
+output "this_db_instance_ca_cert_identifier" {
+  description = "Specifies the identifier of the CA certificate for the DB instance"
+  value       = module.db_instance.this_db_instance_ca_cert_identifier
+}
+
 output "this_db_subnet_group_id" {
   description = "The db subnet group name"
   value       = module.db_subnet_group.this_db_subnet_group_id
@@ -88,4 +93,3 @@ output "this_db_option_group_arn" {
   description = "The ARN of the db option group"
   value       = module.db_option_group.this_db_option_group_arn
 }
-
