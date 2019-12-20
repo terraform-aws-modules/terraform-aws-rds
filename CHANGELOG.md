@@ -3,9 +3,61 @@
 
 
 
+<a name="v2.6.0"></a>
+## [v2.6.0] - 2019-12-20
+
+- Updated formatting after PR [#174](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/174)
+- Add support for ca_cert_identifier option ([#174](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/174))
+- Updated CHANGELOG
+- Disable perf insights ret period when disabled ([#153](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/153))
+- Updated CHANGELOG
+- Update documentation a bit after merge
+- Add support for performance insights retention period ([#147](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/147))
+- Updated CHANGELOG
+- Update documentation a bit after merge
+- Support for max_allocated_storage ([#146](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/146))
+- Updated CHANGELOG
+- Added performance_insights support ([#139](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/139))
+- Updated CHANGELOG
+- Updated pre-commit
+- Fixed variable default for parameters ([#138](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/138))
+- Updated CHANGELOG
+- Upgraded module to support Terraform 0.12 ([#126](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/126))
+
+
+<a name="v1.33.0"></a>
+## [v1.33.0] - 2019-12-20
+
+- Updated CHANGELOG
+- Updated formatting after PR [#175](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/175)
+- Add support for ca_cert_identifier option ([#175](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/175))
+
+
+<a name="v1.32.0"></a>
+## [v1.32.0] - 2019-08-27
+
+- Updated CHANGELOG
+- Fix formatting for 0.11.14 ([#161](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/161))
+
+
+<a name="v1.31.0"></a>
+## [v1.31.0] - 2019-07-28
+
+- Updated CHANGELOG
+- feat(storage): added support for max_allocated_storage ([#155](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/155))
+- Updated CHANGELOG
+- Use boolean value in condition ([#148](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/148))
+- Updated CHANGELOG
+- Update documentation a bit after merge
+- Use false instead of 0 in enable_create_db_option_group flag ([#137](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/137))
+- Add support of performance_insights_enabled ([#132](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/132))
+- Use false instead of 0 in enable_create_db_option_group flag
+
+
 <a name="v2.5.0"></a>
 ## [v2.5.0] - 2019-07-21
 
+- Updated CHANGELOG
 - Disable perf insights ret period when disabled ([#153](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/153))
 
 
@@ -353,7 +405,11 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.5.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.6.0...HEAD
+[v2.6.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.33.0...v2.6.0
+[v1.33.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.32.0...v1.33.0
+[v1.32.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.31.0...v1.32.0
+[v1.31.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.5.0...v1.31.0
 [v2.5.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.30.0...v2.4.0
 [v1.30.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.3.0...v1.30.0
