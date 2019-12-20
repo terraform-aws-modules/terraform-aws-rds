@@ -3,9 +3,16 @@
 
 
 
+<a name="v2.7.0"></a>
+## [v2.7.0] - 2019-12-20
+
+- Added ca_cert_identifier to outputs
+
+
 <a name="v2.6.0"></a>
 ## [v2.6.0] - 2019-12-20
 
+- Updated CHANGELOG
 - Updated formatting after PR [#174](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/174)
 - Add support for ca_cert_identifier option ([#174](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/174))
 - Updated CHANGELOG
@@ -405,7 +412,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.6.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.7.0...HEAD
+[v2.7.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.6.0...v2.7.0
 [v2.6.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.33.0...v2.6.0
 [v1.33.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.32.0...v1.33.0
 [v1.32.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.31.0...v1.32.0
