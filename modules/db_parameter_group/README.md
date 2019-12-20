@@ -13,7 +13,7 @@
 | name\_prefix | Creates a unique name beginning with the specified prefix | string | `""` | no |
 | parameters | A list of DB parameter maps to apply | list | `[]` | no |
 | tags | A mapping of tags to assign to the resource | map | `{}` | no |
-| use\_name\_prefix | Whether to use name_prefix or not | string | `"true"` | no |
+| use\_name\_prefix | Whether to use name\_prefix or not | string | `"true"` | no |
 
 ## Outputs
 
