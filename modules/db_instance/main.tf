@@ -161,6 +161,8 @@ resource "aws_db_instance" "this_mssql" {
   backup_window           = var.backup_window
 
   timezone = var.timezone
+  
+  ca_cert_identifier = var.ca_cert_identifier
 
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
