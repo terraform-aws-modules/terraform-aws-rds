@@ -60,7 +60,7 @@ output "this_db_instance_port" {
 }
 
 output "this_db_instance_ca_cert_identifier" {
-  description = "The database instance identifier for the CA certificate"
+  description = "Specifies the identifier of the CA certificate for the DB instance"
   value       = module.db_instance.this_db_instance_ca_cert_identifier
 }
 
@@ -94,4 +94,3 @@ output "this_db_option_group_arn" {
   description = "The ARN of the database option group"
   value       = module.db_option_group.this_db_option_group_arn
 }
-
