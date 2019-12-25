@@ -90,8 +90,6 @@ resource "aws_db_instance" "this" {
 
   character_set_name = var.character_set_name
 
-  ca_cert_identifier = var.ca_cert_identifier
-
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
   deletion_protection = var.deletion_protection
