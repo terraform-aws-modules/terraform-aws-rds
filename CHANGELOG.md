@@ -3,9 +3,16 @@
 
 
 
+<a name="v2.10.0"></a>
+## [v2.10.0] - 2020-01-07
+
+- Add outputs for the monitoring role arn ([#181](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/181))
+
+
 <a name="v2.9.0"></a>
 ## [v2.9.0] - 2020-01-07
 
+- Updated CHANGELOG
 - Update CA Certificate identifier default to 'rds-ca-2019' ([#182](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/182))
 
 
@@ -426,7 +433,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.9.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.10.0...HEAD
+[v2.10.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.9.0...v2.10.0
 [v2.9.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.8.0...v2.9.0
 [v2.8.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.7.0...v2.8.0
 [v2.7.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.6.0...v2.7.0
