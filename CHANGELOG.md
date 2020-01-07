@@ -3,9 +3,16 @@
 
 
 
+<a name="v2.9.0"></a>
+## [v2.9.0] - 2020-01-07
+
+- Update CA Certificate identifier default to 'rds-ca-2019' ([#182](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/182))
+
+
 <a name="v2.8.0"></a>
 ## [v2.8.0] - 2019-12-20
 
+- Updated CHANGELOG
 - Mark password as sensitive (closes [#98](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/98))
 
 
@@ -419,7 +426,8 @@
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.8.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.9.0...HEAD
+[v2.9.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.8.0...v2.9.0
 [v2.8.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.7.0...v2.8.0
 [v2.7.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.6.0...v2.7.0
 [v2.6.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.33.0...v2.6.0
