@@ -1,3 +1,13 @@
+output "enhanced_monitoring_iam_role_name" {
+  description = "The name of the monitoring role"
+  value       = module.db_instance.enhanced_monitoring_iam_role_name
+}
+
+output "enhanced_monitoring_iam_role_arn" {
+  description = "The Amazon Resource Name (ARN) specifying the monitoring role"
+  value       = module.db_instance.enhanced_monitoring_iam_role_arn
+}
+
 output "this_db_instance_address" {
   description = "The address of the RDS instance"
   value       = module.db_instance.this_db_instance_address
@@ -51,11 +61,17 @@ output "this_db_instance_username" {
 output "this_db_instance_password" {
   description = "The database password (this password may be old, because Terraform doesn't track it after initial creation)"
   value       = var.password
+  sensitive   = true
 }
 
 output "this_db_instance_port" {
   description = "The database port"
   value       = module.db_instance.this_db_instance_port
+}
+
+output "this_db_instance_ca_cert_identifier" {
+  description = "Specifies the identifier of the CA certificate for the DB instance"
+  value       = module.db_instance.this_db_instance_ca_cert_identifier
 }
 
 output "this_db_subnet_group_id" {
@@ -88,4 +104,3 @@ output "this_db_option_group_arn" {
   description = "The ARN of the db option group"
   value       = module.db_option_group.this_db_option_group_arn
 }
-
