@@ -1,3 +1,13 @@
+output "enhanced_monitoring_iam_role_name" {
+  description = "The name of the monitoring role"
+  value       = module.db_instance.enhanced_monitoring_iam_role_name
+}
+
+output "enhanced_monitoring_iam_role_arn" {
+  description = "The Amazon Resource Name (ARN) specifying the monitoring role"
+  value       = module.db_instance.enhanced_monitoring_iam_role_arn
+}
+
 output "this_db_instance_address" {
   description = "The address of the RDS instance"
   value       = module.db_instance.this_db_instance_address
