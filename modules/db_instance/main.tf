@@ -70,7 +70,7 @@ resource "aws_db_instance" "this" {
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
   monitoring_interval = var.monitoring_interval
-  monitoring_role_arn = coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null)
+  monitoring_role_arn = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, join(", ", aws_iam_role.enhanced_monitoring.*.arn), null) : null
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
@@ -88,6 +88,8 @@ resource "aws_db_instance" "this" {
   backup_window           = var.backup_window
 
   character_set_name = var.character_set_name
+
+  ca_cert_identifier = var.ca_cert_identifier
 
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
@@ -143,7 +145,7 @@ resource "aws_db_instance" "this_mssql" {
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
   monitoring_interval = var.monitoring_interval
-  monitoring_role_arn = coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null)
+  monitoring_role_arn = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null) : null
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade

@@ -146,10 +146,11 @@ module "db" {
 | availability\_zone | The Availability Zone of the RDS instance | string | `""` | no |
 | backup\_retention\_period | The days to retain backups for | number | `"1"` | no |
 | backup\_window | The daily time range \(in UTC\) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance\_window | string | n/a | yes |
+| ca\_cert\_identifier | Specifies the identifier of the CA certificate for the DB instance | string | `"rds-ca-2019"` | no |
 | character\_set\_name | \(Optional\) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information | string | `""` | no |
 | copy\_tags\_to\_snapshot | On delete, copy all Instance tags to the final snapshot \(if final\_snapshot\_identifier is specified\) | bool | `"false"` | no |
 | create\_db\_instance | Whether to create a database instance | bool | `"true"` | no |
-| create\_db\_option\_group | Whether to create a database option group | bool | `"true"` | no |
+| create\_db\_option\_group | \(Optional\) Create a database option group | bool | `"true"` | no |
 | create\_db\_parameter\_group | Whether to create a database parameter group | bool | `"true"` | no |
 | create\_db\_subnet\_group | Whether to create a database subnet group | bool | `"true"` | no |
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | bool | `"false"` | no |
@@ -177,7 +178,7 @@ module "db" {
 | multi\_az | Specifies if the RDS instance is multi-AZ | bool | `"false"` | no |
 | name | The DB name to create. If omitted, no database is created initially | string | `""` | no |
 | option\_group\_description | The description of the option group | string | `""` | no |
-| option\_group\_name | Name of the DB option group to associate. Setting this automatically disables option\_group creation | string | `""` | no |
+| option\_group\_name | Name of the DB option group to associate | string | `""` | no |
 | options | A list of Options to apply. | any | `[]` | no |
 | parameter\_group\_description | Description of the DB parameter group to create | string | `""` | no |
 | parameter\_group\_name | Name of the DB parameter group to associate or create | string | `""` | no |
@@ -204,9 +205,12 @@ module "db" {
 
 | Name | Description |
 |------|-------------|
+| enhanced\_monitoring\_iam\_role\_arn | The Amazon Resource Name \(ARN\) specifying the monitoring role |
+| enhanced\_monitoring\_iam\_role\_name | The name of the monitoring role |
 | this\_db\_instance\_address | The address of the RDS instance |
 | this\_db\_instance\_arn | The ARN of the RDS instance |
 | this\_db\_instance\_availability\_zone | The availability zone of the RDS instance |
+| this\_db\_instance\_ca\_cert\_identifier | Specifies the identifier of the CA certificate for the DB instance |
 | this\_db\_instance\_endpoint | The connection endpoint |
 | this\_db\_instance\_hosted\_zone\_id | The canonical hosted zone ID of the DB instance \(to be used in a Route 53 Alias record\) |
 | this\_db\_instance\_id | The RDS instance ID |

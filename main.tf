@@ -6,7 +6,7 @@ locals {
   parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
 
   option_group_name             = var.option_group_name != "" ? var.option_group_name : module.db_option_group.this_db_option_group_id
-  enable_create_db_option_group = var.option_group_name == "" && var.engine != "postgres" ? var.create_db_option_group : false
+  enable_create_db_option_group = var.create_db_option_group ? true : var.option_group_name == "" && var.engine != "postgres"
 }
 
 module "db_subnet_group" {
@@ -86,6 +86,8 @@ module "db_instance" {
   multi_az            = var.multi_az
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
+
+  ca_cert_identifier = var.ca_cert_identifier
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade

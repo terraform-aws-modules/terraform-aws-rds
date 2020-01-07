@@ -129,7 +129,7 @@ variable "parameter_group_name" {
 }
 
 variable "option_group_name" {
-  description = "Name of the DB option group to associate. Setting this automatically disables option_group creation"
+  description = "Name of the DB option group to associate"
   type        = string
   default     = ""
 }
@@ -286,7 +286,7 @@ variable "create_db_parameter_group" {
 }
 
 variable "create_db_option_group" {
-  description = "Whether to create a database option group"
+  description = "(Optional) Create a database option group"
   type        = bool
   default     = true
 }
@@ -353,4 +353,10 @@ variable "max_allocated_storage" {
   description = "Specifies the value for Storage Autoscaling"
   type        = number
   default     = 0
+}
+
+variable "ca_cert_identifier" {
+  description = "Specifies the identifier of the CA certificate for the DB instance"
+  type        = string
+  default     = "rds-ca-2019"
 }
