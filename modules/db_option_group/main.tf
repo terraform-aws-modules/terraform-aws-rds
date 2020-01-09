@@ -10,6 +10,8 @@ resource "aws_db_option_group" "this" {
 
   tags = "${merge(var.tags, map("Name", format("%s", var.identifier)))}"
 
+  timeouts = "${var.timeouts}"
+
   lifecycle {
     create_before_destroy = true
   }

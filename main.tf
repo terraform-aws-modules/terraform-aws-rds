@@ -48,6 +48,8 @@ module "db_option_group" {
 
   options = ["${var.options}"]
 
+  timeouts = "${var.option_group_timeouts}"
+
   tags = "${var.tags}"
 }
 
