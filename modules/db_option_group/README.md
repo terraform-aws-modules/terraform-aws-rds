@@ -13,6 +13,7 @@
 | option\_group\_description | The description of the option group | string | `""` | no |
 | options | A list of Options to apply | list | `[]` | no |
 | tags | A mapping of tags to assign to the resource | map | `{}` | no |
+| timeouts | Define maximum timeout for deletion of `aws\_db\_option\_group` resource | map | `{ "delete": "15m" }` | no |
 
 ## Outputs
 
