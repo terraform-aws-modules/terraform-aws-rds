@@ -325,6 +325,14 @@ variable "timeouts" {
   }
 }
 
+variable "option_group_timeouts" {
+  description = "Define maximum timeout for deletion of `aws_db_option_group` resource"
+  type        = map(string)
+  default = {
+    delete = "15m"
+  }
+}
+
 variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true."
   type        = bool

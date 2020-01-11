@@ -179,6 +179,7 @@ module "db" {
 | name | The DB name to create. If omitted, no database is created initially | string | `""` | no |
 | option\_group\_description | The description of the option group | string | `""` | no |
 | option\_group\_name | Name of the DB option group to associate | string | `""` | no |
+| option\_group\_timeouts | Define maximum timeout for deletion of `aws\_db\_option\_group` resource | map(string) | `{ "delete": "15m" }` | no |
 | options | A list of Options to apply. | any | `[]` | no |
 | parameter\_group\_description | Description of the DB parameter group to create | string | `""` | no |
 | parameter\_group\_name | Name of the DB parameter group to associate or create | string | `""` | no |
