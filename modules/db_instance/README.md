@@ -66,6 +66,8 @@
 | this\_db\_instance\_arn | The ARN of the RDS instance |
 | this\_db\_instance\_availability\_zone | The availability zone of the RDS instance |
 | this\_db\_instance\_ca\_cert\_identifier | Specifies the identifier of the CA certificate for the DB instance |
+| this\_db\_instance\_domain | The ID of the Directory Service Active Directory domain the instance is joined to |
+| this\_db\_instance\_domain\_iam\_role\_name | The name of the IAM role to be used when making API calls to the Directory Service. |
 | this\_db\_instance\_endpoint | The connection endpoint |
 | this\_db\_instance\_hosted\_zone\_id | The canonical hosted zone ID of the DB instance \(to be used in a Route 53 Alias record\) |
 | this\_db\_instance\_id | The RDS instance ID |
