@@ -289,5 +289,5 @@ variable "max_allocated_storage" {
 variable "ca_cert_identifier" {
   description = "Specifies the identifier of the CA certificate for the DB instance"
   type        = string
-  default     = "rds-ca-2015"
+  default     = "rds-ca-2019"
 }

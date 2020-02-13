@@ -17,6 +17,16 @@ $ terraform apply
 Note that this example may create resources which cost money. Run `terraform destroy` when you don't need these resources.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
+## Inputs
+
+No input.
+
 ## Outputs
 
 | Name | Description |
@@ -27,10 +37,10 @@ Note that this example may create resources which cost money. Run `terraform des
 | this\_db\_instance\_domain | The ID of the Directory Service Active Directory domain the instance is joined to |
 | this\_db\_instance\_domain\_iam\_role\_name | The name of the IAM role to be used when making API calls to the Directory Service. |
 | this\_db\_instance\_endpoint | The connection endpoint |
-| this\_db\_instance\_hosted\_zone\_id | The canonical hosted zone ID of the DB instance \(to be used in a Route 53 Alias record\) |
+| this\_db\_instance\_hosted\_zone\_id | The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record) |
 | this\_db\_instance\_id | The RDS instance ID |
 | this\_db\_instance\_name | The database name |
-| this\_db\_instance\_password | The database password \(this password may be old, because Terraform doesn't track it after initial creation\) |
+| this\_db\_instance\_password | The database password (this password may be old, because Terraform doesn't track it after initial creation) |
 | this\_db\_instance\_port | The database port |
 | this\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
 | this\_db\_instance\_status | The RDS instance status |
