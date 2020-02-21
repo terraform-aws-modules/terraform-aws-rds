@@ -1,19 +1,25 @@
 # aws_db_parameter_group
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | n/a |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| create | Whether to create this resource or not? | string | `"true"` | no |
-| description | The description of the DB parameter group | string | `""` | no |
-| family | The family of the DB parameter group | string | n/a | yes |
-| identifier | The identifier of the resource | string | n/a | yes |
-| name | The name of the DB parameter group | string | `""` | no |
-| name\_prefix | Creates a unique name beginning with the specified prefix | string | `""` | no |
-| parameters | A list of DB parameter maps to apply | list | `[]` | no |
-| tags | A mapping of tags to assign to the resource | map | `{}` | no |
-| use\_name\_prefix | Whether to use name\_prefix or not | string | `"true"` | no |
+|------|-------------|------|---------|:-----:|
+| create | Whether to create this resource or not? | `bool` | `true` | no |
+| description | The description of the DB parameter group | `string` | `""` | no |
+| family | The family of the DB parameter group | `any` | n/a | yes |
+| identifier | The identifier of the resource | `any` | n/a | yes |
+| name | The name of the DB parameter group | `string` | `""` | no |
+| name\_prefix | Creates a unique name beginning with the specified prefix | `string` | `""` | no |
+| parameters | A list of DB parameter maps to apply | `list` | `[]` | no |
+| tags | A mapping of tags to assign to the resource | `map` | `{}` | no |
+| use\_name\_prefix | Whether to use name\_prefix or not | `bool` | `true` | no |
 
 ## Outputs
 
