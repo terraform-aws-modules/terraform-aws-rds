@@ -54,6 +54,8 @@ resource "aws_db_instance" "this" {
   username                            = var.username
   password                            = var.password
   port                                = var.port
+  domain                              = var.domain
+  domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
   replicate_source_db = var.replicate_source_db
