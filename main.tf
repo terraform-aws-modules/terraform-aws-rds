@@ -15,8 +15,8 @@ module "db_subnet_group" {
   create      = local.enable_create_db_subnet_group
   identifier  = var.identifier
   name_prefix = "${var.identifier}-"
+  use_name_prefix = var.use_subnet_group_name_prefix
   subnet_ids  = var.subnet_ids
-
   tags = var.tags
 }
 
@@ -42,6 +42,7 @@ module "db_option_group" {
   create                   = local.enable_create_db_option_group
   identifier               = var.identifier
   name_prefix              = "${var.identifier}-"
+  use_name_prefix          = var.use_option_group_name_prefix
   option_group_description = var.option_group_description
   engine_name              = var.engine
   major_engine_version     = var.major_engine_version
