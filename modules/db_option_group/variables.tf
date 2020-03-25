@@ -9,6 +9,12 @@ variable "name_prefix" {
   type        = string
 }
 
+variable "use_name_prefix" {
+  description = "Whether to use name_prefix or not"
+  type        = bool
+  default     = true
+}
+
 variable "identifier" {
   description = "The identifier of the resource"
   type        = string
