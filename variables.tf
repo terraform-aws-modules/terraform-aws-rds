@@ -332,7 +332,16 @@ variable "use_parameter_group_name_prefix" {
   type        = bool
   default     = true
 }
-
+variable "use_option_group_name_prefix" {
+  description = "Whether to use the option group name prefix or not"
+  type        = bool
+  default     = true
+}
+variable "use_subnet_group_name_prefix" {
+  description = "Whether to use the subnet group name prefix or not"
+  type        = bool
+  default     = true
+}
 variable "performance_insights_enabled" {
   description = "Specifies whether Performance Insights are enabled"
   type        = bool
