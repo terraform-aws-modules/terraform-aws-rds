@@ -163,7 +163,7 @@ No provider.
 | enabled\_cloudwatch\_logs\_exports | List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine): alert, audit, error, general, listener, slowquery, trace, postgresql (PostgreSQL), upgrade (PostgreSQL). | `list(string)` | `[]` | no |
 | engine | The database engine to use | `string` | n/a | yes |
 | engine\_version | The engine version to use | `string` | n/a | yes |
-| family | The family of the DB parameter group | `string` | `""` | no |
+| family | The family of the DB parameter group | `string` | `""` | yes |
 | final\_snapshot\_identifier | The name of your final DB snapshot when this DB instance is deleted. | `string` | n/a | yes |
 | iam\_database\_authentication\_enabled | Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled | `bool` | `false` | no |
 | identifier | The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier | `string` | n/a | yes |
