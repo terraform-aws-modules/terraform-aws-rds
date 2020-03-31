@@ -279,3 +279,9 @@ variable "ca_cert_identifier" {
   type        = string
   default     = "rds-ca-2019"
 }
+
+variable "s3_import_options" {
+  description = "Allows restoring a DB from an xtrabackup percona snapshot stored in s3"
+  type        = map(string)
+  default     = {}
+}
