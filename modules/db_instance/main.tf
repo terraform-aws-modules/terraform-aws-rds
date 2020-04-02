@@ -176,7 +176,7 @@ resource "aws_db_instance" "this_s3" {
     delete = lookup(var.timeouts, "delete", null)
     update = lookup(var.timeouts, "update", null)
   }
-  s3_import = {
+  s3_import {
 ## Only MySQL supported for this option
     source_engine         = "mysql"
     source_engine_version = var.s3_import_options["engine_version"]
