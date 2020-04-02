@@ -179,10 +179,10 @@ resource "aws_db_instance" "this_s3" {
   s3_import {
 ## Only MySQL supported for this option
     source_engine         = "mysql"
-    source_engine_version = var.s3_import_options["engine_version"]
-    bucket_name           = var.s3_import_options["bucket"]
-    bucket_prefix         = var.s3_import_options["prefix"]
-    ingestion_role        = var.s3_import_options["role"]
+    source_engine_version = var.s3_import_options["source_engine_version"]
+    bucket_name           = var.s3_import_options["bucket_name"]
+    bucket_prefix         = var.s3_import_options["bucket_prefix"]
+    ingestion_role        = var.s3_import_options["ingestion_role"]
   }
 }
 
