@@ -114,7 +114,8 @@ module "db_instance" {
 
   timeouts = var.timeouts
 
-  deletion_protection = var.deletion_protection
+  deletion_protection      = var.deletion_protection
+  delete_automated_backups = var.delete_automated_backups
 
   tags = var.tags
 }
