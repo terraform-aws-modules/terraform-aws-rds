@@ -160,7 +160,8 @@ resource "aws_db_instance" "this_mssql" {
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
 
-  timezone = var.timezone
+  character_set_name = var.character_set_name
+  timezone           = var.timezone
 
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
