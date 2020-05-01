@@ -262,6 +262,11 @@ variable "performance_insights_enabled" {
   default     = false
 }
 
+variable "performance_insights_kms_key_id" {
+  description = "The ARN for the KMS key to encrypt Performance Insights data."
+  default     = null
+}
+
 variable "performance_insights_retention_period" {
   description = "The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years)."
   type        = number

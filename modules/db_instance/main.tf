@@ -82,6 +82,7 @@ resource "aws_db_instance" "this" {
   max_allocated_storage       = var.max_allocated_storage
 
   performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_kms_key_id       = var.performance_insights_enabled == true ? var.performance_insights_kms_key_id : null
   performance_insights_retention_period = var.performance_insights_enabled == true ? var.performance_insights_retention_period : null
 
   backup_retention_period = var.backup_retention_period
@@ -155,6 +156,7 @@ resource "aws_db_instance" "this_mssql" {
   max_allocated_storage       = var.max_allocated_storage
 
   performance_insights_enabled          = var.performance_insights_enabled
+  performance_insights_kms_key_id       = var.performance_insights_enabled == true ? var.performance_insights_kms_key_id : null
   performance_insights_retention_period = var.performance_insights_enabled == true ? var.performance_insights_retention_period : null
 
   backup_retention_period = var.backup_retention_period
