@@ -37,7 +37,7 @@ resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
 }
 
 resource "aws_db_instance" "this" {
-  count = var.create && length(keys(var.s3_import_options)) == 0 && false == local.is_mssql ? 1 : 0
+  count = var.create && var.s3_import_options != null && false == local.is_mssql ? 1 : 0
 
   identifier = var.identifier
 
