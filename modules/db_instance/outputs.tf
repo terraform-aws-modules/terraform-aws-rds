@@ -3,7 +3,7 @@ locals {
   enhanced_monitoring_iam_role_arn    = element(concat(aws_iam_role.enhanced_monitoring.*.arn, [""]), 0)
   this_db_instance_address            = element(concat(aws_db_instance.this_mssql.*.address, aws_db_instance.this.*.address, aws_db_instance.this_s3.*.address, [""]), 0)
   this_db_instance_arn                = element(concat(aws_db_instance.this_mssql.*.arn, aws_db_instance.this.*.arn,aws_db_instance.this_s3.*.arn, [""]), 0)
-  this_db_instance_availability_zone  = element(concat(aws_db_instance.this_mssql.*.availability_zone, aws_db_instance.this.*.availability_zone,aws_db_instance.this_s3.*.availability_zone [""]), 0)
+  this_db_instance_availability_zone  = element(concat(aws_db_instance.this_mssql.*.availability_zone, aws_db_instance.this.*.availability_zone,aws_db_instance.this_s3.*.availability_zone, [""]), 0)
   this_db_instance_endpoint           = element(concat(aws_db_instance.this_mssql.*.endpoint, aws_db_instance.this.*.endpoint,aws_db_instance.this_s3.*.endpoint,  [""]), 0)
   this_db_instance_hosted_zone_id     = element(concat(aws_db_instance.this_mssql.*.hosted_zone_id, aws_db_instance.this.*.hosted_zone_id,aws_db_instance.this_s3.*.hosted_zone_id, [""]), 0)
   this_db_instance_id                 = element(concat(aws_db_instance.this_mssql.*.id, aws_db_instance.this.*.id,aws_db_instance.this_s3.*.id, [""]), 0)
