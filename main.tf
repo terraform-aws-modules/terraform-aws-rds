@@ -1,6 +1,7 @@
 locals {
-  db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
-  enable_create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
+  created_db_subnet_group       = var.create_db_subnet_group && var.db_subnet_group_name == "" ? module.db_subnet_group.this_db_subnet_group_id : null
+  enable_create_db_subnet_group = var.create_db_subnet_group && var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
+  db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : local.created_db_subnet_group
 
   parameter_group_name    = var.parameter_group_name != "" ? var.parameter_group_name : var.identifier
   parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
@@ -118,4 +119,3 @@ module "db_instance" {
 
   tags = var.tags
 }
-
