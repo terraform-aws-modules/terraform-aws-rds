@@ -1,6 +1,10 @@
 # aws_db_subnet_group
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -10,7 +14,7 @@
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | create | Whether to create this resource or not? | `bool` | `true` | no |
 | identifier | The identifier of the resource | `string` | n/a | yes |
 | name\_prefix | Creates a unique name beginning with the specified prefix | `string` | n/a | yes |
