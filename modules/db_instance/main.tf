@@ -93,7 +93,8 @@ resource "aws_db_instance" "this" {
 
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
-  deletion_protection = var.deletion_protection
+  deletion_protection      = var.deletion_protection
+  delete_automated_backups = var.delete_automated_backups
 
   tags = merge(
     var.tags,

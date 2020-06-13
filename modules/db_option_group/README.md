@@ -1,6 +1,10 @@
 # aws_db_option_group
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -10,7 +14,7 @@
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | create | Whether to create this resource or not? | `bool` | `true` | no |
 | engine\_name | Specifies the name of the engine that this option group should be associated with | `string` | n/a | yes |
 | identifier | The identifier of the resource | `string` | n/a | yes |
