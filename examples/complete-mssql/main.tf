@@ -88,6 +88,7 @@ module "db" {
 
   engine            = "sqlserver-ex"
   engine_version    = "14.00.1000.169.v1"
+  family            = "sqlserver-ex-14.0"
   instance_class    = "db.t2.medium"
   allocated_storage = 20
   storage_encrypted = false
@@ -96,7 +97,7 @@ module "db" {
   username = "demouser"
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "1433"
-
+  
   domain               = aws_directory_service_directory.demo.id
   domain_iam_role_name = aws_iam_role.rds_ad_auth.name
 
