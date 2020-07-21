@@ -88,6 +88,7 @@ module "db" {
 
   engine            = "sqlserver-ex"
   engine_version    = "14.00.1000.169.v1"
+  family            = "sqlserver-ex-14.0"
   instance_class    = "db.t2.medium"
   allocated_storage = 20
   storage_encrypted = false
