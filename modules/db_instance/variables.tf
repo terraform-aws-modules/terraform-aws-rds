@@ -56,6 +56,18 @@ variable "iam_database_authentication_enabled" {
   default     = false
 }
 
+variable "domain" {
+  description = "The ID of the Directory Service Active Directory domain to create the instance in"
+  type        = string
+  default     = ""
+}
+
+variable "domain_iam_role_name" {
+  description = "(Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service"
+  type        = string
+  default     = ""
+}
+
 variable "engine" {
   description = "The database engine to use"
   type        = string
@@ -284,4 +296,10 @@ variable "s3_import_options" {
   description = "Allows restoring a DB from an xtrabackup percona snapshot stored in s3"
   type        = map(string)
   default     = {}
+}
+
+variable "delete_automated_backups" {
+  description = "Specifies whether to remove automated backups immediately after the DB instance is deleted"
+  type        = bool
+  default     = true
 }

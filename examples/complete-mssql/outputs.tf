@@ -77,3 +77,13 @@ output "this_db_parameter_group_arn" {
   description = "The ARN of the db parameter group"
   value       = module.db.this_db_parameter_group_arn
 }
+
+output "this_db_instance_domain" {
+  description = "The ID of the Directory Service Active Directory domain the instance is joined to"
+  value       = module.db.this_db_instance_domain
+}
+
+output "this_db_instance_domain_iam_role_name" {
+  description = "The name of the IAM role to be used when making API calls to the Directory Service. "
+  value       = module.db.this_db_instance_domain_iam_role_name
+}
