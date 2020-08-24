@@ -1,6 +1,6 @@
 locals {
   db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
-  enable_create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
+  enable_create_db_subnet_group = var.create_db_subnet_group == false ? false : var.db_subnet_group_name != ""
 
   parameter_group_name    = var.parameter_group_name != "" ? var.parameter_group_name : var.identifier
   parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
