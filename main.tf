@@ -72,6 +72,8 @@ module "db_instance" {
   username                            = var.username
   password                            = var.password
   port                                = var.port
+  domain                              = var.domain
+  domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
   replicate_source_db = var.replicate_source_db
@@ -115,7 +117,8 @@ module "db_instance" {
 
   timeouts = var.timeouts
 
-  deletion_protection = var.deletion_protection
+  deletion_protection      = var.deletion_protection
+  delete_automated_backups = var.delete_automated_backups
 
   tags = var.tags
 }

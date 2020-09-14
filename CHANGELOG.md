@@ -7,6 +7,25 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.18.0"></a>
+## [v2.18.0] - 2020-08-13
+
+- feat: Bump version of AWS provider to support v3
+
+
+<a name="v2.17.0"></a>
+## [v2.17.0] - 2020-07-20
+
+- Upgraded Terraform version supported
+- feat: add Windows authentication ([#177](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/177))
+
+
+<a name="v2.16.0"></a>
+## [v2.16.0] - 2020-06-13
+
+- feat: add handling for delete_automated_backups flag ([#215](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/215))
+
+
 <a name="v2.15.0"></a>
 ## [v2.15.0] - 2020-05-13
 
@@ -570,7 +589,10 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.15.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.18.0...HEAD
+[v2.18.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.17.0...v2.18.0
+[v2.17.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.16.0...v2.17.0
+[v2.16.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.15.0...v2.16.0
 [v2.15.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.37.0...v2.15.0
 [v1.37.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.14.0...v1.37.0
 [v2.14.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v1.36.0...v2.14.0

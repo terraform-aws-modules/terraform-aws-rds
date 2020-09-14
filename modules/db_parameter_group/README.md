@@ -1,6 +1,10 @@
 # aws_db_parameter_group
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
@@ -10,7 +14,7 @@
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | create | Whether to create this resource or not? | `bool` | `true` | no |
 | description | The description of the DB parameter group | `string` | `""` | no |
 | family | The family of the DB parameter group | `string` | n/a | yes |
