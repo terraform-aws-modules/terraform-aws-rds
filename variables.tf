@@ -357,6 +357,12 @@ variable "performance_insights_retention_period" {
   default     = 7
 }
 
+variable "performance_insights_kms_key_id" {
+  description = "The ARN for the KMS key to encrypt Performance Insights data."
+  type        = string
+  default     = ""
+}
+
 variable "max_allocated_storage" {
   description = "Specifies the value for Storage Autoscaling"
   type        = number

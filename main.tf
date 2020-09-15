@@ -101,6 +101,7 @@ module "db_instance" {
 
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_retention_period
+  performance_insights_kms_key_id       = var.performance_insights_kms_key_id
 
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
