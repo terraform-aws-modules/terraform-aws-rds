@@ -9,7 +9,7 @@ These types of resources are supported:
 * [DB Parameter Group](https://www.terraform.io/docs/providers/aws/r/db_parameter_group.html)
 * [DB Option Group](https://www.terraform.io/docs/providers/aws/r/db_option_group.html)
 
-Root module calls these modules which can also be used separately to create independent resources:
+Root module calls these modules which can also be used separately to create independent resources: 
 
 * [db_instance](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_instance) - creates RDS DB instance
 * [db_subnet_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_subnet_group) - creates RDS DB subnet group
