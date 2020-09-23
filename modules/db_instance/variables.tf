@@ -56,6 +56,18 @@ variable "iam_database_authentication_enabled" {
   default     = false
 }
 
+variable "domain" {
+  description = "The ID of the Directory Service Active Directory domain to create the instance in"
+  type        = string
+  default     = ""
+}
+
+variable "domain_iam_role_name" {
+  description = "(Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service"
+  type        = string
+  default     = ""
+}
+
 variable "engine" {
   description = "The database engine to use"
   type        = string
@@ -278,4 +290,10 @@ variable "ca_cert_identifier" {
   description = "Specifies the identifier of the CA certificate for the DB instance"
   type        = string
   default     = "rds-ca-2019"
+}
+
+variable "delete_automated_backups" {
+  description = "Specifies whether to remove automated backups immediately after the DB instance is deleted"
+  type        = bool
+  default     = true
 }

@@ -64,6 +64,16 @@ output "this_db_instance_password" {
   sensitive   = true
 }
 
+output "this_db_instance_domain" {
+  description = "The ID of the Directory Service Active Directory domain the instance is joined to"
+  value       = module.db_instance.this_db_instance_domain
+}
+
+output "this_db_instance_domain_iam_role_name" {
+  description = "The name of the IAM role to be used when making API calls to the Directory Service. "
+  value       = module.db_instance.this_db_instance_domain_iam_role_name
+}
+
 output "this_db_instance_port" {
   description = "The database port"
   value       = module.db_instance.this_db_instance_port

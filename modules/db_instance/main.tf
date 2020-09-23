@@ -54,6 +54,8 @@ resource "aws_db_instance" "this" {
   username                            = var.username
   password                            = var.password
   port                                = var.port
+  domain                              = var.domain
+  domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
   replicate_source_db = var.replicate_source_db
@@ -93,7 +95,8 @@ resource "aws_db_instance" "this" {
 
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
-  deletion_protection = var.deletion_protection
+  deletion_protection      = var.deletion_protection
+  delete_automated_backups = var.delete_automated_backups
 
   tags = merge(
     var.tags,
@@ -127,6 +130,8 @@ resource "aws_db_instance" "this_mssql" {
   username                            = var.username
   password                            = var.password
   port                                = var.port
+  domain                              = var.domain
+  domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
   replicate_source_db = var.replicate_source_db
