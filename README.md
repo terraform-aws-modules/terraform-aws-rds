@@ -18,7 +18,7 @@ Root module calls these modules which can also be used separately to create inde
 
 ## Terraform versions
 
-Terraform 0.12. Pin module version to `~> v2.0`. Submit pull-requests to `master` branch.
+Terraform 0.12 and newer. Pin module version to `~> v2.0`. Submit pull-requests to `master` branch.
 
 Terraform 0.11. Pin module version to `~> v1.0`. Submit pull-requests to `terraform011` branch.
 
@@ -140,7 +140,7 @@ module "db" {
 | Name | Version |
 |------|---------|
 | terraform | >= 0.12.6, < 0.14 |
-| aws | ~> 2.49 |
+| aws | >= 2.49, < 4.0 |
 
 ## Providers
 
