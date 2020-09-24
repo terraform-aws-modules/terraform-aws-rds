@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = var.aws_region
 }
 
 ##############################################################
@@ -13,9 +13,19 @@ data "aws_subnet_ids" "all" {
   vpc_id = data.aws_vpc.default.id
 }
 
-data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
-  name   = "default"
+data "http" "my_public_ip" {
+  url = "https://ipecho.net/plain"
+}
+
+##############################
+# Security Group for Mysql   #
+##############################
+module "mysql_security_group" {
+  source              = "terraform-aws-modules/security-group/aws//modules/mysql"
+  version             = "~> 3.16"
+  name                = "mysql-sg-terraform-teste"
+  ingress_cidr_blocks = ["${chomp(data.http.my_public_ip.body)}/32"]
+  vpc_id              = data.aws_vpc.default.id
 }
 
 #####
@@ -24,22 +34,23 @@ data "aws_security_group" "default" {
 module "db" {
   source = "../../"
 
-  identifier = "demodb"
+  identifier = var.name
 
   # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-  engine            = "mysql"
-  engine_version    = "5.7.19"
-  instance_class    = "db.t2.large"
-  allocated_storage = 5
-  storage_encrypted = false
+  engine              = var.engine_name
+  engine_version      = var.engine_version
+  instance_class      = "db.t2.large"
+  allocated_storage   = 5
+  storage_encrypted   = false
+  publicly_accessible = var.publicly_accessible
 
   # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
-  name     = "demodb"
-  username = "user"
-  password = "YourPwdShouldBeLongAndSecure!"
+  name     = var.database_name
+  username = var.username
+  password = var.password
   port     = "3306"
 
-  vpc_security_group_ids = [data.aws_security_group.default.id]
+  vpc_security_group_ids = [module.mysql_security_group.this_security_group_id]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -63,10 +74,10 @@ module "db" {
   family = "mysql5.7"
 
   # DB option group
-  major_engine_version = "5.7"
+  major_engine_version = var.major_engine_version
 
   # Snapshot name upon DB deletion
-  final_snapshot_identifier = "demodb"
+  final_snapshot_identifier = var.database_name
 
   # Database Deletion Protection
   deletion_protection = false

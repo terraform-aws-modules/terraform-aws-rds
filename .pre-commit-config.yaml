@@ -8,3 +8,4 @@ repos:
     rev: v3.1.0
     hooks:
       - id: check-merge-conflict
+      - id: detect-aws-credentials

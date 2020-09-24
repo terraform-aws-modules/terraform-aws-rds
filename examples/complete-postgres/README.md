@@ -26,10 +26,22 @@ No requirements.
 | Name | Version |
 |------|---------|
 | aws | n/a |
+| http | n/a |
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| aws\_region | AWS Region to create this resource | `string` | `"eu-west-1"` | no |
+| database\_name | Name of the database to be created | `string` | `"demodb"` | no |
+| engine\_name | Name of the database engine | `string` | `"postgres"` | no |
+| engine\_version | Version of the database to be launched | `string` | `"9.6.9"` | no |
+| major\_engine\_version | MAJOR.MINOR version of the DB engine | `string` | `"9.6"` | no |
+| name | Name of the database | `string` | `"terratest-example-postgres"` | no |
+| password | Master password of the DB | `string` | `"YourPwdShouldBeLongAndSecure!"` | no |
+| port | The port on which the DB accepts connections | `string` | `"5432"` | no |
+| publicly\_accessible | Bool to control if instance is publicly accessible | `bool` | `true` | no |
+| username | Master username of the DB | `string` | `"demouser"` | no |
 
 ## Outputs
 
