@@ -23,7 +23,7 @@ data "http" "my_public_ip" {
 module "postgresql_security_group" {
   source              = "terraform-aws-modules/security-group/aws//modules/postgresql"
   version             = "~> 3.16"
-  name                = "mysql-sg-terraform-teste"
+  name                = "psql-sg-terraform-teste"
   ingress_cidr_blocks = ["${chomp(data.http.my_public_ip.body)}/32"]
   vpc_id              = data.aws_vpc.default.id
 }
