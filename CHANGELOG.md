@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.19.0"></a>
+## [v2.19.0] - 2020-10-15
+
+- fix: Added tflint and fixes in README ([#265](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/265))
+- docs: Change accound to account ([#261](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/261))
+
+
 <a name="v2.18.0"></a>
 ## [v2.18.0] - 2020-08-13
 
@@ -589,7 +596,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.18.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.19.0...HEAD
+[v2.19.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.18.0...v2.19.0
 [v2.18.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.17.0...v2.18.0
 [v2.17.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.16.0...v2.17.0
 [v2.16.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.15.0...v2.16.0
