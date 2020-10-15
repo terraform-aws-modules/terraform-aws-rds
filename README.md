@@ -139,8 +139,8 @@ module "db" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6, < 0.14 |
-| aws | >= 2.49, < 4.0 |
+| terraform | >= 0.12.6 |
+| aws | >= 2.49 |
 
 ## Providers
 
@@ -175,7 +175,7 @@ No provider.
 | engine\_version | The engine version to use | `string` | n/a | yes |
 | family | The family of the DB parameter group | `string` | `""` | no |
 | final\_snapshot\_identifier | The name of your final DB snapshot when this DB instance is deleted. | `string` | `null` | no |
-| iam\_database\_authentication\_enabled | Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled | `bool` | `false` | no |
+| iam\_database\_authentication\_enabled | Specifies whether or not the mappings of AWS Identity and Access Management (IAM) accounts to database accounts are enabled | `bool` | `false` | no |
 | identifier | The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier | `string` | n/a | yes |
 | instance\_class | The instance type of the RDS instance | `string` | n/a | yes |
 | iops | The amount of provisioned IOPS. Setting this implies a storage\_type of 'io1' | `number` | `0` | no |
