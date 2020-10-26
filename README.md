@@ -160,10 +160,10 @@ No provider.
 | ca\_cert\_identifier | Specifies the identifier of the CA certificate for the DB instance | `string` | `"rds-ca-2019"` | no |
 | character\_set\_name | (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information | `string` | `""` | no |
 | copy\_tags\_to\_snapshot | On delete, copy all Instance tags to the final snapshot (if final\_snapshot\_identifier is specified) | `bool` | `false` | no |
-| create\_db\_instance | Whether to create a database instance | `bool` | `true` | no |
-| create\_db\_option\_group | (Optional) Create a database option group | `bool` | `true` | no |
-| create\_db\_parameter\_group | Whether to create a database parameter group | `bool` | `true` | no |
-| create\_db\_subnet\_group | Whether to create a database subnet group | `bool` | `true` | no |
+| create\_db\_instance | (Optional) Whether to create a database instance | `bool` | `true` | no |
+| create\_db\_option\_group | (Optional) Create a database option group. Ignored if create\_db\_instance is false. | `bool` | `true` | no |
+| create\_db\_parameter\_group | (Optional) Whether to create a database parameter group. Ignored if create\_db\_instance is false. | `bool` | `true` | no |
+| create\_db\_subnet\_group | (Optional) Whether to create a database subnet group. Ignored if create\_db\_instance is false. | `bool` | `true` | no |
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | `bool` | `false` | no |
 | db\_subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | `string` | `""` | no |
 | delete\_automated\_backups | Specifies whether to remove automated backups immediately after the DB instance is deleted | `bool` | `true` | no |

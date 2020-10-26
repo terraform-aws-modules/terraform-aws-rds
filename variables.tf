@@ -274,25 +274,25 @@ variable "options" {
 }
 
 variable "create_db_subnet_group" {
-  description = "Whether to create a database subnet group"
+  description = "(Optional) Whether to create a database subnet group. Ignored if create_db_instance is false."
   type        = bool
   default     = true
 }
 
 variable "create_db_parameter_group" {
-  description = "Whether to create a database parameter group"
+  description = "(Optional) Whether to create a database parameter group. Ignored if create_db_instance is false."
   type        = bool
   default     = true
 }
 
 variable "create_db_option_group" {
-  description = "(Optional) Create a database option group"
+  description = "(Optional) Create a database option group. Ignored if create_db_instance is false."
   type        = bool
   default     = true
 }
 
 variable "create_db_instance" {
-  description = "Whether to create a database instance"
+  description = "(Optional) Whether to create a database instance"
   type        = bool
   default     = true
 }
