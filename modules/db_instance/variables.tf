@@ -303,3 +303,9 @@ variable "delete_automated_backups" {
   type        = bool
   default     = true
 }
+
+variable "iam_partition" {
+  description = "IAM Partition to use when generating ARN's. For most regions this can be left at default. China/Govcloud use different partitions"
+  type        = string
+  default     = "aws"
+}

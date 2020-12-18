@@ -3,13 +3,16 @@
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.6 |
+| aws | >= 2.49 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| aws | >= 2.49 |
 
 ## Inputs
 
@@ -37,6 +40,7 @@ No requirements.
 | engine\_version | The engine version to use | `string` | n/a | yes |
 | final\_snapshot\_identifier | The name of your final DB snapshot when this DB instance is deleted. | `string` | `null` | no |
 | iam\_database\_authentication\_enabled | Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled | `bool` | `false` | no |
+| iam\_partition | IAM Partition to use when generating ARN's. For most regions this can be left at default. China/Govcloud use different partitions | `string` | `"aws"` | no |
 | identifier | The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier | `string` | n/a | yes |
 | instance\_class | The instance type of the RDS instance | `string` | n/a | yes |
 | iops | The amount of provisioned IOPS. Setting this implies a storage\_type of 'io1' | `number` | `0` | no |
