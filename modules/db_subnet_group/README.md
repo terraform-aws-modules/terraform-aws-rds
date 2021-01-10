@@ -20,9 +20,11 @@
 |------|-------------|------|---------|:--------:|
 | create | Whether to create this resource or not? | `bool` | `true` | no |
 | identifier | The identifier of the resource | `string` | n/a | yes |
-| name\_prefix | Creates a unique name beginning with the specified prefix | `string` | n/a | yes |
+| name | The name of the DB parameter group | `string` | `""` | no |
+| name\_prefix | Creates a unique name beginning with the specified prefix | `string` | `""` | no |
 | subnet\_ids | A list of VPC subnet IDs | `list(string)` | `[]` | no |
 | tags | A mapping of tags to assign to the resource | `map(string)` | `{}` | no |
+| use\_name\_prefix | Whether to use name\_prefix or not | `bool` | `true` | no |
 
 ## Outputs
 

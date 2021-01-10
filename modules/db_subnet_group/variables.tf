@@ -4,9 +4,16 @@ variable "create" {
   default     = true
 }
 
+variable "name" {
+  description = "The name of the DB parameter group"
+  type        = string
+  default     = ""
+}
+
 variable "name_prefix" {
   description = "Creates a unique name beginning with the specified prefix"
   type        = string
+  default     = ""
 }
 
 variable "identifier" {
@@ -26,3 +33,8 @@ variable "tags" {
   default     = {}
 }
 
+variable "use_name_prefix" {
+  description = "Whether to use name_prefix or not"
+  type        = bool
+  default     = true
+}

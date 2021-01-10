@@ -339,8 +339,26 @@ variable "deletion_protection" {
   default     = false
 }
 
+variable "use_db_instance_identifier_prefix" {
+  description = "Whether to use the db instance identifier prefix or not"
+  type        = bool
+  default     = true
+}
+
 variable "use_parameter_group_name_prefix" {
   description = "Whether to use the parameter group name prefix or not"
+  type        = bool
+  default     = true
+}
+
+variable "use_option_group_name_prefix" {
+  description = "Whether to use the option group name prefix or not"
+  type        = bool
+  default     = true
+}
+
+variable "use_subnet_group_name_prefix" {
+  description = "Whether to use the subnet group name prefix or not"
   type        = bool
   default     = true
 }

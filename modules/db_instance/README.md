@@ -41,7 +41,8 @@
 | final\_snapshot\_identifier | The name of your final DB snapshot when this DB instance is deleted. | `string` | `null` | no |
 | iam\_database\_authentication\_enabled | Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled | `bool` | `false` | no |
 | iam\_partition | IAM Partition to use when generating ARN's. For most regions this can be left at default. China/Govcloud use different partitions | `string` | `"aws"` | no |
-| identifier | The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier | `string` | n/a | yes |
+| identifier | The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier | `string` | `""` | no |
+| identifier\_prefix | Creates a unique name beginning with the specified prefix | `string` | `""` | no |
 | instance\_class | The instance type of the RDS instance | `string` | n/a | yes |
 | iops | The amount of provisioned IOPS. Setting this implies a storage\_type of 'io1' | `number` | `0` | no |
 | kms\_key\_id | The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage\_encrypted is set to true and kms\_key\_id is not specified the default KMS key created in your account will be used | `string` | `""` | no |
@@ -68,6 +69,7 @@
 | tags | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 | timeouts | (Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times | `map(string)` | <pre>{<br>  "create": "40m",<br>  "delete": "40m",<br>  "update": "80m"<br>}</pre> | no |
 | timezone | (Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information. | `string` | `""` | no |
+| use\_identifier\_prefix | Whether to use identifier\_prefix or not | `bool` | `true` | no |
 | username | Username for the master DB user | `string` | n/a | yes |
 | vpc\_security\_group\_ids | List of VPC security groups to associate | `list(string)` | `[]` | no |
 

@@ -11,10 +11,12 @@ locals {
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  create      = local.enable_create_db_subnet_group
-  identifier  = var.identifier
-  name_prefix = "${var.identifier}-"
-  subnet_ids  = var.subnet_ids
+  create          = local.enable_create_db_subnet_group
+  identifier      = var.identifier
+  name            = var.identifier
+  name_prefix     = "${var.identifier}-"
+  use_name_prefix = var.use_subnet_group_name_prefix
+  subnet_ids      = var.subnet_ids
 
   tags = var.tags
 }
@@ -38,12 +40,14 @@ module "db_parameter_group" {
 module "db_option_group" {
   source = "./modules/db_option_group"
 
-  create                   = local.enable_create_db_option_group
-  identifier               = var.identifier
-  name_prefix              = "${var.identifier}-"
-  option_group_description = var.option_group_description
-  engine_name              = var.engine
-  major_engine_version     = var.major_engine_version
+  create               = local.enable_create_db_option_group
+  identifier           = var.identifier
+  name                 = var.option_group_name
+  description          = var.option_group_description
+  name_prefix          = "${var.identifier}-"
+  use_name_prefix      = var.use_option_group_name_prefix
+  engine_name          = var.engine
+  major_engine_version = var.major_engine_version
 
   options = var.options
 
@@ -55,16 +59,18 @@ module "db_option_group" {
 module "db_instance" {
   source = "./modules/db_instance"
 
-  create            = var.create_db_instance
-  identifier        = var.identifier
-  engine            = var.engine
-  engine_version    = var.engine_version
-  instance_class    = var.instance_class
-  allocated_storage = var.allocated_storage
-  storage_type      = var.storage_type
-  storage_encrypted = var.storage_encrypted
-  kms_key_id        = var.kms_key_id
-  license_model     = var.license_model
+  create                = var.create_db_instance
+  identifier            = var.identifier
+  identifier_prefix     = "${var.identifier}-"
+  use_identifier_prefix = var.use_db_instance_identifier_prefix
+  engine                = var.engine
+  engine_version        = var.engine_version
+  instance_class        = var.instance_class
+  allocated_storage     = var.allocated_storage
+  storage_type          = var.storage_type
+  storage_encrypted     = var.storage_encrypted
+  kms_key_id            = var.kms_key_id
+  license_model         = var.license_model
 
   name                                = var.name
   username                            = var.username
@@ -120,4 +126,3 @@ module "db_instance" {
 
   tags = var.tags
 }
-
