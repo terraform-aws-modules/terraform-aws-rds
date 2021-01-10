@@ -7,6 +7,13 @@ variable "create" {
 variable "identifier" {
   description = "The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier"
   type        = string
+  default     = ""
+}
+
+variable "identifier_prefix" {
+  description = "Creates a unique name beginning with the specified prefix"
+  type        = string
+  default     = ""
 }
 
 variable "allocated_storage" {
@@ -302,4 +309,10 @@ variable "iam_partition" {
   description = "IAM Partition to use when generating ARN's. For most regions this can be left at default. China/Govcloud use different partitions"
   type        = string
   default     = "aws"
+}
+
+variable "use_identifier_prefix" {
+  description = "Whether to use identifier_prefix or not"
+  type        = bool
+  default     = true
 }

@@ -2,7 +2,8 @@ locals {
   db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
   enable_create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
 
-  parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
+  parameter_group_name_id       = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
+  enable_create_parameter_group = var.parameter_group_name == "" ? var.create_db_parameter_group : false
 
   option_group_name             = var.option_group_name != "" ? var.option_group_name : module.db_option_group.this_db_option_group_id
   enable_create_db_option_group = var.create_db_option_group ? true : var.option_group_name == "" && var.engine != "postgres"
@@ -11,10 +12,12 @@ locals {
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  create      = local.enable_create_db_subnet_group
-  identifier  = var.identifier
-  name_prefix = "${var.identifier}-"
-  subnet_ids  = var.subnet_ids
+  create          = local.enable_create_db_subnet_group
+  identifier      = var.identifier
+  name            = var.identifier
+  name_prefix     = "${var.identifier}-"
+  use_name_prefix = var.use_subnet_group_name_prefix
+  subnet_ids      = var.subnet_ids
 
   tags = var.tags
 }
@@ -22,9 +25,9 @@ module "db_subnet_group" {
 module "db_parameter_group" {
   source = "./modules/db_parameter_group"
 
-  create          = var.create_db_parameter_group
+  create          = local.enable_create_parameter_group
   identifier      = var.identifier
-  name            = var.parameter_group_name
+  name            = var.identifier
   description     = var.parameter_group_description
   name_prefix     = "${var.identifier}-"
   use_name_prefix = var.use_parameter_group_name_prefix
@@ -38,12 +41,14 @@ module "db_parameter_group" {
 module "db_option_group" {
   source = "./modules/db_option_group"
 
-  create                   = local.enable_create_db_option_group
-  identifier               = var.identifier
-  name_prefix              = "${var.identifier}-"
-  option_group_description = var.option_group_description
-  engine_name              = var.engine
-  major_engine_version     = var.major_engine_version
+  create               = local.enable_create_db_option_group
+  identifier           = var.identifier
+  name                 = var.identifier
+  description          = var.option_group_description
+  name_prefix          = "${var.identifier}-"
+  use_name_prefix      = var.use_option_group_name_prefix
+  engine_name          = var.engine
+  major_engine_version = var.major_engine_version
 
   options = var.options
 
@@ -55,16 +60,18 @@ module "db_option_group" {
 module "db_instance" {
   source = "./modules/db_instance"
 
-  create            = var.create_db_instance
-  identifier        = var.identifier
-  engine            = var.engine
-  engine_version    = var.engine_version
-  instance_class    = var.instance_class
-  allocated_storage = var.allocated_storage
-  storage_type      = var.storage_type
-  storage_encrypted = var.storage_encrypted
-  kms_key_id        = var.kms_key_id
-  license_model     = var.license_model
+  create                = var.create_db_instance
+  identifier            = var.identifier
+  identifier_prefix     = "${var.identifier}-"
+  use_identifier_prefix = var.use_db_instance_identifier_prefix
+  engine                = var.engine
+  engine_version        = var.engine_version
+  instance_class        = var.instance_class
+  allocated_storage     = var.allocated_storage
+  storage_type          = var.storage_type
+  storage_encrypted     = var.storage_encrypted
+  kms_key_id            = var.kms_key_id
+  license_model         = var.license_model
 
   name                                = var.name
   username                            = var.username
@@ -120,4 +127,3 @@ module "db_instance" {
 
   tags = var.tags
 }
-
