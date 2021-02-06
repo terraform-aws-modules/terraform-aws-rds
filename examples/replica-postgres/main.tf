@@ -58,7 +58,6 @@ module "master" {
   # DB subnet group
   subnet_ids = data.aws_subnet_ids.all.ids
 
-  create_db_option_group    = false
   create_db_parameter_group = false
 }
 

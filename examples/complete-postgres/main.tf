@@ -27,8 +27,8 @@ module "db" {
   identifier = "demodb-postgres"
 
   engine            = "postgres"
-  engine_version    = "9.6.9"
-  instance_class    = "db.t2.large"
+  engine_version    = "12.5"
+  instance_class    = "db.t3.large"
   allocated_storage = 5
   storage_encrypted = false
 
@@ -62,10 +62,7 @@ module "db" {
   subnet_ids = data.aws_subnet_ids.all.ids
 
   # DB parameter group
-  family = "postgres9.6"
-
-  # DB option group
-  major_engine_version = "9.6"
+  family = "postgres12"
 
   # Snapshot name upon DB deletion
   final_snapshot_identifier = "demodb"
