@@ -1,3 +1,13 @@
+# get the secret metadata
+data "aws_secretsmanager_secret" "db_creds" {
+  name = var.secret_name
+}
+
+#get the secret values using the id from the metadata
+data "aws_secretsmanager_secret_version" "db_creds_version" {
+  secret_id = data.aws_secretsmanager_secret.db_creds.id
+}
+
 locals {
   db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
   enable_create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
@@ -6,6 +16,7 @@ locals {
 
   option_group_name             = var.option_group_name != "" ? var.option_group_name : module.db_option_group.this_db_option_group_id
   enable_create_db_option_group = var.create_db_option_group ? true : var.option_group_name == "" && var.engine != "postgres"
+  creds_map = jsondecode(data.aws_secretsmanager_secret_version.db_creds_version.secret_string)
 }
 
 module "db_subnet_group" {
@@ -67,8 +78,8 @@ module "db_instance" {
   license_model     = var.license_model
 
   name                                = var.name
-  username                            = var.username
-  password                            = var.password
+  username                            = local.creds_map.username
+  password                            = local.creds_map.password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
