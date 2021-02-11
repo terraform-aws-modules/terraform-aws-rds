@@ -14,6 +14,11 @@ variable "storage_type" {
   default     = "gp2"
 }
 
+variable "secret_name" {
+    description = "Name of the secret stored in secret manager"
+    type        = string
+
+}
 variable "storage_encrypted" {
   description = "Specifies whether the DB instance is encrypted"
   type        = bool
@@ -87,16 +92,6 @@ variable "name" {
   description = "The DB name to create. If omitted, no database is created initially"
   type        = string
   default     = ""
-}
-
-variable "username" {
-  description = "Username for the master DB user"
-  type        = string
-}
-
-variable "password" {
-  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
-  type        = string
 }
 
 variable "port" {
