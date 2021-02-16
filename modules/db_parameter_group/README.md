@@ -14,6 +14,16 @@
 |------|---------|
 | aws | >= 2.49 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_db_parameter_group](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/db_parameter_group) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -34,5 +44,4 @@
 |------|-------------|
 | this\_db\_parameter\_group\_arn | The ARN of the db parameter group |
 | this\_db\_parameter\_group\_id | The db parameter group id |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
