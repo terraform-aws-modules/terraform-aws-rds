@@ -30,6 +30,21 @@ Note that this example may create resources which cost money. Run `terraform des
 |------|---------|
 | aws | >= 2.49 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| master | ../../ |  |
+| replica | ../../ |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/security_group) |
+| [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/subnet_ids) |
+| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/vpc) |
+
 ## Inputs
 
 No input.
@@ -63,5 +78,4 @@ No input.
 | replica\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
 | replica\_db\_instance\_status | The RDS instance status |
 | replica\_db\_instance\_username | The replica username for the database |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

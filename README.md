@@ -146,6 +146,19 @@ module "db" {
 
 No provider.
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| db_instance | ./modules/db_instance |  |
+| db_option_group | ./modules/db_option_group |  |
+| db_parameter_group | ./modules/db_parameter_group |  |
+| db_subnet_group | ./modules/db_subnet_group |  |
+
+## Resources
+
+No resources.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -241,7 +254,6 @@ No provider.
 | this\_db\_parameter\_group\_id | The db parameter group id |
 | this\_db\_subnet\_group\_arn | The ARN of the db subnet group |
 | this\_db\_subnet\_group\_id | The db subnet group name |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors

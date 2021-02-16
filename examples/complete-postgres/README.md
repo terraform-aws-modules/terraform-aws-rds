@@ -30,6 +30,20 @@ Note that this example may create resources which cost money. Run `terraform des
 |------|---------|
 | aws | >= 2.49 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| db | ../../ |  |
+
+## Resources
+
+| Name |
+|------|
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/security_group) |
+| [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/subnet_ids) |
+| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/vpc) |
+
 ## Inputs
 
 No input.
@@ -54,5 +68,4 @@ No input.
 | this\_db\_parameter\_group\_id | The db parameter group id |
 | this\_db\_subnet\_group\_arn | The ARN of the db subnet group |
 | this\_db\_subnet\_group\_id | The db subnet group name |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

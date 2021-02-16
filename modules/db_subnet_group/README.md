@@ -14,6 +14,16 @@
 |------|---------|
 | aws | >= 2.49 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_db_subnet_group](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/db_subnet_group) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -30,5 +40,4 @@
 |------|-------------|
 | this\_db\_subnet\_group\_arn | The ARN of the db subnet group |
 | this\_db\_subnet\_group\_id | The db subnet group name |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

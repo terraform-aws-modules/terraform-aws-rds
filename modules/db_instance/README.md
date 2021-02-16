@@ -14,6 +14,19 @@
 |------|---------|
 | aws | >= 2.49 |
 
+## Modules
+
+No Modules.
+
+## Resources
+
+| Name |
+|------|
+| [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/db_instance) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/iam_role) |
+| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/iam_role_policy_attachment) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -91,5 +104,4 @@
 | this\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
 | this\_db\_instance\_status | The RDS instance status |
 | this\_db\_instance\_username | The master username for the database |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
