@@ -303,3 +303,9 @@ variable "iam_partition" {
   type        = string
   default     = "aws"
 }
+
+variable "s3_import" {
+  description = "Restore from a Percona Xtrabackup in S3 (only MySQL is supported)"
+  type        = map(string)
+  default     = {}
+}

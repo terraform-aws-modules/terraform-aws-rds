@@ -228,6 +228,12 @@ variable "backup_window" {
   type        = string
 }
 
+variable "s3_import" {
+  description = "Restore from a Percona Xtrabackup in S3 (only MySQL is supported)"
+  type        = map(string)
+  default     = {}
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to all resources"
   type        = map(string)
