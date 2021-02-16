@@ -3,13 +3,14 @@ provider "aws" {
 }
 
 locals {
-  name   = "s3_import"
+  name   = "s3-import"
   region = "eu-west-1"
   tags = {
     Owner       = "user"
     Environment = "dev"
   }
 }
+
 ################################################################################
 # Supporting Resources
 ################################################################################
@@ -33,6 +34,51 @@ module "vpc" {
   create_database_subnet_group = true
   enable_nat_gateway           = true
   single_nat_gateway           = true
+
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+  enable_s3_endpoint   = true
+
+  tags = local.tags
+}
+
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3.17"
+
+  name        = local.name
+  description = "S3 import VPC example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_self = [
+    {
+      rule        = "https-443-tcp"
+      description = "Allow all internal HTTPs"
+    },
+  ]
+
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 3306
+      to_port     = 3306
+      protocol    = "tcp"
+      description = "MySQL access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  # egress
+  computed_egress_with_self = [
+    {
+      rule        = "https-443-tcp"
+      description = "Allow all internal HTTPs"
+    },
+  ]
+  number_of_computed_egress_with_self = 1
+
+  egress_cidr_blocks = ["0.0.0.0/0"]
+  egress_rules       = ["all-all"]
 
   tags = local.tags
 }
@@ -99,7 +145,6 @@ resource "aws_iam_role_policy" "s3_import" {
   policy = data.aws_iam_policy_document.s3_import.json
 }
 
-
 ################################################################################
 # RDS Module
 ################################################################################
@@ -110,29 +155,28 @@ module "db" {
   identifier = local.name
 
   engine               = "mysql"
-  engine_version       = "5.7.31"
-  family               = "mysql5.7"
-  major_engine_version = "5.7"
+  engine_version       = "8.0.20"
+  family               = "mysql8.0"
+  major_engine_version = "8.0"
   instance_class       = "db.t2.large"
   allocated_storage    = 20
   storage_encrypted    = false
 
-  name     = local.name
-  username = "user"
+  name     = "s3Import"
+  username = "s3_import_user"
   password = "YourPwdShouldBeLongAndSecure!"
   port     = "3306"
 
   # S3 import https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
   s3_import = {
-    source_engine_version = "5.7.31"
+    source_engine_version = "8.0.20"
     bucket_name           = module.import_s3_bucket.this_s3_bucket_id
     ingestion_role        = aws_iam_role.s3_import.arn
   }
 
-
   multi_az               = true
-  subnet_ids             = data.aws_subnet_ids.all.ids
-  vpc_security_group_ids = [data.aws_security_group.default.id]
+  subnet_ids             = module.vpc.database_subnets
+  vpc_security_group_ids = [module.security_group.this_security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
   backup_window                   = "03:00-06:00"
