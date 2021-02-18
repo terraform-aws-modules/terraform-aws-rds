@@ -139,7 +139,7 @@ module "db" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
+| terraform | >= 0.12.26 |
 | aws | >= 2.49 |
 
 ## Providers
