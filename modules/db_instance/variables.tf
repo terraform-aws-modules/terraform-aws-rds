@@ -35,13 +35,13 @@ variable "kms_key_id" {
 variable "replicate_source_db" {
   description = "Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "snapshot_identifier" {
   description = "Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "license_model" {
@@ -302,4 +302,10 @@ variable "iam_partition" {
   description = "IAM Partition to use when generating ARN's. For most regions this can be left at default. China/Govcloud use different partitions"
   type        = string
   default     = "aws"
+}
+
+variable "s3_import" {
+  description = "Restore from a Percona Xtrabackup in S3 (only MySQL is supported)"
+  type        = map(string)
+  default     = null
 }
