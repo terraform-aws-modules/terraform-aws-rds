@@ -143,6 +143,13 @@ resource "aws_iam_role_policy" "s3_import" {
   name   = "${local.name}-${random_pet.this.id}"
   role   = aws_iam_role.s3_import.id
   policy = data.aws_iam_policy_document.s3_import.json
+
+  # We need the files uploaded before the RDS instance is created, and the instance
+  # also needs this role so this is an easy way of ensuring the backup is uploaded before
+  # the instance creation starts
+  provisioner "local-exec" {
+    command = "aws s3 sync ${path.module}/backup s3://${module.import_s3_bucket.this_s3_bucket_id}"
+  }
 }
 
 ################################################################################
@@ -158,7 +165,7 @@ module "db" {
   engine_version       = "8.0.20"
   family               = "mysql8.0"
   major_engine_version = "8.0"
-  instance_class       = "db.t2.large"
+  instance_class       = "db.t3.large"
   allocated_storage    = 20
   storage_encrypted    = false
 

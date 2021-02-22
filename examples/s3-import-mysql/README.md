@@ -14,14 +14,14 @@ $ terraform apply
 
 ## Testing
 
-In order to test this example, you will need a database backup in order to upload to S3 and import into the module. The steps outlined below should suffice for creating a backup that can be uploaded to S3 and imported for the sake of testing and verifying module functionality/changes.
+In order to test this example, you will need a database backup in order to upload to S3 and import into the module. A backup has been provided under `backup/`, but in the case that a new backup needs to be created, the steps outlined below should suffice for creating a backup that can be used for the sake of testing and verifying module functionality/changes.
 
 1. Create database container
 
 ```bash
 $ docker run -d --name percona-server-mysql-8.0.20 -e MYSQL_ROOT_PASSWORD=root percona/percona-server:8.0.20
 $ docker exec -it percona-server-mysql-8.0.20 bash
-$ mysql -u root -p
+$ mysql -u root -p # password is also root
 ```
 
 2. Once logged into container and database, create database and user used by RDS
@@ -36,8 +36,9 @@ FLUSH PRIVILEGES;
 3. Use Percona Xtrabackup container to dump database and upload to S3
 
 ```bash
+$ mkdir -p /tmp/backup
 $ docker run --name percona-xtrabackup-8.0 --mount type=bind,src=/tmp/backup,dst=/backup --volumes-from percona-server-mysql-8.0.20 percona/percona-xtrabackup:8.0 xtrabackup --backup --data-dir=/var/lib/mysql --target-dir=/backup --user=root --password=root
-$ s3 sync /tmp/backup/ s3://s3-import-<UPDATE-NAME>/
+$ mv /tmp/backup ./backup
 ```
 
 Note that this example may create resources which cost money. Run `terraform destroy` when you don't need these resources.
