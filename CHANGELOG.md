@@ -7,6 +7,16 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.21.0"></a>
+## [v2.21.0] - 2021-02-22
+
+- feat: add S3 import functionality which is supported for MySQL instances ([#289](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/289))
+- chore: add `terraform_validate` hook to pre-commit checks ([#293](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/293))
+- chore: add ci-cd workflow for pre-commit checks ([#292](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/292))
+- chore: update documentation based on latest `terraform-docs` which includes module and resource sections ([#288](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/288))
+- fix: documentation for default storage type ([#277](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/277))
+
+
 <a name="v2.20.0"></a>
 ## [v2.20.0] - 2020-10-15
 
@@ -602,7 +612,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.20.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.21.0...HEAD
+[v2.21.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.20.0...v2.21.0
 [v2.20.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.19.0...v2.20.0
 [v2.19.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.18.0...v2.19.0
 [v2.18.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.17.0...v2.18.0
