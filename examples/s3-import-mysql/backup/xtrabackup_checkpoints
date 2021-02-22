@@ -1,5 +1,0 @@
-backup_type = full-backuped
-from_lsn = 0
-to_lsn = 27582847
-last_lsn = 27582857
-flushed_lsn = 0

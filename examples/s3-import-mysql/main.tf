@@ -148,7 +148,7 @@ resource "aws_iam_role_policy" "s3_import" {
   # also needs this role so this is an easy way of ensuring the backup is uploaded before
   # the instance creation starts
   provisioner "local-exec" {
-    command = "aws s3 sync ${path.module}/backup s3://${module.import_s3_bucket.this_s3_bucket_id}"
+    command = "unzip backup.zip && aws s3 sync ${path.module}/backup s3://${module.import_s3_bucket.this_s3_bucket_id}"
   }
 }
 
