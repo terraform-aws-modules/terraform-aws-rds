@@ -22,7 +22,7 @@ No Modules.
 
 | Name |
 |------|
-| [aws_db_subnet_group](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/db_subnet_group) |
+| [aws_db_subnet_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group) |
 
 ## Inputs
 

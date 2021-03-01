@@ -1,26 +1,65 @@
 provider "aws" {
+  region = local.region
+}
+
+locals {
+  name   = "enhanced-monitoring"
   region = "eu-west-1"
+  tags = {
+    Owner       = "user"
+    Environment = "dev"
+  }
 }
 
-##############################################################
-# Data sources to get VPC, subnets and security group details
-##############################################################
-data "aws_vpc" "default" {
-  default = true
+################################################################################
+# Supporting Resources
+################################################################################
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2.77"
+
+  name = local.name
+  cidr = "10.99.0.0/18"
+
+  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
+  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
+  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+
+  create_database_subnet_group = true
+  enable_nat_gateway           = true
+  single_nat_gateway           = true
+
+  tags = local.tags
 }
 
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3.18"
+
+  name        = local.name
+  description = "Enhanced monitoring MySQL example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 3306
+      to_port     = 3306
+      protocol    = "tcp"
+      description = "MySQL access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  tags = local.tags
 }
 
-data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
-  name   = "default"
-}
-
-##################################################
+################################################################################
 # Create an IAM role to allow enhanced monitoring
-##################################################
+################################################################################
+
 resource "aws_iam_role" "rds_enhanced_monitoring" {
   name_prefix        = "rds-enhanced-monitoring-"
   assume_role_policy = data.aws_iam_policy_document.rds_enhanced_monitoring.json
@@ -46,48 +85,51 @@ data "aws_iam_policy_document" "rds_enhanced_monitoring" {
   }
 }
 
-#####
-# DB
-#####
+################################################################################
+# RDS Module
+################################################################################
+
 module "db" {
   source = "../../"
 
-  identifier = "demodb-enhanced-monitoring"
+  identifier = local.name
 
-  engine            = "mysql"
-  engine_version    = "5.7.25"
-  instance_class    = "db.t2.large"
-  allocated_storage = 5
-  storage_encrypted = false
+  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+  engine               = "mysql"
+  engine_version       = "8.0.20"
+  family               = "mysql8.0" # DB parameter group
+  major_engine_version = "8.0"      # DB option group
+  instance_class       = "db.t3.large"
 
-  # kms_key_id        = "arm:aws:kms:<region>:<accound id>:key/<kms key id>"
-  name                   = "demodb"
-  username               = "user"
-  password               = "YourPwdShouldBeLongAndSecure!"
-  port                   = "3306"
-  vpc_security_group_ids = [data.aws_security_group.default.id]
-  maintenance_window     = "Mon:00:00-Mon:03:00"
-  backup_window          = "03:00-06:00"
+  allocated_storage     = 20
+  max_allocated_storage = 100
+  storage_encrypted     = false
 
-  # disable backups to create DB faster
-  backup_retention_period = 0
+  name     = "completeMysql"
+  username = "complete_mysql"
+  password = "YourPwdShouldBeLongAndSecure!"
+  port     = 3306
 
-  tags = {
-    Owner       = "user"
-    Environment = "dev"
-  }
+  multi_az               = true
+  subnet_ids             = module.vpc.database_subnets
+  vpc_security_group_ids = [module.security_group.this_security_group_id]
 
-  # DB subnet group
-  subnet_ids = data.aws_subnet_ids.all.ids
+  # kms_key_id                      = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
+  maintenance_window              = "Mon:00:00-Mon:03:00"
+  backup_window                   = "03:00-06:00"
+  enabled_cloudwatch_logs_exports = ["audit", "general"]
 
-  # DB parameter group
-  family = "mysql5.7"
+  backup_retention_period   = 0
+  final_snapshot_identifier = local.name
+  deletion_protection       = false
 
-  # DB option group
-  major_engine_version = "5.7"
-  monitoring_interval  = "30"
-  monitoring_role_arn  = aws_iam_role.rds_enhanced_monitoring.arn
+  # Enhanced monitoring
+  monitoring_interval = 30
+  monitoring_role_arn = aws_iam_role.rds_enhanced_monitoring.arn
 
-  # Database Deletion Protection
-  deletion_protection = false
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  create_monitoring_role                = true
+
+  tags = local.tags
 }

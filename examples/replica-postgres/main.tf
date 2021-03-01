@@ -7,8 +7,8 @@ provider "aws" {
 ####################################
 locals {
   engine            = "postgres"
-  engine_version    = "9.6.9"
-  instance_class    = "db.t2.large"
+  engine_version    = "11.10"
+  instance_class    = "db.t3.large"
   allocated_storage = 5
   port              = "5432"
 }
