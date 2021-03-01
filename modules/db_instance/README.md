@@ -22,10 +22,10 @@ No Modules.
 
 | Name |
 |------|
-| [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/db_instance) |
-| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/iam_policy_document) |
-| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/iam_role_policy_attachment) |
-| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/iam_role) |
+| [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
+| [aws_iam_role_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) |
 
 ## Inputs
 
@@ -70,6 +70,7 @@ No Modules.
 | parameter\_group\_name | Name of the DB parameter group to associate | `string` | `""` | no |
 | password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | `string` | n/a | yes |
 | performance\_insights\_enabled | Specifies whether Performance Insights are enabled | `bool` | `false` | no |
+| performance\_insights\_kms\_key\_id | The ARN for the KMS key to encrypt Performance Insights data. | `string` | `null` | no |
 | performance\_insights\_retention\_period | The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years). | `number` | `7` | no |
 | port | The port on which the DB accepts connections | `string` | n/a | yes |
 | publicly\_accessible | Bool to control if instance is publicly accessible | `bool` | `false` | no |
