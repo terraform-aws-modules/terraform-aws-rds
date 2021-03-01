@@ -72,10 +72,10 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name |
 |------|
-| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/iam_policy_document) |
-| [aws_iam_role_policy](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/iam_role_policy) |
-| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/resources/iam_role) |
-| [random_pet](https://registry.terraform.io/providers/hashicorp/random/3.0/docs/resources/pet) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
+| [aws_iam_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) |
+| [aws_iam_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) |
+| [random_pet](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/pet) |
 
 ## Inputs
 

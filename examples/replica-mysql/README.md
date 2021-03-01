@@ -41,9 +41,9 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name |
 |------|
-| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/security_group) |
-| [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/subnet_ids) |
-| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/2.49/docs/data-sources/vpc) |
+| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) |
+| [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) |
+| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) |
 
 ## Inputs
 
