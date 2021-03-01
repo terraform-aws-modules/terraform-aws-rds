@@ -119,5 +119,7 @@ module "db_instance" {
   deletion_protection      = var.deletion_protection
   delete_automated_backups = var.delete_automated_backups
 
+  s3_import = var.s3_import
+
   tags = var.tags
 }

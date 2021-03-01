@@ -139,12 +139,25 @@ module "db" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
+| terraform | >= 0.12.26 |
 | aws | >= 2.49 |
 
 ## Providers
 
 No provider.
+
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| db_instance | ./modules/db_instance |  |
+| db_option_group | ./modules/db_option_group |  |
+| db_parameter_group | ./modules/db_parameter_group |  |
+| db_subnet_group | ./modules/db_subnet_group |  |
+
+## Resources
+
+No resources.
 
 ## Inputs
 
@@ -202,11 +215,12 @@ No provider.
 | performance\_insights\_retention\_period | The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years). | `number` | `7` | no |
 | port | The port on which the DB accepts connections | `string` | n/a | yes |
 | publicly\_accessible | Bool to control if instance is publicly accessible | `bool` | `false` | no |
-| replicate\_source\_db | Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate. | `string` | `""` | no |
+| replicate\_source\_db | Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate. | `string` | `null` | no |
+| s3\_import | Restore from a Percona Xtrabackup in S3 (only MySQL is supported) | `map(string)` | `null` | no |
 | skip\_final\_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final\_snapshot\_identifier | `bool` | `true` | no |
-| snapshot\_identifier | Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05. | `string` | `""` | no |
+| snapshot\_identifier | Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05. | `string` | `null` | no |
 | storage\_encrypted | Specifies whether the DB instance is encrypted | `bool` | `false` | no |
-| storage\_type | One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'standard' if not. Note that this behaviour is different from the AWS web console, where the default is 'gp2'. | `string` | `"gp2"` | no |
+| storage\_type | One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'gp2' if not. | `string` | `"gp2"` | no |
 | subnet\_ids | A list of VPC subnet IDs | `list(string)` | `[]` | no |
 | tags | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 | timeouts | (Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times | `map(string)` | <pre>{<br>  "create": "40m",<br>  "delete": "40m",<br>  "update": "80m"<br>}</pre> | no |
@@ -242,7 +256,6 @@ No provider.
 | this\_db\_parameter\_group\_id | The db parameter group id |
 | this\_db\_subnet\_group\_arn | The ARN of the db subnet group |
 | this\_db\_subnet\_group\_id | The db subnet group name |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors
