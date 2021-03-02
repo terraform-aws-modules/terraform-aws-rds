@@ -75,7 +75,6 @@ output "this_db_instance_name" {
 output "this_db_instance_username" {
   description = "The master username for the database"
   value       = local.this_db_instance_username
-  sensitive   = true
 }
 
 output "this_db_instance_port" {
