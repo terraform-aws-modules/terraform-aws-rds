@@ -118,9 +118,9 @@ module "db" {
   identifier = local.name
 
   engine               = "sqlserver-ex"
-  engine_version       = "14.00.1000.169.v1"
-  family               = "sqlserver-ex-14.0" # DB parameter group
-  major_engine_version = "14.00"             # DB option group
+  engine_version       = "15.00.4073.23.v1"
+  family               = "sqlserver-ex-15.0" # DB parameter group
+  major_engine_version = "15.00"             # DB option group
   instance_class       = "db.t3.large"
 
   allocated_storage     = 20
@@ -135,14 +135,13 @@ module "db" {
   domain               = aws_directory_service_directory.demo.id
   domain_iam_role_name = aws_iam_role.rds_ad_auth.name
 
-  multi_az               = true
+  multi_az               = false
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
-  # kms_key_id                      = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
   maintenance_window              = "Mon:00:00-Mon:03:00"
   backup_window                   = "03:00-06:00"
-  enabled_cloudwatch_logs_exports = ["audit", "general"]
+  enabled_cloudwatch_logs_exports = ["error"]
 
   backup_retention_period   = 0
   final_snapshot_identifier = local.name
@@ -155,7 +154,7 @@ module "db" {
   options                   = []
   create_db_parameter_group = false
   license_model             = "license-included"
-  timezone                  = "Central Standard Time"
+  timezone                  = "GMT Standard Time"
 
   tags = local.tags
 }

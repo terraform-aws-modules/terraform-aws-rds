@@ -44,7 +44,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.17"
+  version = "~> 3.18"
 
   name        = local.name
   description = "S3 import VPC example security group"
@@ -85,7 +85,7 @@ module "security_group" {
 
 module "import_s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 1.17"
+  version = "~> 1.20"
 
   bucket        = "${local.name}-${random_pet.this.id}"
   acl           = "private"

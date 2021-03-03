@@ -94,7 +94,6 @@ module "master" {
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
-  # kms_key_id                    = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
   maintenance_window              = "Mon:00:00-Mon:03:00"
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["audit", "general"]
@@ -141,7 +140,6 @@ module "replica" {
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
-  # kms_key_id                    = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
   maintenance_window              = "Mon:00:00-Mon:03:00"
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["audit", "general"]
