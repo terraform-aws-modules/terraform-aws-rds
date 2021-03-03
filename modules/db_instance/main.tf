@@ -122,6 +122,11 @@ resource "aws_db_instance" "this" {
     delete = lookup(var.timeouts, "delete", null)
     update = lookup(var.timeouts, "update", null)
   }
+
+  # Handle upgrades outside of Terraform
+  lifecycle {
+    ignore_changes = [engine_version]
+  }
 }
 
 resource "aws_db_instance" "this_mssql" {
