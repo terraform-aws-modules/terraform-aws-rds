@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.22.0"></a>
+## [v2.22.0] - 2021-03-01
+
+- feat: Add support for performance_insights_kms_key_id ([#253](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/253))
+
+
 <a name="v2.21.0"></a>
 ## [v2.21.0] - 2021-02-22
 
@@ -612,7 +618,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.21.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.22.0...HEAD
+[v2.22.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.21.0...v2.22.0
 [v2.21.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.20.0...v2.21.0
 [v2.20.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.19.0...v2.20.0
 [v2.19.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.18.0...v2.19.0
