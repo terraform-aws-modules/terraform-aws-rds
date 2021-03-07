@@ -96,7 +96,7 @@ module "master" {
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
   backup_window                   = "03:00-06:00"
-  enabled_cloudwatch_logs_exports = ["audit", "general"]
+  enabled_cloudwatch_logs_exports = ["general"]
 
   # Backups are required in order to create a replica
   backup_retention_period   = 1
@@ -140,9 +140,9 @@ module "replica" {
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
-  maintenance_window              = "Mon:00:00-Mon:03:00"
+  maintenance_window              = "Tue:00:00-Tue:03:00"
   backup_window                   = "03:00-06:00"
-  enabled_cloudwatch_logs_exports = ["audit", "general"]
+  enabled_cloudwatch_logs_exports = ["general"]
 
   backup_retention_period   = 0
   final_snapshot_identifier = local.name
