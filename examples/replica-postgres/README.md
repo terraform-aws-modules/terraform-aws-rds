@@ -26,9 +26,7 @@ Note that this example may create resources which cost money. Run `terraform des
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| aws | >= 2.49 |
+No provider.
 
 ## Modules
 
@@ -36,14 +34,12 @@ Note that this example may create resources which cost money. Run `terraform des
 |------|--------|---------|
 | master | ../../ |  |
 | replica | ../../ |  |
+| security_group | terraform-aws-modules/security-group/aws | ~> 3 |
+| vpc | terraform-aws-modules/vpc/aws | ~> 2 |
 
 ## Resources
 
-| Name |
-|------|
-| [aws_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) |
-| [aws_subnet_ids](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) |
-| [aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) |
+No resources.
 
 ## Inputs
 

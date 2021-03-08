@@ -1,75 +1,99 @@
 provider "aws" {
+  region = local.region
+}
+
+locals {
+  name   = "complete-mysql"
   region = "eu-west-1"
-}
-
-##############################################################
-# Data sources to get VPC, subnets and security group details
-##############################################################
-data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
-}
-
-data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
-  name   = "default"
-}
-
-#####
-# DB
-#####
-module "db" {
-  source = "../../"
-
-  identifier = "demodb"
-
-  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-  engine            = "mysql"
-  engine_version    = "5.7.19"
-  instance_class    = "db.t2.large"
-  allocated_storage = 5
-  storage_encrypted = false
-
-  # kms_key_id        = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
-  name     = "demodb"
-  username = "user"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = "3306"
-
-  vpc_security_group_ids = [data.aws_security_group.default.id]
-
-  maintenance_window = "Mon:00:00-Mon:03:00"
-  backup_window      = "03:00-06:00"
-
-  multi_az = true
-
-  # disable backups to create DB faster
-  backup_retention_period = 0
-
   tags = {
     Owner       = "user"
     Environment = "dev"
   }
+}
 
-  enabled_cloudwatch_logs_exports = ["audit", "general"]
+################################################################################
+# Supporting Resources
+################################################################################
 
-  # DB subnet group
-  subnet_ids = data.aws_subnet_ids.all.ids
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2"
 
-  # DB parameter group
-  family = "mysql5.7"
+  name = local.name
+  cidr = "10.99.0.0/18"
 
-  # DB option group
-  major_engine_version = "5.7"
+  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
+  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
+  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
 
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = "demodb"
+  create_database_subnet_group = true
 
-  # Database Deletion Protection
-  deletion_protection = false
+  tags = local.tags
+}
+
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3"
+
+  name        = local.name
+  description = "Complete MySQL example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 3306
+      to_port     = 3306
+      protocol    = "tcp"
+      description = "MySQL access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  tags = local.tags
+}
+
+################################################################################
+# RDS Module
+################################################################################
+
+module "db" {
+  source = "../../"
+
+  identifier = local.name
+
+  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+  engine               = "mysql"
+  engine_version       = "8.0.20"
+  family               = "mysql8.0" # DB parameter group
+  major_engine_version = "8.0"      # DB option group
+  instance_class       = "db.t3.large"
+
+  allocated_storage     = 20
+  max_allocated_storage = 100
+  storage_encrypted     = false
+
+  name     = "completeMysql"
+  username = "complete_mysql"
+  password = "YourPwdShouldBeLongAndSecure!"
+  port     = 3306
+
+  multi_az               = true
+  subnet_ids             = module.vpc.database_subnets
+  vpc_security_group_ids = [module.security_group.this_security_group_id]
+
+  maintenance_window              = "Mon:00:00-Mon:03:00"
+  backup_window                   = "03:00-06:00"
+  enabled_cloudwatch_logs_exports = ["general"]
+
+  backup_retention_period   = 0
+  final_snapshot_identifier = local.name
+  deletion_protection       = false
+
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  create_monitoring_role                = true
 
   parameters = [
     {
@@ -98,4 +122,6 @@ module "db" {
       ]
     },
   ]
+
+  tags = local.tags
 }

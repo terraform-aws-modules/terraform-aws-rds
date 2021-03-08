@@ -21,7 +21,7 @@ resource "random_pet" "this" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "2.70.0"
+  version = "~> 2"
 
   name = local.name
   cidr = "10.0.0.0/18"
@@ -32,8 +32,6 @@ module "vpc" {
   database_subnets = ["10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24"]
 
   create_database_subnet_group = true
-  enable_nat_gateway           = true
-  single_nat_gateway           = true
 
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -44,7 +42,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.17"
+  version = "~> 3"
 
   name        = local.name
   description = "S3 import VPC example security group"
@@ -85,7 +83,7 @@ module "security_group" {
 
 module "import_s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "1.17.0"
+  version = "~> 1"
 
   bucket        = "${local.name}-${random_pet.this.id}"
   acl           = "private"
@@ -161,18 +159,21 @@ module "db" {
 
   identifier = local.name
 
+  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
   engine               = "mysql"
   engine_version       = "8.0.20"
-  family               = "mysql8.0"
-  major_engine_version = "8.0"
+  family               = "mysql8.0" # DB parameter group
+  major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t3.large"
-  allocated_storage    = 20
-  storage_encrypted    = false
+
+  allocated_storage     = 20
+  max_allocated_storage = 100
+  storage_encrypted     = false
 
   name     = "s3Import"
   username = "s3_import_user"
   password = "YourPwdShouldBeLongAndSecure!"
-  port     = "3306"
+  port     = 3306
 
   # S3 import https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
   s3_import = {
@@ -193,8 +194,5 @@ module "db" {
   final_snapshot_identifier = local.name
   deletion_protection       = false
 
-  tags = {
-    Owner       = "user"
-    Environment = "dev"
-  }
+  tags = local.tags
 }

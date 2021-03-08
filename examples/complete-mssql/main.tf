@@ -1,33 +1,62 @@
 provider "aws" {
-  region = "us-east-1"
+  region = local.region
 }
 
 locals {
+  name   = "complete-mssql"
+  region = "eu-west-1"
   tags = {
     Owner       = "user"
     Environment = "dev"
   }
 }
 
-##############################################################
-# Data sources to get VPC, subnets and security group details
-##############################################################
-data "aws_vpc" "default" {
-  default = true
+################################################################################
+# Supporting Resources
+################################################################################
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2"
+
+  name = local.name
+  cidr = "10.99.0.0/18"
+
+  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
+  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
+  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+
+  create_database_subnet_group = true
+
+  tags = local.tags
 }
 
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3"
+
+  name        = local.name
+  description = "Complete SqlServer example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 1433
+      to_port     = 1433
+      protocol    = "tcp"
+      description = "SqlServer access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  tags = local.tags
 }
 
-data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
-  name   = "default"
-}
-
-#####################################
+################################################################################
 # IAM Role for Windows Authentication
-#####################################
+################################################################################
 
 data "aws_iam_policy_document" "rds_assume_role" {
   statement {
@@ -58,9 +87,9 @@ resource "aws_iam_role_policy_attachment" "rds_directory_services" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSDirectoryServiceAccess"
 }
 
-##########################################
+################################################################################
 # AWS Directory Service (Acitve Directory)
-##########################################
+################################################################################
 
 resource "aws_directory_service_directory" "demo" {
   name     = "corp.demo.com"
@@ -69,63 +98,61 @@ resource "aws_directory_service_directory" "demo" {
   type     = "MicrosoftAD"
 
   vpc_settings {
-    vpc_id = data.aws_vpc.default.id
+    vpc_id = module.vpc.vpc_id
     # Only 2 subnets, must be in different AZs
-    subnet_ids = slice(tolist(data.aws_subnet_ids.all.ids), 0, 2)
+    subnet_ids = slice(tolist(module.vpc.database_subnets), 0, 2)
   }
 
   tags = local.tags
 }
 
-#####
-# DB
-#####
+################################################################################
+# RDS Module
+################################################################################
 
 module "db" {
   source = "../../"
 
-  identifier = "demodb"
+  identifier = local.name
 
-  engine            = "sqlserver-ex"
-  engine_version    = "14.00.1000.169.v1"
-  instance_class    = "db.t2.medium"
-  allocated_storage = 20
-  storage_encrypted = false
+  engine               = "sqlserver-ex"
+  engine_version       = "15.00.4073.23.v1"
+  family               = "sqlserver-ex-15.0" # DB parameter group
+  major_engine_version = "15.00"             # DB option group
+  instance_class       = "db.t3.large"
 
-  name     = null # "demodb"
-  username = "demouser"
+  allocated_storage     = 20
+  max_allocated_storage = 100
+  storage_encrypted     = false
+
+  name     = null
+  username = "complete_mssql"
   password = "YourPwdShouldBeLongAndSecure!"
-  port     = "1433"
+  port     = 1433
 
   domain               = aws_directory_service_directory.demo.id
   domain_iam_role_name = aws_iam_role.rds_ad_auth.name
 
-  vpc_security_group_ids = [data.aws_security_group.default.id]
+  multi_az               = false
+  subnet_ids             = module.vpc.database_subnets
+  vpc_security_group_ids = [module.security_group.this_security_group_id]
 
-  maintenance_window = "Mon:00:00-Mon:03:00"
-  backup_window      = "03:00-06:00"
+  maintenance_window              = "Mon:00:00-Mon:03:00"
+  backup_window                   = "03:00-06:00"
+  enabled_cloudwatch_logs_exports = ["error"]
 
-  # disable backups to create DB faster
-  backup_retention_period = 0
+  backup_retention_period   = 0
+  final_snapshot_identifier = local.name
+  deletion_protection       = false
 
-  tags = local.tags
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  create_monitoring_role                = true
 
-  # DB subnet group
-  subnet_ids = data.aws_subnet_ids.all.ids
-
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = "demodb"
-
+  options                   = []
   create_db_parameter_group = false
   license_model             = "license-included"
+  timezone                  = "GMT Standard Time"
 
-  timezone = "Central Standard Time"
-
-  # Database Deletion Protection
-  deletion_protection = false
-
-  # DB options
-  major_engine_version = "14.00"
-
-  options = []
+  tags = local.tags
 }
