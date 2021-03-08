@@ -17,7 +17,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.77"
+  version = "~> 2"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -28,15 +28,13 @@ module "vpc" {
   database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
 
   create_database_subnet_group = true
-  enable_nat_gateway           = true
-  single_nat_gateway           = true
 
   tags = local.tags
 }
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.18"
+  version = "~> 3"
 
   name        = local.name
   description = "Complete SqlServer example security group"

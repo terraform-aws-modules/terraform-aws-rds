@@ -21,7 +21,7 @@ resource "random_pet" "this" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.77"
+  version = "~> 2"
 
   name = local.name
   cidr = "10.0.0.0/18"
@@ -32,8 +32,6 @@ module "vpc" {
   database_subnets = ["10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24"]
 
   create_database_subnet_group = true
-  enable_nat_gateway           = true
-  single_nat_gateway           = true
 
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -44,7 +42,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.18"
+  version = "~> 3"
 
   name        = local.name
   description = "S3 import VPC example security group"
@@ -85,7 +83,7 @@ module "security_group" {
 
 module "import_s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 1.20"
+  version = "~> 1"
 
   bucket        = "${local.name}-${random_pet.this.id}"
   acl           = "private"

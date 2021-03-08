@@ -64,9 +64,9 @@ Note that this example may create resources which cost money. Run `terraform des
 | Name | Source | Version |
 |------|--------|---------|
 | db | ../../ |  |
-| import_s3_bucket | terraform-aws-modules/s3-bucket/aws | ~> 1.20 |
-| security_group | terraform-aws-modules/security-group/aws | ~> 3.18 |
-| vpc | terraform-aws-modules/vpc/aws | ~> 2.77 |
+| import_s3_bucket | terraform-aws-modules/s3-bucket/aws | ~> 1 |
+| security_group | terraform-aws-modules/security-group/aws | ~> 3 |
+| vpc | terraform-aws-modules/vpc/aws | ~> 2 |
 
 ## Resources
 

@@ -33,8 +33,8 @@ No provider.
 | Name | Source | Version |
 |------|--------|---------|
 | db | ../../ |  |
-| security_group | terraform-aws-modules/security-group/aws | ~> 3.18 |
-| vpc | terraform-aws-modules/vpc/aws | ~> 2.77 |
+| security_group | terraform-aws-modules/security-group/aws | ~> 3 |
+| vpc | terraform-aws-modules/vpc/aws | ~> 2 |
 
 ## Resources
 
