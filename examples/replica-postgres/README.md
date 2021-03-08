@@ -2,8 +2,6 @@
 
 Configuration in this directory creates set of RDS resources demonstrating master and replica in the same VPC.
 
-Data sources are used to discover existing VPC resources (VPC, subnet and security group).
-
 ## Usage
 
 To run this example you need to execute:
