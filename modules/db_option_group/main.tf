@@ -1,8 +1,16 @@
+locals {
+  name        = var.use_name_prefix ? null : var.name
+  name_prefix = var.use_name_prefix ? "${var.name}-" : null
+
+  description = coalesce(var.option_group_description, format("%s option group", var.name))
+}
+
 resource "aws_db_option_group" "this" {
   count = var.create ? 1 : 0
 
-  name_prefix              = var.name_prefix
-  option_group_description = var.option_group_description == "" ? format("Option group for %s", var.identifier) : var.option_group_description
+  name                     = local.name
+  name_prefix              = local.name_prefix
+  option_group_description = local.description
   engine_name              = var.engine_name
   major_engine_version     = var.major_engine_version
 
@@ -28,7 +36,7 @@ resource "aws_db_option_group" "this" {
   tags = merge(
     var.tags,
     {
-      "Name" = format("%s", var.identifier)
+      "Name" = var.name
     },
   )
 
