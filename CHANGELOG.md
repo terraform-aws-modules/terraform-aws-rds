@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.23.0"></a>
+## [v2.23.0] - 2021-03-08
+
+- chore: update example projects ([#298](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/298))
+- chore: align ci-cd static checks to use individual minimum Terraform versions ([#297](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/297))
+
+
 <a name="v2.22.0"></a>
 ## [v2.22.0] - 2021-03-01
 
@@ -618,7 +625,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.22.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.23.0...HEAD
+[v2.23.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.22.0...v2.23.0
 [v2.22.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.21.0...v2.22.0
 [v2.21.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.20.0...v2.21.0
 [v2.20.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.19.0...v2.20.0
