@@ -17,7 +17,10 @@ Note that this example may create resources which cost money. Run `terraform des
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.26 |
+| aws | >= 2.49 |
 
 ## Providers
 
@@ -46,8 +49,9 @@ No input.
 |------|-------------|
 | byo\_mysql\_option\_group\_arn | The ARN of the BYO MySQL option group (should be blank) |
 | byo\_mysql\_option\_group\_id | The ID of the BYO MySQL option group (should be blank) |
+| default\_mysql\_name\_option\_group\_arn | The ARN of the default MySQL option group using `name` |
 | default\_mysql\_name\_option\_group\_id | The ID of the default MySQL option group using `name` |
-| default\_mysql\_option\_group\_arn | The ARN of the default MySQL option group using `name` |
+| default\_mysql\_option\_group\_arn | The ARN of the default MySQL option group |
 | default\_mysql\_option\_group\_id | The ID of the default MySQL option group |
 | default\_postgres\_option\_group\_arn | The ARN of the default PostgreSQL option group (should be blank) |
 | default\_postgres\_option\_group\_id | The ID of the default PostgreSQL option group (should be blank) |
