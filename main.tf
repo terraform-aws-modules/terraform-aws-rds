@@ -1,11 +1,11 @@
 locals {
-  db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
   enable_create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
+  db_subnet_group_name          = coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)
 
-  parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
+  parameter_group_name_id = coalesce(var.parameter_group_name, module.db_parameter_group.this_db_parameter_group_id)
 
-  option_group_name             = var.option_group_name != "" ? var.option_group_name : module.db_option_group.this_db_option_group_id
-  enable_create_db_option_group = var.create_db_option_group ? true : var.option_group_name == "" && var.engine != "postgres"
+  enable_create_db_option_group = var.create_db_option_group && var.engine != "postgres"
+  option_group                  = var.engine != "postgres" ? coalesce(module.db_option_group.this_db_option_group_id, var.option_group_name) : null
 }
 
 module "db_subnet_group" {
@@ -35,12 +35,15 @@ module "db_parameter_group" {
   tags = var.tags
 }
 
+# "${var.identifier}-${var.engine}-${var.major_engine_version}"
+
 module "db_option_group" {
   source = "./modules/db_option_group"
 
-  create                   = local.enable_create_db_option_group
-  identifier               = var.identifier
-  name_prefix              = "${var.identifier}-"
+  create = local.enable_create_db_option_group
+
+  name                     = var.option_group_name
+  use_name_prefix          = var.option_group_use_name_prefix
   option_group_description = var.option_group_description
   engine_name              = var.engine
   major_engine_version     = var.major_engine_version
@@ -81,7 +84,7 @@ module "db_instance" {
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = local.db_subnet_group_name
   parameter_group_name   = local.parameter_group_name_id
-  option_group_name      = local.option_group_name
+  option_group_name      = local.option_group
 
   availability_zone   = var.availability_zone
   multi_az            = var.multi_az

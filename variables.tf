@@ -128,12 +128,6 @@ variable "parameter_group_name" {
   default     = ""
 }
 
-variable "option_group_name" {
-  description = "Name of the DB option group to associate"
-  type        = string
-  default     = ""
-}
-
 variable "availability_zone" {
   description = "The Availability Zone of the RDS instance"
   type        = string
@@ -261,6 +255,18 @@ variable "parameters" {
 }
 
 # DB option group
+variable "option_group_name" {
+  description = "Name of the option group"
+  type        = string
+  default     = ""
+}
+
+variable "option_group_use_name_prefix" {
+  description = "Determines whether to use `option_group_name` as is or create a unique name beginning with the `option_group_name` as the prefix"
+  type        = bool
+  default     = true
+}
+
 variable "option_group_description" {
   description = "The description of the option group"
   type        = string

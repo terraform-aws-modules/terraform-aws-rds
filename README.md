@@ -114,6 +114,39 @@ module "db" {
 }
 ```
 
+## Option Groups
+
+[Reference](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithOptionGroups.html)
+
+Users have the ability to:
+
+- Create an option group with the name provided:
+
+```hcl
+  option_group_name            = "prod-instance-mysql-8.0"
+  option_group_use_name_prefix = false
+```
+
+- Create an option group using a unique prefix beginning with the name provided:
+
+```hcl
+  option_group_name = "prod-instance-mysql-8.0"
+```
+
+- Pass the name of an option group to use that has been created outside of the module:
+
+```hcl
+  create_option_group = false
+  option_group_name   = "prod-instance-mysql-8.0" # must already exist in AWS
+```
+
+- Skip creating an option group for PostgreSQL entirely as that is not supported
+
+```hcl
+  engine            = "postgres"
+  option_group_name = "prod-instance-postgresql-11.0" # this will be ignored, no option group created
+```
+
 ## Examples
 
 - [Complete RDS example for MSSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-mssql)
@@ -198,8 +231,9 @@ No resources.
 | multi\_az | Specifies if the RDS instance is multi-AZ | `bool` | `false` | no |
 | name | The DB name to create. If omitted, no database is created initially | `string` | `""` | no |
 | option\_group\_description | The description of the option group | `string` | `""` | no |
-| option\_group\_name | Name of the DB option group to associate | `string` | `""` | no |
+| option\_group\_name | Name of the option group | `string` | `""` | no |
 | option\_group\_timeouts | Define maximum timeout for deletion of `aws_db_option_group` resource | `map(string)` | <pre>{<br>  "delete": "15m"<br>}</pre> | no |
+| option\_group\_use\_name\_prefix | Determines whether to use `option_group_name` as is or create a unique name beginning with the `option_group_name` as the prefix | `bool` | `true` | no |
 | options | A list of Options to apply. | `any` | `[]` | no |
 | parameter\_group\_description | Description of the DB parameter group to create | `string` | `""` | no |
 | parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `""` | no |
