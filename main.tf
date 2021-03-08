@@ -1,17 +1,17 @@
 locals {
-  enable_create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
-  db_subnet_group_name          = coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)
+  create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
+  db_subnet_group_name   = coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)
 
   parameter_group_name_id = coalesce(var.parameter_group_name, module.db_parameter_group.this_db_parameter_group_id)
 
-  enable_create_db_option_group = var.create_db_option_group && var.engine != "postgres"
-  option_group                  = var.engine != "postgres" ? coalesce(module.db_option_group.this_db_option_group_id, var.option_group_name) : null
+  create_db_option_group = var.create_db_option_group && var.engine != "postgres"
+  option_group           = var.engine != "postgres" ? coalesce(module.db_option_group.this_db_option_group_id, var.option_group_name) : null
 }
 
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  create      = local.enable_create_db_subnet_group
+  create      = local.create_db_subnet_group
   identifier  = var.identifier
   name_prefix = "${var.identifier}-"
   subnet_ids  = var.subnet_ids
@@ -22,12 +22,11 @@ module "db_subnet_group" {
 module "db_parameter_group" {
   source = "./modules/db_parameter_group"
 
-  create          = var.create_db_parameter_group
-  identifier      = var.identifier
+  create = var.create_db_parameter_group
+
   name            = var.parameter_group_name
+  use_name_prefix = var.parameter_group_use_name_prefix
   description     = var.parameter_group_description
-  name_prefix     = "${var.identifier}-"
-  use_name_prefix = var.use_parameter_group_name_prefix
   family          = var.family
 
   parameters = var.parameters
@@ -35,12 +34,10 @@ module "db_parameter_group" {
   tags = var.tags
 }
 
-# "${var.identifier}-${var.engine}-${var.major_engine_version}"
-
 module "db_option_group" {
   source = "./modules/db_option_group"
 
-  create = local.enable_create_db_option_group
+  create = local.create_db_option_group
 
   name                     = var.option_group_name
   use_name_prefix          = var.option_group_use_name_prefix

@@ -1,6 +1,6 @@
-# Example usage of option groups
+# Example usage of option and parameter groups
 
-Configuration in this directory creates various option groups depending on the configuration specified - no other resources are created.
+Configuration in this directory creates various option and parameter groups depending on the configuration specified - no other resources are created.
 
 ## Usage
 
@@ -49,10 +49,18 @@ No input.
 |------|-------------|
 | byo\_mysql\_option\_group\_arn | The ARN of the BYO MySQL option group (should be blank) |
 | byo\_mysql\_option\_group\_id | The ID of the BYO MySQL option group (should be blank) |
+| byo\_mysql\_parameter\_group\_arn | The ARN of the db parameter group |
+| byo\_mysql\_parameter\_group\_id | The db parameter group id |
 | default\_mysql\_name\_option\_group\_arn | The ARN of the default MySQL option group using `name` |
 | default\_mysql\_name\_option\_group\_id | The ID of the default MySQL option group using `name` |
+| default\_mysql\_name\_parameter\_group\_arn | The ARN of the db parameter group |
+| default\_mysql\_name\_parameter\_group\_id | The db parameter group id |
 | default\_mysql\_option\_group\_arn | The ARN of the default MySQL option group |
 | default\_mysql\_option\_group\_id | The ID of the default MySQL option group |
+| default\_mysql\_parameter\_group\_arn | The ARN of the db parameter group |
+| default\_mysql\_parameter\_group\_id | The db parameter group id |
 | default\_postgres\_option\_group\_arn | The ARN of the default PostgreSQL option group (should be blank) |
 | default\_postgres\_option\_group\_id | The ID of the default PostgreSQL option group (should be blank) |
+| default\_postgres\_parameter\_group\_arn | The ARN of the db parameter group |
+| default\_postgres\_parameter\_group\_id | The db parameter group id |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
