@@ -13,7 +13,7 @@ locals {
 resource "random_password" "master_password" {
   count = var.create_db_instance && var.create_random_password ? 1 : 0
 
-  length  = 10
+  length  = var.random_password_length
   special = false
 }
 

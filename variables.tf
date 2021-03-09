@@ -398,3 +398,9 @@ variable "create_random_password" {
   type        = bool
   default     = true
 }
+
+variable "random_password_length" {
+  description = "(Optional) Length of random password to create. (default: 10)"
+  type        = number
+  default     = 10
+}
