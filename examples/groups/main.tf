@@ -25,7 +25,7 @@ module "default_postgres" {
 
   parameter_group_name = "${local.name}-default-postgresql"
 
-  db_subnet_group_name   = "foo"
+  subnet_group_name      = "foo"
   create_db_subnet_group = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
@@ -61,7 +61,7 @@ module "default_mysql" {
 
   parameter_group_name = "${local.name}-default-mysql"
 
-  db_subnet_group_name   = "foo"
+  subnet_group_name      = "foo"
   create_db_subnet_group = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
@@ -99,7 +99,7 @@ module "default_mysql_name" {
   parameter_group_name            = "${local.name}-default-mysql-name"
   parameter_group_use_name_prefix = false
 
-  db_subnet_group_name   = "foo"
+  subnet_group_name      = "foo"
   create_db_subnet_group = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
@@ -137,7 +137,7 @@ module "byo_mysql" {
   create_db_parameter_group = false
   parameter_group_name      = "bringMyOwnParameterGroupName"
 
-  db_subnet_group_name   = "foo"
+  subnet_group_name      = "foo"
   create_db_subnet_group = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
