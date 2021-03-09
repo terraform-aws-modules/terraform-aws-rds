@@ -5,7 +5,7 @@ locals {
   parameter_group_name_id = coalesce(var.parameter_group_name, module.db_parameter_group.this_db_parameter_group_id)
 
   create_db_option_group = var.create_db_option_group && var.engine != "postgres"
-  option_group           = var.engine != "postgres" ? coalesce(module.db_option_group.this_db_option_group_id, var.option_group_name) : null
+  option_group           = var.engine != "postgres" && var.create_db_option_group ? coalesce(module.db_option_group.this_db_option_group_id, var.option_group_name) : null
 }
 
 module "db_subnet_group" {
