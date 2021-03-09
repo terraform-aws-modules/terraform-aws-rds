@@ -62,6 +62,7 @@ module "db" {
   source = "../../"
 
   identifier = local.name
+  # create_db_instance = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   engine               = "postgres"
@@ -90,9 +91,9 @@ module "db" {
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
-  backup_retention_period   = 0
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   performance_insights_enabled          = true
   performance_insights_retention_period = 7
@@ -101,7 +102,7 @@ module "db" {
   parameters = [
     {
       name  = "autovacuum"
-      value = true
+      value = 1
     },
     {
       name  = "client_encoding"

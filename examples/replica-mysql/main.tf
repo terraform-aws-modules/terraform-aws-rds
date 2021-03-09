@@ -97,9 +97,9 @@ module "master" {
   enabled_cloudwatch_logs_exports = ["general"]
 
   # Backups are required in order to create a replica
-  backup_retention_period   = 1
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 1
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   create_db_option_group    = false
   create_db_parameter_group = false
