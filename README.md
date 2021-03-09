@@ -173,7 +173,9 @@ Users have the ability to:
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| random | >= 3.1 |
 
 ## Modules
 
@@ -186,7 +188,9 @@ No provider.
 
 ## Resources
 
-No resources.
+| Name |
+|------|
+| [random_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) |
 
 ## Inputs
 
@@ -288,7 +292,6 @@ No resources.
 | this\_db\_parameter\_group\_id | The db parameter group id |
 | this\_db\_subnet\_group\_arn | The ARN of the db subnet group |
 | this\_db\_subnet\_group\_id | The db subnet group name |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors

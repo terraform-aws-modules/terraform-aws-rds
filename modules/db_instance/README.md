@@ -101,6 +101,7 @@ No Modules.
 | this\_db\_instance\_endpoint | The connection endpoint |
 | this\_db\_instance\_hosted\_zone\_id | The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record) |
 | this\_db\_instance\_id | The RDS instance ID |
+| this\_db\_instance\_master\_password | The master password |
 | this\_db\_instance\_name | The database name |
 | this\_db\_instance\_port | The database port |
 | this\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
