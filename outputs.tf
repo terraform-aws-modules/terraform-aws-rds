@@ -60,7 +60,7 @@ output "this_db_instance_username" {
 
 output "this_db_instance_password" {
   description = "The database password (this password may be old, because Terraform doesn't track it after initial creation)"
-  value       = var.password
+  value       = local.master_password
   sensitive   = true
 }
 
