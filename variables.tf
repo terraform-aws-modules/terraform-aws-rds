@@ -392,3 +392,9 @@ variable "delete_automated_backups" {
   type        = bool
   default     = true
 }
+
+variable "create_random_password" {
+  description = "Whether to create random password for RDS primary cluster"
+  type        = bool
+  default     = true
+}

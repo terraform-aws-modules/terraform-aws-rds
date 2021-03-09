@@ -1,4 +1,5 @@
 locals {
+  master_password        = var.create_db_instance && var.create_random_password ? random_password.master_password[0].result : var.password
   create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
   db_subnet_group_name   = coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)
 
@@ -6,6 +7,14 @@ locals {
 
   create_db_option_group = var.create_db_option_group && var.engine != "postgres"
   option_group           = var.engine != "postgres" ? coalesce(module.db_option_group.this_db_option_group_id, var.option_group_name) : null
+}
+
+# Random string to use as master password
+resource "random_password" "master_password" {
+  count = var.create_db_instance && var.create_random_password ? 1 : 0
+
+  length  = 10
+  special = false
 }
 
 module "db_subnet_group" {
@@ -68,7 +77,7 @@ module "db_instance" {
 
   name                                = var.name
   username                            = var.username
-  password                            = var.password
+  password                            = local.master_password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
