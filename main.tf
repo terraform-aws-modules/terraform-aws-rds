@@ -2,10 +2,10 @@ locals {
   create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
   db_subnet_group_name   = coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)
 
-  parameter_group_name_id = coalesce(var.parameter_group_name, module.db_parameter_group.this_db_parameter_group_id)
+  parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.this_db_parameter_group_id : var.parameter_group_name
 
   create_db_option_group = var.create_db_option_group && var.engine != "postgres"
-  option_group           = var.engine != "postgres" ? coalesce(module.db_option_group.this_db_option_group_id, var.option_group_name) : null
+  option_group           = local.create_db_option_group ? module.db_option_group.this_db_option_group_id : var.option_group_name
 }
 
 module "db_subnet_group" {
@@ -24,7 +24,7 @@ module "db_parameter_group" {
 
   create = var.create_db_parameter_group
 
-  name            = var.parameter_group_name
+  name            = coalesce(var.parameter_group_name, var.identifier)
   use_name_prefix = var.parameter_group_use_name_prefix
   description     = var.parameter_group_description
   family          = var.family
@@ -39,7 +39,7 @@ module "db_option_group" {
 
   create = local.create_db_option_group
 
-  name                     = var.option_group_name
+  name                     = coalesce(var.option_group_name, var.identifier)
   use_name_prefix          = var.option_group_use_name_prefix
   option_group_description = var.option_group_description
   engine_name              = var.engine

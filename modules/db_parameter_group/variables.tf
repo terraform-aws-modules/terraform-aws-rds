@@ -7,7 +7,6 @@ variable "create" {
 variable "name" {
   description = "The name of the DB parameter group"
   type        = string
-  default     = ""
 }
 
 variable "use_name_prefix" {

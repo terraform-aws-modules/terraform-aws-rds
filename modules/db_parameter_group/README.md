@@ -31,7 +31,7 @@ No Modules.
 | create | Whether to create this resource or not? | `bool` | `true` | no |
 | description | The description of the DB parameter group | `string` | `""` | no |
 | family | The family of the DB parameter group | `string` | n/a | yes |
-| name | The name of the DB parameter group | `string` | `""` | no |
+| name | The name of the DB parameter group | `string` | n/a | yes |
 | parameters | A list of DB parameter maps to apply | `list(map(string))` | `[]` | no |
 | tags | A mapping of tags to assign to the resource | `map(string)` | `{}` | no |
 | use\_name\_prefix | Determines whether to use `name` as is or create a unique name beginning with `name` as the specified prefix | `bool` | `true` | no |
