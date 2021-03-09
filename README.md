@@ -281,6 +281,7 @@ No resources.
 | this\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
 | this\_db\_instance\_status | The RDS instance status |
 | this\_db\_instance\_username | The master username for the database |
+| this\_db\_master\_password | The master password |
 | this\_db\_option\_group\_arn | The ARN of the db option group |
 | this\_db\_option\_group\_id | The db option group id |
 | this\_db\_parameter\_group\_arn | The ARN of the db parameter group |

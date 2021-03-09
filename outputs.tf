@@ -114,3 +114,9 @@ output "this_db_option_group_arn" {
   description = "The ARN of the db option group"
   value       = module.db_option_group.this_db_option_group_arn
 }
+
+output "this_db_master_password" {
+  description = "The master password"
+  value       = module.db_instance.this_db_instance_master_password
+  sensitive   = true
+}
