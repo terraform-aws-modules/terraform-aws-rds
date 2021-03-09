@@ -4,27 +4,22 @@ variable "create" {
   default     = true
 }
 
-variable "description" {
-  description = "The description of the DB parameter group"
-  type        = string
-  default     = ""
-}
-
 variable "name" {
   description = "The name of the DB parameter group"
   type        = string
   default     = ""
 }
 
-variable "name_prefix" {
-  description = "Creates a unique name beginning with the specified prefix"
-  type        = string
-  default     = ""
+variable "use_name_prefix" {
+  description = "Determines whether to use `name` as is or create a unique name beginning with `name` as the specified prefix"
+  type        = bool
+  default     = true
 }
 
-variable "identifier" {
-  description = "The identifier of the resource"
+variable "description" {
+  description = "The description of the DB parameter group"
   type        = string
+  default     = ""
 }
 
 variable "family" {
@@ -43,10 +38,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-
-variable "use_name_prefix" {
-  description = "Whether to use name_prefix or not"
-  type        = bool
-  default     = true
-}
-
