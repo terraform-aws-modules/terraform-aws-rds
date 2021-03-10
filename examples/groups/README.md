@@ -32,6 +32,7 @@ No provider.
 |------|--------|---------|
 | byo_mysql | ../../ |  |
 | default_mysql | ../../ |  |
+| default_mysql_default_aws | ../../ |  |
 | default_mysql_name | ../../ |  |
 | default_postgres | ../../ |  |
 
@@ -51,6 +52,10 @@ No input.
 | byo\_mysql\_option\_group\_id | The ID of the BYO MySQL option group (should be blank) |
 | byo\_mysql\_parameter\_group\_arn | The ARN of the db parameter group |
 | byo\_mysql\_parameter\_group\_id | The db parameter group id |
+| default\_mysql\_default\_aws\_option\_group\_arn | The ARN of the default MySQL option group |
+| default\_mysql\_default\_aws\_option\_group\_id | The ID of the default MySQL option group |
+| default\_mysql\_default\_aws\_parameter\_group\_arn | The ARN of the db parameter group |
+| default\_mysql\_default\_aws\_parameter\_group\_id | The db parameter group id |
 | default\_mysql\_name\_option\_group\_arn | The ARN of the default MySQL option group using `name` |
 | default\_mysql\_name\_option\_group\_id | The ID of the default MySQL option group using `name` |
 | default\_mysql\_name\_parameter\_group\_arn | The ARN of the db parameter group |
