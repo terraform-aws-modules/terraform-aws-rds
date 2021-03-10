@@ -147,6 +147,15 @@ Users have the ability to:
   option_group_name = "prod-instance-postgresql-11.0" # this will be ignored, no option group created
 ```
 
+- Backward compatibility in case the optional group for PostgreSQL was created earlier
+
+```hcl
+  engine            = "postgres"
+  option_group_name = "prod-instance-postgresql-11.0" # this will be used, option group created
+
+  skip_db_option_group_for_postgres = false
+```
+
 ## Examples
 
 - [Complete RDS example for MSSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-mssql)
@@ -247,6 +256,7 @@ No resources.
 | publicly\_accessible | Bool to control if instance is publicly accessible | `bool` | `false` | no |
 | replicate\_source\_db | Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate. | `string` | `null` | no |
 | s3\_import | Restore from a Percona Xtrabackup in S3 (only MySQL is supported) | `map(string)` | `null` | no |
+| skip\_db\_option\_group\_for\_postgres | (Optional) Skip create a database option group for postgres, because option group is not supported for PostgreSQL. | `bool` | `true` | no |
 | skip\_final\_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final\_snapshot\_identifier | `bool` | `true` | no |
 | snapshot\_identifier | Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05. | `string` | `null` | no |
 | storage\_encrypted | Specifies whether the DB instance is encrypted | `bool` | `false` | no |

@@ -291,6 +291,12 @@ variable "option_group_description" {
   default     = ""
 }
 
+variable "skip_db_option_group_for_postgres" {
+  description = "(Optional) Skip create a database option group for postgres, because option group is not supported for PostgreSQL."
+  type        = bool
+  default     = true
+}
+
 variable "major_engine_version" {
   description = "Specifies the major version of the engine that this option group should be associated with"
   type        = string
