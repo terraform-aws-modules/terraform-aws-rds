@@ -211,7 +211,7 @@ Users have the ability to:
 | create\_db\_parameter\_group | Whether to create a database parameter group | `bool` | `true` | no |
 | create\_db\_subnet\_group | Whether to create a database subnet group | `bool` | `true` | no |
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | `bool` | `false` | no |
-| create\_random\_password | Whether to create random password for RDS primary cluster | `bool` | `true` | no |
+| create\_random\_password | Whether to create random password for RDS primary cluster | `bool` | `false` | no |
 | db\_subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | `string` | `""` | no |
 | delete\_automated\_backups | Specifies whether to remove automated backups immediately after the DB instance is deleted | `bool` | `true` | no |
 | deletion\_protection | The database can't be deleted when this value is set to true. | `bool` | `false` | no |
