@@ -223,19 +223,19 @@ variable "create_db_subnet_group" {
   default     = true
 }
 
-variable "subnet_group_name" {
+variable "db_subnet_group_name" {
   description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
   type        = string
   default     = ""
 }
 
-variable "subnet_group_use_name_prefix" {
+variable "db_subnet_group_use_name_prefix" {
   description = "Determines whether to use `subnet_group_name` as is or create a unique name beginning with the `subnet_group_name` as the prefix"
   type        = bool
   default     = true
 }
 
-variable "subnet_group_description" {
+variable "db_subnet_group_description" {
   description = "Description of the DB subnet group to create"
   type        = string
   default     = ""
@@ -257,7 +257,7 @@ variable "create_db_parameter_group" {
 variable "parameter_group_name" {
   description = "Name of the DB parameter group to associate or create"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "parameter_group_use_name_prefix" {
@@ -294,7 +294,7 @@ variable "create_db_option_group" {
 variable "option_group_name" {
   description = "Name of the option group"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "option_group_use_name_prefix" {

@@ -25,7 +25,7 @@ module "default_postgres" {
 
   parameter_group_name = "${local.name}-default-postgresql"
 
-  subnet_group_name      = "foo"
+  db_subnet_group_name   = "foo"
   create_db_subnet_group = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
@@ -61,7 +61,7 @@ module "default_mysql" {
 
   parameter_group_name = "${local.name}-default-mysql"
 
-  subnet_group_name      = "foo"
+  db_subnet_group_name   = "foo"
   create_db_subnet_group = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
@@ -99,7 +99,42 @@ module "default_mysql_name" {
   parameter_group_name            = "${local.name}-default-mysql-name"
   parameter_group_use_name_prefix = false
 
-  subnet_group_name      = "foo"
+  db_subnet_group_name   = "foo"
+  create_db_subnet_group = false
+
+  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+  create_db_instance   = false
+  engine               = "mysql"
+  engine_version       = "8.0.20"
+  family               = "mysql8.0" # DB parameter group
+  major_engine_version = "8.0"      # DB option group
+  instance_class       = "db.t3.large"
+
+  allocated_storage = 20
+
+  username = "option_groups_mysql"
+  password = "YourPwdShouldBeLongAndSecure!"
+  port     = 3306
+
+  maintenance_window = "Mon:00:00-Mon:03:00"
+  backup_window      = "03:00-06:00"
+
+  tags = local.tags
+}
+
+################################################################################
+# Default MySQL using AWS provided default groups
+################################################################################
+
+module "default_mysql_default_aws" {
+  source = "../../"
+
+  identifier = local.name
+
+  create_db_option_group    = false
+  create_db_parameter_group = false
+
+  db_subnet_group_name   = "foo"
   create_db_subnet_group = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
@@ -137,7 +172,7 @@ module "byo_mysql" {
   create_db_parameter_group = false
   parameter_group_name      = "bringMyOwnParameterGroupName"
 
-  subnet_group_name      = "foo"
+  db_subnet_group_name   = "foo"
   create_db_subnet_group = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts

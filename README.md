@@ -206,6 +206,9 @@ No resources.
 | create\_db\_parameter\_group | Whether to create a database parameter group | `bool` | `true` | no |
 | create\_db\_subnet\_group | Whether to create a database subnet group | `bool` | `true` | no |
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | `bool` | `false` | no |
+| db\_subnet\_group\_description | Description of the DB subnet group to create | `string` | `""` | no |
+| db\_subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | `string` | `""` | no |
+| db\_subnet\_group\_use\_name\_prefix | Determines whether to use `subnet_group_name` as is or create a unique name beginning with the `subnet_group_name` as the prefix | `bool` | `true` | no |
 | delete\_automated\_backups | Specifies whether to remove automated backups immediately after the DB instance is deleted | `bool` | `true` | no |
 | deletion\_protection | The database can't be deleted when this value is set to true. | `bool` | `false` | no |
 | domain | The ID of the Directory Service Active Directory domain to create the instance in | `string` | `""` | no |
@@ -230,12 +233,12 @@ No resources.
 | multi\_az | Specifies if the RDS instance is multi-AZ | `bool` | `false` | no |
 | name | The DB name to create. If omitted, no database is created initially | `string` | `""` | no |
 | option\_group\_description | The description of the option group | `string` | `""` | no |
-| option\_group\_name | Name of the option group | `string` | `""` | no |
+| option\_group\_name | Name of the option group | `string` | `null` | no |
 | option\_group\_timeouts | Define maximum timeout for deletion of `aws_db_option_group` resource | `map(string)` | <pre>{<br>  "delete": "15m"<br>}</pre> | no |
 | option\_group\_use\_name\_prefix | Determines whether to use `option_group_name` as is or create a unique name beginning with the `option_group_name` as the prefix | `bool` | `true` | no |
 | options | A list of Options to apply. | `any` | `[]` | no |
 | parameter\_group\_description | Description of the DB parameter group to create | `string` | `""` | no |
-| parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `""` | no |
+| parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `null` | no |
 | parameter\_group\_use\_name\_prefix | Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix | `bool` | `true` | no |
 | parameters | A list of DB parameters (map) to apply | `list(map(string))` | `[]` | no |
 | password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | `string` | n/a | yes |
@@ -250,9 +253,6 @@ No resources.
 | snapshot\_identifier | Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05. | `string` | `null` | no |
 | storage\_encrypted | Specifies whether the DB instance is encrypted | `bool` | `false` | no |
 | storage\_type | One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'gp2' if not. | `string` | `"gp2"` | no |
-| subnet\_group\_description | Description of the DB subnet group to create | `string` | `""` | no |
-| subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | `string` | `""` | no |
-| subnet\_group\_use\_name\_prefix | Determines whether to use `subnet_group_name` as is or create a unique name beginning with the `subnet_group_name` as the prefix | `bool` | `true` | no |
 | subnet\_ids | A list of VPC subnet IDs | `list(string)` | `[]` | no |
 | tags | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 | timeouts | (Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times | `map(string)` | <pre>{<br>  "create": "40m",<br>  "delete": "40m",<br>  "update": "80m"<br>}</pre> | no |
