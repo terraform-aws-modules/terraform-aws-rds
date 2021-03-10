@@ -245,7 +245,7 @@ Users have the ability to:
 | parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `null` | no |
 | parameter\_group\_use\_name\_prefix | Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix | `bool` | `true` | no |
 | parameters | A list of DB parameters (map) to apply | `list(map(string))` | `[]` | no |
-| password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | `string` | n/a | yes |
+| password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | `string` | `""` | no |
 | performance\_insights\_enabled | Specifies whether Performance Insights are enabled | `bool` | `false` | no |
 | performance\_insights\_kms\_key\_id | The ARN for the KMS key to encrypt Performance Insights data. | `string` | `null` | no |
 | performance\_insights\_retention\_period | The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years). | `number` | `7` | no |
