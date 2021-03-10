@@ -231,12 +231,12 @@ No resources.
 | multi\_az | Specifies if the RDS instance is multi-AZ | `bool` | `false` | no |
 | name | The DB name to create. If omitted, no database is created initially | `string` | `""` | no |
 | option\_group\_description | The description of the option group | `string` | `""` | no |
-| option\_group\_name | Name of the option group | `string` | `""` | no |
+| option\_group\_name | Name of the option group | `string` | `null` | no |
 | option\_group\_timeouts | Define maximum timeout for deletion of `aws_db_option_group` resource | `map(string)` | <pre>{<br>  "delete": "15m"<br>}</pre> | no |
 | option\_group\_use\_name\_prefix | Determines whether to use `option_group_name` as is or create a unique name beginning with the `option_group_name` as the prefix | `bool` | `true` | no |
 | options | A list of Options to apply. | `any` | `[]` | no |
 | parameter\_group\_description | Description of the DB parameter group to create | `string` | `""` | no |
-| parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `""` | no |
+| parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `null` | no |
 | parameter\_group\_use\_name\_prefix | Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix | `bool` | `true` | no |
 | parameters | A list of DB parameters (map) to apply | `list(map(string))` | `[]` | no |
 | password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | `string` | n/a | yes |

@@ -7,6 +7,7 @@ variable "create" {
 variable "name" {
   description = "The name of the option group"
   type        = string
+  default     = ""
 }
 
 variable "use_name_prefix" {
