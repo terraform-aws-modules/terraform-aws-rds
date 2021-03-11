@@ -12,7 +12,7 @@ module "db_subnet_group" {
 
   create = var.create_db_subnet_group
 
-  name            = var.db_subnet_group_name
+  name            = coalesce(var.db_subnet_group_name, var.identifier)
   use_name_prefix = var.db_subnet_group_use_name_prefix
   description     = var.db_subnet_group_description
   subnet_ids      = var.subnet_ids
