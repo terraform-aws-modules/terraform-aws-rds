@@ -153,6 +153,7 @@ module "db" {
   create_db_parameter_group = false
   license_model             = "license-included"
   timezone                  = "GMT Standard Time"
+  character_set_name        = "Latin1_General_CI_AS"
 
   tags = local.tags
 }
