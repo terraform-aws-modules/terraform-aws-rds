@@ -196,7 +196,7 @@ No resources.
 | backup\_retention\_period | The days to retain backups for | `number` | `null` | no |
 | backup\_window | The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance\_window | `string` | n/a | yes |
 | ca\_cert\_identifier | Specifies the identifier of the CA certificate for the DB instance | `string` | `"rds-ca-2019"` | no |
-| character\_set\_name | (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information | `string` | `""` | no |
+| character\_set\_name | (Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation. | `string` | `""` | no |
 | copy\_tags\_to\_snapshot | On delete, copy all Instance tags to the final snapshot (if final\_snapshot\_identifier is specified) | `bool` | `false` | no |
 | create\_db\_instance | Whether to create a database instance | `bool` | `true` | no |
 | create\_db\_option\_group | (Optional) Create a database option group | `bool` | `true` | no |
@@ -228,12 +228,13 @@ No resources.
 | multi\_az | Specifies if the RDS instance is multi-AZ | `bool` | `false` | no |
 | name | The DB name to create. If omitted, no database is created initially | `string` | `""` | no |
 | option\_group\_description | The description of the option group | `string` | `""` | no |
-| option\_group\_name | Name of the option group | `string` | `""` | no |
+| option\_group\_name | Name of the option group | `string` | `null` | no |
 | option\_group\_timeouts | Define maximum timeout for deletion of `aws_db_option_group` resource | `map(string)` | <pre>{<br>  "delete": "15m"<br>}</pre> | no |
 | option\_group\_use\_name\_prefix | Determines whether to use `option_group_name` as is or create a unique name beginning with the `option_group_name` as the prefix | `bool` | `true` | no |
 | options | A list of Options to apply. | `any` | `[]` | no |
 | parameter\_group\_description | Description of the DB parameter group to create | `string` | `""` | no |
-| parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `""` | no |
+| parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `null` | no |
+| parameter\_group\_use\_name\_prefix | Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix | `bool` | `true` | no |
 | parameters | A list of DB parameters (map) to apply | `list(map(string))` | `[]` | no |
 | password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | `string` | n/a | yes |
 | performance\_insights\_enabled | Specifies whether Performance Insights are enabled | `bool` | `false` | no |
@@ -251,7 +252,6 @@ No resources.
 | tags | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 | timeouts | (Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times | `map(string)` | <pre>{<br>  "create": "40m",<br>  "delete": "40m",<br>  "update": "80m"<br>}</pre> | no |
 | timezone | (Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information. | `string` | `""` | no |
-| use\_parameter\_group\_name\_prefix | Whether to use the parameter group name prefix or not | `bool` | `true` | no |
 | username | Username for the master DB user | `string` | n/a | yes |
 | vpc\_security\_group\_ids | List of VPC security groups to associate | `list(string)` | `[]` | no |
 

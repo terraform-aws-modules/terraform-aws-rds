@@ -116,18 +116,6 @@ variable "db_subnet_group_name" {
   default     = ""
 }
 
-variable "parameter_group_description" {
-  description = "Description of the DB parameter group to create"
-  type        = string
-  default     = ""
-}
-
-variable "parameter_group_name" {
-  description = "Name of the DB parameter group to associate or create"
-  type        = string
-  default     = ""
-}
-
 variable "availability_zone" {
   description = "The Availability Zone of the RDS instance"
   type        = string
@@ -242,6 +230,30 @@ variable "subnet_ids" {
 }
 
 # DB parameter group
+variable "create_db_parameter_group" {
+  description = "Whether to create a database parameter group"
+  type        = bool
+  default     = true
+}
+
+variable "parameter_group_name" {
+  description = "Name of the DB parameter group to associate or create"
+  type        = string
+  default     = null
+}
+
+variable "parameter_group_use_name_prefix" {
+  description = "Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix"
+  type        = bool
+  default     = true
+}
+
+variable "parameter_group_description" {
+  description = "Description of the DB parameter group to create"
+  type        = string
+  default     = ""
+}
+
 variable "family" {
   description = "The family of the DB parameter group"
   type        = string
@@ -255,10 +267,16 @@ variable "parameters" {
 }
 
 # DB option group
+variable "create_db_option_group" {
+  description = "(Optional) Create a database option group"
+  type        = bool
+  default     = true
+}
+
 variable "option_group_name" {
   description = "Name of the option group"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "option_group_use_name_prefix" {
@@ -291,18 +309,6 @@ variable "create_db_subnet_group" {
   default     = true
 }
 
-variable "create_db_parameter_group" {
-  description = "Whether to create a database parameter group"
-  type        = bool
-  default     = true
-}
-
-variable "create_db_option_group" {
-  description = "(Optional) Create a database option group"
-  type        = bool
-  default     = true
-}
-
 variable "create_db_instance" {
   description = "Whether to create a database instance"
   type        = bool
@@ -316,7 +322,7 @@ variable "timezone" {
 }
 
 variable "character_set_name" {
-  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information"
+  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation."
   type        = string
   default     = ""
 }
@@ -349,12 +355,6 @@ variable "deletion_protection" {
   description = "The database can't be deleted when this value is set to true."
   type        = bool
   default     = false
-}
-
-variable "use_parameter_group_name_prefix" {
-  description = "Whether to use the parameter group name prefix or not"
-  type        = bool
-  default     = true
 }
 
 variable "performance_insights_enabled" {
