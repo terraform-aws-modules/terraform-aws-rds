@@ -97,15 +97,26 @@ module "db" {
 
 ## Conditional creation
 
-There is also a way to specify an existing database subnet group and parameter group name instead of creating new resources like this:
+The following values are provided to toggle on/off creation of the associated resources as desired:
 
 ```hcl
-# This RDS instance will be created using default database subnet and parameter group
 module "db" {
   source = "terraform-aws-modules/rds/aws"
 
-  db_subnet_group_name = "default"
-  parameter_group_name = "default.mysql5.7"
+  # Disable creation of RDS instance(s)
+  create_db_instance = false
+
+  # Disable creation of option group - provide an option group or default AWS default
+  create_db_option_group = false
+
+  # Disable creation of parameter group - provide a parameter group or default to AWS default
+  create_db_parameter_group = false
+
+  # Disable creation of subnet group - provide a subnet group
+  create_db_subnet_group = false
+
+  # Enable creation of monitoring IAM role
+  create_monitoring_role = true
 
   # ... omitted
 }
@@ -142,6 +153,44 @@ Users have the ability to:
 ```hcl
   engine            = "postgres"
   option_group_name = "prod-instance-postgresql-11.0" # this will be ignored, no option group created
+```
+
+- Use a default option group provided by AWS
+
+```hcl
+  create_option_group = false
+```
+
+## Parameter Groups
+
+[Reference](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)
+
+Users have the ability to:
+
+- Create a parameter group with the name provided:
+
+```hcl
+  parameter_group_name            = "prod-instance-mysql-8.0"
+  parameter_group_use_name_prefix = false
+```
+
+- Create a parameter group using a unique prefix beginning with the name provided:
+
+```hcl
+  parameter_group_name = "prod-instance-mysql-8.0"
+```
+
+- Pass the name of a parameter group to use that has been created outside of the module:
+
+```hcl
+  create_parameter_group = false
+  parameter_group_name   = "prod-instance-mysql-8.0" # must already exist in AWS
+```
+
+- Use a default parameter group provided by AWS
+
+```hcl
+  create_parameter_group = false
 ```
 
 ## Examples
@@ -204,7 +253,9 @@ No resources.
 | create\_db\_parameter\_group | Whether to create a database parameter group | `bool` | `true` | no |
 | create\_db\_subnet\_group | Whether to create a database subnet group | `bool` | `true` | no |
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | `bool` | `false` | no |
+| db\_subnet\_group\_description | Description of the DB subnet group to create | `string` | `""` | no |
 | db\_subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | `string` | `""` | no |
+| db\_subnet\_group\_use\_name\_prefix | Determines whether to use `subnet_group_name` as is or create a unique name beginning with the `subnet_group_name` as the prefix | `bool` | `true` | no |
 | delete\_automated\_backups | Specifies whether to remove automated backups immediately after the DB instance is deleted | `bool` | `true` | no |
 | deletion\_protection | The database can't be deleted when this value is set to true. | `bool` | `false` | no |
 | domain | The ID of the Directory Service Active Directory domain to create the instance in | `string` | `""` | no |
