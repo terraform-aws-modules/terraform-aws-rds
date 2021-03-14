@@ -190,9 +190,9 @@ module "db" {
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["audit", "general"]
 
-  backup_retention_period   = 0
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   tags = local.tags
 }

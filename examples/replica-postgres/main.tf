@@ -97,9 +97,9 @@ module "master" {
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
   # Backups are required in order to create a replica
-  backup_retention_period   = 1
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 1
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   tags = local.tags
 }
@@ -139,9 +139,9 @@ module "replica" {
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
-  backup_retention_period   = 0
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   # Not allowed to specify a subnet group for replicas in the same region
   create_db_subnet_group = false
