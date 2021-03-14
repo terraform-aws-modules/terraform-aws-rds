@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.29.0"></a>
+## [v2.29.0] - 2021-03-14
+
+- fix: set snapshot identifier and backup retention period to null to default to AWS provider settings ([#314](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/314))
+- chore: Use utf8mb4 in mysql examples ([#313](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/313))
+
+
 <a name="v2.28.0"></a>
 ## [v2.28.0] - 2021-03-14
 
@@ -656,7 +663,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.28.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.29.0...HEAD
+[v2.29.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.28.0...v2.29.0
 [v2.28.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.27.0...v2.28.0
 [v2.27.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.26.0...v2.27.0
 [v2.26.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.25.0...v2.26.0
