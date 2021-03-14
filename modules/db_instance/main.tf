@@ -5,7 +5,10 @@ locals {
 resource "random_id" "snapshot_identifier" {
   count = var.create && !var.skip_final_snapshot ? 1 : 0
 
-  keepers     = { id = var.identifier }
+  keepers = {
+    id = var.identifier
+  }
+
   byte_length = 4
 }
 
