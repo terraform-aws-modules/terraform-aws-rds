@@ -98,11 +98,11 @@ module "db" {
   parameters = [
     {
       name  = "character_set_client"
-      value = "utf8"
+      value = "utf8mb4"
     },
     {
       name  = "character_set_server"
-      value = "utf8"
+      value = "utf8mb4"
     }
   ]
 
