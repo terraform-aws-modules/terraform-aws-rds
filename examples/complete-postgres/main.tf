@@ -62,7 +62,6 @@ module "db" {
   source = "../../"
 
   identifier = local.name
-  # create_db_instance = false
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   engine               = "postgres"

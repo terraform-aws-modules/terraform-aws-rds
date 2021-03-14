@@ -32,12 +32,6 @@ variable "replicate_source_db" {
   default     = null
 }
 
-variable "snapshot_identifier" {
-  description = "Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05."
-  type        = string
-  default     = null
-}
-
 variable "license_model" {
   description = "License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1"
   type        = string
@@ -72,10 +66,34 @@ variable "engine_version" {
   type        = string
 }
 
+variable "skip_final_snapshot" {
+  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier"
+  type        = bool
+  default     = false
+}
+
+variable "snapshot_identifier" {
+  description = "Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05."
+  type        = string
+  default     = null
+}
+
+variable "copy_tags_to_snapshot" {
+  description = "On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified)"
+  type        = bool
+  default     = false
+}
+
 variable "final_snapshot_identifier" {
   description = "The name of your final DB snapshot when this DB instance is deleted."
   type        = string
   default     = null
+}
+
+variable "final_snapshot_identifier_prefix" {
+  description = "The name which is prefixed to the final snapshot on cluster destroy"
+  type        = string
+  default     = "final"
 }
 
 variable "instance_class" {
@@ -185,18 +203,6 @@ variable "apply_immediately" {
 variable "maintenance_window" {
   description = "The window to perform maintenance in. Syntax: 'ddd:hh24:mi-ddd:hh24:mi'. Eg: 'Mon:00:00-Mon:03:00'"
   type        = string
-}
-
-variable "skip_final_snapshot" {
-  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier"
-  type        = bool
-  default     = null
-}
-
-variable "copy_tags_to_snapshot" {
-  description = "On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified)"
-  type        = bool
-  default     = false
 }
 
 variable "backup_retention_period" {

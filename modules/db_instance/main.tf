@@ -2,38 +2,11 @@ locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
 }
 
-data "aws_iam_policy_document" "enhanced_monitoring" {
-  statement {
-    actions = [
-      "sts:AssumeRole",
-    ]
+resource "random_id" "snapshot_identifier" {
+  count = var.create && !var.skip_final_snapshot ? 1 : 0
 
-    principals {
-      type        = "Service"
-      identifiers = ["monitoring.rds.amazonaws.com"]
-    }
-  }
-}
-
-resource "aws_iam_role" "enhanced_monitoring" {
-  count = var.create_monitoring_role ? 1 : 0
-
-  name               = var.monitoring_role_name
-  assume_role_policy = data.aws_iam_policy_document.enhanced_monitoring.json
-
-  tags = merge(
-    {
-      "Name" = format("%s", var.monitoring_role_name)
-    },
-    var.tags,
-  )
-}
-
-resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
-  count = var.create_monitoring_role ? 1 : 0
-
-  role       = aws_iam_role.enhanced_monitoring[0].name
-  policy_arn = "arn:${var.iam_partition}:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+  keepers     = { id = var.identifier }
+  byte_length = 4
 }
 
 resource "aws_db_instance" "this" {
@@ -58,10 +31,6 @@ resource "aws_db_instance" "this" {
   domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  replicate_source_db = var.replicate_source_db
-
-  snapshot_identifier = var.snapshot_identifier
-
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = var.db_subnet_group_name
   parameter_group_name   = var.parameter_group_name
@@ -71,29 +40,31 @@ resource "aws_db_instance" "this" {
   multi_az            = var.multi_az
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
-  monitoring_interval = var.monitoring_interval
-  monitoring_role_arn = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, join(", ", aws_iam_role.enhanced_monitoring.*.arn), null) : null
+  ca_cert_identifier  = var.ca_cert_identifier
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
   apply_immediately           = var.apply_immediately
   maintenance_window          = var.maintenance_window
-  skip_final_snapshot         = var.skip_final_snapshot
-  copy_tags_to_snapshot       = var.copy_tags_to_snapshot
-  final_snapshot_identifier   = var.final_snapshot_identifier
-  max_allocated_storage       = var.max_allocated_storage
+
+  snapshot_identifier   = var.snapshot_identifier
+  copy_tags_to_snapshot = var.copy_tags_to_snapshot
+  skip_final_snapshot   = var.skip_final_snapshot
+  # TODO - remove coalesce() at next breaking change - adding existing name as fallback to maintain backwards compatibility
+  final_snapshot_identifier = var.skip_final_snapshot ? null : coalesce(var.final_snapshot_identifier, "${var.final_snapshot_identifier_prefix}-${var.identifier}-${random_id.snapshot_identifier[0].hex}")
 
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_enabled == true ? var.performance_insights_retention_period : null
   performance_insights_kms_key_id       = var.performance_insights_enabled == true ? var.performance_insights_kms_key_id : null
 
+  replicate_source_db     = var.replicate_source_db
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
+  max_allocated_storage   = var.max_allocated_storage
+  monitoring_interval     = var.monitoring_interval
+  monitoring_role_arn     = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, join(", ", aws_iam_role.enhanced_monitoring.*.arn), null) : null
 
-  character_set_name = var.character_set_name
-
-  ca_cert_identifier = var.ca_cert_identifier
-
+  character_set_name              = var.character_set_name
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
   deletion_protection      = var.deletion_protection
@@ -146,10 +117,6 @@ resource "aws_db_instance" "this_mssql" {
   domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  replicate_source_db = var.replicate_source_db
-
-  snapshot_identifier = var.snapshot_identifier
-
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = var.db_subnet_group_name
   parameter_group_name   = var.parameter_group_name
@@ -159,30 +126,36 @@ resource "aws_db_instance" "this_mssql" {
   multi_az            = var.multi_az
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
-  monitoring_interval = var.monitoring_interval
-  monitoring_role_arn = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null) : null
+  ca_cert_identifier  = var.ca_cert_identifier
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
   apply_immediately           = var.apply_immediately
   maintenance_window          = var.maintenance_window
-  skip_final_snapshot         = var.skip_final_snapshot
-  copy_tags_to_snapshot       = var.copy_tags_to_snapshot
-  final_snapshot_identifier   = var.final_snapshot_identifier
-  max_allocated_storage       = var.max_allocated_storage
+
+  snapshot_identifier   = var.snapshot_identifier
+  copy_tags_to_snapshot = var.copy_tags_to_snapshot
+  skip_final_snapshot   = var.skip_final_snapshot
+  # TODO - remove coalesce() at next breaking change - adding existing name as fallback to maintain backwards compatibility
+  final_snapshot_identifier = var.skip_final_snapshot ? null : coalesce(var.final_snapshot_identifier, "${var.final_snapshot_identifier_prefix}-${var.identifier}-${random_id.snapshot_identifier[0].hex}")
 
   performance_insights_enabled          = var.performance_insights_enabled
-  performance_insights_retention_period = var.performance_insights_enabled == true ? var.performance_insights_retention_period : null
+  performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
+  performance_insights_kms_key_id       = var.performance_insights_enabled ? var.performance_insights_kms_key_id : null
 
+  replicate_source_db     = var.replicate_source_db
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
+  max_allocated_storage   = var.max_allocated_storage
+  monitoring_interval     = var.monitoring_interval
+  monitoring_role_arn     = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null) : null
 
-  character_set_name = var.character_set_name
-  timezone           = var.timezone
-
+  character_set_name              = var.character_set_name
+  timezone                        = var.timezone # MSSQL only
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
-  deletion_protection = var.deletion_protection
+  deletion_protection      = var.deletion_protection
+  delete_automated_backups = var.delete_automated_backups
 
   tags = merge(
     var.tags,
@@ -198,3 +171,40 @@ resource "aws_db_instance" "this_mssql" {
   }
 }
 
+################################################################################
+# Enhanced monitoring
+################################################################################
+
+data "aws_iam_policy_document" "enhanced_monitoring" {
+  statement {
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["monitoring.rds.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "enhanced_monitoring" {
+  count = var.create_monitoring_role ? 1 : 0
+
+  name               = var.monitoring_role_name
+  assume_role_policy = data.aws_iam_policy_document.enhanced_monitoring.json
+
+  tags = merge(
+    {
+      "Name" = format("%s", var.monitoring_role_name)
+    },
+    var.tags,
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
+  count = var.create_monitoring_role ? 1 : 0
+
+  role       = aws_iam_role.enhanced_monitoring[0].name
+  policy_arn = "arn:${var.iam_partition}:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+}

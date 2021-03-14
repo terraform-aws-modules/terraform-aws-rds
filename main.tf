@@ -55,8 +55,9 @@ module "db_option_group" {
 module "db_instance" {
   source = "./modules/db_instance"
 
-  create            = var.create_db_instance
-  identifier        = var.identifier
+  create     = var.create_db_instance
+  identifier = var.identifier
+
   engine            = var.engine
   engine_version    = var.engine_version
   instance_class    = var.instance_class
@@ -74,10 +75,6 @@ module "db_instance" {
   domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  replicate_source_db = var.replicate_source_db
-
-  snapshot_identifier = var.snapshot_identifier
-
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = local.db_subnet_group_name
   parameter_group_name   = local.parameter_group_name_id
@@ -87,21 +84,24 @@ module "db_instance" {
   multi_az            = var.multi_az
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
-
-  ca_cert_identifier = var.ca_cert_identifier
+  ca_cert_identifier  = var.ca_cert_identifier
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
   apply_immediately           = var.apply_immediately
   maintenance_window          = var.maintenance_window
-  skip_final_snapshot         = var.skip_final_snapshot
-  copy_tags_to_snapshot       = var.copy_tags_to_snapshot
-  final_snapshot_identifier   = var.final_snapshot_identifier
+
+  snapshot_identifier              = var.snapshot_identifier
+  copy_tags_to_snapshot            = var.copy_tags_to_snapshot
+  skip_final_snapshot              = var.skip_final_snapshot
+  final_snapshot_identifier        = var.final_snapshot_identifier
+  final_snapshot_identifier_prefix = var.final_snapshot_identifier_prefix
 
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_retention_period
-  performance_insights_kms_key_id       = var.performance_insights_enabled == true ? var.performance_insights_kms_key_id : null
+  performance_insights_kms_key_id       = var.performance_insights_enabled ? var.performance_insights_kms_key_id : null
 
+  replicate_source_db     = var.replicate_source_db
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
   max_allocated_storage   = var.max_allocated_storage
@@ -110,8 +110,8 @@ module "db_instance" {
   monitoring_role_name    = var.monitoring_role_name
   create_monitoring_role  = var.create_monitoring_role
 
-  timezone                        = var.timezone
   character_set_name              = var.character_set_name
+  timezone                        = var.timezone
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
   timeouts = var.timeouts

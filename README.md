@@ -166,6 +166,7 @@ Users have the ability to:
 |------|---------|
 | terraform | >= 0.12.26 |
 | aws | >= 2.49 |
+| random | >= 2.2 |
 
 ## Providers
 
@@ -213,6 +214,7 @@ No resources.
 | engine\_version | The engine version to use | `string` | n/a | yes |
 | family | The family of the DB parameter group | `string` | `""` | no |
 | final\_snapshot\_identifier | The name of your final DB snapshot when this DB instance is deleted. | `string` | `null` | no |
+| final\_snapshot\_identifier\_prefix | The name which is prefixed to the final snapshot on cluster destroy | `string` | `"final"` | no |
 | iam\_database\_authentication\_enabled | Specifies whether or not the mappings of AWS Identity and Access Management (IAM) accounts to database accounts are enabled | `bool` | `false` | no |
 | identifier | The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier | `string` | n/a | yes |
 | instance\_class | The instance type of the RDS instance | `string` | n/a | yes |
@@ -244,7 +246,7 @@ No resources.
 | publicly\_accessible | Bool to control if instance is publicly accessible | `bool` | `false` | no |
 | replicate\_source\_db | Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate. | `string` | `null` | no |
 | s3\_import | Restore from a Percona Xtrabackup in S3 (only MySQL is supported) | `map(string)` | `null` | no |
-| skip\_final\_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final\_snapshot\_identifier | `bool` | `null` | no |
+| skip\_final\_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final\_snapshot\_identifier | `bool` | `false` | no |
 | snapshot\_identifier | Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05. | `string` | `null` | no |
 | storage\_encrypted | Specifies whether the DB instance is encrypted | `bool` | `false` | no |
 | storage\_type | One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'gp2' if not. | `string` | `"gp2"` | no |
