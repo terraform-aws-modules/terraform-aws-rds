@@ -4,14 +4,22 @@ variable "create" {
   default     = true
 }
 
-variable "name_prefix" {
-  description = "Creates a unique name beginning with the specified prefix"
+variable "name" {
+  description = "The name of the DB subnet group"
   type        = string
+  default     = ""
 }
 
-variable "identifier" {
-  description = "The identifier of the resource"
+variable "use_name_prefix" {
+  description = "Determines whether to use `name` as is or create a unique name beginning with `name` as the specified prefix"
+  type        = bool
+  default     = true
+}
+
+variable "description" {
+  description = "The description of the DB subnet group"
   type        = string
+  default     = ""
 }
 
 variable "subnet_ids" {

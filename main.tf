@@ -1,6 +1,5 @@
 locals {
-  create_db_subnet_group = var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
-  db_subnet_group_name   = var.db_subnet_group_name != "" ? var.db_subnet_group_name : module.db_subnet_group.this_db_subnet_group_id
+  db_subnet_group_name = coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)
 
   parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.this_db_parameter_group_id : var.parameter_group_name
 
@@ -11,10 +10,12 @@ locals {
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  create      = local.create_db_subnet_group
-  identifier  = var.identifier
-  name_prefix = "${var.identifier}-"
-  subnet_ids  = var.subnet_ids
+  create = var.create_db_subnet_group
+
+  name            = coalesce(var.db_subnet_group_name, var.identifier)
+  use_name_prefix = var.db_subnet_group_use_name_prefix
+  description     = var.db_subnet_group_description
+  subnet_ids      = var.subnet_ids
 
   tags = var.tags
 }
