@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.28.0"></a>
+## [v2.28.0] - 2021-03-14
+
+- fix: update subnet group to fix name vs name_prefix ([#312](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/312))
+
+
 <a name="v2.27.0"></a>
 ## [v2.27.0] - 2021-03-11
 
@@ -650,7 +656,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.27.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.28.0...HEAD
+[v2.28.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.27.0...v2.28.0
 [v2.27.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.26.0...v2.27.0
 [v2.26.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.25.0...v2.26.0
 [v2.25.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.24.0...v2.25.0
