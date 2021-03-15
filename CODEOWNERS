@@ -1,0 +1,12 @@
+#
+# PlanGrid CODEOWNERS
+# For more information, see Hera and GitHub documentation:
+#    http://docs.planfront.net/docs/hera/en/latest/configuration.html
+#    https://help.github.com/articles/about-codeowners/
+#
+# Infrastructure - Cloud Engineering
+#
+#  Slack: #acs-infra
+#
+# review_type: Random
+* @plangrid/acs-cloud-engineering-reviewers
