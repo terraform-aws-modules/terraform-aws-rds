@@ -1,5 +1,5 @@
 locals {
-  db_subnet_group_name = coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)
+  db_subnet_group_name = var.replicate_source_db != null ? null : coalesce(var.db_subnet_group_name, module.db_subnet_group.this_db_subnet_group_id)
 
   parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.this_db_parameter_group_id : var.parameter_group_name
 
