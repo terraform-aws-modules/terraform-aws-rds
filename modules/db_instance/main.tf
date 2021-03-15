@@ -2,6 +2,9 @@ locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
 }
 
+# Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
+data "aws_partition" "current" {}
+
 resource "random_id" "snapshot_identifier" {
   count = var.create && !var.skip_final_snapshot ? 1 : 0
 
@@ -209,5 +212,5 @@ resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
   count = var.create_monitoring_role ? 1 : 0
 
   role       = aws_iam_role.enhanced_monitoring[0].name
-  policy_arn = "arn:${var.iam_partition}:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+  policy_arn = "arn:${data.aws_partition.current.partition}:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
 }
