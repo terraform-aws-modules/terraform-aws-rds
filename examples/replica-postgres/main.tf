@@ -89,7 +89,8 @@ module "master" {
   port     = local.port
 
   multi_az               = true
-  subnet_ids             = module.vpc.database_subnets
+  create_db_subnet_group = false
+  db_subnet_group_name   = module.vpc.database_subnet_group_name
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
@@ -97,9 +98,9 @@ module "master" {
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
   # Backups are required in order to create a replica
-  backup_retention_period   = 1
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 1
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   tags = local.tags
 }
@@ -127,21 +128,20 @@ module "replica" {
   storage_encrypted     = false
 
   # Username and password should not be set for replicas
-  username = ""
-  password = ""
+  username = null
+  password = null
   port     = local.port
 
   multi_az               = false
-  subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
   maintenance_window              = "Tue:00:00-Tue:03:00"
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
-  backup_retention_period   = 0
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   # Not allowed to specify a subnet group for replicas in the same region
   create_db_subnet_group = false
