@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v2.31.0"></a>
+## [v2.31.0] - 2021-03-16
+
+- chore: correct examples and scenario where replicas are used ([#317](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/317))
+
+
 <a name="v2.30.0"></a>
 ## [v2.30.0] - 2021-03-15
 
@@ -669,7 +675,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.30.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.31.0...HEAD
+[v2.31.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.30.0...v2.31.0
 [v2.30.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.29.0...v2.30.0
 [v2.29.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.28.0...v2.29.0
 [v2.28.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.27.0...v2.28.0
