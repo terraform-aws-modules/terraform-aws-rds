@@ -89,7 +89,8 @@ module "master" {
   port     = local.port
 
   multi_az               = true
-  subnet_ids             = module.vpc.database_subnets
+  create_db_subnet_group = false
+  db_subnet_group_name   = module.vpc.database_subnet_group_name
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
@@ -127,12 +128,11 @@ module "replica" {
   storage_encrypted     = false
 
   # Username and password should not be set for replicas
-  username = ""
-  password = ""
+  username = null
+  password = null
   port     = local.port
 
   multi_az               = false
-  subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
   maintenance_window              = "Tue:00:00-Tue:03:00"
