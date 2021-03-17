@@ -53,6 +53,7 @@ No input.
 
 | Name | Description |
 |------|-------------|
+| this\_db\_enhanced\_monitoring\_iam\_role\_arn | The Amazon Resource Name (ARN) specifying the monitoring role |
 | this\_db\_instance\_address | The address of the RDS instance |
 | this\_db\_instance\_arn | The ARN of the RDS instance |
 | this\_db\_instance\_availability\_zone | The availability zone of the RDS instance |

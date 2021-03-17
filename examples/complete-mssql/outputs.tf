@@ -88,3 +88,8 @@ output "this_db_instance_domain_iam_role_name" {
   description = "The name of the IAM role to be used when making API calls to the Directory Service. "
   value       = module.db.this_db_instance_domain_iam_role_name
 }
+
+output "this_db_enhanced_monitoring_iam_role_arn" {
+  description = "The Amazon Resource Name (ARN) specifying the monitoring role"
+  value       = module.db.enhanced_monitoring_iam_role_arn
+}
