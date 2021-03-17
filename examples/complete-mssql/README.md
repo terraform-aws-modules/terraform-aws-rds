@@ -33,7 +33,6 @@ Note that this example may create resources which cost money. Run `terraform des
 | Name | Source | Version |
 |------|--------|---------|
 | db | ../../ |  |
-| db_random_password | ../../ |  |
 | security_group | terraform-aws-modules/security-group/aws | ~> 3 |
 | vpc | terraform-aws-modules/vpc/aws | ~> 2 |
 

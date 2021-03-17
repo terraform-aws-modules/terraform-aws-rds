@@ -125,10 +125,11 @@ module "db" {
   max_allocated_storage = 100
   storage_encrypted     = false
 
-  name     = null
-  username = "complete_mssql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 1433
+  name                   = null
+  username               = "complete_mssql"
+  create_random_password = true
+  random_password_length = 12
+  port                   = 1433
 
   domain               = aws_directory_service_directory.demo.id
   domain_iam_role_name = aws_iam_role.rds_ad_auth.name
@@ -154,54 +155,6 @@ module "db" {
   license_model             = "license-included"
   timezone                  = "GMT Standard Time"
   character_set_name        = "Latin1_General_CI_AS"
-
-  tags = local.tags
-}
-
-module "db_random_password" {
-  source = "../../"
-
-  identifier = local.name
-
-  engine               = "sqlserver-ex"
-  engine_version       = "15.00.4073.23.v1"
-  family               = "sqlserver-ex-15.0" # DB parameter group
-  major_engine_version = "15.00"             # DB option group
-  instance_class       = "db.t3.large"
-
-  allocated_storage     = 20
-  max_allocated_storage = 100
-  storage_encrypted     = false
-
-  name                   = null
-  username               = "complete_mssql"
-  create_random_password = true
-  random_password_length = 12
-  port                   = 1433
-
-  domain               = aws_directory_service_directory.demo.id
-  domain_iam_role_name = aws_iam_role.rds_ad_auth.name
-
-  multi_az               = false
-  subnet_ids             = module.vpc.database_subnets
-  vpc_security_group_ids = [module.security_group.this_security_group_id]
-
-  maintenance_window              = "Mon:00:00-Mon:03:00"
-  backup_window                   = "03:00-06:00"
-  enabled_cloudwatch_logs_exports = ["error"]
-
-  backup_retention_period   = 0
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
-
-  performance_insights_enabled          = true
-  performance_insights_retention_period = 7
-  create_monitoring_role                = true
-
-  options                   = []
-  create_db_parameter_group = false
-  license_model             = "license-included"
-  timezone                  = "GMT Standard Time"
 
   tags = local.tags
 }
