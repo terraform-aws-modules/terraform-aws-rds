@@ -10,16 +10,16 @@ locals {
     Environment = "dev"
   }
   db_instance_tags = {
-    "Name": "dev-db-instance"
+    "Sensitive": "high"
   }
   db_option_group_tags = {
-    "Name": "dev-db-option-group"
+    "Sensitive": "low"
   }
   db_parameter_group_tags = {
-    "Name": "dev-db-parameter-group"
+    "Sensitive": "low"
   }
   db_subnet_group_tags = {
-    "Name": "dev-db-subnet-group"
+    "Sensitive": "high"
   }
 }
 
@@ -125,7 +125,7 @@ module "db" {
   tags = local.tags
   db_instance_tags = local.db_instance_tags
   db_option_group_tags = local.db_option_group_tags
-  db_subnet_group_tags = local.db_option_group_tags
+  db_subnet_group_tags = local.db_subnet_group_tags
   db_parameter_group_tags = local.db_parameter_group_tags
 }
 
