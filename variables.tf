@@ -115,6 +115,7 @@ variable "username" {
 variable "password" {
   description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
+  default     = ""
 }
 
 variable "port" {
@@ -409,4 +410,16 @@ variable "delete_automated_backups" {
   description = "Specifies whether to remove automated backups immediately after the DB instance is deleted"
   type        = bool
   default     = true
+}
+
+variable "create_random_password" {
+  description = "Whether to create random password for RDS primary cluster"
+  type        = bool
+  default     = false
+}
+
+variable "random_password_length" {
+  description = "(Optional) Length of random password to create. (default: 10)"
+  type        = number
+  default     = 10
 }

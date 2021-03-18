@@ -125,10 +125,11 @@ module "db" {
   max_allocated_storage = 100
   storage_encrypted     = false
 
-  name     = null
-  username = "complete_mssql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 1433
+  name                   = null
+  username               = "complete_mssql"
+  create_random_password = true
+  random_password_length = 12
+  port                   = 1433
 
   domain               = aws_directory_service_directory.demo.id
   domain_iam_role_name = aws_iam_role.rds_ad_auth.name

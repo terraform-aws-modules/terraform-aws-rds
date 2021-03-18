@@ -127,10 +127,11 @@ module "db_default" {
 
   allocated_storage = 20
 
-  name     = "completeMysql"
-  username = "complete_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 3306
+  name                   = "completeMysql"
+  username               = "complete_mysql"
+  create_random_password = true
+  random_password_length = 12
+  port                   = 3306
 
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.this_security_group_id]
