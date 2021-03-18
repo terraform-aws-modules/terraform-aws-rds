@@ -223,6 +223,30 @@ variable "tags" {
   default     = {}
 }
 
+variable "db_instance_tags" {
+  description = "A mapping of tags to assign to DB instance. It will be merged in `var.tags`."
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_option_group_tags" {
+  description = "A mapping of tags to assign to DB option group. It will be merged in `var.tags`."
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_parameter_group_tags" {
+  description = "A mapping of tags to assign to DB parameter group. It will be merged in `var.tags`."
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_subnet_group_tags" {
+  description = "A mapping of tags to assign to DB subnet group tags. It will be merged in `var.tags`."
+  type        = map(string)
+  default     = {}
+}
+
 # DB subnet group
 variable "create_db_subnet_group" {
   description = "Whether to create a database subnet group"
