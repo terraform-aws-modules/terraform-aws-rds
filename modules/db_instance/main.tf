@@ -1,5 +1,7 @@
 locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
+
+  monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
@@ -68,7 +70,7 @@ resource "aws_db_instance" "this" {
   backup_window           = var.backup_window
   max_allocated_storage   = var.max_allocated_storage
   monitoring_interval     = var.monitoring_interval
-  monitoring_role_arn     = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, join(", ", aws_iam_role.enhanced_monitoring.*.arn), null) : null
+  monitoring_role_arn     = var.monitoring_interval > 0 ? local.monitoring_role_arn : null
 
   character_set_name              = var.character_set_name
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
@@ -154,7 +156,7 @@ resource "aws_db_instance" "this_mssql" {
   backup_window           = var.backup_window
   max_allocated_storage   = var.max_allocated_storage
   monitoring_interval     = var.monitoring_interval
-  monitoring_role_arn     = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null) : null
+  monitoring_role_arn     = var.monitoring_interval > 0 ? local.monitoring_role_arn : null
 
   character_set_name              = var.character_set_name
   timezone                        = var.timezone # MSSQL only

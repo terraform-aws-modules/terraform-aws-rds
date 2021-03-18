@@ -79,6 +79,11 @@ output "this_db_parameter_group_arn" {
   value       = module.db.this_db_parameter_group_arn
 }
 
+output "this_db_enhanced_monitoring_iam_role_arn" {
+  description = "The Amazon Resource Name (ARN) specifying the monitoring role"
+  value       = module.db.enhanced_monitoring_iam_role_arn
+}
+
 # Default
 output "db_default_instance_address" {
   description = "The address of the RDS instance"
