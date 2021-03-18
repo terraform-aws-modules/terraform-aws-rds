@@ -215,11 +215,13 @@ Users have the ability to:
 |------|---------|
 | terraform | >= 0.12.26 |
 | aws | >= 2.49 |
-| random | >= 2.2 |
+| random | >= 3.1 |
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| random | >= 3.1 |
 
 ## Modules
 
@@ -232,7 +234,9 @@ No provider.
 
 ## Resources
 
-No resources.
+| Name |
+|------|
+| [random_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) |
 
 ## Inputs
 
@@ -253,6 +257,7 @@ No resources.
 | create\_db\_parameter\_group | Whether to create a database parameter group | `bool` | `true` | no |
 | create\_db\_subnet\_group | Whether to create a database subnet group | `bool` | `true` | no |
 | create\_monitoring\_role | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. | `bool` | `false` | no |
+| create\_random\_password | Whether to create random password for RDS primary cluster | `bool` | `false` | no |
 | db\_subnet\_group\_description | Description of the DB subnet group to create | `string` | `""` | no |
 | db\_subnet\_group\_name | Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC | `string` | `null` | no |
 | db\_subnet\_group\_use\_name\_prefix | Determines whether to use `subnet_group_name` as is or create a unique name beginning with the `subnet_group_name` as the prefix | `bool` | `true` | no |
@@ -289,12 +294,13 @@ No resources.
 | parameter\_group\_name | Name of the DB parameter group to associate or create | `string` | `null` | no |
 | parameter\_group\_use\_name\_prefix | Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix | `bool` | `true` | no |
 | parameters | A list of DB parameters (map) to apply | `list(map(string))` | `[]` | no |
-| password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | `string` | n/a | yes |
+| password | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file | `string` | `""` | no |
 | performance\_insights\_enabled | Specifies whether Performance Insights are enabled | `bool` | `false` | no |
 | performance\_insights\_kms\_key\_id | The ARN for the KMS key to encrypt Performance Insights data. | `string` | `null` | no |
 | performance\_insights\_retention\_period | The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years). | `number` | `7` | no |
 | port | The port on which the DB accepts connections | `string` | n/a | yes |
 | publicly\_accessible | Bool to control if instance is publicly accessible | `bool` | `false` | no |
+| random\_password\_length | (Optional) Length of random password to create. (default: 10) | `number` | `10` | no |
 | replicate\_source\_db | Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate. | `string` | `null` | no |
 | s3\_import | Restore from a Percona Xtrabackup in S3 (only MySQL is supported) | `map(string)` | `null` | no |
 | skip\_final\_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final\_snapshot\_identifier | `bool` | `false` | no |
@@ -329,6 +335,7 @@ No resources.
 | this\_db\_instance\_resource\_id | The RDS Resource ID of this instance |
 | this\_db\_instance\_status | The RDS instance status |
 | this\_db\_instance\_username | The master username for the database |
+| this\_db\_master\_password | The master password |
 | this\_db\_option\_group\_arn | The ARN of the db option group |
 | this\_db\_option\_group\_id | The db option group id |
 | this\_db\_parameter\_group\_arn | The ARN of the db parameter group |

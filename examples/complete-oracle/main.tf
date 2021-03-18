@@ -75,10 +75,11 @@ module "db" {
   storage_encrypted     = false
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
-  name     = "COMPLETEORACLE"
-  username = "complete_oracle"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 1521
+  name                   = "COMPLETEORACLE"
+  username               = "complete_oracle"
+  create_random_password = true
+  random_password_length = 12
+  port                   = 1521
 
   multi_az               = true
   subnet_ids             = module.vpc.database_subnets
