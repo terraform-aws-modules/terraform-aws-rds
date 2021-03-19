@@ -223,6 +223,30 @@ variable "tags" {
   default     = {}
 }
 
+variable "db_instance_tags" {
+  description = "Additional tags for the DB instance"
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_option_group_tags" {
+  description = "Additional tags for the DB option group"
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_parameter_group_tags" {
+  description = "Additional tags for the  DB parameter group"
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_subnet_group_tags" {
+  description = "Additional tags for the DB subnet group"
+  type        = map(string)
+  default     = {}
+}
+
 # DB subnet group
 variable "create_db_subnet_group" {
   description = "Whether to create a database subnet group"

@@ -108,6 +108,18 @@ module "db" {
   ]
 
   tags = local.tags
+  db_instance_tags = {
+    "Sensitive" = "high"
+  }
+  db_option_group_tags = {
+    "Sensitive" = "low"
+  }
+  db_parameter_group_tags = {
+    "Sensitive" = "low"
+  }
+  db_subnet_group_tags = {
+    "Sensitive" = "high"
+  }
 }
 
 module "db_default" {
