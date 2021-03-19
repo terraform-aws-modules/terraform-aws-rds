@@ -14,16 +14,6 @@
 |------|---------|
 | aws | >= 2.49 |
 
-## Modules
-
-No Modules.
-
-## Resources
-
-| Name |
-|------|
-| [aws_db_option_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_option_group) |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -44,4 +34,5 @@ No Modules.
 |------|-------------|
 | this\_db\_option\_group\_arn | The ARN of the db option group |
 | this\_db\_option\_group\_id | The db option group id |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

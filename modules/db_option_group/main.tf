@@ -2,7 +2,7 @@ locals {
   name        = var.use_name_prefix ? null : var.name
   name_prefix = var.use_name_prefix ? "${var.name}-" : null
 
-  description = coalesce(var.option_group_description, format("%s option group", var.name))
+  description = var.option_group_description
 }
 
 resource "aws_db_option_group" "this" {
