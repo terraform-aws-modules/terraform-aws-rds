@@ -223,21 +223,6 @@ Users have the ability to:
 |------|---------|
 | random | >= 3.1 |
 
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| db_instance | ./modules/db_instance |  |
-| db_option_group | ./modules/db_option_group |  |
-| db_parameter_group | ./modules/db_parameter_group |  |
-| db_subnet_group | ./modules/db_subnet_group |  |
-
-## Resources
-
-| Name |
-|------|
-| [random_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) |
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -342,6 +327,7 @@ Users have the ability to:
 | this\_db\_parameter\_group\_id | The db parameter group id |
 | this\_db\_subnet\_group\_arn | The ARN of the db subnet group |
 | this\_db\_subnet\_group\_id | The db subnet group name |
+
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors

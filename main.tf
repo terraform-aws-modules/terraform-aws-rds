@@ -4,7 +4,7 @@ locals {
 
   parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.this_db_parameter_group_id : var.parameter_group_name
 
-  create_db_option_group = var.create_db_option_group && var.engine != "postgres"
+  create_db_option_group = var.create_db_option_group
   option_group           = local.create_db_option_group ? module.db_option_group.this_db_option_group_id : var.option_group_name
 }
 
