@@ -90,18 +90,19 @@ module "db" {
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
-  backup_retention_period   = 0
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   performance_insights_enabled          = true
   performance_insights_retention_period = 7
   create_monitoring_role                = true
+  monitoring_interval                   = 60
 
   parameters = [
     {
       name  = "autovacuum"
-      value = true
+      value = 1
     },
     {
       name  = "client_encoding"
@@ -110,6 +111,15 @@ module "db" {
   ]
 
   tags = local.tags
+  db_option_group_tags = {
+    "Sensitive" = "low"
+  }
+  db_parameter_group_tags = {
+    "Sensitive" = "low"
+  }
+  db_subnet_group_tags = {
+    "Sensitive" = "high"
+  }
 }
 
 
@@ -133,10 +143,11 @@ module "db_default" {
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  name     = "completePostgresql"
-  username = "complete_postgresql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 5432
+  name                   = "completePostgresql"
+  username               = "complete_postgresql"
+  create_random_password = true
+  random_password_length = 12
+  port                   = 5432
 
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.this_security_group_id]

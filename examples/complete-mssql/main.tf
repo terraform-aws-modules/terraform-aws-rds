@@ -125,10 +125,11 @@ module "db" {
   max_allocated_storage = 100
   storage_encrypted     = false
 
-  name     = null
-  username = "complete_mssql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 1433
+  name                   = null
+  username               = "complete_mssql"
+  create_random_password = true
+  random_password_length = 12
+  port                   = 1433
 
   domain               = aws_directory_service_directory.demo.id
   domain_iam_role_name = aws_iam_role.rds_ad_auth.name
@@ -141,13 +142,14 @@ module "db" {
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["error"]
 
-  backup_retention_period   = 0
-  final_snapshot_identifier = local.name
-  deletion_protection       = false
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
   performance_insights_enabled          = true
   performance_insights_retention_period = 7
   create_monitoring_role                = true
+  monitoring_interval                   = 60
 
   options                   = []
   create_db_parameter_group = false

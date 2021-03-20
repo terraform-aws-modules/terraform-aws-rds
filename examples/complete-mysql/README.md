@@ -63,6 +63,7 @@ No input.
 | db\_default\_parameter\_group\_id | The db parameter group id |
 | db\_default\_subnet\_group\_arn | The ARN of the db subnet group |
 | db\_default\_subnet\_group\_id | The db subnet group name |
+| this\_db\_enhanced\_monitoring\_iam\_role\_arn | The Amazon Resource Name (ARN) specifying the monitoring role |
 | this\_db\_instance\_address | The address of the RDS instance |
 | this\_db\_instance\_arn | The ARN of the RDS instance |
 | this\_db\_instance\_availability\_zone | The availability zone of the RDS instance |
