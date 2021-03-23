@@ -123,6 +123,12 @@ variable "port" {
   type        = string
 }
 
+variable "security_group_names" {
+  description = "(Optional/Deprecated) List of DB Security Groups to associate. Only used for DB Instances on the EC2-Classic Platform."
+  type        = list(string)
+  default     = []
+}
+
 variable "vpc_security_group_ids" {
   description = "List of VPC security groups to associate"
   type        = list(string)

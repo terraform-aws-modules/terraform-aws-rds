@@ -80,6 +80,7 @@ No Modules.
 | publicly\_accessible | Bool to control if instance is publicly accessible | `bool` | `false` | no |
 | replicate\_source\_db | Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate. | `string` | `null` | no |
 | s3\_import | Restore from a Percona Xtrabackup in S3 (only MySQL is supported) | `map(string)` | `null` | no |
+| security\_group\_names | (Optional/Deprecated) List of DB Security Groups to associate. Only used for DB Instances on the EC2-Classic Platform. | `list(string)` | `[]` | no |
 | skip\_final\_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final\_snapshot\_identifier | `bool` | `false` | no |
 | snapshot\_identifier | Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05. | `string` | `null` | no |
 | storage\_encrypted | Specifies whether the DB instance is encrypted | `bool` | `false` | no |
