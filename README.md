@@ -2,13 +2,6 @@
 
 Terraform module which creates RDS resources on AWS.
 
-These types of resources are supported:
-
-- [DB Instance](https://www.terraform.io/docs/providers/aws/r/db_instance.html)
-- [DB Subnet Group](https://www.terraform.io/docs/providers/aws/r/db_subnet_group.html)
-- [DB Parameter Group](https://www.terraform.io/docs/providers/aws/r/db_parameter_group.html)
-- [DB Option Group](https://www.terraform.io/docs/providers/aws/r/db_option_group.html)
-
 Root module calls these modules which can also be used separately to create independent resources:
 
 - [db_instance](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_instance) - creates RDS DB instance
