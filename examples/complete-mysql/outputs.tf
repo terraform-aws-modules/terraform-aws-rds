@@ -46,6 +46,7 @@ output "this_db_instance_name" {
 output "this_db_instance_username" {
   description = "The master username for the database"
   value       = module.db.this_db_instance_username
+  sensitive   = true
 }
 
 output "this_db_instance_password" {
@@ -133,6 +134,7 @@ output "db_default_instance_name" {
 output "db_default_instance_username" {
   description = "The master username for the database"
   value       = module.db_default.this_db_instance_username
+  sensitive   = true
 }
 
 output "db_default_instance_password" {

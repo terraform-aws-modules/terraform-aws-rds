@@ -47,6 +47,7 @@ output "master_db_instance_name" {
 output "master_db_instance_username" {
   description = "The master username for the database"
   value       = module.master.this_db_instance_username
+  sensitive   = true
 }
 
 output "master_db_instance_password" {
@@ -119,6 +120,7 @@ output "replica_db_instance_name" {
 output "replica_db_instance_username" {
   description = "The replica username for the database"
   value       = module.replica.this_db_instance_username
+  sensitive   = true
 }
 
 output "replica_db_instance_port" {
