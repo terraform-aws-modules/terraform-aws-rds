@@ -21,7 +21,7 @@ resource "random_pet" "this" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.0.0.0/18"
@@ -35,14 +35,13 @@ module "vpc" {
 
   enable_dns_hostnames = true
   enable_dns_support   = true
-  enable_s3_endpoint   = true
 
   tags = local.tags
 }
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3"
+  version = "~> 3.0"
 
   name        = local.name
   description = "S3 import VPC example security group"
@@ -83,7 +82,7 @@ module "security_group" {
 
 module "import_s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 1"
+  version = "~> 2.0"
 
   bucket        = "${local.name}-${random_pet.this.id}"
   acl           = "private"
@@ -122,7 +121,7 @@ data "aws_iam_policy_document" "s3_import" {
     ]
 
     resources = [
-      module.import_s3_bucket.this_s3_bucket_arn
+      module.import_s3_bucket.s3_bucket_arn
     ]
   }
 
@@ -132,7 +131,7 @@ data "aws_iam_policy_document" "s3_import" {
     ]
 
     resources = [
-      "${module.import_s3_bucket.this_s3_bucket_arn}/*",
+      "${module.import_s3_bucket.s3_bucket_arn}/*",
     ]
   }
 }
@@ -146,7 +145,7 @@ resource "aws_iam_role_policy" "s3_import" {
   # also needs this role so this is an easy way of ensuring the backup is uploaded before
   # the instance creation starts
   provisioner "local-exec" {
-    command = "unzip backup.zip && aws s3 sync ${path.module}/backup s3://${module.import_s3_bucket.this_s3_bucket_id}"
+    command = "unzip backup.zip && aws s3 sync ${path.module}/backup s3://${module.import_s3_bucket.s3_bucket_id}"
   }
 }
 
@@ -178,7 +177,7 @@ module "db" {
   # S3 import https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
   s3_import = {
     source_engine_version = "8.0.20"
-    bucket_name           = module.import_s3_bucket.this_s3_bucket_id
+    bucket_name           = module.import_s3_bucket.s3_bucket_id
     ingestion_role        = aws_iam_role.s3_import.arn
   }
 

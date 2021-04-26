@@ -42,6 +42,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_this_db_option_group_arn"></a> [this\_db\_option\_group\_arn](#output\_this\_db\_option\_group\_arn) | The ARN of the db option group |
-| <a name="output_this_db_option_group_id"></a> [this\_db\_option\_group\_id](#output\_this\_db\_option\_group\_id) | The db option group id |
+| <a name="output_db_option_group_arn"></a> [db\_option\_group\_arn](#output\_db\_option\_group\_arn) | The ARN of the db option group |
+| <a name="output_db_option_group_id"></a> [db\_option\_group\_id](#output\_db\_option\_group\_id) | The db option group id |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
