@@ -40,6 +40,6 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_this_db_parameter_group_arn"></a> [this\_db\_parameter\_group\_arn](#output\_this\_db\_parameter\_group\_arn) | The ARN of the db parameter group |
-| <a name="output_this_db_parameter_group_id"></a> [this\_db\_parameter\_group\_id](#output\_this\_db\_parameter\_group\_id) | The db parameter group id |
+| <a name="output_db_parameter_group_arn"></a> [db\_parameter\_group\_arn](#output\_db\_parameter\_group\_arn) | The ARN of the db parameter group |
+| <a name="output_db_parameter_group_id"></a> [db\_parameter\_group\_id](#output\_db\_parameter\_group\_id) | The db parameter group id |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

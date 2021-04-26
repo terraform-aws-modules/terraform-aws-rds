@@ -95,21 +95,21 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_db_instance_address"></a> [db\_instance\_address](#output\_db\_instance\_address) | The address of the RDS instance |
+| <a name="output_db_instance_arn"></a> [db\_instance\_arn](#output\_db\_instance\_arn) | The ARN of the RDS instance |
+| <a name="output_db_instance_availability_zone"></a> [db\_instance\_availability\_zone](#output\_db\_instance\_availability\_zone) | The availability zone of the RDS instance |
+| <a name="output_db_instance_ca_cert_identifier"></a> [db\_instance\_ca\_cert\_identifier](#output\_db\_instance\_ca\_cert\_identifier) | Specifies the identifier of the CA certificate for the DB instance |
+| <a name="output_db_instance_domain"></a> [db\_instance\_domain](#output\_db\_instance\_domain) | The ID of the Directory Service Active Directory domain the instance is joined to |
+| <a name="output_db_instance_domain_iam_role_name"></a> [db\_instance\_domain\_iam\_role\_name](#output\_db\_instance\_domain\_iam\_role\_name) | The name of the IAM role to be used when making API calls to the Directory Service. |
+| <a name="output_db_instance_endpoint"></a> [db\_instance\_endpoint](#output\_db\_instance\_endpoint) | The connection endpoint |
+| <a name="output_db_instance_hosted_zone_id"></a> [db\_instance\_hosted\_zone\_id](#output\_db\_instance\_hosted\_zone\_id) | The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record) |
+| <a name="output_db_instance_id"></a> [db\_instance\_id](#output\_db\_instance\_id) | The RDS instance ID |
+| <a name="output_db_instance_master_password"></a> [db\_instance\_master\_password](#output\_db\_instance\_master\_password) | The master password |
+| <a name="output_db_instance_name"></a> [db\_instance\_name](#output\_db\_instance\_name) | The database name |
+| <a name="output_db_instance_port"></a> [db\_instance\_port](#output\_db\_instance\_port) | The database port |
+| <a name="output_db_instance_resource_id"></a> [db\_instance\_resource\_id](#output\_db\_instance\_resource\_id) | The RDS Resource ID of this instance |
+| <a name="output_db_instance_status"></a> [db\_instance\_status](#output\_db\_instance\_status) | The RDS instance status |
+| <a name="output_db_instance_username"></a> [db\_instance\_username](#output\_db\_instance\_username) | The master username for the database |
 | <a name="output_enhanced_monitoring_iam_role_arn"></a> [enhanced\_monitoring\_iam\_role\_arn](#output\_enhanced\_monitoring\_iam\_role\_arn) | The Amazon Resource Name (ARN) specifying the monitoring role |
 | <a name="output_enhanced_monitoring_iam_role_name"></a> [enhanced\_monitoring\_iam\_role\_name](#output\_enhanced\_monitoring\_iam\_role\_name) | The name of the monitoring role |
-| <a name="output_this_db_instance_address"></a> [this\_db\_instance\_address](#output\_this\_db\_instance\_address) | The address of the RDS instance |
-| <a name="output_this_db_instance_arn"></a> [this\_db\_instance\_arn](#output\_this\_db\_instance\_arn) | The ARN of the RDS instance |
-| <a name="output_this_db_instance_availability_zone"></a> [this\_db\_instance\_availability\_zone](#output\_this\_db\_instance\_availability\_zone) | The availability zone of the RDS instance |
-| <a name="output_this_db_instance_ca_cert_identifier"></a> [this\_db\_instance\_ca\_cert\_identifier](#output\_this\_db\_instance\_ca\_cert\_identifier) | Specifies the identifier of the CA certificate for the DB instance |
-| <a name="output_this_db_instance_domain"></a> [this\_db\_instance\_domain](#output\_this\_db\_instance\_domain) | The ID of the Directory Service Active Directory domain the instance is joined to |
-| <a name="output_this_db_instance_domain_iam_role_name"></a> [this\_db\_instance\_domain\_iam\_role\_name](#output\_this\_db\_instance\_domain\_iam\_role\_name) | The name of the IAM role to be used when making API calls to the Directory Service. |
-| <a name="output_this_db_instance_endpoint"></a> [this\_db\_instance\_endpoint](#output\_this\_db\_instance\_endpoint) | The connection endpoint |
-| <a name="output_this_db_instance_hosted_zone_id"></a> [this\_db\_instance\_hosted\_zone\_id](#output\_this\_db\_instance\_hosted\_zone\_id) | The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record) |
-| <a name="output_this_db_instance_id"></a> [this\_db\_instance\_id](#output\_this\_db\_instance\_id) | The RDS instance ID |
-| <a name="output_this_db_instance_master_password"></a> [this\_db\_instance\_master\_password](#output\_this\_db\_instance\_master\_password) | The master password |
-| <a name="output_this_db_instance_name"></a> [this\_db\_instance\_name](#output\_this\_db\_instance\_name) | The database name |
-| <a name="output_this_db_instance_port"></a> [this\_db\_instance\_port](#output\_this\_db\_instance\_port) | The database port |
-| <a name="output_this_db_instance_resource_id"></a> [this\_db\_instance\_resource\_id](#output\_this\_db\_instance\_resource\_id) | The RDS Resource ID of this instance |
-| <a name="output_this_db_instance_status"></a> [this\_db\_instance\_status](#output\_this\_db\_instance\_status) | The RDS instance status |
-| <a name="output_this_db_instance_username"></a> [this\_db\_instance\_username](#output\_this\_db\_instance\_username) | The master username for the database |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

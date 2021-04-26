@@ -27,7 +27,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -44,7 +44,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3"
+  version = "~> 3.0"
 
   name        = local.name
   description = "Replica PostgreSQL example security group"
@@ -114,8 +114,8 @@ module "replica" {
 
   identifier = "${local.name}-replica"
 
-  # Source database. For cross-region use this_db_instance_arn
-  replicate_source_db = module.master.this_db_instance_id
+  # Source database. For cross-region use db_instance_arn
+  replicate_source_db = module.master.db_instance_id
 
   engine               = local.engine
   engine_version       = local.engine_version
