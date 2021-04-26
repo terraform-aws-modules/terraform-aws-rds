@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.0.0"></a>
+## [v3.0.0] - 2021-04-26
+
+- feat: Shorten outputs (removing this_) ([#330](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/330))
+
+
 <a name="v2.35.0"></a>
 ## [v2.35.0] - 2021-04-24
 
@@ -719,7 +725,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.35.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.0.0...HEAD
+[v3.0.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.35.0...v3.0.0
 [v2.35.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.34.0...v2.35.0
 [v2.34.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.33.0...v2.34.0
 [v2.33.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.32.0...v2.33.0
