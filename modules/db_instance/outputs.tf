@@ -71,6 +71,7 @@ output "db_instance_status" {
 output "db_instance_name" {
   description = "The database name"
   value       = local.db_instance_name
+  sensitive   = true
 }
 
 output "db_instance_username" {
