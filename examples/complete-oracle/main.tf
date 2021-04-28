@@ -1,72 +1,104 @@
 provider "aws" {
+  region = local.region
+}
+
+locals {
+  name   = "complete-oracle"
   region = "eu-west-1"
+  tags = {
+    Owner       = "user"
+    Environment = "dev"
+  }
 }
 
-##############################################################
-# Data sources to get VPC, subnets and security group details
-##############################################################
-data "aws_vpc" "default" {
-  default = true
+################################################################################
+# Supporting Resources
+################################################################################
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2"
+
+  name = local.name
+  cidr = "10.99.0.0/18"
+
+  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
+  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
+  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+
+  create_database_subnet_group = true
+
+  tags = local.tags
 }
 
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3"
+
+  name        = local.name
+  description = "Complete Oracle example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 1521
+      to_port     = 1521
+      protocol    = "tcp"
+      description = "Oracle access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  tags = local.tags
 }
 
-data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
-  name   = "default"
-}
+################################################################################
+# RDS Module
+################################################################################
 
-#####
-# DB
-#####
 module "db" {
   source = "../../"
 
   identifier = "demodb-oracle"
 
-  engine            = "oracle-ee"
-  engine_version    = "12.1.0.2.v8"
-  instance_class    = "db.t2.large"
-  allocated_storage = 10
-  storage_encrypted = false
-  license_model     = "bring-your-own-license"
+  engine               = "oracle-ee"
+  engine_version       = "12.1.0.2.v8"
+  family               = "oracle-ee-12.1" # DB parameter group
+  major_engine_version = "12.1"           # DB option group
+  instance_class       = "db.t3.large"
+  license_model        = "bring-your-own-license"
+
+  allocated_storage     = 20
+  max_allocated_storage = 100
+  storage_encrypted     = false
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
-  name                                = "DEMODB"
-  username                            = "something_like_user"
-  password                            = "YourPwdShouldBeLongAndSecure!"
-  port                                = "1521"
-  iam_database_authentication_enabled = false
+  name                   = "COMPLETEORACLE"
+  username               = "complete_oracle"
+  create_random_password = true
+  random_password_length = 12
+  port                   = 1521
 
-  vpc_security_group_ids = [data.aws_security_group.default.id]
-  maintenance_window     = "Mon:00:00-Mon:03:00"
-  backup_window          = "03:00-06:00"
+  multi_az               = true
+  subnet_ids             = module.vpc.database_subnets
+  vpc_security_group_ids = [module.security_group.this_security_group_id]
 
-  # disable backups to create DB faster
+  maintenance_window              = "Mon:00:00-Mon:03:00"
+  backup_window                   = "03:00-06:00"
+  enabled_cloudwatch_logs_exports = ["alert", "audit"]
+
   backup_retention_period = 0
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
-  tags = {
-    Owner       = "user"
-    Environment = "dev"
-  }
-
-  # DB subnet group
-  subnet_ids = data.aws_subnet_ids.all.ids
-
-  # DB parameter group
-  family = "oracle-ee-12.1"
-
-  # DB option group
-  major_engine_version = "12.1"
-
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = "demodb"
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  create_monitoring_role                = true
 
   # See here for support character sets https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html
   character_set_name = "AL32UTF8"
 
-  # Database Deletion Protection
-  deletion_protection = false
+  tags = local.tags
 }

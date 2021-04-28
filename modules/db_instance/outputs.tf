@@ -15,6 +15,7 @@ locals {
   this_db_instance_ca_cert_identifier   = element(concat(aws_db_instance.this_mssql.*.ca_cert_identifier, aws_db_instance.this.*.ca_cert_identifier, [""]), 0)
   this_db_instance_domain               = element(concat(aws_db_instance.this_mssql.*.domain, [""]), 0)
   this_db_instance_domain_iam_role_name = element(concat(aws_db_instance.this_mssql.*.domain_iam_role_name, [""]), 0)
+  this_db_instance_master_password      = element(concat(aws_db_instance.this_mssql.*.password, aws_db_instance.this.*.password, [""]), 0)
 }
 
 output "enhanced_monitoring_iam_role_name" {
@@ -75,6 +76,7 @@ output "this_db_instance_name" {
 output "this_db_instance_username" {
   description = "The master username for the database"
   value       = local.this_db_instance_username
+  sensitive   = true
 }
 
 output "this_db_instance_port" {
@@ -95,4 +97,10 @@ output "this_db_instance_domain" {
 output "this_db_instance_domain_iam_role_name" {
   description = "The name of the IAM role to be used when making API calls to the Directory Service. "
   value       = local.this_db_instance_domain_iam_role_name
+}
+
+output "this_db_instance_master_password" {
+  description = "The master password"
+  value       = local.this_db_instance_master_password
+  sensitive   = true
 }

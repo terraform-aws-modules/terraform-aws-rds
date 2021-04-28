@@ -4,14 +4,16 @@ variable "create" {
   default     = true
 }
 
-variable "name_prefix" {
-  description = "Creates a unique name beginning with the specified prefix"
+variable "name" {
+  description = "The name of the option group"
   type        = string
+  default     = ""
 }
 
-variable "identifier" {
-  description = "The identifier of the resource"
-  type        = string
+variable "use_name_prefix" {
+  description = "Determines whether to use `name` as is or create a unique name beginning with `name` as the specified prefix"
+  type        = bool
+  default     = true
 }
 
 variable "option_group_description" {

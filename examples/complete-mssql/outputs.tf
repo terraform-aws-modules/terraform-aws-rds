@@ -46,11 +46,13 @@ output "this_db_instance_name" {
 output "this_db_instance_username" {
   description = "The master username for the database"
   value       = module.db.this_db_instance_username
+  sensitive   = true
 }
 
 output "this_db_instance_password" {
   description = "The database password (this password may be old, because Terraform doesn't track it after initial creation)"
   value       = module.db.this_db_instance_password
+  sensitive   = true
 }
 
 output "this_db_instance_port" {
@@ -86,4 +88,9 @@ output "this_db_instance_domain" {
 output "this_db_instance_domain_iam_role_name" {
   description = "The name of the IAM role to be used when making API calls to the Directory Service. "
   value       = module.db.this_db_instance_domain_iam_role_name
+}
+
+output "this_db_enhanced_monitoring_iam_role_arn" {
+  description = "The Amazon Resource Name (ARN) specifying the monitoring role"
+  value       = module.db.enhanced_monitoring_iam_role_arn
 }

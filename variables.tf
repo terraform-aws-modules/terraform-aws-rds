@@ -9,9 +9,9 @@ variable "allocated_storage" {
 }
 
 variable "storage_type" {
-  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'standard' if not. Note that this behaviour is different from the AWS web console, where the default is 'gp2'."
+  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'gp2' if not."
   type        = string
-  default     = "gp2"
+  default     = null
 }
 
 variable "storage_encrypted" {
@@ -23,29 +23,23 @@ variable "storage_encrypted" {
 variable "kms_key_id" {
   description = "The ARN for the KMS encryption key. If creating an encrypted replica, set this to the destination KMS ARN. If storage_encrypted is set to true and kms_key_id is not specified the default KMS key created in your account will be used"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "replicate_source_db" {
   description = "Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate."
   type        = string
-  default     = ""
-}
-
-variable "snapshot_identifier" {
-  description = "Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05."
-  type        = string
-  default     = ""
+  default     = null
 }
 
 variable "license_model" {
   description = "License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "iam_database_authentication_enabled" {
-  description = "Specifies whether or mappings of AWS Identity and Access Management (IAM) accounts to database accounts is enabled"
+  description = "Specifies whether or not the mappings of AWS Identity and Access Management (IAM) accounts to database accounts are enabled"
   type        = bool
   default     = false
 }
@@ -53,13 +47,13 @@ variable "iam_database_authentication_enabled" {
 variable "domain" {
   description = "The ID of the Directory Service Active Directory domain to create the instance in"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "domain_iam_role_name" {
   description = "(Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "engine" {
@@ -72,10 +66,34 @@ variable "engine_version" {
   type        = string
 }
 
+variable "skip_final_snapshot" {
+  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier"
+  type        = bool
+  default     = false
+}
+
+variable "snapshot_identifier" {
+  description = "Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05."
+  type        = string
+  default     = null
+}
+
+variable "copy_tags_to_snapshot" {
+  description = "On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified)"
+  type        = bool
+  default     = false
+}
+
 variable "final_snapshot_identifier" {
   description = "The name of your final DB snapshot when this DB instance is deleted."
   type        = string
   default     = null
+}
+
+variable "final_snapshot_identifier_prefix" {
+  description = "The name which is prefixed to the final snapshot on cluster destroy"
+  type        = string
+  default     = "final"
 }
 
 variable "instance_class" {
@@ -86,7 +104,7 @@ variable "instance_class" {
 variable "name" {
   description = "The DB name to create. If omitted, no database is created initially"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "username" {
@@ -97,6 +115,7 @@ variable "username" {
 variable "password" {
   description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
+  default     = ""
 }
 
 variable "port" {
@@ -110,34 +129,10 @@ variable "vpc_security_group_ids" {
   default     = []
 }
 
-variable "db_subnet_group_name" {
-  description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
-  type        = string
-  default     = ""
-}
-
-variable "parameter_group_description" {
-  description = "Description of the DB parameter group to create"
-  type        = string
-  default     = ""
-}
-
-variable "parameter_group_name" {
-  description = "Name of the DB parameter group to associate or create"
-  type        = string
-  default     = ""
-}
-
-variable "option_group_name" {
-  description = "Name of the DB option group to associate"
-  type        = string
-  default     = ""
-}
-
 variable "availability_zone" {
   description = "The Availability Zone of the RDS instance"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "multi_az" {
@@ -167,7 +162,7 @@ variable "monitoring_interval" {
 variable "monitoring_role_arn" {
   description = "The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to CloudWatch Logs. Must be specified if monitoring_interval is non-zero."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "monitoring_role_name" {
@@ -205,27 +200,21 @@ variable "maintenance_window" {
   type        = string
 }
 
-variable "skip_final_snapshot" {
-  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier"
-  type        = bool
-  default     = true
-}
-
-variable "copy_tags_to_snapshot" {
-  description = "On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified)"
-  type        = bool
-  default     = false
-}
-
 variable "backup_retention_period" {
   description = "The days to retain backups for"
   type        = number
-  default     = 1
+  default     = null
 }
 
 variable "backup_window" {
   description = "The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance_window"
   type        = string
+}
+
+variable "s3_import" {
+  description = "Restore from a Percona Xtrabackup in S3 (only MySQL is supported)"
+  type        = map(string)
+  default     = null
 }
 
 variable "tags" {
@@ -234,7 +223,55 @@ variable "tags" {
   default     = {}
 }
 
+variable "db_instance_tags" {
+  description = "Additional tags for the DB instance"
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_option_group_tags" {
+  description = "Additional tags for the DB option group"
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_parameter_group_tags" {
+  description = "Additional tags for the  DB parameter group"
+  type        = map(string)
+  default     = {}
+}
+
+variable "db_subnet_group_tags" {
+  description = "Additional tags for the DB subnet group"
+  type        = map(string)
+  default     = {}
+}
+
 # DB subnet group
+variable "create_db_subnet_group" {
+  description = "Whether to create a database subnet group"
+  type        = bool
+  default     = true
+}
+
+variable "db_subnet_group_name" {
+  description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
+  type        = string
+  default     = null
+}
+
+variable "db_subnet_group_use_name_prefix" {
+  description = "Determines whether to use `subnet_group_name` as is or create a unique name beginning with the `subnet_group_name` as the prefix"
+  type        = bool
+  default     = true
+}
+
+variable "db_subnet_group_description" {
+  description = "Description of the DB subnet group to create"
+  type        = string
+  default     = ""
+}
+
 variable "subnet_ids" {
   description = "A list of VPC subnet IDs"
   type        = list(string)
@@ -242,6 +279,30 @@ variable "subnet_ids" {
 }
 
 # DB parameter group
+variable "create_db_parameter_group" {
+  description = "Whether to create a database parameter group"
+  type        = bool
+  default     = true
+}
+
+variable "parameter_group_name" {
+  description = "Name of the DB parameter group to associate or create"
+  type        = string
+  default     = null
+}
+
+variable "parameter_group_use_name_prefix" {
+  description = "Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix"
+  type        = bool
+  default     = true
+}
+
+variable "parameter_group_description" {
+  description = "Description of the DB parameter group to create"
+  type        = string
+  default     = ""
+}
+
 variable "family" {
   description = "The family of the DB parameter group"
   type        = string
@@ -255,6 +316,24 @@ variable "parameters" {
 }
 
 # DB option group
+variable "create_db_option_group" {
+  description = "(Optional) Create a database option group"
+  type        = bool
+  default     = true
+}
+
+variable "option_group_name" {
+  description = "Name of the option group"
+  type        = string
+  default     = null
+}
+
+variable "option_group_use_name_prefix" {
+  description = "Determines whether to use `option_group_name` as is or create a unique name beginning with the `option_group_name` as the prefix"
+  type        = bool
+  default     = true
+}
+
 variable "option_group_description" {
   description = "The description of the option group"
   type        = string
@@ -273,24 +352,6 @@ variable "options" {
   default     = []
 }
 
-variable "create_db_subnet_group" {
-  description = "Whether to create a database subnet group"
-  type        = bool
-  default     = true
-}
-
-variable "create_db_parameter_group" {
-  description = "Whether to create a database parameter group"
-  type        = bool
-  default     = true
-}
-
-variable "create_db_option_group" {
-  description = "(Optional) Create a database option group"
-  type        = bool
-  default     = true
-}
-
 variable "create_db_instance" {
   description = "Whether to create a database instance"
   type        = bool
@@ -300,13 +361,13 @@ variable "create_db_instance" {
 variable "timezone" {
   description = "(Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "character_set_name" {
-  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS for more information"
+  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "enabled_cloudwatch_logs_exports" {
@@ -339,12 +400,6 @@ variable "deletion_protection" {
   default     = false
 }
 
-variable "use_parameter_group_name_prefix" {
-  description = "Whether to use the parameter group name prefix or not"
-  type        = bool
-  default     = true
-}
-
 variable "performance_insights_enabled" {
   description = "Specifies whether Performance Insights are enabled"
   type        = bool
@@ -357,6 +412,12 @@ variable "performance_insights_retention_period" {
   default     = 7
 }
 
+variable "performance_insights_kms_key_id" {
+  description = "The ARN for the KMS key to encrypt Performance Insights data."
+  type        = string
+  default     = null
+}
+
 variable "max_allocated_storage" {
   description = "Specifies the value for Storage Autoscaling"
   type        = number
@@ -366,11 +427,23 @@ variable "max_allocated_storage" {
 variable "ca_cert_identifier" {
   description = "Specifies the identifier of the CA certificate for the DB instance"
   type        = string
-  default     = "rds-ca-2019"
+  default     = null
 }
 
 variable "delete_automated_backups" {
   description = "Specifies whether to remove automated backups immediately after the DB instance is deleted"
   type        = bool
   default     = true
+}
+
+variable "create_random_password" {
+  description = "Whether to create random password for RDS primary cluster"
+  type        = bool
+  default     = false
+}
+
+variable "random_password_length" {
+  description = "(Optional) Length of random password to create. (default: 10)"
+  type        = number
+  default     = 10
 }

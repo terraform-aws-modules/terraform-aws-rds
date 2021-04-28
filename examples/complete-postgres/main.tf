@@ -1,75 +1,161 @@
 provider "aws" {
-  region = "us-west-1"
+  region = local.region
 }
 
-##############################################################
-# Data sources to get VPC, subnets and security group details
-##############################################################
-data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
-}
-
-data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
-  name   = "default"
-}
-
-#####
-# DB
-#####
-module "db" {
-  source = "../../"
-
-  identifier = "demodb-postgres"
-
-  engine            = "postgres"
-  engine_version    = "9.6.9"
-  instance_class    = "db.t2.large"
-  allocated_storage = 5
-  storage_encrypted = false
-
-  # kms_key_id        = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
-  name = "demodb"
-
-  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
-  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
-  # user cannot be used as it is a reserved word used by the engine"
-  username = "demouser"
-
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = "5432"
-
-  vpc_security_group_ids = [data.aws_security_group.default.id]
-
-  maintenance_window = "Mon:00:00-Mon:03:00"
-  backup_window      = "03:00-06:00"
-
-  # disable backups to create DB faster
-  backup_retention_period = 0
-
+locals {
+  name   = "complete-postgresql"
+  region = "eu-west-1"
   tags = {
     Owner       = "user"
     Environment = "dev"
   }
+}
 
+################################################################################
+# Supporting Resources
+################################################################################
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2"
+
+  name = local.name
+  cidr = "10.99.0.0/18"
+
+  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
+  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
+  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+
+  create_database_subnet_group = true
+
+  tags = local.tags
+}
+
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 3"
+
+  name        = local.name
+  description = "Complete PostgreSQL example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      description = "PostgreSQL access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  tags = local.tags
+}
+
+################################################################################
+# RDS Module
+################################################################################
+
+module "db" {
+  source = "../../"
+
+  identifier = local.name
+
+  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+  engine               = "postgres"
+  engine_version       = "11.10"
+  family               = "postgres11" # DB parameter group
+  major_engine_version = "11"         # DB option group
+  instance_class       = "db.t3.large"
+
+  allocated_storage     = 20
+  max_allocated_storage = 100
+  storage_encrypted     = false
+
+  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
+  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
+  # user cannot be used as it is a reserved word used by the engine"
+  name     = "completePostgresql"
+  username = "complete_postgresql"
+  password = "YourPwdShouldBeLongAndSecure!"
+  port     = 5432
+
+  multi_az               = true
+  subnet_ids             = module.vpc.database_subnets
+  vpc_security_group_ids = [module.security_group.this_security_group_id]
+
+  maintenance_window              = "Mon:00:00-Mon:03:00"
+  backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
 
-  # DB subnet group
-  subnet_ids = data.aws_subnet_ids.all.ids
+  backup_retention_period = 0
+  skip_final_snapshot     = true
+  deletion_protection     = false
 
-  # DB parameter group
-  family = "postgres9.6"
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  create_monitoring_role                = true
+  monitoring_interval                   = 60
 
-  # DB option group
-  major_engine_version = "9.6"
+  parameters = [
+    {
+      name  = "autovacuum"
+      value = 1
+    },
+    {
+      name  = "client_encoding"
+      value = "utf8"
+    }
+  ]
 
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = "demodb"
+  tags = local.tags
+  db_option_group_tags = {
+    "Sensitive" = "low"
+  }
+  db_parameter_group_tags = {
+    "Sensitive" = "low"
+  }
+  db_subnet_group_tags = {
+    "Sensitive" = "high"
+  }
+}
 
-  # Database Deletion Protection
-  deletion_protection = false
+
+module "db_default" {
+  source = "../../"
+
+  identifier = "${local.name}-default"
+
+  create_db_option_group    = false
+  create_db_parameter_group = false
+
+  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+  engine               = "postgres"
+  engine_version       = "11.10"
+  family               = "postgres11" # DB parameter group
+  major_engine_version = "11"         # DB option group
+  instance_class       = "db.t3.large"
+
+  allocated_storage = 20
+
+  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
+  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
+  # user cannot be used as it is a reserved word used by the engine"
+  name                   = "completePostgresql"
+  username               = "complete_postgresql"
+  create_random_password = true
+  random_password_length = 12
+  port                   = 5432
+
+  subnet_ids             = module.vpc.database_subnets
+  vpc_security_group_ids = [module.security_group.this_security_group_id]
+
+  maintenance_window = "Mon:00:00-Mon:03:00"
+  backup_window      = "03:00-06:00"
+
+  backup_retention_period = 0
+
+  tags = local.tags
 }

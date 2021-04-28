@@ -2,47 +2,57 @@ locals {
   created_db_subnet_group       = var.create_db_subnet_group && var.db_subnet_group_name == "" ? module.db_subnet_group.this_db_subnet_group_id : null
   enable_create_db_subnet_group = var.create_db_subnet_group && var.db_subnet_group_name == "" ? var.create_db_subnet_group : false
   db_subnet_group_name          = var.db_subnet_group_name != "" ? var.db_subnet_group_name : local.created_db_subnet_group
+  master_password               = var.create_db_instance && var.create_random_password ? random_password.master_password[0].result : var.password
 
-  parameter_group_name    = var.parameter_group_name != "" ? var.parameter_group_name : var.identifier
-  parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
+  parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.this_db_parameter_group_id : var.parameter_group_name
 
-  option_group_name             = var.option_group_name != "" ? var.option_group_name : module.db_option_group.this_db_option_group_id
-  enable_create_db_option_group = var.create_db_option_group ? true : var.option_group_name == "" && var.engine != "postgres"
+  create_db_option_group = var.create_db_option_group && var.engine != "postgres"
+  option_group           = local.create_db_option_group ? module.db_option_group.this_db_option_group_id : var.option_group_name
+}
+
+# Random string to use as master password
+resource "random_password" "master_password" {
+  count = var.create_db_instance && var.create_random_password ? 1 : 0
+
+  length  = var.random_password_length
+  special = false
 }
 
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  create      = local.enable_create_db_subnet_group
-  identifier  = var.identifier
-  name_prefix = "${var.identifier}-"
-  subnet_ids  = var.subnet_ids
+  create = var.create_db_subnet_group
 
-  tags = var.tags
+  name            = coalesce(var.db_subnet_group_name, var.identifier)
+  use_name_prefix = var.db_subnet_group_use_name_prefix
+  description     = var.db_subnet_group_description
+  subnet_ids      = var.subnet_ids
+
+  tags = merge(var.tags, var.db_subnet_group_tags)
 }
 
 module "db_parameter_group" {
   source = "./modules/db_parameter_group"
 
-  create          = var.create_db_parameter_group
-  identifier      = var.identifier
-  name            = var.parameter_group_name
+  create = var.create_db_parameter_group
+
+  name            = coalesce(var.parameter_group_name, var.identifier)
+  use_name_prefix = var.parameter_group_use_name_prefix
   description     = var.parameter_group_description
-  name_prefix     = "${var.identifier}-"
-  use_name_prefix = var.use_parameter_group_name_prefix
   family          = var.family
 
   parameters = var.parameters
 
-  tags = var.tags
+  tags = merge(var.tags, var.db_parameter_group_tags)
 }
 
 module "db_option_group" {
   source = "./modules/db_option_group"
 
-  create                   = local.enable_create_db_option_group
-  identifier               = var.identifier
-  name_prefix              = "${var.identifier}-"
+  create = local.create_db_option_group
+
+  name                     = coalesce(var.option_group_name, var.identifier)
+  use_name_prefix          = var.option_group_use_name_prefix
   option_group_description = var.option_group_description
   engine_name              = var.engine
   major_engine_version     = var.major_engine_version
@@ -51,14 +61,15 @@ module "db_option_group" {
 
   timeouts = var.option_group_timeouts
 
-  tags = var.tags
+  tags = merge(var.tags, var.db_option_group_tags)
 }
 
 module "db_instance" {
   source = "./modules/db_instance"
 
-  create            = var.create_db_instance
-  identifier        = var.identifier
+  create     = var.create_db_instance
+  identifier = var.identifier
+
   engine            = var.engine
   engine_version    = var.engine_version
   instance_class    = var.instance_class
@@ -70,39 +81,39 @@ module "db_instance" {
 
   name                                = var.name
   username                            = var.username
-  password                            = var.password
+  password                            = local.master_password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  replicate_source_db = var.replicate_source_db
-
-  snapshot_identifier = var.snapshot_identifier
-
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = local.db_subnet_group_name
   parameter_group_name   = local.parameter_group_name_id
-  option_group_name      = local.option_group_name
+  option_group_name      = local.option_group
 
   availability_zone   = var.availability_zone
   multi_az            = var.multi_az
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
-
-  ca_cert_identifier = var.ca_cert_identifier
+  ca_cert_identifier  = var.ca_cert_identifier
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
   apply_immediately           = var.apply_immediately
   maintenance_window          = var.maintenance_window
-  skip_final_snapshot         = var.skip_final_snapshot
-  copy_tags_to_snapshot       = var.copy_tags_to_snapshot
-  final_snapshot_identifier   = var.final_snapshot_identifier
+
+  snapshot_identifier              = var.snapshot_identifier
+  copy_tags_to_snapshot            = var.copy_tags_to_snapshot
+  skip_final_snapshot              = var.skip_final_snapshot
+  final_snapshot_identifier        = var.final_snapshot_identifier
+  final_snapshot_identifier_prefix = var.final_snapshot_identifier_prefix
 
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_retention_period
+  performance_insights_kms_key_id       = var.performance_insights_enabled ? var.performance_insights_kms_key_id : null
 
+  replicate_source_db     = var.replicate_source_db
   backup_retention_period = var.backup_retention_period
   backup_window           = var.backup_window
   max_allocated_storage   = var.max_allocated_storage
@@ -111,8 +122,8 @@ module "db_instance" {
   monitoring_role_name    = var.monitoring_role_name
   create_monitoring_role  = var.create_monitoring_role
 
-  timezone                        = var.timezone
   character_set_name              = var.character_set_name
+  timezone                        = var.timezone
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
   timeouts = var.timeouts
@@ -120,5 +131,7 @@ module "db_instance" {
   deletion_protection      = var.deletion_protection
   delete_automated_backups = var.delete_automated_backups
 
-  tags = var.tags
+  s3_import = var.s3_import
+
+  tags = merge(var.tags, var.db_instance_tags)
 }
