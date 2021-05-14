@@ -129,7 +129,8 @@ module "db_instance" {
   deletion_protection      = var.deletion_protection
   delete_automated_backups = var.delete_automated_backups
 
-  s3_import = var.s3_import
+  restore_to_point_in_time = var.restore_to_point_in_time
+  s3_import                = var.s3_import
 
   tags = merge(var.tags, var.db_instance_tags)
 }

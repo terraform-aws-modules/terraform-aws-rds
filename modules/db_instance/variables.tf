@@ -315,3 +315,10 @@ variable "s3_import" {
   type        = map(string)
   default     = null
 }
+
+
+variable "restore_to_point_in_time" {
+  description = "point in time recovery input"
+  type        = map(string)
+  default     = null
+}
