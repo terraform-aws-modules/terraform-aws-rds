@@ -14,7 +14,7 @@ Root module calls these modules which can also be used separately to create inde
 ```hcl
 module "db" {
   source  = "terraform-aws-modules/rds/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   identifier = "demodb"
 
