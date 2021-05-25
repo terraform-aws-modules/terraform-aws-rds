@@ -30,7 +30,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_create"></a> [create](#input\_create) | Whether to create this resource or not? | `bool` | `true` | no |
 | <a name="input_description"></a> [description](#input\_description) | The description of the DB parameter group | `string` | `""` | no |
-| <a name="input_family"></a> [family](#input\_family) | The family of the DB parameter group | `string` | n/a | yes |
+| <a name="input_family"></a> [family](#input\_family) | The family of the DB parameter group | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the DB parameter group | `string` | `""` | no |
 | <a name="input_parameters"></a> [parameters](#input\_parameters) | A list of DB parameter maps to apply | `list(map(string))` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to the resource | `map(string)` | `{}` | no |
