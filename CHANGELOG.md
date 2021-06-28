@@ -8,9 +8,10 @@ All notable changes to this project will be documented in this file.
 
 
 <a name="v3.1.0"></a>
-## [v3.1.0] - 2021-05-14
+## [v3.1.0] - 2021-05-26
 
-- feat: add restore_to_point_in_time support for Databases others than mysql
+- fix: add default values to allow for completely disabling module with bare minimum input ([#342](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/342))
+- chore: Update README.md to current version ([#339](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/339))
 - chore: update CI/CD to use stable `terraform-docs` release artifact and discoverable Apache2.0 license ([#332](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/332))
 - chore: Updated versions&comments in examples
 
