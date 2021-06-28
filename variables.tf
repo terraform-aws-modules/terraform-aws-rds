@@ -6,6 +6,7 @@ variable "identifier" {
 variable "allocated_storage" {
   description = "The allocated storage in gigabytes"
   type        = string
+  default     = null
 }
 
 variable "storage_type" {
@@ -59,11 +60,13 @@ variable "domain_iam_role_name" {
 variable "engine" {
   description = "The database engine to use"
   type        = string
+  default     = ""
 }
 
 variable "engine_version" {
   description = "The engine version to use"
   type        = string
+  default     = null
 }
 
 variable "skip_final_snapshot" {
@@ -99,6 +102,7 @@ variable "final_snapshot_identifier_prefix" {
 variable "instance_class" {
   description = "The instance type of the RDS instance"
   type        = string
+  default     = null
 }
 
 variable "name" {
@@ -110,6 +114,7 @@ variable "name" {
 variable "username" {
   description = "Username for the master DB user"
   type        = string
+  default     = null
 }
 
 variable "password" {
@@ -121,6 +126,7 @@ variable "password" {
 variable "port" {
   description = "The port on which the DB accepts connections"
   type        = string
+  default     = null
 }
 
 variable "vpc_security_group_ids" {
@@ -198,6 +204,7 @@ variable "apply_immediately" {
 variable "maintenance_window" {
   description = "The window to perform maintenance in. Syntax: 'ddd:hh24:mi-ddd:hh24:mi'. Eg: 'Mon:00:00-Mon:03:00'"
   type        = string
+  default     = null
 }
 
 variable "backup_retention_period" {
@@ -209,6 +216,7 @@ variable "backup_retention_period" {
 variable "backup_window" {
   description = "The daily time range (in UTC) during which automated backups are created if they are enabled. Example: '09:46-10:16'. Must not overlap with maintenance_window"
   type        = string
+  default     = null
 }
 
 variable "restore_to_point_in_time" {

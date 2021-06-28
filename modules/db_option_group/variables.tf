@@ -25,11 +25,13 @@ variable "option_group_description" {
 variable "engine_name" {
   description = "Specifies the name of the engine that this option group should be associated with"
   type        = string
+  default     = null
 }
 
 variable "major_engine_version" {
   description = "Specifies the major version of the engine that this option group should be associated with"
   type        = string
+  default     = null
 }
 
 variable "options" {
