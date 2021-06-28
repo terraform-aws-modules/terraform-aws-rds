@@ -80,19 +80,20 @@ resource "aws_db_instance" "this" {
 
 
   dynamic "restore_to_point_in_time" {
-
     for_each = var.restore_to_point_in_time != null ? [var.restore_to_point_in_time] : []
+
     content {
-      restore_time                  = restore_to_point_in_time.value.restore_time
+      restore_time                  = lookup(restore_to_point_in_time.value, "restore_time", null)
       source_db_instance_identifier = lookup(restore_to_point_in_time.value, "source_db_instance_identifier", null)
       source_dbi_resource_id        = lookup(restore_to_point_in_time.value, "source_dbi_resource_id", null)
-      use_latest_restorable_time    = lookup(restore_to_point_in_time.value, "use_latest_restorable+time", null)
+      use_latest_restorable_time    = lookup(restore_to_point_in_time.value, "use_latest_restorable_time", null)
     }
   }
 
 
   dynamic "s3_import" {
     for_each = var.s3_import != null ? [var.s3_import] : []
+
     content {
       source_engine         = "mysql"
       source_engine_version = s3_import.value.source_engine_version
