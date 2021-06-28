@@ -33,6 +33,12 @@ variable "replicate_source_db" {
   default     = null
 }
 
+variable "cross_region_replica" {
+  description = "Specifies if the replica should be cross region"
+  type        = string
+  default     = false
+}
+
 variable "license_model" {
   description = "License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1"
   type        = string
