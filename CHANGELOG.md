@@ -7,6 +7,12 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.2.0"></a>
+## [v3.2.0] - 2021-06-28
+
+- feat: Add restore_to_point_in_time support for databases ([#338](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/338))
+
+
 <a name="v3.1.0"></a>
 ## [v3.1.0] - 2021-05-26
 
@@ -715,7 +721,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.2.0...HEAD
+[v3.2.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.1.0...v3.2.0
 [v3.1.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.0.0...v3.1.0
 [v3.0.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.35.0...v3.0.0
 [v2.35.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v2.34.0...v2.35.0
