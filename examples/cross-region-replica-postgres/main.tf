@@ -1,10 +1,16 @@
 provider "aws" {
-  region = local.region
+  region = local.region1
+}
+
+provider "aws" {
+  alias  = "region2"
+  region = local.region12
 }
 
 locals {
-  name   = "replica-postgresql"
-  region = "eu-west-1"
+  name    = "replica-postgresql"
+  region1 = "eu-west-1"
+  region2 = "eu-central-1"
   tags = {
     Owner       = "user"
     Environment = "dev"
@@ -25,30 +31,30 @@ locals {
 # Supporting Resources
 ################################################################################
 
-module "vpc" {
+module "vpc_region1" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 2.0"
 
   name = local.name
-  cidr = "10.99.0.0/18"
+  cidr = "10.100.0.0/18"
 
-  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
-  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
-  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
-  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+  azs              = ["${local.region1}a", "${local.region1}b", "${local.region1}c"]
+  public_subnets   = ["10.100.0.0/24", "10.100.1.0/24", "10.100.2.0/24"]
+  private_subnets  = ["10.100.3.0/24", "10.100.4.0/24", "10.100.5.0/24"]
+  database_subnets = ["10.100.7.0/24", "10.100.8.0/24", "10.100.9.0/24"]
 
   create_database_subnet_group = true
 
   tags = local.tags
 }
 
-module "security_group" {
+module "security_group_region1" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4"
 
   name        = local.name
   description = "Replica PostgreSQL example security group"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = module.vpc_region1.vpc_id
 
   # ingress
   ingress_with_cidr_blocks = [
@@ -57,7 +63,54 @@ module "security_group" {
       to_port     = 5432
       protocol    = "tcp"
       description = "PostgreSQL access from within VPC"
-      cidr_blocks = module.vpc.vpc_cidr_block
+      cidr_blocks = module.vpc_region1.vpc_cidr_block
+    },
+  ]
+
+  tags = local.tags
+}
+
+module "vpc_region2" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 2.0"
+
+  providers = {
+    aws = aws.region2
+  }
+
+  name = local.name
+  cidr = "10.100.0.0/18"
+
+  azs              = ["${local.region2}a", "${local.region2}b", "${local.region2}c"]
+  public_subnets   = ["10.100.0.0/24", "10.100.1.0/24", "10.100.2.0/24"]
+  private_subnets  = ["10.100.3.0/24", "10.100.4.0/24", "10.100.5.0/24"]
+  database_subnets = ["10.100.7.0/24", "10.100.8.0/24", "10.100.9.0/24"]
+
+  create_database_subnet_group = true
+
+  tags = local.tags
+}
+
+module "security_group_region2" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 4"
+
+  providers = {
+    aws = aws.region2
+  }
+
+  name        = local.name
+  description = "Replica PostgreSQL example security group"
+  vpc_id      = module.vpc_region2.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      description = "PostgreSQL access from within VPC"
+      cidr_blocks = module.vpc_region2.vpc_cidr_block
     },
   ]
 
@@ -90,7 +143,7 @@ module "master" {
 
   multi_az               = true
   create_db_subnet_group = false
-  db_subnet_group_name   = module.vpc.database_subnet_group_name
+  db_subnet_group_name   = module.vpc_region1.database_subnet_group_name
   vpc_security_group_ids = [module.security_group.security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
@@ -111,6 +164,10 @@ module "master" {
 
 module "replica" {
   source = "../../"
+
+  providers = {
+    aws = aws.region2
+  }
 
   identifier = "${local.name}-replica"
 
@@ -144,8 +201,9 @@ module "replica" {
   skip_final_snapshot     = true
   deletion_protection     = false
 
-  # Not allowed to specify a subnet group for replicas in the same region
+  # Must create or specify a subnet group since the replica is on another region
   create_db_subnet_group = false
+  db_subnet_group_name   = module.vpc_region2.database_subnet_group_name
 
   tags = local.tags
 }
