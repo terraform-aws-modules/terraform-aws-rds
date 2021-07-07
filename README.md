@@ -137,8 +137,8 @@ Users have the ability to:
 - Pass the name of an option group to use that has been created outside of the module:
 
 ```hcl
-  create_option_group = false
-  option_group_name   = "prod-instance-mysql-8.0" # must already exist in AWS
+  create_db_option_group = false
+  option_group_name      = "prod-instance-mysql-8.0" # must already exist in AWS
 ```
 
 - Skip creating an option group for PostgreSQL entirely as that is not supported
@@ -151,7 +151,7 @@ Users have the ability to:
 - Use a default option group provided by AWS
 
 ```hcl
-  create_option_group = false
+  create_db_option_group = false
 ```
 
 ## Parameter Groups
@@ -176,14 +176,14 @@ Users have the ability to:
 - Pass the name of a parameter group to use that has been created outside of the module:
 
 ```hcl
-  create_parameter_group = false
+  create_db_parameter_group = false
   parameter_group_name   = "prod-instance-mysql-8.0" # must already exist in AWS
 ```
 
 - Use a default parameter group provided by AWS
 
 ```hcl
-  create_parameter_group = false
+  create_db_parameter_group = false
 ```
 
 ## Examples
