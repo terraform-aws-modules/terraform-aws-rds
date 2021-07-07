@@ -4,7 +4,7 @@ provider "aws" {
 
 provider "aws" {
   alias  = "region2"
-  region = local.region12
+  region = local.region2
 }
 
 locals {
@@ -144,7 +144,7 @@ module "master" {
   multi_az               = true
   create_db_subnet_group = false
   db_subnet_group_name   = module.vpc_region1.database_subnet_group_name
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.security_group_region1.security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
   backup_window                   = "03:00-06:00"
@@ -191,7 +191,7 @@ module "replica" {
   port     = local.port
 
   multi_az               = false
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.security_group_region2.security_group_id]
 
   maintenance_window              = "Tue:00:00-Tue:03:00"
   backup_window                   = "03:00-06:00"
