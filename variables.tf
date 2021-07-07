@@ -34,8 +34,8 @@ variable "replicate_source_db" {
 }
 
 variable "cross_region_replica" {
-  description = "Specifies if the replica should be cross region"
-  type        = string
+  description = "Specifies if the replica should be cross region. It allows the use of a subnet group in a region different than the master instance"
+  type        = bool
   default     = false
 }
 
