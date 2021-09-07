@@ -7,6 +7,13 @@ All notable changes to this project will be documented in this file.
 
 
 
+<a name="v3.4.0"></a>
+## [v3.4.0] - 2021-09-07
+
+- feat: Add new parameter monitoring_role_description ([#350](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/350))
+- docs: create_option_group -> create_db_option_group in README ([#348](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/348))
+
+
 <a name="v3.3.0"></a>
 ## [v3.3.0] - 2021-07-07
 
@@ -727,7 +734,8 @@ All notable changes to this project will be documented in this file.
 - Initial commit
 
 
-[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.3.0...HEAD
+[Unreleased]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.4.0...HEAD
+[v3.4.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.3.0...v3.4.0
 [v3.3.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.2.0...v3.3.0
 [v3.2.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.1.0...v3.2.0
 [v3.1.0]: https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.0.0...v3.1.0
