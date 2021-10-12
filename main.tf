@@ -76,6 +76,7 @@ module "db_instance" {
   storage_encrypted = var.storage_encrypted
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
+  replica_mode      = var.replica_mode
 
   name                                = var.name
   username                            = var.username

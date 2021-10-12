@@ -473,3 +473,10 @@ variable "random_password_length" {
   type        = number
   default     = 10
 }
+
+
+variable "replica_mode" {
+  description = "(Optional) Specifies whether the replica is in either 'mounted' or 'open-read-only' mode. Supported by Oracle Instances Only"
+  type        = string
+  default     = null
+}

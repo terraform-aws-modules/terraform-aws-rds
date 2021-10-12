@@ -337,3 +337,9 @@ variable "restore_to_point_in_time" {
   type        = map(string)
   default     = null
 }
+
+variable "replica_mode" {
+  description = "(Optional) Specifies whether the replica is in either 'mounted' or 'open-read-only' mode. Supported by Oracle Instances Only"
+  type        = string
+  default     = null
+}
