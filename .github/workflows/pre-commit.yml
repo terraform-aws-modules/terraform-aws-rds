@@ -1,4 +1,4 @@
-name: Pre-Commit
+name: pre-Commit
 
 on:
   pull_request:
@@ -33,10 +33,15 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-      - name: Format and update docs
-        uses: clowdhaus/terraform-composite-actions/format-docs@v1.0.0
+      - name: Pre-commit Terraform ${{ needs.getBaseVersion.outputs.maxVersion }}
+        continue-on-error: true # because we want to format and not fail CI
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.1.0
         with:
           terraform-version: ${{ needs.getBaseVersion.outputs.maxVersion }}
+
+      - name: Commit changes
+        uses: clowdhaus/terraform-composite-actions/commit@v1.1.0
+        with:
           git-branch: ${{ github.event.pull_request.head.ref }}
           github-token: ${{ secrets.PAT_GITHUB }}
 
@@ -52,7 +57,7 @@ jobs:
 
       - name: Get root directories
         id: search
-        uses: clowdhaus/terraform-composite-actions/directories@v1.0.0
+        uses: clowdhaus/terraform-composite-actions/directories@v1.1.0
 
   preCommitMinVersions:
     name: Min TF pre-commit
@@ -74,7 +79,7 @@ jobs:
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
         if: ${{ matrix.directory !=  '.' }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.0.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.1.0
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
           args: 'terraform_validate --color=always --show-diff-on-failure --files ${{ matrix.directory }}/*'
@@ -82,7 +87,7 @@ jobs:
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
         # Run only validate pre-commit check on min version supported
         if: ${{ matrix.directory ==  '.' }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.0.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.1.0
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
           args: 'terraform_validate --color=always --show-diff-on-failure --files $(ls *.tf)'
@@ -102,6 +107,6 @@ jobs:
         uses: clowdhaus/terraform-min-max@v1.0.3
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.maxVersion }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.0.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.1.0
         with:
           terraform-version: ${{ steps.minMax.outputs.maxVersion }}
