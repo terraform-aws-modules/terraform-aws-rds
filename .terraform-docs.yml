@@ -1,0 +1,3 @@
+formatter: "md doc" # this is required
+settings:
+  lockfile: false
