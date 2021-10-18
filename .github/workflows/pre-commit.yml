@@ -7,40 +7,26 @@ on:
       - master
 
 jobs:
-  getBaseVersion:
-    name: Get module max TF version
+  collectInputs:
+    name: Collect workflow inputs
     runs-on: ubuntu-latest
     outputs:
-      minVersion: ${{ steps.minMax.outputs.minVersion }}
-      maxVersion: ${{ steps.minMax.outputs.maxVersion }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Terraform min/max versions
-        id: minMax
-        uses: clowdhaus/terraform-min-max@v1.0.3
-
-  getDirectories:
-    name: Get root directories
-    runs-on: ubuntu-latest
-    outputs:
-      directories: ${{ steps.search.outputs.directories }}
+      directories: ${{ steps.dirs.outputs.directories }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Get root directories
-        id: search
+        id: dirs
         uses: clowdhaus/terraform-composite-actions/directories@v1.1.0
 
   preCommitMinVersions:
     name: Min TF pre-commit
-    needs: getDirectories
+    needs: collectInputs
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        directory: ${{ fromJson(needs.getDirectories.outputs.directories) }}
+        directory: ${{ fromJson(needs.collectInputs.outputs.directories) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -70,7 +56,7 @@ jobs:
   preCommitMaxVersion:
     name: Max TF pre-commit
     runs-on: ubuntu-latest
-    needs: getBaseVersion
+    needs: collectInputs
     steps:
       - name: Checkout
         uses: actions/checkout@v2
