@@ -21,35 +21,9 @@ jobs:
         id: minMax
         uses: clowdhaus/terraform-min-max@v1.0.3
 
-  formatUpdateDocs:
-    name: Format and update docs
-    runs-on: ubuntu-latest
-    needs: getBaseVersion
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
-          persist-credentials: false
-          fetch-depth: 0
-
-      - name: Pre-commit Terraform ${{ needs.getBaseVersion.outputs.maxVersion }}
-        continue-on-error: true # because we want to format and not fail CI
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.1.0
-        with:
-          terraform-version: ${{ needs.getBaseVersion.outputs.maxVersion }}
-
-      - name: Commit changes
-        uses: clowdhaus/terraform-composite-actions/commit@v1.1.0
-        with:
-          git-branch: ${{ github.event.pull_request.head.ref }}
-          github-token: ${{ secrets.PAT_GITHUB }}
-
   getDirectories:
     name: Get root directories
     runs-on: ubuntu-latest
-    needs: formatUpdateDocs
     outputs:
       directories: ${{ steps.search.outputs.directories }}
     steps:
@@ -96,7 +70,7 @@ jobs:
   preCommitMaxVersion:
     name: Max TF pre-commit
     runs-on: ubuntu-latest
-    needs: [getBaseVersion, formatUpdateDocs]
+    needs: getBaseVersion
     steps:
       - name: Checkout
         uses: actions/checkout@v2
