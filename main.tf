@@ -5,7 +5,7 @@ locals {
   parameter_group_name_id = var.parameter_group_name != "" ? var.parameter_group_name : module.db_parameter_group.this_db_parameter_group_id
 
   option_group_name             = var.option_group_name != "" ? var.option_group_name : module.db_option_group.this_db_option_group_id
-  enable_create_db_option_group = var.create_db_option_group ? true : var.option_group_name == "" && var.engine != "postgres"
+  enable_create_db_option_group = var.create_db_option_group && var.option_group_name == ""
 }
 
 module "db_subnet_group" {
