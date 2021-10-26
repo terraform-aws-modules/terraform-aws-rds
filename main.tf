@@ -9,7 +9,6 @@ locals {
 }
 
 # Random string to use as master password
-# Temporary whitespace change - TODO remove me
 resource "random_password" "master_password" {
   count = var.create_db_instance && var.create_random_password ? 1 : 0
 
