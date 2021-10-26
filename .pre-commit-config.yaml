@@ -26,5 +26,4 @@ repos:
     rev: v4.0.1
     hooks:
       - id: check-merge-conflict
-      - id: trailing-whitespace
       - id: end-of-file-fixer

@@ -22,6 +22,7 @@ jobs:
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
         with:
+          semantic_version: 18.0.0
           extra_plugins: |
             @semantic-release/changelog@6.0.0
             @semantic-release/git@10.0.0
