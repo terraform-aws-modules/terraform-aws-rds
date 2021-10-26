@@ -48,4 +48,3 @@ resource "aws_db_option_group" "this" {
     create_before_destroy = true
   }
 }
-
