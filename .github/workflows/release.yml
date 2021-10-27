@@ -6,8 +6,8 @@ on:
       - main
       - master
     paths:
-      - '*.tf'
-      - 'modules/**/*.tf'
+      - '**/*.py'
+      - '**/*.tf'
 
 jobs:
   release:
