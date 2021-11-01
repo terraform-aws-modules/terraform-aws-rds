@@ -179,6 +179,19 @@ resource "aws_db_instance" "this_mssql" {
   deletion_protection      = var.deletion_protection
   delete_automated_backups = var.delete_automated_backups
 
+
+  dynamic "restore_to_point_in_time" {
+    for_each = var.restore_to_point_in_time != null ? [var.restore_to_point_in_time] : []
+
+    content {
+      restore_time                  = lookup(restore_to_point_in_time.value, "restore_time", null)
+      source_db_instance_identifier = lookup(restore_to_point_in_time.value, "source_db_instance_identifier", null)
+      source_dbi_resource_id        = lookup(restore_to_point_in_time.value, "source_dbi_resource_id", null)
+      use_latest_restorable_time    = lookup(restore_to_point_in_time.value, "use_latest_restorable_time", null)
+    }
+  }
+
+
   tags = merge(
     var.tags,
     {
