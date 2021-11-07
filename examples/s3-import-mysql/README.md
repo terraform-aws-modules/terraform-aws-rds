@@ -63,7 +63,7 @@ Note that this example may create resources which cost money. Run `terraform des
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_db"></a> [db](#module\_db) | ../../ |  |
+| <a name="module_db"></a> [db](#module\_db) | ../../ | n/a |
 | <a name="module_import_s3_bucket"></a> [import\_s3\_bucket](#module\_import\_s3\_bucket) | terraform-aws-modules/s3-bucket/aws | ~> 2.0 |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 4 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 2.0 |

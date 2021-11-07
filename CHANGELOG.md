@@ -1,12 +1,3 @@
-# Change Log
-
-All notable changes to this project will be documented in this file.
-
-<a name="unreleased"></a>
-## [Unreleased]
-
-
-
 <a name="v3.4.0"></a>
 ## [v3.4.0] - 2021-09-07
 
