@@ -72,15 +72,15 @@ module "db" {
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  name     = "completePostgresql"
-  username = "complete_postgresql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 5432
+  name                   = "completePostgresql"
+  username               = "complete_postgresql"
+  create_random_password = true
+  random_password_length = 16
+  port                   = 5432
 
   multi_az               = true
   subnet_ids             = module.vpc.database_subnets
@@ -148,7 +148,7 @@ module "db_default" {
   name                   = "completePostgresql"
   username               = "complete_postgresql"
   create_random_password = true
-  random_password_length = 12
+  random_password_length = 16
   port                   = 5432
 
   subnet_ids             = module.vpc.database_subnets

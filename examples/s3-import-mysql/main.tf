@@ -167,12 +167,12 @@ module "db" {
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
-  name     = "s3Import"
-  username = "s3_import_user"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 3306
+  name                   = "s3Import"
+  username               = "s3_import_user"
+  create_random_password = true
+  random_password_length = 16
+  port                   = 3306
 
   # S3 import https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
   s3_import = {

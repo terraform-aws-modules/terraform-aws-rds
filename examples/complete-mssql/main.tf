@@ -123,12 +123,11 @@ module "db" {
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
   name                   = null
   username               = "complete_mssql"
   create_random_password = true
-  random_password_length = 12
+  random_password_length = 16
   port                   = 1433
 
   domain               = aws_directory_service_directory.demo.id

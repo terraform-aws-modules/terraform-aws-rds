@@ -38,9 +38,10 @@ module "default_postgres" {
 
   allocated_storage = 20
 
-  username = "option_groups_postgresql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 5432
+  username               = "option_groups_postgresql"
+  create_random_password = true
+  random_password_length = 16
+  port                   = 5432
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -74,9 +75,10 @@ module "default_mysql" {
 
   allocated_storage = 20
 
-  username = "option_groups_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 3306
+  username               = "option_groups_mysql"
+  create_random_password = true
+  random_password_length = 16
+  port                   = 3306
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -112,9 +114,10 @@ module "default_mysql_name" {
 
   allocated_storage = 20
 
-  username = "option_groups_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 3306
+  username               = "option_groups_mysql"
+  create_random_password = true
+  random_password_length = 16
+  port                   = 3306
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -147,9 +150,10 @@ module "default_mysql_default_aws" {
 
   allocated_storage = 20
 
-  username = "option_groups_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 3306
+  username               = "option_groups_mysql"
+  create_random_password = true
+  random_password_length = 16
+  port                   = 3306
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -185,9 +189,10 @@ module "byo_mysql" {
 
   allocated_storage = 20
 
-  username = "option_groups_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 3306
+  username               = "option_groups_mysql"
+  create_random_password = true
+  random_password_length = 16
+  port                   = 3306
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"

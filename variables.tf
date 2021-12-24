@@ -18,7 +18,7 @@ variable "storage_type" {
 variable "storage_encrypted" {
   description = "Specifies whether the DB instance is encrypted"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kms_key_id" {
@@ -126,7 +126,7 @@ variable "username" {
 variable "password" {
   description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "port" {

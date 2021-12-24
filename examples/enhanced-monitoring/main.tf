@@ -101,12 +101,12 @@ module "db" {
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
-  name     = "completeMysql"
-  username = "complete_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = 3306
+  name                   = "completeMysql"
+  username               = "complete_mysql"
+  create_random_password = true
+  random_password_length = 16
+  port                   = 3306
 
   multi_az               = true
   subnet_ids             = module.vpc.database_subnets

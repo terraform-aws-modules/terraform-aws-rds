@@ -72,13 +72,12 @@ module "db" {
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
   name                   = "COMPLETEORACLE"
   username               = "complete_oracle"
   create_random_password = true
-  random_password_length = 12
+  random_password_length = 16
   port                   = 1521
 
   multi_az               = true
