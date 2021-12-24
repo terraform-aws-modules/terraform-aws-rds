@@ -3,9 +3,7 @@ locals {
 
   monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
 
-
-  # TODO - remove coalesce() at next breaking change - adding existing name as fallback to maintain backwards compatibility
-  final_snapshot_identifier = var.skip_final_snapshot ? null : coalesce(var.final_snapshot_identifier, "${var.final_snapshot_identifier_prefix}-${var.identifier}-${random_id.snapshot_identifier[0].hex}")
+  final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${var.identifier}-${random_id.snapshot_identifier[0].hex}"
 
   # For replica instances or instances restored from snapshot, the metadata is already baked into the source
   metadata_already_exists = var.snapshot_identifier != null && var.replicate_source_db != null

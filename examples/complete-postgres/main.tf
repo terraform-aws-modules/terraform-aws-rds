@@ -76,11 +76,9 @@ module "db" {
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  name                   = "completePostgresql"
-  username               = "complete_postgresql"
-  create_random_password = true
-  random_password_length = 16
-  port                   = 5432
+  name     = "completePostgresql"
+  username = "complete_postgresql"
+  port     = 5432
 
   multi_az               = true
   subnet_ids             = module.vpc.database_subnets
@@ -145,11 +143,9 @@ module "db_default" {
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  name                   = "completePostgresql"
-  username               = "complete_postgresql"
-  create_random_password = true
-  random_password_length = 16
-  port                   = 5432
+  name     = "completePostgresql"
+  username = "complete_postgresql"
+  port     = 5432
 
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.security_group_id]

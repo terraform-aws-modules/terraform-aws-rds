@@ -82,11 +82,9 @@ module "master" {
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
 
-  name                   = "replicaMysql"
-  username               = "replica_mysql"
-  create_random_password = true
-  random_password_length = 16
-  port                   = local.port
+  name     = "replicaMysql"
+  username = "replica_mysql"
+  port     = local.port
 
   multi_az               = true
   create_db_subnet_group = false

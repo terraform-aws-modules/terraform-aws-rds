@@ -112,7 +112,7 @@ variable "port" {
 }
 
 variable "skip_final_snapshot" {
-  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier"
+  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted"
   type        = bool
   default     = false
 }
@@ -124,15 +124,9 @@ variable "snapshot_identifier" {
 }
 
 variable "copy_tags_to_snapshot" {
-  description = "On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified)"
+  description = "On delete, copy all Instance tags to the final snapshot"
   type        = bool
   default     = false
-}
-
-variable "final_snapshot_identifier" {
-  description = "The name of your final DB snapshot when this DB instance is deleted."
-  type        = string
-  default     = null
 }
 
 variable "final_snapshot_identifier_prefix" {

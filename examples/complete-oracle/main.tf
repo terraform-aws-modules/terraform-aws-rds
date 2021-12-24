@@ -74,11 +74,9 @@ module "db" {
   max_allocated_storage = 100
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
-  name                   = "COMPLETEORACLE"
-  username               = "complete_oracle"
-  create_random_password = true
-  random_password_length = 16
-  port                   = 1521
+  name     = "COMPLETEORACLE"
+  username = "complete_oracle"
+  port     = 1521
 
   multi_az               = true
   subnet_ids             = module.vpc.database_subnets
