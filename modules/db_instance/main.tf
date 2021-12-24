@@ -2,6 +2,16 @@ locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
 
   monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
+
+
+  # TODO - remove coalesce() at next breaking change - adding existing name as fallback to maintain backwards compatibility
+  final_snapshot_identifier = var.skip_final_snapshot ? null : coalesce(var.final_snapshot_identifier, "${var.final_snapshot_identifier_prefix}-${var.identifier}-${random_id.snapshot_identifier[0].hex}")
+
+  # For replica instances or instances restored from snapshot, the metadata is already baked into the source
+  metadata_already_exists = var.snapshot_identifier != null && var.replicate_source_db != null
+  username                = local.metadata_already_exists ? var.username : null
+  password                = local.metadata_already_exists ? var.password : null
+  engine                  = local.metadata_already_exists ? var.engine : null
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
@@ -22,7 +32,7 @@ resource "aws_db_instance" "this" {
 
   identifier = var.identifier
 
-  engine            = var.engine
+  engine            = local.engine
   engine_version    = var.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
@@ -30,10 +40,11 @@ resource "aws_db_instance" "this" {
   storage_encrypted = var.storage_encrypted
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
+  replica_mode      = var.replica_mode
 
   name                                = var.name
-  username                            = var.username
-  password                            = var.password
+  username                            = local.username
+  password                            = local.password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
@@ -55,11 +66,10 @@ resource "aws_db_instance" "this" {
   apply_immediately           = var.apply_immediately
   maintenance_window          = var.maintenance_window
 
-  snapshot_identifier   = var.snapshot_identifier
-  copy_tags_to_snapshot = var.copy_tags_to_snapshot
-  skip_final_snapshot   = var.skip_final_snapshot
-  # TODO - remove coalesce() at next breaking change - adding existing name as fallback to maintain backwards compatibility
-  final_snapshot_identifier = var.skip_final_snapshot ? null : coalesce(var.final_snapshot_identifier, "${var.final_snapshot_identifier_prefix}-${var.identifier}-${random_id.snapshot_identifier[0].hex}")
+  snapshot_identifier       = var.snapshot_identifier
+  copy_tags_to_snapshot     = var.copy_tags_to_snapshot
+  skip_final_snapshot       = var.skip_final_snapshot
+  final_snapshot_identifier = local.final_snapshot_identifier
 
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
@@ -78,7 +88,6 @@ resource "aws_db_instance" "this" {
   deletion_protection      = var.deletion_protection
   delete_automated_backups = var.delete_automated_backups
 
-
   dynamic "restore_to_point_in_time" {
     for_each = var.restore_to_point_in_time != null ? [var.restore_to_point_in_time] : []
 
@@ -89,7 +98,6 @@ resource "aws_db_instance" "this" {
       use_latest_restorable_time    = lookup(restore_to_point_in_time.value, "use_latest_restorable_time", null)
     }
   }
-
 
   dynamic "s3_import" {
     for_each = var.s3_import != null ? [var.s3_import] : []
@@ -122,7 +130,7 @@ resource "aws_db_instance" "this_mssql" {
 
   identifier = var.identifier
 
-  engine            = var.engine
+  engine            = local.engine
   engine_version    = var.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
@@ -130,10 +138,11 @@ resource "aws_db_instance" "this_mssql" {
   storage_encrypted = var.storage_encrypted
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
+  replica_mode      = var.replica_mode
 
   name                                = var.name
-  username                            = var.username
-  password                            = var.password
+  username                            = local.username
+  password                            = local.password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
@@ -155,11 +164,10 @@ resource "aws_db_instance" "this_mssql" {
   apply_immediately           = var.apply_immediately
   maintenance_window          = var.maintenance_window
 
-  snapshot_identifier   = var.snapshot_identifier
-  copy_tags_to_snapshot = var.copy_tags_to_snapshot
-  skip_final_snapshot   = var.skip_final_snapshot
-  # TODO - remove coalesce() at next breaking change - adding existing name as fallback to maintain backwards compatibility
-  final_snapshot_identifier = var.skip_final_snapshot ? null : coalesce(var.final_snapshot_identifier, "${var.final_snapshot_identifier_prefix}-${var.identifier}-${random_id.snapshot_identifier[0].hex}")
+  snapshot_identifier       = var.snapshot_identifier
+  copy_tags_to_snapshot     = var.copy_tags_to_snapshot
+  skip_final_snapshot       = var.skip_final_snapshot
+  final_snapshot_identifier = local.final_snapshot_identifier
 
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
@@ -179,6 +187,17 @@ resource "aws_db_instance" "this_mssql" {
   deletion_protection      = var.deletion_protection
   delete_automated_backups = var.delete_automated_backups
 
+  dynamic "restore_to_point_in_time" {
+    for_each = var.restore_to_point_in_time != null ? [var.restore_to_point_in_time] : []
+
+    content {
+      restore_time                  = lookup(restore_to_point_in_time.value, "restore_time", null)
+      source_db_instance_identifier = lookup(restore_to_point_in_time.value, "source_db_instance_identifier", null)
+      source_dbi_resource_id        = lookup(restore_to_point_in_time.value, "source_dbi_resource_id", null)
+      use_latest_restorable_time    = lookup(restore_to_point_in_time.value, "use_latest_restorable_time", null)
+    }
+  }
+
   tags = merge(
     var.tags,
     {
@@ -190,6 +209,12 @@ resource "aws_db_instance" "this_mssql" {
     create = lookup(var.timeouts, "create", null)
     delete = lookup(var.timeouts, "delete", null)
     update = lookup(var.timeouts, "update", null)
+  }
+
+  lifecycle {
+    ignore_changes = [
+      latest_restorable_time
+    ]
   }
 }
 

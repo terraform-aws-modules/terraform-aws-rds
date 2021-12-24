@@ -126,10 +126,7 @@ module "replica" {
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
 
-  # Username and password should not be set for replicas
-  username = null
-  password = null
-  port     = local.port
+  port = local.port
 
   multi_az               = false
   vpc_security_group_ids = [module.security_group.security_group_id]

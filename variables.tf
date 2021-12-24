@@ -45,6 +45,12 @@ variable "license_model" {
   default     = null
 }
 
+variable "replica_mode" {
+  description = "Specifies whether the replica is in either mounted or open-read-only mode. This attribute is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified"
+  type        = string
+  default     = null
+}
+
 variable "iam_database_authentication_enabled" {
   description = "Specifies whether or not the mappings of AWS Identity and Access Management (IAM) accounts to database accounts are enabled"
   type        = bool
