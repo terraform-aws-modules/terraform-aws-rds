@@ -1,6 +1,6 @@
 locals {
   master_password      = var.create_db_instance && var.create_random_password ? random_password.master_password[0].result : var.password
-  db_subnet_group_name = !var.cross_region_replica && var.replicate_source_db != null ? null : coalesce(var.db_subnet_group_name, module.db_subnet_group.db_subnet_group_id, var.identifier)
+  db_subnet_group_name = !var.cross_region_replica && var.replicate_source_db != null ? null : try(module.db_subnet_group.db_subnet_group_id, var.db_subnet_group_name)
 
   parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.db_parameter_group_id : var.parameter_group_name
 
