@@ -87,7 +87,6 @@ module "master" {
   port     = local.port
 
   multi_az               = true
-  create_db_subnet_group = false
   db_subnet_group_name   = module.vpc.database_subnet_group_name
   vpc_security_group_ids = [module.security_group.security_group_id]
 
@@ -136,9 +135,6 @@ module "replica" {
   backup_retention_period = 0
   skip_final_snapshot     = true
   deletion_protection     = false
-
-  # Not allowed to specify a subnet group for replicas in the same region
-  create_db_subnet_group = false
 
   tags = local.tags
 }

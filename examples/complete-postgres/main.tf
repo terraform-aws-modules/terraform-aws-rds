@@ -81,7 +81,7 @@ module "db" {
   port     = 5432
 
   multi_az               = true
-  subnet_ids             = module.vpc.database_subnets
+  db_subnet_group_name   = module.vpc.database_subnet_group
   vpc_security_group_ids = [module.security_group.security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
@@ -117,11 +117,7 @@ module "db" {
   db_parameter_group_tags = {
     "Sensitive" = "low"
   }
-  db_subnet_group_tags = {
-    "Sensitive" = "high"
-  }
 }
-
 
 module "db_default" {
   source = "../../"
@@ -147,12 +143,11 @@ module "db_default" {
   username = "complete_postgresql"
   port     = 5432
 
-  subnet_ids             = module.vpc.database_subnets
+  db_subnet_group_name   = module.vpc.database_subnet_group
   vpc_security_group_ids = [module.security_group.security_group_id]
 
-  maintenance_window = "Mon:00:00-Mon:03:00"
-  backup_window      = "03:00-06:00"
-
+  maintenance_window      = "Mon:00:00-Mon:03:00"
+  backup_window           = "03:00-06:00"
   backup_retention_period = 0
 
   tags = local.tags
@@ -164,7 +159,6 @@ module "db_disabled" {
   identifier = "${local.name}-disabled"
 
   create_db_instance        = false
-  create_db_subnet_group    = false
   create_db_parameter_group = false
   create_db_option_group    = false
 }

@@ -25,8 +25,7 @@ module "default_postgres" {
 
   parameter_group_name = "${local.name}-default-postgresql"
 
-  db_subnet_group_name   = "foo"
-  create_db_subnet_group = false
+  db_subnet_group_name = "foo"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
@@ -60,8 +59,7 @@ module "default_mysql" {
 
   parameter_group_name = "${local.name}-default-mysql"
 
-  db_subnet_group_name   = "foo"
-  create_db_subnet_group = false
+  db_subnet_group_name = "foo"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
@@ -97,8 +95,7 @@ module "default_mysql_name" {
   parameter_group_name            = "${local.name}-default-mysql-name"
   parameter_group_use_name_prefix = false
 
-  db_subnet_group_name   = "foo"
-  create_db_subnet_group = false
+  db_subnet_group_name = "foo"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
@@ -131,8 +128,7 @@ module "default_mysql_default_aws" {
   create_db_option_group    = false
   create_db_parameter_group = false
 
-  db_subnet_group_name   = "foo"
-  create_db_subnet_group = false
+  db_subnet_group_name = "foo"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
@@ -168,8 +164,7 @@ module "byo_mysql" {
   create_db_parameter_group = false
   parameter_group_name      = "bringMyOwnParameterGroupName"
 
-  db_subnet_group_name   = "foo"
-  create_db_subnet_group = false
+  db_subnet_group_name = "foo"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false

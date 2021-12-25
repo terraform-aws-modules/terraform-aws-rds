@@ -140,7 +140,6 @@ module "master" {
   port     = local.port
 
   multi_az               = true
-  create_db_subnet_group = false
   db_subnet_group_name   = module.vpc_region1.database_subnet_group_name
   vpc_security_group_ids = [module.security_group_region1.security_group_id]
 
@@ -199,8 +198,7 @@ module "replica" {
   deletion_protection     = false
 
   # Must create or specify a subnet group since the replica is on another region
-  create_db_subnet_group = false
-  db_subnet_group_name   = module.vpc_region2.database_subnet_group_name
+  db_subnet_group_name = module.vpc_region2.database_subnet_group_name
 
   tags = local.tags
 }

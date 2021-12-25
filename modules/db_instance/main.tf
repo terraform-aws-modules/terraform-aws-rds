@@ -3,13 +3,13 @@ locals {
 
   monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
 
-  final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${var.identifier}-${random_id.snapshot_identifier[0].hex}"
+  final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${var.identifier}-${try(random_id.snapshot_identifier[0].hex, "")}"
 
   # For replica instances or instances restored from snapshot, the metadata is already baked into the source
-  metadata_already_exists = var.snapshot_identifier != null && var.replicate_source_db != null
-  username                = local.metadata_already_exists ? var.username : null
-  password                = local.metadata_already_exists ? var.password : null
-  engine                  = local.metadata_already_exists ? var.engine : null
+  metadata_already_exists = var.snapshot_identifier != null || var.replicate_source_db != null
+  username                = local.metadata_already_exists ? null : var.username
+  password                = local.metadata_already_exists ? null : var.password
+  engine                  = local.metadata_already_exists ? null : var.engine
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces

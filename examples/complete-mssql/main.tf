@@ -163,7 +163,6 @@ module "db_disabled" {
   identifier = "${local.name}-disabled"
 
   create_db_instance        = false
-  create_db_subnet_group    = false
   create_db_parameter_group = false
   create_db_option_group    = false
 }

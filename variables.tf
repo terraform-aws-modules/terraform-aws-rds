@@ -138,7 +138,7 @@ variable "port" {
 variable "vpc_security_group_ids" {
   description = "List of VPC security groups to associate"
   type        = list(string)
-  default     = []
+  default     = null
 }
 
 variable "availability_zone" {
@@ -277,7 +277,7 @@ variable "db_subnet_group_tags" {
 variable "create_db_subnet_group" {
   description = "Whether to create a database subnet group"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "db_subnet_group_name" {
