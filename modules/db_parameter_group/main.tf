@@ -33,4 +33,3 @@ resource "aws_db_parameter_group" "this" {
     create_before_destroy = true
   }
 }
-

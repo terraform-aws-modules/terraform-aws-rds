@@ -1,11 +1,24 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
-<a name="unreleased"></a>
-## [Unreleased]
+### [3.4.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.4.1...v3.4.2) (2022-01-10)
 
 
+### Bug Fixes
+
+* update CI/CD process to align auto-release workflow ([#366](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/366)) ([e38aace](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/e38aaced17278567973dad4980fae8757d6a1265))
+
+# Changelog
+
+All notable changes to this project will be documented in this file
+
+## [3.4.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.4.0...v3.4.1) (2021-11-07)
+
+
+### Bug Fixes
+
+* update CI/CD process to use composite actions and auto-release workflow ([#361](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/361)) ([123ea2a](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/123ea2a136c913de0588d4820b291eb4d1d74d61))
 
 <a name="v3.4.0"></a>
 ## [v3.4.0] - 2021-09-07
