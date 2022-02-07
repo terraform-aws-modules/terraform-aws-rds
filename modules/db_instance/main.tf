@@ -1,5 +1,7 @@
 locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
+
+  monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
 }
 
 data "aws_iam_policy_document" "enhanced_monitoring" {
@@ -72,7 +74,7 @@ resource "aws_db_instance" "this" {
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
   monitoring_interval = var.monitoring_interval
-  monitoring_role_arn = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, join(", ", aws_iam_role.enhanced_monitoring.*.arn), null) : null
+  monitoring_role_arn = var.monitoring_interval > 0 ? local.monitoring_role_arn : null
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
@@ -148,7 +150,7 @@ resource "aws_db_instance" "this_mssql" {
   iops                = var.iops
   publicly_accessible = var.publicly_accessible
   monitoring_interval = var.monitoring_interval
-  monitoring_role_arn = var.monitoring_interval > 0 ? coalesce(var.monitoring_role_arn, aws_iam_role.enhanced_monitoring.*.arn, null) : null
+  monitoring_role_arn = var.monitoring_interval > 0 ? local.monitoring_role_arn : null
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
