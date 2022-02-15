@@ -10,6 +10,7 @@ locals {
   username                = local.metadata_already_exists ? null : var.username
   password                = local.metadata_already_exists ? null : var.password
   engine                  = local.metadata_already_exists ? null : var.engine
+  engine_version          = var.replicate_source_db != null ? null : var.engine_version
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
@@ -31,7 +32,7 @@ resource "aws_db_instance" "this" {
   identifier = var.identifier
 
   engine            = local.engine
-  engine_version    = var.engine_version
+  engine_version    = local.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
   storage_type      = var.storage_type

@@ -1,5 +1,5 @@
 variable "identifier" {
-  description = "The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier"
+  description = "The name of the RDS instance"
   type        = string
 }
 
@@ -121,14 +121,12 @@ variable "username" {
   description = "Username for the master DB user"
   type        = string
   default     = null
-  sensitive   = true
 }
 
 variable "password" {
   description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
   default     = null
-  sensitive   = true
 }
 
 variable "port" {
@@ -140,7 +138,7 @@ variable "port" {
 variable "vpc_security_group_ids" {
   description = "List of VPC security groups to associate"
   type        = list(string)
-  default     = null
+  default     = []
 }
 
 variable "availability_zone" {
