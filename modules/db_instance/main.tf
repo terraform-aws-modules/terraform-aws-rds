@@ -1,5 +1,5 @@
 locals {
-  is_mssql = element(split("-", var.engine), 0) == "sqlserver"
+  is_mssql = try(element(split("-", var.engine), 0) == "sqlserver", false)
 
   monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
 

@@ -72,7 +72,7 @@ variable "domain_iam_role_name" {
 variable "engine" {
   description = "The database engine to use"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "engine_version" {
@@ -297,7 +297,7 @@ variable "db_subnet_group_use_name_prefix" {
 variable "db_subnet_group_description" {
   description = "Description of the DB subnet group to create"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "subnet_ids" {
@@ -328,13 +328,13 @@ variable "parameter_group_use_name_prefix" {
 variable "parameter_group_description" {
   description = "Description of the DB parameter group to create"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "family" {
   description = "The family of the DB parameter group"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "parameters" {
@@ -345,7 +345,7 @@ variable "parameters" {
 
 # DB option group
 variable "create_db_option_group" {
-  description = "(Optional) Create a database option group"
+  description = "Create a database option group"
   type        = bool
   default     = true
 }
@@ -365,13 +365,13 @@ variable "option_group_use_name_prefix" {
 variable "option_group_description" {
   description = "The description of the option group"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "major_engine_version" {
   description = "Specifies the major version of the engine that this option group should be associated with"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "options" {
@@ -387,13 +387,13 @@ variable "create_db_instance" {
 }
 
 variable "timezone" {
-  description = "(Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information"
+  description = "Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information"
   type        = string
   default     = null
 }
 
 variable "character_set_name" {
-  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation"
+  description = "The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation"
   type        = string
   default     = null
 }
@@ -405,21 +405,15 @@ variable "enabled_cloudwatch_logs_exports" {
 }
 
 variable "timeouts" {
-  description = "(Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
+  description = "Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
   type        = map(string)
-  default = {
-    create = "40m"
-    update = "80m"
-    delete = "40m"
-  }
+  default     = {}
 }
 
 variable "option_group_timeouts" {
   description = "Define maximum timeout for deletion of `aws_db_option_group` resource"
   type        = map(string)
-  default = {
-    delete = "15m"
-  }
+  default     = {}
 }
 
 variable "deletion_protection" {

@@ -29,7 +29,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_create"></a> [create](#input\_create) | Whether to create this resource or not? | `bool` | `true` | no |
-| <a name="input_description"></a> [description](#input\_description) | The description of the DB subnet group | `string` | `""` | no |
+| <a name="input_description"></a> [description](#input\_description) | The description of the DB subnet group | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the DB subnet group | `string` | `""` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | A list of VPC subnet IDs | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to the resource | `map(string)` | `{}` | no |

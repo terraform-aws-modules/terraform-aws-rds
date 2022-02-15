@@ -5,7 +5,7 @@ variable "create" {
 }
 
 variable "identifier" {
-  description = "The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier"
+  description = "The name of the RDS instance"
   type        = string
 }
 
@@ -72,7 +72,7 @@ variable "domain_iam_role_name" {
 variable "engine" {
   description = "The database engine to use"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "engine_version" {
@@ -146,13 +146,13 @@ variable "vpc_security_group_ids" {
 variable "db_subnet_group_name" {
   description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "parameter_group_name" {
   description = "Name of the DB parameter group to associate"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "availability_zone" {
@@ -254,17 +254,17 @@ variable "tags" {
 variable "option_group_name" {
   description = "Name of the DB option group to associate."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "timezone" {
-  description = "(Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information."
+  description = "Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information."
   type        = string
   default     = null
 }
 
 variable "character_set_name" {
-  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation."
+  description = "The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation."
   type        = string
   default     = null
 }
@@ -276,13 +276,9 @@ variable "enabled_cloudwatch_logs_exports" {
 }
 
 variable "timeouts" {
-  description = "(Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
+  description = "Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
   type        = map(string)
-  default = {
-    create = "40m"
-    update = "80m"
-    delete = "40m"
-  }
+  default     = {}
 }
 
 variable "deletion_protection" {
