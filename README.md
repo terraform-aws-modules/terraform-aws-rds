@@ -14,18 +14,16 @@ Root module calls these modules which can also be used separately to create inde
 ```hcl
 module "db" {
   source  = "terraform-aws-modules/rds/aws"
-  version = "~> 3.0"
 
   identifier = "demodb"
 
   engine            = "mysql"
-  engine_version    = "5.7.19"
-  instance_class    = "db.t2.large"
+  engine_version    = "5.7.25"
+  instance_class    = "db.t3a.large"
   allocated_storage = 5
 
-  name     = "demodb"
+  db_name  = "demodb"
   username = "user"
-  password = "YourPwdShouldBeLongAndSecure!"
   port     = "3306"
 
   iam_database_authentication_enabled = true
@@ -47,7 +45,8 @@ module "db" {
   }
 
   # DB subnet group
-  subnet_ids = ["subnet-12345678", "subnet-87654321"]
+  create_db_subnet_group = true
+  subnet_ids             = ["subnet-12345678", "subnet-87654321"]
 
   # DB parameter group
   family = "mysql5.7"
@@ -105,8 +104,8 @@ module "db" {
   # Disable creation of parameter group - provide a parameter group or default to AWS default
   create_db_parameter_group = false
 
-  # Disable creation of subnet group - provide a subnet group
-  create_db_subnet_group = false
+  # Enable creation of subnet group (disabled by default)
+  create_db_subnet_group = true
 
   # Enable creation of monitoring IAM role
   create_monitoring_role = true
