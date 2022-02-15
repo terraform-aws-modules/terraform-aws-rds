@@ -77,7 +77,6 @@ module "db_instance" {
   storage_encrypted = var.storage_encrypted
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
-  replica_mode      = var.replica_mode
 
   db_name                             = var.db_name
   username                            = var.username
@@ -113,6 +112,7 @@ module "db_instance" {
   performance_insights_kms_key_id       = var.performance_insights_enabled ? var.performance_insights_kms_key_id : null
 
   replicate_source_db         = var.replicate_source_db
+  replica_mode                = var.replica_mode
   backup_retention_period     = var.backup_retention_period
   backup_window               = var.backup_window
   max_allocated_storage       = var.max_allocated_storage
