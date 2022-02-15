@@ -26,13 +26,12 @@ module "default_postgres" {
   parameter_group_name = "${local.name}-default-postgresql"
   db_subnet_group_name = "foo"
 
-  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
   engine               = "postgres"
-  engine_version       = "11.10"
-  family               = "postgres11" # DB parameter group
-  major_engine_version = "11"         # DB option group
-  instance_class       = "db.t3.large"
+  engine_version       = "14.1"
+  family               = "postgres14" # DB parameter group
+  major_engine_version = "14"         # DB option group
+  instance_class       = "db.t3a.large"
 
   allocated_storage = 20
 
@@ -58,13 +57,12 @@ module "default_mysql" {
   parameter_group_name = "${local.name}-default-mysql"
   db_subnet_group_name = "foo"
 
-  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
   engine               = "mysql"
-  engine_version       = "8.0.20"
+  engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
+  instance_class       = "db.t3a.large"
 
   allocated_storage = 20
 
@@ -94,13 +92,12 @@ module "default_mysql_name" {
 
   db_subnet_group_name = "foo"
 
-  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
   engine               = "mysql"
-  engine_version       = "8.0.20"
+  engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
+  instance_class       = "db.t3a.large"
 
   allocated_storage = 20
 
@@ -127,13 +124,12 @@ module "default_mysql_default_aws" {
 
   db_subnet_group_name = "foo"
 
-  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
   engine               = "mysql"
-  engine_version       = "8.0.20"
+  engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
+  instance_class       = "db.t3a.large"
 
   allocated_storage = 20
 
@@ -163,13 +159,12 @@ module "byo_mysql" {
 
   db_subnet_group_name = "foo"
 
-  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   create_db_instance   = false
   engine               = "mysql"
-  engine_version       = "8.0.20"
+  engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
+  instance_class       = "db.t3a.large"
 
   allocated_storage = 20
 

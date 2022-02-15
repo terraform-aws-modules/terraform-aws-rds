@@ -17,10 +17,10 @@ locals {
   }
 
   engine                = "postgres"
-  engine_version        = "11.10"
-  family                = "postgres11" # DB parameter group
-  major_engine_version  = "11"         # DB option group
-  instance_class        = "db.t3.large"
+  engine_version        = "14.1"
+  family                = "postgres14" # DB parameter group
+  major_engine_version  = "14"         # DB option group
+  instance_class        = "db.t3a.large"
   allocated_storage     = 20
   max_allocated_storage = 100
   port                  = 5432
@@ -169,8 +169,9 @@ module "replica" {
   identifier = "${local.name}-replica"
 
   # Source database. For cross-region use db_instance_arn
-  replicate_source_db  = module.master.db_instance_arn
-  cross_region_replica = true
+  replicate_source_db    = module.master.db_instance_arn
+  cross_region_replica   = true
+  create_random_password = false
 
   engine               = local.engine
   engine_version       = local.engine_version

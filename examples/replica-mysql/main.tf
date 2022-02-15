@@ -11,10 +11,10 @@ locals {
   }
 
   engine                = "mysql"
-  engine_version        = "8.0.20"
+  engine_version        = "8.0.27"
   family                = "mysql8.0" # DB parameter group
   major_engine_version  = "8.0"      # DB option group
-  instance_class        = "db.t3.large"
+  instance_class        = "db.t3a.large"
   allocated_storage     = 20
   max_allocated_storage = 100
   port                  = 3306
@@ -112,7 +112,8 @@ module "replica" {
   identifier = "${local.name}-replica"
 
   # Source database. For cross-region use db_instance_arn
-  replicate_source_db = module.master.db_instance_id
+  replicate_source_db    = module.master.db_instance_id
+  create_random_password = false
 
   engine               = local.engine
   engine_version       = local.engine_version

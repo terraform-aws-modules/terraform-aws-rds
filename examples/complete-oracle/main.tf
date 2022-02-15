@@ -64,9 +64,9 @@ module "db" {
   identifier = "demodb-oracle"
 
   engine               = "oracle-ee"
-  engine_version       = "12.1.0.2.v8"
-  family               = "oracle-ee-12.1" # DB parameter group
-  major_engine_version = "12.1"           # DB option group
+  engine_version       = "19.0.0.0.ru-2021-10.rur-2021-10.r1"
+  family               = "oracle-ee-19.0" # DB parameter group
+  major_engine_version = "19.0"           # DB option group
   instance_class       = "db.t3.large"
   license_model        = "bring-your-own-license"
 
