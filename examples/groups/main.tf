@@ -24,7 +24,6 @@ module "default_postgres" {
   # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithOptionGroups.html
 
   parameter_group_name = "${local.name}-default-postgresql"
-
   db_subnet_group_name = "foo"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
@@ -55,10 +54,8 @@ module "default_mysql" {
 
   identifier = local.name
 
-  option_group_name = "${local.name}-default-mysql"
-
+  option_group_name    = "${local.name}-default-mysql"
   parameter_group_name = "${local.name}-default-mysql"
-
   db_subnet_group_name = "foo"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts

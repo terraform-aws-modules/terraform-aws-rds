@@ -17,7 +17,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -34,7 +34,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "Enhanced monitoring MySQL example security group"
@@ -102,7 +102,7 @@ module "db" {
   allocated_storage     = 20
   max_allocated_storage = 100
 
-  name     = "completeMysql"
+  db_name  = "completeMysql"
   username = "complete_mysql"
   port     = 3306
 

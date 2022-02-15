@@ -17,7 +17,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -34,7 +34,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "Complete Oracle example security group"
@@ -74,7 +74,7 @@ module "db" {
   max_allocated_storage = 100
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
-  name     = "COMPLETEORACLE"
+  db_name  = "COMPLETEORACLE"
   username = "complete_oracle"
   port     = 1521
 

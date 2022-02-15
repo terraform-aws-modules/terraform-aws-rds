@@ -20,7 +20,7 @@ Note that this example may create resources which cost money. Run `terraform des
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.62 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.0 |
 
 ## Providers
 
@@ -32,10 +32,10 @@ No providers.
 |------|--------|---------|
 | <a name="module_master"></a> [master](#module\_master) | ../../ | n/a |
 | <a name="module_replica"></a> [replica](#module\_replica) | ../../ | n/a |
-| <a name="module_security_group_region1"></a> [security\_group\_region1](#module\_security\_group\_region1) | terraform-aws-modules/security-group/aws | ~> 4 |
-| <a name="module_security_group_region2"></a> [security\_group\_region2](#module\_security\_group\_region2) | terraform-aws-modules/security-group/aws | ~> 4 |
-| <a name="module_vpc_region1"></a> [vpc\_region1](#module\_vpc\_region1) | terraform-aws-modules/vpc/aws | ~> 2.0 |
-| <a name="module_vpc_region2"></a> [vpc\_region2](#module\_vpc\_region2) | terraform-aws-modules/vpc/aws | ~> 2.0 |
+| <a name="module_security_group_region1"></a> [security\_group\_region1](#module\_security\_group\_region1) | terraform-aws-modules/security-group/aws | ~> 4.0 |
+| <a name="module_security_group_region2"></a> [security\_group\_region2](#module\_security\_group\_region2) | terraform-aws-modules/security-group/aws | ~> 4.0 |
+| <a name="module_vpc_region1"></a> [vpc\_region1](#module\_vpc\_region1) | terraform-aws-modules/vpc/aws | ~> 3.0 |
+| <a name="module_vpc_region2"></a> [vpc\_region2](#module\_vpc\_region2) | terraform-aws-modules/vpc/aws | ~> 3.0 |
 
 ## Resources
 

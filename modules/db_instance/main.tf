@@ -40,7 +40,7 @@ resource "aws_db_instance" "this" {
   license_model     = var.license_model
   replica_mode      = var.replica_mode
 
-  name                                = var.name
+  db_name                             = var.db_name
   username                            = local.username
   password                            = local.password
   port                                = var.port
@@ -109,12 +109,7 @@ resource "aws_db_instance" "this" {
     }
   }
 
-  tags = merge(
-    var.tags,
-    {
-      "Name" = format("%s", var.identifier)
-    },
-  )
+  tags = var.tags
 
   timeouts {
     create = lookup(var.timeouts, "create", null)
@@ -144,7 +139,7 @@ resource "aws_db_instance" "this_mssql" {
   license_model     = var.license_model
   replica_mode      = var.replica_mode
 
-  name                                = var.name
+  db_name                             = var.db_name
   username                            = local.username
   password                            = local.password
   port                                = var.port
@@ -202,12 +197,7 @@ resource "aws_db_instance" "this_mssql" {
     }
   }
 
-  tags = merge(
-    var.tags,
-    {
-      "Name" = format("%s", var.identifier)
-    },
-  )
+  tags = var.tags
 
   timeouts {
     create = lookup(var.timeouts, "create", null)

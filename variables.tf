@@ -111,7 +111,7 @@ variable "instance_class" {
   default     = null
 }
 
-variable "name" {
+variable "db_name" {
   description = "The DB name to create. If omitted, no database is created initially"
   type        = string
   default     = null
@@ -121,12 +121,14 @@ variable "username" {
   description = "Username for the master DB user"
   type        = string
   default     = null
+  sensitive   = true
 }
 
 variable "password" {
   description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
   default     = null
+  sensitive   = true
 }
 
 variable "port" {

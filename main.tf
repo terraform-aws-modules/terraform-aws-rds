@@ -79,7 +79,7 @@ module "db_instance" {
   license_model     = var.license_model
   replica_mode      = var.replica_mode
 
-  name                                = var.name
+  db_name                             = var.db_name
   username                            = var.username
   password                            = local.master_password
   port                                = var.port

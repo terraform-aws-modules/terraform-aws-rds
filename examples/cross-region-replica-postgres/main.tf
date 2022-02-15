@@ -33,7 +33,7 @@ locals {
 
 module "vpc_region1" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.100.0.0/18"
@@ -50,7 +50,7 @@ module "vpc_region1" {
 
 module "security_group_region1" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "Replica PostgreSQL example security group"
@@ -72,7 +72,7 @@ module "security_group_region1" {
 
 module "vpc_region2" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   providers = {
     aws = aws.region2
@@ -93,7 +93,7 @@ module "vpc_region2" {
 
 module "security_group_region2" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   providers = {
     aws = aws.region2
@@ -135,7 +135,7 @@ module "master" {
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
 
-  name     = "replicaPostgresql"
+  db_name  = "replicaPostgresql"
   username = "replica_postgresql"
   port     = local.port
 
