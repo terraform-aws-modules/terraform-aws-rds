@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.5.0...v4.0.0) (2022-02-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update default values for security posture improvement (#369)
+
+### Features
+
+* Update default values for security posture improvement ([#369](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/369)) ([9149ec1](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/9149ec147327fbe5a7675ac48e9e641b5d7ec6e1))
+
 ## [3.5.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.4.2...v3.5.0) (2022-01-12)
 
 
