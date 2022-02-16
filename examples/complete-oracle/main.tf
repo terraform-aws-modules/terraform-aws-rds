@@ -17,7 +17,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -34,7 +34,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "Complete Oracle example security group"
@@ -64,22 +64,19 @@ module "db" {
   identifier = "demodb-oracle"
 
   engine               = "oracle-ee"
-  engine_version       = "12.1.0.2.v8"
-  family               = "oracle-ee-12.1" # DB parameter group
-  major_engine_version = "12.1"           # DB option group
+  engine_version       = "19.0.0.0.ru-2021-10.rur-2021-10.r1"
+  family               = "oracle-ee-19.0" # DB parameter group
+  major_engine_version = "19.0"           # DB option group
   instance_class       = "db.t3.large"
   license_model        = "bring-your-own-license"
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
-  name                   = "COMPLETEORACLE"
-  username               = "complete_oracle"
-  create_random_password = true
-  random_password_length = 12
-  port                   = 1521
+  db_name  = "COMPLETEORACLE"
+  username = "complete_oracle"
+  port     = 1521
 
   multi_az               = true
   subnet_ids             = module.vpc.database_subnets
@@ -109,7 +106,6 @@ module "db_disabled" {
   identifier = "${local.name}-disabled"
 
   create_db_instance        = false
-  create_db_subnet_group    = false
   create_db_parameter_group = false
   create_db_option_group    = false
 }

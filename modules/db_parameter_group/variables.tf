@@ -19,7 +19,7 @@ variable "use_name_prefix" {
 variable "description" {
   description = "The description of the DB parameter group"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "family" {

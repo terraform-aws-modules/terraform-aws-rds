@@ -5,14 +5,14 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12.26 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 2.49 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.62 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.49 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.62 |
 
 ## Modules
 
@@ -29,7 +29,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_create"></a> [create](#input\_create) | Whether to create this resource or not? | `bool` | `true` | no |
-| <a name="input_description"></a> [description](#input\_description) | The description of the DB parameter group | `string` | `""` | no |
+| <a name="input_description"></a> [description](#input\_description) | The description of the DB parameter group | `string` | `null` | no |
 | <a name="input_family"></a> [family](#input\_family) | The family of the DB parameter group | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the DB parameter group | `string` | `""` | no |
 | <a name="input_parameters"></a> [parameters](#input\_parameters) | A list of DB parameter maps to apply | `list(map(string))` | `[]` | no |

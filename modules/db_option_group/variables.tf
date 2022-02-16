@@ -19,7 +19,7 @@ variable "use_name_prefix" {
 variable "option_group_description" {
   description = "The description of the option group"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "engine_name" {
@@ -43,9 +43,7 @@ variable "options" {
 variable "timeouts" {
   description = "Define maximum timeout for deletion of `aws_db_option_group` resource"
   type        = map(string)
-  default = {
-    delete = "15m"
-  }
+  default     = {}
 }
 
 variable "tags" {

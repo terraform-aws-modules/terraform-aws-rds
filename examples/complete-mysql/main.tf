@@ -17,7 +17,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -34,7 +34,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "Complete MySQL example security group"
@@ -65,18 +65,16 @@ module "db" {
 
   # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
   engine               = "mysql"
-  engine_version       = "8.0.20"
+  engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
+  instance_class       = "db.t3a.large"
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
-  name     = "completeMysql"
+  db_name  = "completeMysql"
   username = "complete_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
   port     = 3306
 
   multi_az               = true
@@ -132,18 +130,16 @@ module "db_default" {
 
   # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
   engine               = "mysql"
-  engine_version       = "8.0.20"
+  engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
+  instance_class       = "db.t3a.large"
 
   allocated_storage = 20
 
-  name                   = "completeMysql"
-  username               = "complete_mysql"
-  create_random_password = true
-  random_password_length = 12
-  port                   = 3306
+  db_name  = "completeMysql"
+  username = "complete_mysql"
+  port     = 3306
 
   subnet_ids             = module.vpc.database_subnets
   vpc_security_group_ids = [module.security_group.security_group_id]
@@ -162,7 +158,6 @@ module "db_disabled" {
   identifier = "${local.name}-disabled"
 
   create_db_instance        = false
-  create_db_subnet_group    = false
   create_db_parameter_group = false
   create_db_option_group    = false
 }

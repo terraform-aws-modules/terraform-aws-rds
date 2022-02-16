@@ -11,10 +11,10 @@ locals {
   }
 
   engine                = "mysql"
-  engine_version        = "8.0.20"
+  engine_version        = "8.0.27"
   family                = "mysql8.0" # DB parameter group
   major_engine_version  = "8.0"      # DB option group
-  instance_class        = "db.t3.large"
+  instance_class        = "db.t3a.large"
   allocated_storage     = 20
   max_allocated_storage = 100
   port                  = 3306
@@ -27,7 +27,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -44,7 +44,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "Replica MySQL example security group"
@@ -81,15 +81,12 @@ module "master" {
 
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
-  storage_encrypted     = false
 
-  name     = "replicaMysql"
+  db_name  = "replicaMysql"
   username = "replica_mysql"
-  password = "YourPwdShouldBeLongAndSecure!"
   port     = local.port
 
   multi_az               = true
-  create_db_subnet_group = false
   db_subnet_group_name   = module.vpc.database_subnet_group_name
   vpc_security_group_ids = [module.security_group.security_group_id]
 
@@ -115,7 +112,8 @@ module "replica" {
   identifier = "${local.name}-replica"
 
   # Source database. For cross-region use db_instance_arn
-  replicate_source_db = module.master.db_instance_id
+  replicate_source_db    = module.master.db_instance_id
+  create_random_password = false
 
   engine               = local.engine
   engine_version       = local.engine_version
@@ -125,12 +123,8 @@ module "replica" {
 
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
-  storage_encrypted     = false
 
-  # Username and password should not be set for replicas
-  username = null
-  password = null
-  port     = local.port
+  port = local.port
 
   multi_az               = false
   vpc_security_group_ids = [module.security_group.security_group_id]
@@ -142,9 +136,6 @@ module "replica" {
   backup_retention_period = 0
   skip_final_snapshot     = true
   deletion_protection     = false
-
-  # Not allowed to specify a subnet group for replicas in the same region
-  create_db_subnet_group = false
 
   tags = local.tags
 }

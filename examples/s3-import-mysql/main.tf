@@ -21,7 +21,7 @@ resource "random_pet" "this" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.0.0.0/18"
@@ -41,7 +41,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "S3 import VPC example security group"
@@ -80,16 +80,24 @@ module "security_group" {
   tags = local.tags
 }
 
-module "import_s3_bucket" {
-  source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 2.0"
-
+# Temporary work around until S3 module is updated to support v4.x
+resource "aws_s3_bucket" "import" {
   bucket        = "${local.name}-${random_pet.this.id}"
-  acl           = "private"
   force_destroy = true
 
   tags = local.tags
 }
+
+# module "import_s3_bucket" {
+#   source  = "terraform-aws-modules/s3-bucket/aws"
+#   version = "~> 2.0"
+
+#   bucket        = "${local.name}-${random_pet.this.id}"
+#   acl           = "private"
+#   force_destroy = true
+
+#   tags = local.tags
+# }
 
 data "aws_iam_policy_document" "s3_import_assume" {
   statement {
@@ -121,7 +129,7 @@ data "aws_iam_policy_document" "s3_import" {
     ]
 
     resources = [
-      module.import_s3_bucket.s3_bucket_arn
+      aws_s3_bucket.import.arn
     ]
   }
 
@@ -131,7 +139,7 @@ data "aws_iam_policy_document" "s3_import" {
     ]
 
     resources = [
-      "${module.import_s3_bucket.s3_bucket_arn}/*",
+      "${aws_s3_bucket.import.arn}/*",
     ]
   }
 }
@@ -145,7 +153,7 @@ resource "aws_iam_role_policy" "s3_import" {
   # also needs this role so this is an easy way of ensuring the backup is uploaded before
   # the instance creation starts
   provisioner "local-exec" {
-    command = "unzip backup.zip && aws s3 sync ${path.module}/backup s3://${module.import_s3_bucket.s3_bucket_id}"
+    command = "unzip backup.zip && aws s3 sync ${path.module}/backup s3://${aws_s3_bucket.import.id}"
   }
 }
 
@@ -160,24 +168,22 @@ module "db" {
 
   # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
   engine               = "mysql"
-  engine_version       = "8.0.20"
+  engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3.large"
+  instance_class       = "db.t3a.large"
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
-  name     = "s3Import"
+  db_name  = "s3Import"
   username = "s3_import_user"
-  password = "YourPwdShouldBeLongAndSecure!"
   port     = 3306
 
   # S3 import https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
   s3_import = {
-    source_engine_version = "8.0.20"
-    bucket_name           = module.import_s3_bucket.s3_bucket_id
+    source_engine_version = "8.0.27"
+    bucket_name           = aws_s3_bucket.import.id
     ingestion_role        = aws_iam_role.s3_import.arn
   }
 

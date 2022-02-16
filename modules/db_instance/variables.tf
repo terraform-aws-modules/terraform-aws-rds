@@ -5,7 +5,7 @@ variable "create" {
 }
 
 variable "identifier" {
-  description = "The name of the RDS instance, if omitted, Terraform will assign a random, unique identifier"
+  description = "The name of the RDS instance"
   type        = string
 }
 
@@ -24,7 +24,7 @@ variable "storage_type" {
 variable "storage_encrypted" {
   description = "Specifies whether the DB instance is encrypted"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kms_key_id" {
@@ -41,6 +41,12 @@ variable "replicate_source_db" {
 
 variable "license_model" {
   description = "License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1"
+  type        = string
+  default     = null
+}
+
+variable "replica_mode" {
+  description = "Specifies whether the replica is in either mounted or open-read-only mode. This attribute is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified"
   type        = string
   default     = null
 }
@@ -66,7 +72,7 @@ variable "domain_iam_role_name" {
 variable "engine" {
   description = "The database engine to use"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "engine_version" {
@@ -81,7 +87,7 @@ variable "instance_class" {
   default     = null
 }
 
-variable "name" {
+variable "db_name" {
   description = "The DB name to create. If omitted, no database is created initially"
   type        = string
   default     = null
@@ -106,7 +112,7 @@ variable "port" {
 }
 
 variable "skip_final_snapshot" {
-  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted, using the value from final_snapshot_identifier"
+  description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted"
   type        = bool
   default     = false
 }
@@ -118,15 +124,9 @@ variable "snapshot_identifier" {
 }
 
 variable "copy_tags_to_snapshot" {
-  description = "On delete, copy all Instance tags to the final snapshot (if final_snapshot_identifier is specified)"
+  description = "On delete, copy all Instance tags to the final snapshot"
   type        = bool
   default     = false
-}
-
-variable "final_snapshot_identifier" {
-  description = "The name of your final DB snapshot when this DB instance is deleted."
-  type        = string
-  default     = null
 }
 
 variable "final_snapshot_identifier_prefix" {
@@ -144,13 +144,13 @@ variable "vpc_security_group_ids" {
 variable "db_subnet_group_name" {
   description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "parameter_group_name" {
   description = "Name of the DB parameter group to associate"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "availability_zone" {
@@ -252,17 +252,17 @@ variable "tags" {
 variable "option_group_name" {
   description = "Name of the DB option group to associate."
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "timezone" {
-  description = "(Optional) Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information."
+  description = "Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information."
   type        = string
   default     = null
 }
 
 variable "character_set_name" {
-  description = "(Optional) The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation."
+  description = "The character set name to use for DB encoding in Oracle instances. This can't be changed. See Oracle Character Sets Supported in Amazon RDS and Collations and Character Sets for Microsoft SQL Server for more information. This can only be set on creation."
   type        = string
   default     = null
 }
@@ -274,13 +274,9 @@ variable "enabled_cloudwatch_logs_exports" {
 }
 
 variable "timeouts" {
-  description = "(Optional) Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
+  description = "Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
   type        = map(string)
-  default = {
-    create = "40m"
-    update = "80m"
-    delete = "40m"
-  }
+  default     = {}
 }
 
 variable "deletion_protection" {

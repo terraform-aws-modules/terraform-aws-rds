@@ -17,10 +17,10 @@ locals {
   }
 
   engine                = "postgres"
-  engine_version        = "11.10"
-  family                = "postgres11" # DB parameter group
-  major_engine_version  = "11"         # DB option group
-  instance_class        = "db.t3.large"
+  engine_version        = "14.1"
+  family                = "postgres14" # DB parameter group
+  major_engine_version  = "14"         # DB option group
+  instance_class        = "db.t3a.large"
   allocated_storage     = 20
   max_allocated_storage = 100
   port                  = 5432
@@ -33,7 +33,7 @@ locals {
 
 module "vpc_region1" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.100.0.0/18"
@@ -50,7 +50,7 @@ module "vpc_region1" {
 
 module "security_group_region1" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "Replica PostgreSQL example security group"
@@ -72,7 +72,7 @@ module "security_group_region1" {
 
 module "vpc_region2" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2.0"
+  version = "~> 3.0"
 
   providers = {
     aws = aws.region2
@@ -93,7 +93,7 @@ module "vpc_region2" {
 
 module "security_group_region2" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   providers = {
     aws = aws.region2
@@ -134,15 +134,12 @@ module "master" {
 
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
-  storage_encrypted     = false
 
-  name     = "replicaPostgresql"
+  db_name  = "replicaPostgresql"
   username = "replica_postgresql"
-  password = "YourPwdShouldBeLongAndSecure!"
   port     = local.port
 
   multi_az               = true
-  create_db_subnet_group = false
   db_subnet_group_name   = module.vpc_region1.database_subnet_group_name
   vpc_security_group_ids = [module.security_group_region1.security_group_id]
 
@@ -172,8 +169,9 @@ module "replica" {
   identifier = "${local.name}-replica"
 
   # Source database. For cross-region use db_instance_arn
-  replicate_source_db  = module.master.db_instance_arn
-  cross_region_replica = true
+  replicate_source_db    = module.master.db_instance_arn
+  cross_region_replica   = true
+  create_random_password = false
 
   engine               = local.engine
   engine_version       = local.engine_version
@@ -183,7 +181,6 @@ module "replica" {
 
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
-  storage_encrypted     = false
 
   # Username and password should not be set for replicas
   username = null
@@ -202,8 +199,7 @@ module "replica" {
   deletion_protection     = false
 
   # Must create or specify a subnet group since the replica is on another region
-  create_db_subnet_group = false
-  db_subnet_group_name   = module.vpc_region2.database_subnet_group_name
+  db_subnet_group_name = module.vpc_region2.database_subnet_group_name
 
   tags = local.tags
 }

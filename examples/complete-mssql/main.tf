@@ -17,7 +17,7 @@ locals {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 2"
+  version = "~> 3.0"
 
   name = local.name
   cidr = "10.99.0.0/18"
@@ -34,7 +34,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4"
+  version = "~> 4.0"
 
   name        = local.name
   description = "Complete SqlServer example security group"
@@ -116,20 +116,16 @@ module "db" {
   identifier = local.name
 
   engine               = "sqlserver-ex"
-  engine_version       = "15.00.4073.23.v1"
+  engine_version       = "15.00.4153.1.v1"
   family               = "sqlserver-ex-15.0" # DB parameter group
   major_engine_version = "15.00"             # DB option group
   instance_class       = "db.t3.large"
 
   allocated_storage     = 20
   max_allocated_storage = 100
-  storage_encrypted     = false
 
-  name                   = null
-  username               = "complete_mssql"
-  create_random_password = true
-  random_password_length = 12
-  port                   = 1433
+  username = "complete_mssql"
+  port     = 1433
 
   domain               = aws_directory_service_directory.demo.id
   domain_iam_role_name = aws_iam_role.rds_ad_auth.name
@@ -166,7 +162,6 @@ module "db_disabled" {
   identifier = "${local.name}-disabled"
 
   create_db_instance        = false
-  create_db_subnet_group    = false
   create_db_parameter_group = false
   create_db_option_group    = false
 }
