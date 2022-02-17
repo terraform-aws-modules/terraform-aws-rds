@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.1.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.0.0...v4.1.0) (2022-02-17)
+
+
+### Features
+
+* Add support for managing CloudWatch log groups ([#380](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/380)) ([761fb7f](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/761fb7f5b8d7bb8ae99c54d8fa143c40d0772c0a))
+
 ## [4.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.5.0...v4.0.0) (2022-02-16)
 
 
