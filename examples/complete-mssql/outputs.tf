@@ -94,3 +94,8 @@ output "db_enhanced_monitoring_iam_role_arn" {
   description = "The Amazon Resource Name (ARN) specifying the monitoring role"
   value       = module.db.enhanced_monitoring_iam_role_arn
 }
+
+output "db_instance_cloudwatch_log_groups" {
+  description = "Map of CloudWatch log groups created and their attributes"
+  value       = module.db.db_instance_cloudwatch_log_groups
+}

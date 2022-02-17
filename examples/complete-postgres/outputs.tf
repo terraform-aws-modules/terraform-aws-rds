@@ -85,6 +85,11 @@ output "db_enhanced_monitoring_iam_role_arn" {
   value       = module.db.enhanced_monitoring_iam_role_arn
 }
 
+output "db_instance_cloudwatch_log_groups" {
+  description = "Map of CloudWatch log groups created and their attributes"
+  value       = module.db.db_instance_cloudwatch_log_groups
+}
+
 # Default
 output "db_default_instance_address" {
   description = "The address of the RDS instance"
@@ -166,4 +171,9 @@ output "db_default_parameter_group_id" {
 output "db_default_parameter_group_arn" {
   description = "The ARN of the db parameter group"
   value       = module.db_default.db_parameter_group_arn
+}
+
+output "db_default_instance_cloudwatch_log_groups" {
+  description = "Map of CloudWatch log groups created and their attributes"
+  value       = module.db_default.db_instance_cloudwatch_log_groups
 }

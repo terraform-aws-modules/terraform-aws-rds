@@ -121,3 +121,12 @@ output "db_master_password" {
   value       = module.db_instance.db_instance_master_password
   sensitive   = true
 }
+
+################################################################################
+# CloudWatch Log Group
+################################################################################
+
+output "db_instance_cloudwatch_log_groups" {
+  description = "Map of CloudWatch log groups created and their attributes"
+  value       = module.db_instance.db_instance_cloudwatch_log_groups
+}

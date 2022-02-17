@@ -71,6 +71,11 @@ output "master_db_subnet_group_arn" {
   value       = module.master.db_subnet_group_arn
 }
 
+output "master_db_instance_cloudwatch_log_groups" {
+  description = "Map of CloudWatch log groups created and their attributes"
+  value       = module.master.db_instance_cloudwatch_log_groups
+}
+
 # Replica
 output "replica_db_instance_address" {
   description = "The address of the RDS instance"
@@ -126,4 +131,9 @@ output "replica_db_instance_username" {
 output "replica_db_instance_port" {
   description = "The database port"
   value       = module.replica.db_instance_port
+}
+
+output "replica_db_instance_cloudwatch_log_groups" {
+  description = "Map of CloudWatch log groups created and their attributes"
+  value       = module.replica.db_instance_cloudwatch_log_groups
 }
