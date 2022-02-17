@@ -33,12 +33,6 @@ variable "replicate_source_db" {
   default     = null
 }
 
-variable "cross_region_replica" {
-  description = "Specifies if the replica should be cross region. It allows the use of a subnet group in a region different than the master instance"
-  type        = bool
-  default     = false
-}
-
 variable "license_model" {
   description = "License model information for this DB instance. Optional, but required for some DB engines, i.e. Oracle SE1"
   type        = string
@@ -466,4 +460,26 @@ variable "random_password_length" {
   description = "Length of random password to create"
   type        = number
   default     = 16
+}
+
+################################################################################
+# CloudWatch Log Group
+################################################################################
+
+variable "create_cloudwatch_log_group" {
+  description = "Determines whether a CloudWatch log group is created for each `enabled_cloudwatch_logs_exports`"
+  type        = bool
+  default     = false
+}
+
+variable "cloudwatch_log_group_retention_in_days" {
+  description = "The number of days to retain CloudWatch logs for the DB instance"
+  type        = number
+  default     = 7
+}
+
+variable "cloudwatch_log_group_kms_key_id" {
+  description = "The ARN of the KMS Key to use when encrypting log data"
+  type        = string
+  default     = null
 }

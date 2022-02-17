@@ -14,7 +14,7 @@ locals {
   engine_version        = "14.1"
   family                = "postgres14" # DB parameter group
   major_engine_version  = "14"         # DB option group
-  instance_class        = "db.t3a.large"
+  instance_class        = "db.t4g.large"
   allocated_storage     = 20
   max_allocated_storage = 100
   port                  = 5432
