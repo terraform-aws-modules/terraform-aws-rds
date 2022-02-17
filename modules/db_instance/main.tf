@@ -1,6 +1,4 @@
 locals {
-  is_mssql = try(element(split("-", var.engine), 0) == "sqlserver", false)
-
   monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
 
   final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${var.identifier}-${try(random_id.snapshot_identifier[0].hex, "")}"
@@ -27,7 +25,7 @@ resource "random_id" "snapshot_identifier" {
 }
 
 resource "aws_db_instance" "this" {
-  count = var.create && false == local.is_mssql ? 1 : 0
+  count = var.create ? 1 : 0
 
   identifier = var.identifier
 
