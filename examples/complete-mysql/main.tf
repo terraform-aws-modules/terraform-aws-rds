@@ -68,7 +68,7 @@ module "db" {
   engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage     = 20
   max_allocated_storage = 100
@@ -84,6 +84,7 @@ module "db" {
   maintenance_window              = "Mon:00:00-Mon:03:00"
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["general"]
+  create_cloudwatch_log_group     = true
 
   backup_retention_period = 0
   skip_final_snapshot     = true
@@ -133,7 +134,7 @@ module "db_default" {
   engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage = 20
 

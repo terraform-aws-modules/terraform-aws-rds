@@ -27,7 +27,8 @@ module "vpc" {
   private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
   database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
 
-  create_database_subnet_group = true
+  create_database_subnet_group       = true
+  create_database_subnet_route_table = true
 
   tags = local.tags
 }
@@ -68,7 +69,7 @@ module "db" {
   engine_version       = "14.1"
   family               = "postgres14" # DB parameter group
   major_engine_version = "14"         # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage     = 20
   max_allocated_storage = 100
@@ -87,6 +88,7 @@ module "db" {
   maintenance_window              = "Mon:00:00-Mon:03:00"
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+  create_cloudwatch_log_group     = true
 
   backup_retention_period = 0
   skip_final_snapshot     = true
@@ -132,7 +134,7 @@ module "db_default" {
   engine_version       = "14.1"
   family               = "postgres14" # DB parameter group
   major_engine_version = "14"         # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage = 20
 

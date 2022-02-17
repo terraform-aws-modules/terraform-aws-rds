@@ -31,7 +31,7 @@ module "default_postgres" {
   engine_version       = "14.1"
   family               = "postgres14" # DB parameter group
   major_engine_version = "14"         # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage = 20
 
@@ -62,7 +62,7 @@ module "default_mysql" {
   engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage = 20
 
@@ -97,7 +97,7 @@ module "default_mysql_name" {
   engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage = 20
 
@@ -129,7 +129,7 @@ module "default_mysql_default_aws" {
   engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage = 20
 
@@ -164,7 +164,7 @@ module "byo_mysql" {
   engine_version       = "8.0.27"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.t3a.large"
+  instance_class       = "db.t4g.large"
 
   allocated_storage = 20
 

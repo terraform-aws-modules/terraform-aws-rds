@@ -20,7 +20,7 @@ locals {
   engine_version        = "14.1"
   family                = "postgres14" # DB parameter group
   major_engine_version  = "14"         # DB option group
-  instance_class        = "db.t3a.large"
+  instance_class        = "db.t4g.large"
   allocated_storage     = 20
   max_allocated_storage = 100
   port                  = 5432
@@ -170,7 +170,6 @@ module "replica" {
 
   # Source database. For cross-region use db_instance_arn
   replicate_source_db    = module.master.db_instance_arn
-  cross_region_replica   = true
   create_random_password = false
 
   engine               = local.engine
@@ -198,7 +197,7 @@ module "replica" {
   skip_final_snapshot     = true
   deletion_protection     = false
 
-  # Must create or specify a subnet group since the replica is on another region
+  # Specify a subnet group created in the replica region
   db_subnet_group_name = module.vpc_region2.database_subnet_group_name
 
   tags = local.tags
