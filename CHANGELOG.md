@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.1.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.0...v4.1.1) (2022-02-17)
+
+
+### Bug Fixes
+
+* Remove check for `is_mssql` which is no longer valid ([#382](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/382)) ([f4481e6](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/f4481e6f4c21452840627b8cd229753229c04e5c))
+
 ## [4.1.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.0.0...v4.1.0) (2022-02-17)
 
 
