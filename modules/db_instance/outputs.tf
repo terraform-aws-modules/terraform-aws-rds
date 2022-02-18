@@ -79,7 +79,7 @@ output "db_instance_domain_iam_role_name" {
   value       = try(aws_db_instance.this[0].domain_iam_role_name, "")
 }
 
-output "db_instance_master_password" {
+output "db_instance_password" {
   description = "The master password"
   value       = try(aws_db_instance.this[0].password, "")
   sensitive   = true

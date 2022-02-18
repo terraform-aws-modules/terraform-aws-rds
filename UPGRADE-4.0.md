@@ -43,6 +43,7 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 2. Renamed variables:
 
     - `name` (deprecated) -> `db_name`
+    - `master_password` -> `password`
 
 3. Added variables:
 
@@ -54,7 +55,7 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 
 5. Renamed outputs:
 
-    - None
+    - `db_instance_master_password` -> `db_instance_password`
 
 6. Added outputs:
 
@@ -88,7 +89,7 @@ module "asg" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 4.0"
 
-  master_password        = "MySuperStrongPassword!"
+  password               = "MySuperStrongPassword!"
   # Set random password creation to false if providing your own password as input
   create_random_password = false
 
