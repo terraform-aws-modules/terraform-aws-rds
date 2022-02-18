@@ -1,5 +1,5 @@
 locals {
-  create_random_password = var.create_db_instance && var.create_random_password && var.snapshot_identifier == null
+  create_random_password = var.create_db_instance && var.create_random_password && var.replicate_source_db == null
   password               = try(random_password.master_password[0].result, var.password)
 
   db_subnet_group_name    = var.create_db_subnet_group ? module.db_subnet_group.db_subnet_group_id : var.db_subnet_group_name
