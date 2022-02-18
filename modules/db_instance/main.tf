@@ -3,12 +3,11 @@ locals {
 
   final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${var.identifier}-${try(random_id.snapshot_identifier[0].hex, "")}"
 
-  # For replica instances or instances restored from snapshot, the metadata is already baked into the source
-  metadata_already_exists = var.snapshot_identifier != null || var.replicate_source_db != null
-  username                = local.metadata_already_exists ? null : var.username
-  password                = local.metadata_already_exists ? null : var.password
-  engine                  = local.metadata_already_exists ? null : var.engine
-  engine_version          = var.replicate_source_db != null ? null : var.engine_version
+  # Replicas will use source metadata
+  username       = var.replicate_source_db != null ? null : var.username
+  password       = var.replicate_source_db != null ? null : var.password
+  engine         = var.replicate_source_db != null ? null : var.engine
+  engine_version = var.replicate_source_db != null ? null : var.engine_version
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces

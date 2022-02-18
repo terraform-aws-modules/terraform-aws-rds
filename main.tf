@@ -1,6 +1,6 @@
 locals {
-  create_random_password = var.create_db_instance && var.create_random_password && var.snapshot_identifier == null
-  master_password        = try(random_password.master_password[0].result, var.password)
+  create_random_password = var.create_db_instance && var.create_random_password && var.replicate_source_db == null
+  password               = try(random_password.master_password[0].result, var.password)
 
   db_subnet_group_name    = var.create_db_subnet_group ? module.db_subnet_group.db_subnet_group_id : var.db_subnet_group_name
   parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.db_parameter_group_id : var.parameter_group_name
@@ -80,7 +80,7 @@ module "db_instance" {
 
   db_name                             = var.db_name
   username                            = var.username
-  password                            = local.master_password
+  password                            = local.password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name

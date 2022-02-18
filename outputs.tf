@@ -61,7 +61,7 @@ output "db_instance_username" {
 
 output "db_instance_password" {
   description = "The database password (this password may be old, because Terraform doesn't track it after initial creation)"
-  value       = local.master_password
+  value       = local.password
   sensitive   = true
 }
 
@@ -114,12 +114,6 @@ output "db_option_group_id" {
 output "db_option_group_arn" {
   description = "The ARN of the db option group"
   value       = module.db_option_group.db_option_group_arn
-}
-
-output "db_master_password" {
-  description = "The master password"
-  value       = module.db_instance.db_instance_master_password
-  sensitive   = true
 }
 
 ################################################################################
