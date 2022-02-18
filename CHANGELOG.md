@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.1.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.1...v4.1.2) (2022-02-18)
+
+
+### Bug Fixes
+
+* Correct usage of `password` and allow restored snapshots to set password, username, etc. ([#384](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/384)) ([81db512](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/81db51292cbbb1a23b3649814691498514fbd273))
+
 ### [4.1.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.0...v4.1.1) (2022-02-17)
 
 
