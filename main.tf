@@ -1,6 +1,6 @@
 locals {
-  create_random_password = var.create_db_instance && var.create_random_password && var.replicate_source_db == null
-  password               = try(random_password.master_password[0].result, var.password)
+  create_random_password = var.create_db_instance && var.create_random_password
+  password               = local.create_random_password ? random_password.master_password[0].result : var.password
 
   db_subnet_group_name    = var.create_db_subnet_group ? module.db_subnet_group.db_subnet_group_id : var.db_subnet_group_name
   parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.db_parameter_group_id : var.parameter_group_name
@@ -10,7 +10,6 @@ locals {
 }
 
 resource "random_password" "master_password" {
-  # We don't need to create a random password for instances that are replicas or restored from a snapshot
   count = local.create_random_password ? 1 : 0
 
   length  = var.random_password_length
