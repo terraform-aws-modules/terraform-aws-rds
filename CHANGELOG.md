@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [4.1.3](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.2...v4.1.3) (2022-02-23)
+
+
+### Bug Fixes
+
+* Correct random password lifecycle by eagerly creating random password value ([#388](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/388)) ([b41a0a5](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/b41a0a5ef6d3b8ee590ec22507c3af85df985521))
+
 ### [4.1.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.1...v4.1.2) (2022-02-18)
 
 
