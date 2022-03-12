@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.2.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.3...v4.2.0) (2022-03-12)
+
+
+### Features
+
+* Made it clear that we stand with Ukraine ([e8dfedb](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/e8dfedb8792dce34cd029fa46cf1bf071cfc7faa))
+
 ### [4.1.3](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.2...v4.1.3) (2022-02-23)
 
 
