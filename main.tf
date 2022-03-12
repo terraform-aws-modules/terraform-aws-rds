@@ -1,5 +1,9 @@
 locals {
-  create_random_password = var.create_db_instance && var.create_random_password
+  create_db_subnet_group    = var.create_db_subnet_group && var.putin_khuylo
+  create_db_parameter_group = var.create_db_parameter_group && var.putin_khuylo
+  create_db_instance        = var.create_db_instance && var.putin_khuylo
+
+  create_random_password = local.create_db_instance && var.create_random_password
   password               = local.create_random_password ? random_password.master_password[0].result : var.password
 
   db_subnet_group_name    = var.create_db_subnet_group ? module.db_subnet_group.db_subnet_group_id : var.db_subnet_group_name
@@ -19,7 +23,7 @@ resource "random_password" "master_password" {
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
-  create = var.create_db_subnet_group
+  create = local.create_db_subnet_group
 
   name            = coalesce(var.db_subnet_group_name, var.identifier)
   use_name_prefix = var.db_subnet_group_use_name_prefix
@@ -32,7 +36,7 @@ module "db_subnet_group" {
 module "db_parameter_group" {
   source = "./modules/db_parameter_group"
 
-  create = var.create_db_parameter_group
+  create = local.create_db_parameter_group
 
   name            = coalesce(var.parameter_group_name, var.identifier)
   use_name_prefix = var.parameter_group_use_name_prefix
@@ -65,7 +69,7 @@ module "db_option_group" {
 module "db_instance" {
   source = "./modules/db_instance"
 
-  create     = var.create_db_instance
+  create     = local.create_db_instance
   identifier = var.identifier
 
   engine            = var.engine
