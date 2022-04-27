@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.3.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.2.0...v4.3.0) (2022-04-27)
+
+
+### Features
+
+* Support `source_db_instance_automated_backups_arn` parameter in `restore_to_point_in_time` block ([#398](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/398)) ([559e6b1](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/559e6b11b76b428e8752e094366c36bea2c2c298))
+
 ## [4.2.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.1.3...v4.2.0) (2022-03-12)
 
 
