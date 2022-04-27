@@ -90,10 +90,10 @@ resource "aws_db_instance" "this" {
 
     content {
       restore_time                             = lookup(restore_to_point_in_time.value, "restore_time", null)
+      source_db_instance_automated_backups_arn = lookup(restore_to_point_in_time.value, "source_db_instance_automated_backups_arn", null)
       source_db_instance_identifier            = lookup(restore_to_point_in_time.value, "source_db_instance_identifier", null)
       source_dbi_resource_id                   = lookup(restore_to_point_in_time.value, "source_dbi_resource_id", null)
       use_latest_restorable_time               = lookup(restore_to_point_in_time.value, "use_latest_restorable_time", null)
-      source_db_instance_automated_backups_arn = lookup(restore_to_point_in_time.value, "source_db_instance_automated_backups_arn", null)
     }
   }
 
