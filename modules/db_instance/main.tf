@@ -2,6 +2,7 @@ locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
 
   monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
+  name           = var.replicate_source_db != null ? null : var.name
   username       = var.replicate_source_db != null ? null : var.username
   engine         = var.replicate_source_db != null ? null : var.engine
   engine_version = var.replicate_source_db != null ? null : var.engine_version
@@ -55,7 +56,7 @@ resource "aws_db_instance" "this" {
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
 
-  name                                = var.name
+  name                                = local.name
   username                            = local.username
   password                            = var.password
   port                                = var.port
@@ -131,7 +132,7 @@ resource "aws_db_instance" "this_mssql" {
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
 
-  name                                = var.name
+  name                                = local.name
   username                            = local.username
   password                            = var.password
   port                                = var.port
