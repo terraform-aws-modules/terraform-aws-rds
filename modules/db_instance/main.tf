@@ -2,6 +2,9 @@ locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
 
   monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
+  username       = var.replicate_source_db != null ? null : var.username
+  engine         = var.replicate_source_db != null ? null : var.engine
+  engine_version = var.replicate_source_db != null ? null : var.engine_version
 }
 
 data "aws_iam_policy_document" "enhanced_monitoring" {
@@ -43,8 +46,8 @@ resource "aws_db_instance" "this" {
 
   identifier = var.identifier
 
-  engine            = var.engine
-  engine_version    = var.engine_version
+  engine            = local.engine
+  engine_version    = local.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
   storage_type      = var.storage_type
@@ -53,7 +56,7 @@ resource "aws_db_instance" "this" {
   license_model     = var.license_model
 
   name                                = var.name
-  username                            = var.username
+  username                            = local.username
   password                            = var.password
   port                                = var.port
   domain                              = var.domain
@@ -119,8 +122,8 @@ resource "aws_db_instance" "this_mssql" {
 
   identifier = var.identifier
 
-  engine            = var.engine
-  engine_version    = var.engine_version
+  engine            = local.engine
+  engine_version    = local.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
   storage_type      = var.storage_type
@@ -129,7 +132,7 @@ resource "aws_db_instance" "this_mssql" {
   license_model     = var.license_model
 
   name                                = var.name
-  username                            = var.username
+  username                            = local.username
   password                            = var.password
   port                                = var.port
   domain                              = var.domain
