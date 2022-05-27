@@ -23,6 +23,11 @@ output "db_instance_engine" {
   value       = module.db.db_instance_engine
 }
 
+output "db_instance_engine_version" {
+  description = "The RDS engine version"
+  value       = module.db.db_instance_engine_version
+}
+
 output "db_instance_hosted_zone_id" {
   description = "The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record)"
   value       = module.db.db_instance_hosted_zone_id
@@ -119,6 +124,11 @@ output "db_default_instance_endpoint" {
 output "db_default_instance_engine" {
   description = "The RDS engine type"
   value       = module.db_default.db_instance_engine
+}
+
+output "db_default_instance_engine_version" {
+  description = "The RDS engine version"
+  value       = module.db_default.db_instance_engine_version
 }
 
 output "db_default_instance_hosted_zone_id" {
