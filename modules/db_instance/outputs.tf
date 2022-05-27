@@ -28,6 +28,16 @@ output "db_instance_endpoint" {
   value       = try(aws_db_instance.this[0].endpoint, "")
 }
 
+output "db_instance_engine" {
+  description = "The database engine"
+  value       = try(aws_db_instance.this[0].engine, "")
+}
+
+output "db_instance_engine_version_actual" {
+  description = "The running version of the database"
+  value       = try(aws_db_instance.this[0].engine_version_actual, "")
+}
+
 output "db_instance_hosted_zone_id" {
   description = "The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record)"
   value       = try(aws_db_instance.this[0].hosted_zone_id, "")

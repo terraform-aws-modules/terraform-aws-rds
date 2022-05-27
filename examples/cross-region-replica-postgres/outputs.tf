@@ -19,6 +19,16 @@ output "master_db_instance_endpoint" {
   value       = module.master.db_instance_endpoint
 }
 
+output "master_db_instance_engine" {
+  description = "The database engine"
+  value       = module.master.db_instance_engine
+}
+
+output "master_db_instance_engine_version_actual" {
+  description = "The running version of the database"
+  value       = module.master.db_instance_engine_version_actual
+}
+
 output "master_db_instance_hosted_zone_id" {
   description = "The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record)"
   value       = module.master.db_instance_hosted_zone_id
@@ -95,6 +105,16 @@ output "replica_db_instance_availability_zone" {
 output "replica_db_instance_endpoint" {
   description = "The connection endpoint"
   value       = module.replica.db_instance_endpoint
+}
+
+output "replica_db_instance_engine" {
+  description = "The database engine"
+  value       = module.replica.db_instance_engine
+}
+
+output "replica_db_instance_engine_version_actual" {
+  description = "The running version of the database"
+  value       = module.replica.db_instance_engine_version_actual
 }
 
 output "replica_db_instance_hosted_zone_id" {
