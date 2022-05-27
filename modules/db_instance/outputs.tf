@@ -29,12 +29,12 @@ output "db_instance_endpoint" {
 }
 
 output "db_instance_engine" {
-  description = "The RDS engine type"
+  description = "The database engine"
   value       = try(aws_db_instance.this[0].engine, "")
 }
 
-output "db_instance_engine_version" {
-  description = "The RDS engine version"
+output "db_instance_engine_version_actual" {
+  description = "The running version of the database"
   value       = try(aws_db_instance.this[0].engine_version_actual, "")
 }
 
