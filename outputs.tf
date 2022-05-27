@@ -28,6 +28,11 @@ output "db_instance_endpoint" {
   value       = module.db_instance.db_instance_endpoint
 }
 
+output "db_instance_engine" {
+  description = "The RDS engine type"
+  value       = module.db_instance.db_instance_engine
+}
+
 output "db_instance_hosted_zone_id" {
   description = "The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record)"
   value       = module.db_instance.db_instance_hosted_zone_id
