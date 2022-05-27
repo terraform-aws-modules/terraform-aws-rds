@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.4.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.3.0...v4.4.0) (2022-05-27)
+
+
+### Features
+
+* Add `engine` and `engine_version_actual` outputs ([#404](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/404)) ([00b9858](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/00b98589d2e8e37a24118887241d74d2b8d0715c))
+
 ## [4.3.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.2.0...v4.3.0) (2022-04-27)
 
 
