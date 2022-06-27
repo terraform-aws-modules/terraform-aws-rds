@@ -3,8 +3,9 @@ provider "aws" {
 }
 
 locals {
-  name   = "complete-mssql"
-  region = "eu-west-1"
+  name    = "complete-mssql"
+  region  = "eu-west-1"
+  region2 = "eu-central-1"
   tags = {
     Owner       = "user"
     Environment = "dev"
@@ -165,4 +166,22 @@ module "db_disabled" {
   create_db_instance        = false
   create_db_parameter_group = false
   create_db_option_group    = false
+}
+
+################################################################################
+# RDS Automated Backups Replication Module
+################################################################################
+provider "aws" {
+  alias  = "region2"
+  region = local.region2
+}
+
+module "db_automated_backups_replication" {
+  source = "../../modules/db_instance_automated_backups_replication"
+
+  source_db_instance_arn = module.db.db_instance_arn
+
+  providers = {
+    aws = aws.region2
+  }
 }
