@@ -24,7 +24,9 @@ Note that this example may create resources which cost money. Run `terraform des
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws.region2"></a> [aws.region2](#provider\_aws.region2) | >= 4.6 |
 
 ## Modules
 
@@ -38,7 +40,9 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_kms_key.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 
 ## Inputs
 

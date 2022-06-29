@@ -66,8 +66,8 @@ module "db" {
 
   engine               = "oracle-ee"
   engine_version       = "19.0.0.0.ru-2021-10.rur-2021-10.r1"
-  family               = "oracle-ee-19.0" # DB parameter group
-  major_engine_version = "19.0"           # DB option group
+  family               = "oracle-ee-19" # DB parameter group
+  major_engine_version = "19"           # DB option group
   instance_class       = "db.t3.large"
   license_model        = "bring-your-own-license"
 
@@ -75,7 +75,8 @@ module "db" {
   max_allocated_storage = 100
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
-  db_name  = "COMPLETEORACLE"
+  # Oracle database name cannot be longer than 8 characters
+  db_name  = "ORACLE"
   username = "complete_oracle"
   port     = 1521
 
@@ -88,7 +89,7 @@ module "db" {
   enabled_cloudwatch_logs_exports = ["alert", "audit"]
   create_cloudwatch_log_group     = true
 
-  backup_retention_period = 0
+  backup_retention_period = 1
   skip_final_snapshot     = true
   deletion_protection     = false
 
@@ -120,10 +121,17 @@ provider "aws" {
   region = local.region2
 }
 
+resource "aws_kms_key" "default" {
+  description = "Encryption key for cross region automated backups"
+
+  provider = aws.region2
+}
+
 module "db_automated_backups_replication" {
   source = "../../modules/db_instance_automated_backups_replication"
 
   source_db_instance_arn = module.db.db_instance_arn
+  kms_key_arn            = aws_kms_key.default.arn
 
   providers = {
     aws = aws.region2
