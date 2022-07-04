@@ -124,7 +124,8 @@ module "db" {
 module "db_default" {
   source = "../../"
 
-  identifier = "${local.name}-default"
+  identifier                     = "${local.name}-default"
+  instance_use_identifier_prefix = true
 
   create_db_option_group    = false
   create_db_parameter_group = false
