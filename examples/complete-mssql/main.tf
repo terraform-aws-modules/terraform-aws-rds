@@ -52,6 +52,17 @@ module "security_group" {
     },
   ]
 
+  # egress
+  egress_with_source_security_group_id = [
+    {
+      from_port                = 0
+      to_port                  = 0
+      protocol                 = -1
+      description              = "Allow outbound communication to Directory Services security group"
+      source_security_group_id = aws_directory_service_directory.demo.security_group_id
+    },
+  ]
+
   tags = local.tags
 }
 
