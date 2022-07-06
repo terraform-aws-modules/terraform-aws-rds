@@ -3,6 +3,9 @@ locals {
 
   final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.final_snapshot_identifier_prefix}-${var.identifier}-${try(random_id.snapshot_identifier[0].hex, "")}"
 
+  identifier        = var.use_identifier_prefix ? null : var.identifier
+  identifier_prefix = var.use_identifier_prefix ? "${var.identifier}-" : null
+
   # Replicas will use source metadata
   username       = var.replicate_source_db != null ? null : var.username
   password       = var.replicate_source_db != null ? null : var.password
@@ -26,7 +29,8 @@ resource "random_id" "snapshot_identifier" {
 resource "aws_db_instance" "this" {
   count = var.create ? 1 : 0
 
-  identifier = var.identifier
+  identifier        = local.identifier
+  identifier_prefix = local.identifier_prefix
 
   engine            = local.engine
   engine_version    = local.engine_version

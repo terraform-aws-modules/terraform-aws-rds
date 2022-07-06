@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.4.0...v4.5.0) (2022-07-06)
+
+
+### Features
+
+* Add support for `identifier_prefix` ([#416](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/416)) ([125c426](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/125c426fc00cd1f2744189a30f9225778169cefb))
+
 ## [4.4.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.3.0...v4.4.0) (2022-05-27)
 
 

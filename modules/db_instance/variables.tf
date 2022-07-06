@@ -9,6 +9,12 @@ variable "identifier" {
   type        = string
 }
 
+variable "use_identifier_prefix" {
+  description = "Determines whether to use `identifier` as is or create a unique identifier beginning with `identifier` as the specified prefix"
+  type        = bool
+  default     = false
+}
+
 variable "allocated_storage" {
   description = "The allocated storage in gigabytes"
   type        = string
