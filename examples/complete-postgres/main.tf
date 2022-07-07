@@ -2,10 +2,13 @@ provider "aws" {
   region = local.region
 }
 
+data "aws_caller_identity" "current" {}
+
 locals {
-  name    = "complete-postgresql"
-  region  = "eu-west-1"
-  region2 = "eu-central-1"
+  name             = "complete-postgresql"
+  region           = "eu-west-1"
+  region2          = "eu-central-1"
+  current_identity = data.aws_caller_identity.current.arn
   tags = {
     Owner       = "user"
     Environment = "dev"
@@ -175,17 +178,29 @@ provider "aws" {
   region = local.region2
 }
 
-resource "aws_kms_key" "default" {
-  description = "Encryption key for cross region automated backups"
+module "kms" {
+  source      = "terraform-aws-modules/kms/aws"
+  version     = "~> 1.0"
+  description = "KMS key for cross region automated backups replication"
 
-  provider = aws.region2
+  # Aliases
+  aliases                 = [local.name]
+  aliases_use_name_prefix = true
+
+  key_owners = [local.current_identity]
+
+  tags = local.tags
+
+  providers = {
+    aws = aws.region2
+  }
 }
 
 module "db_automated_backups_replication" {
   source = "../../modules/db_instance_automated_backups_replication"
 
   source_db_instance_arn = module.db.db_instance_arn
-  kms_key_arn            = aws_kms_key.default.arn
+  kms_key_arn            = module.kms.key_arn
 
   providers = {
     aws = aws.region2
