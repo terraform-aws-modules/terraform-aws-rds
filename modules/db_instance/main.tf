@@ -2,6 +2,12 @@ locals {
   is_mssql = element(split("-", var.engine), 0) == "sqlserver"
 
   monitoring_role_arn = var.create_monitoring_role ? aws_iam_role.enhanced_monitoring[0].arn : var.monitoring_role_arn
+  
+  # Replicas will use source metadata in hashicorp aws 4+
+  username       = var.replicate_source_db != null ? null : var.username
+  password       = var.replicate_source_db != null ? null : var.password
+  engine         = var.replicate_source_db != null ? null : var.engine
+  engine_version = var.replicate_source_db != null ? null : var.engine_version
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
@@ -22,8 +28,8 @@ resource "aws_db_instance" "this" {
 
   identifier = var.identifier
 
-  engine            = var.engine
-  engine_version    = var.engine_version
+  engine            = local.engine
+  engine_version    = local.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
   storage_type      = var.storage_type
@@ -31,9 +37,9 @@ resource "aws_db_instance" "this" {
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
 
-  name                                = var.name
-  username                            = var.username
-  password                            = var.password
+  db_name                             = var.db_name
+  username                            = local.username
+  password                            = local.password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
@@ -112,8 +118,8 @@ resource "aws_db_instance" "this_mssql" {
 
   identifier = var.identifier
 
-  engine            = var.engine
-  engine_version    = var.engine_version
+  engine            = local.engine
+  engine_version    = local.engine_version
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
   storage_type      = var.storage_type
@@ -121,9 +127,9 @@ resource "aws_db_instance" "this_mssql" {
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
 
-  name                                = var.name
-  username                            = var.username
-  password                            = var.password
+  db_name                             = var.db_name
+  username                            = local.username
+  password                            = local.password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name

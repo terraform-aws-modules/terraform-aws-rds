@@ -101,7 +101,7 @@ variable "instance_class" {
   type        = string
 }
 
-variable "name" {
+variable "db_name" {
   description = "The DB name to create. If omitted, no database is created initially"
   type        = string
   default     = null
