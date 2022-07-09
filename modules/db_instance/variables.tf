@@ -201,6 +201,12 @@ variable "monitoring_role_name" {
   default     = "rds-monitoring-role"
 }
 
+variable "use_monitoring_role_name_prefix" {
+  description = "Determines whether to use `monitoring_role_name` as is or create a unique identifier beginning with `monitoring_role_name` as the specified prefix"
+  type        = string
+  default     = false
+}
+
 variable "monitoring_role_description" {
   description = "Description of the monitoring IAM role"
   type        = string
