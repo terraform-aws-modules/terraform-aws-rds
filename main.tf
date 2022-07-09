@@ -123,7 +123,7 @@ module "db_instance" {
   monitoring_interval             = var.monitoring_interval
   monitoring_role_arn             = var.monitoring_role_arn
   monitoring_role_name            = var.monitoring_role_name
-  use_monitoring_role_name_prefix = var.use_monitoring_role_name_prefix
+  monitoring_role_use_name_prefix = var.monitoring_role_use_name_prefix
   monitoring_role_description     = var.monitoring_role_description
   create_monitoring_role          = var.create_monitoring_role
 

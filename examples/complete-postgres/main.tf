@@ -97,9 +97,9 @@ module "db" {
   performance_insights_enabled          = true
   performance_insights_retention_period = 7
   create_monitoring_role                = true
-  use_monitoring_role_name_prefix       = true
   monitoring_interval                   = 60
   monitoring_role_name                  = "example-monitoring-role-name"
+  monitoring_role_use_name_prefix       = true
   monitoring_role_description           = "Description for monitoring role"
 
   parameters = [
