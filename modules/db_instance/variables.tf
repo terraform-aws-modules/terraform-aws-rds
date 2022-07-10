@@ -203,7 +203,7 @@ variable "monitoring_role_name" {
 
 variable "monitoring_role_use_name_prefix" {
   description = "Determines whether to use `monitoring_role_name` as is or create a unique identifier beginning with `monitoring_role_name` as the specified prefix"
-  type        = string
+  type        = bool
   default     = false
 }
 
