@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.6.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.5.0...v4.6.0) (2022-07-13)
+
+
+### Features
+
+* Support `name_prefix` in `iam_role.enhanced_monitoring` ([#418](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/418)) ([644d255](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/644d25528017bc6a7d0c73fbb9b91243ff51933b))
+
 ## [4.5.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.4.0...v4.5.0) (2022-07-06)
 
 
