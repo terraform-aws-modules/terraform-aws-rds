@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.7.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.6.0...v4.7.0) (2022-07-14)
+
+
+### Features
+
+* Add support for `aws_db_instance_automated_backups_replication` ([#413](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/413)) ([f1e15a1](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/f1e15a16a30fa291a33ff9719cc72687124e96d0))
+
 ## [4.6.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.5.0...v4.6.0) (2022-07-13)
 
 
