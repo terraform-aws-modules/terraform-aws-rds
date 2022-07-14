@@ -3,8 +3,9 @@ provider "aws" {
 }
 
 locals {
-  name   = "complete-mssql"
-  region = "eu-west-1"
+  name    = "complete-mssql"
+  region  = "eu-west-1"
+  region2 = "eu-central-1"
   tags = {
     Owner       = "user"
     Environment = "dev"
@@ -135,6 +136,9 @@ module "db" {
   allocated_storage     = 20
   max_allocated_storage = 100
 
+  # Encryption at rest is not available for DB instances running SQL Server Express Edition
+  storage_encrypted = false
+
   username = "complete_mssql"
   port     = 1433
 
@@ -150,7 +154,7 @@ module "db" {
   enabled_cloudwatch_logs_exports = ["error"]
   create_cloudwatch_log_group     = true
 
-  backup_retention_period = 0
+  backup_retention_period = 1
   skip_final_snapshot     = true
   deletion_protection     = false
 
@@ -176,4 +180,22 @@ module "db_disabled" {
   create_db_instance        = false
   create_db_parameter_group = false
   create_db_option_group    = false
+}
+
+################################################################################
+# RDS Automated Backups Replication Module
+################################################################################
+provider "aws" {
+  alias  = "region2"
+  region = local.region2
+}
+
+module "db_automated_backups_replication" {
+  source = "../../modules/db_instance_automated_backups_replication"
+
+  source_db_instance_arn = module.db.db_instance_arn
+
+  providers = {
+    aws = aws.region2
+  }
 }

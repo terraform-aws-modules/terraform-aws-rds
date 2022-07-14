@@ -2,9 +2,13 @@ provider "aws" {
   region = local.region
 }
 
+data "aws_caller_identity" "current" {}
+
 locals {
-  name   = "complete-oracle"
-  region = "eu-west-1"
+  name             = "complete-oracle"
+  region           = "eu-west-1"
+  region2          = "eu-central-1"
+  current_identity = data.aws_caller_identity.current.arn
   tags = {
     Owner       = "user"
     Environment = "dev"
@@ -65,8 +69,8 @@ module "db" {
 
   engine               = "oracle-ee"
   engine_version       = "19.0.0.0.ru-2021-10.rur-2021-10.r1"
-  family               = "oracle-ee-19.0" # DB parameter group
-  major_engine_version = "19.0"           # DB option group
+  family               = "oracle-ee-19" # DB parameter group
+  major_engine_version = "19"           # DB option group
   instance_class       = "db.t3.large"
   license_model        = "bring-your-own-license"
 
@@ -74,7 +78,8 @@ module "db" {
   max_allocated_storage = 100
 
   # Make sure that database name is capitalized, otherwise RDS will try to recreate RDS instance every time
-  db_name  = "COMPLETEORACLE"
+  # Oracle database name cannot be longer than 8 characters
+  db_name  = "ORACLE"
   username = "complete_oracle"
   port     = 1521
 
@@ -87,7 +92,7 @@ module "db" {
   enabled_cloudwatch_logs_exports = ["alert", "audit"]
   create_cloudwatch_log_group     = true
 
-  backup_retention_period = 0
+  backup_retention_period = 1
   skip_final_snapshot     = true
   deletion_protection     = false
 
@@ -109,4 +114,41 @@ module "db_disabled" {
   create_db_instance        = false
   create_db_parameter_group = false
   create_db_option_group    = false
+}
+
+################################################################################
+# RDS Automated Backups Replication Module
+################################################################################
+provider "aws" {
+  alias  = "region2"
+  region = local.region2
+}
+
+module "kms" {
+  source      = "terraform-aws-modules/kms/aws"
+  version     = "~> 1.0"
+  description = "KMS key for cross region automated backups replication"
+
+  # Aliases
+  aliases                 = [local.name]
+  aliases_use_name_prefix = true
+
+  key_owners = [local.current_identity]
+
+  tags = local.tags
+
+  providers = {
+    aws = aws.region2
+  }
+}
+
+module "db_automated_backups_replication" {
+  source = "../../modules/db_instance_automated_backups_replication"
+
+  source_db_instance_arn = module.db.db_instance_arn
+  kms_key_arn            = module.kms.key_arn
+
+  providers = {
+    aws = aws.region2
+  }
 }
