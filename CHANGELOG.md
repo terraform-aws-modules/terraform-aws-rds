@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.7.0...v5.0.0) (2022-07-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update Terraform and provider versions to v1.x and v4.x, mark password input as sensitive (#420)
+
+### Features
+
+* Update Terraform and provider versions to v1.x and v4.x, mark password input as sensitive ([#420](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/420)) ([808407d](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/808407dfb4944ca2701d3c9d25d8f4347238dddd))
+
 ## [4.7.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.6.0...v4.7.0) (2022-07-14)
 
 
