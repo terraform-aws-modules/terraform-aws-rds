@@ -21,7 +21,7 @@ resource "random_password" "master_password" {
 }
     
 resource "aws_ssm_parameter" "master_db_password" {
-  name   = "/rds/${var.identifier}/password"
+  name   = "/rds/var.identifier/password"
   value  = var.create_random_password == true ? random_password.master_password[0].result : var.password
   type   = "SecureString"
 }
