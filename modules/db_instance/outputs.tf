@@ -95,6 +95,12 @@ output "db_instance_password" {
   sensitive   = true
 }
 
+output "db_instance_admin_password" {
+  description = "The master password"
+  value       = random_password.root_password.result
+  sensitive   = true
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################
