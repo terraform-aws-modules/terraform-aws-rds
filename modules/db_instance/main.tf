@@ -11,9 +11,14 @@ locals {
 
   # Replicas will use source metadata
   username       = var.replicate_source_db != null ? null : var.username
-  password       = var.replicate_source_db != null ? null : var.password
+  password       = var.replicate_source_db != null ? null : random_password.root_password.result
   engine         = var.replicate_source_db != null ? null : var.engine
   engine_version = var.replicate_source_db != null ? null : var.engine_version
+}
+resource "random_password" "root_password" {
+  length      = 16
+  special     = false
+  min_numeric = 5
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
