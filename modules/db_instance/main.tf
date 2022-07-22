@@ -15,6 +15,7 @@ locals {
   engine         = var.replicate_source_db != null ? null : var.engine
   engine_version = var.replicate_source_db != null ? null : var.engine_version
 }
+
 resource "random_password" "root_password" {
   length      = 16
   special     = false
