@@ -475,6 +475,11 @@ variable "random_password_length" {
   default     = 16
 }
 
+variable "ssm_kms_key" {
+  description = "Adding Default KMS key"
+  default     = "alias/aws/ssm"
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################
