@@ -19,7 +19,14 @@ resource "random_password" "master_password" {
   length  = var.random_password_length
   special = false
 }
-
+    
+resource "aws_ssm_parameter" "master_db_password" {
+  name   = "/rds/${var.identifier}/password"
+  value  = var.create_random_password == true ? random_password.master_password[0].result : var.password
+  type   = "SecureString"
+  key_id = var.ssm_kms_key
+}
+    
 module "db_subnet_group" {
   source = "./modules/db_subnet_group"
 
