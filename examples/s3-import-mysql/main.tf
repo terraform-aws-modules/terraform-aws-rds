@@ -80,24 +80,16 @@ module "security_group" {
   tags = local.tags
 }
 
-# Temporary work around until S3 module is updated to support v4.x
-resource "aws_s3_bucket" "import" {
+module "import_s3_bucket" {
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 3.0"
+
   bucket        = "${local.name}-${random_pet.this.id}"
+  acl           = "private"
   force_destroy = true
 
   tags = local.tags
 }
-
-# module "import_s3_bucket" {
-#   source  = "terraform-aws-modules/s3-bucket/aws"
-#   version = "~> 2.0"
-
-#   bucket        = "${local.name}-${random_pet.this.id}"
-#   acl           = "private"
-#   force_destroy = true
-
-#   tags = local.tags
-# }
 
 data "aws_iam_policy_document" "s3_import_assume" {
   statement {
@@ -129,7 +121,7 @@ data "aws_iam_policy_document" "s3_import" {
     ]
 
     resources = [
-      aws_s3_bucket.import.arn
+      module.import_s3_bucket.s3_bucket_arn
     ]
   }
 
@@ -139,7 +131,7 @@ data "aws_iam_policy_document" "s3_import" {
     ]
 
     resources = [
-      "${aws_s3_bucket.import.arn}/*",
+      "${module.import_s3_bucket.s3_bucket_arn}/*",
     ]
   }
 }
@@ -153,7 +145,7 @@ resource "aws_iam_role_policy" "s3_import" {
   # also needs this role so this is an easy way of ensuring the backup is uploaded before
   # the instance creation starts
   provisioner "local-exec" {
-    command = "unzip backup.zip && aws s3 sync ${path.module}/backup s3://${aws_s3_bucket.import.id}"
+    command = "unzip backup.zip && aws s3 sync ${path.module}/backup s3://${module.import_s3_bucket.s3_bucket_id}"
   }
 }
 
@@ -168,7 +160,7 @@ module "db" {
 
   # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
   engine               = "mysql"
-  engine_version       = "8.0.27"
+  engine_version       = "8.0.28"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t4g.large"
@@ -182,13 +174,13 @@ module "db" {
 
   # S3 import https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
   s3_import = {
-    source_engine_version = "8.0.27"
-    bucket_name           = aws_s3_bucket.import.id
+    source_engine_version = "8.0.28"
+    bucket_name           = module.import_s3_bucket.s3_bucket_id
     ingestion_role        = aws_iam_role.s3_import.arn
   }
 
   multi_az               = true
-  subnet_ids             = module.vpc.database_subnets
+  db_subnet_group_name   = module.vpc.database_subnet_group_name
   vpc_security_group_ids = [module.security_group.security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
