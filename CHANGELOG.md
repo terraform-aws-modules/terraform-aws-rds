@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.0.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.0.0...v5.0.1) (2022-07-25)
+
+
+### Bug Fixes
+
+* Cloudwatch Log Group deletion db_instance dependency ([#423](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/423)) ([e6351a3](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/e6351a3f2bc57db305be68c78cfdce65bbb82aaf))
+
 ## [5.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v4.7.0...v5.0.0) (2022-07-21)
 
 
