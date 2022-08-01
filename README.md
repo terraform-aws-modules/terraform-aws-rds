@@ -7,9 +7,12 @@ Terraform module which creates RDS resources on AWS.
 Root module calls these modules which can also be used separately to create independent resources:
 
 - [db_instance](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_instance) - creates RDS DB instance
+- [db_instance_automated_backups_replication](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_instance_automated_backups_replication) - creates RDS DB automated backup replication
 - [db_subnet_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_subnet_group) - creates RDS DB subnet group
 - [db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) - creates RDS DB parameter group
 - [db_option_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_option_group) - creates RDS DB option group
+- [rds_cluster](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/rds_cluster) - creates Multi-AZ AZ cluster
+- [rds_cluster_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/rds_cluster_parameter_group) - creates RDS cluster parameter group
 
 ## Usage
 
@@ -194,6 +197,8 @@ Users have the ability to:
 - [Complete RDS example for Oracle](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-oracle)
 - [Complete RDS example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-postgres)
 - [Enhanced monitoring example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/enhanced-monitoring)
+- [Multi-AZ RDS cluster example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/multi-az-cluster-mysql)
+- [Multi-AZ RDS cluster example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/multi-az-cluster-postgres)
 - [Replica RDS example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/replica-mysql)
 - [Replica RDS example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/replica-postgres)
 - [S3 import example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/s3-import-mysql)
@@ -225,6 +230,8 @@ Users have the ability to:
 | <a name="module_db_option_group"></a> [db\_option\_group](#module\_db\_option\_group) | ./modules/db_option_group | n/a |
 | <a name="module_db_parameter_group"></a> [db\_parameter\_group](#module\_db\_parameter\_group) | ./modules/db_parameter_group | n/a |
 | <a name="module_db_subnet_group"></a> [db\_subnet\_group](#module\_db\_subnet\_group) | ./modules/db_subnet_group | n/a |
+| <a name="module_rds_cluster"></a> [rds\_cluster](#module\_rds\_cluster) | ./modules/rds_cluster | n/a |
+| <a name="module_rds_cluster_parameter_group"></a> [rds\_cluster\_parameter\_group](#module\_rds\_cluster\_parameter\_group) | ./modules/rds_cluster_parameter_group | n/a |
 
 ## Resources
 
@@ -255,6 +262,9 @@ Users have the ability to:
 | <a name="input_create_db_subnet_group"></a> [create\_db\_subnet\_group](#input\_create\_db\_subnet\_group) | Whether to create a database subnet group | `bool` | `false` | no |
 | <a name="input_create_monitoring_role"></a> [create\_monitoring\_role](#input\_create\_monitoring\_role) | Create IAM role with a defined name that permits RDS to send enhanced monitoring metrics to CloudWatch Logs | `bool` | `false` | no |
 | <a name="input_create_random_password"></a> [create\_random\_password](#input\_create\_random\_password) | Whether to create random password for RDS primary cluster | `bool` | `true` | no |
+| <a name="input_create_rds_cluster"></a> [create\_rds\_cluster](#input\_create\_rds\_cluster) | Whether to create an rds cluster | `bool` | `false` | no |
+| <a name="input_create_rds_cluster_parameter_group"></a> [create\_rds\_cluster\_parameter\_group](#input\_create\_rds\_cluster\_parameter\_group) | Whether to create an rds cluster parameter group | `bool` | `false` | no |
+| <a name="input_db_cluster_parameter_group_name"></a> [db\_cluster\_parameter\_group\_name](#input\_db\_cluster\_parameter\_group\_name) | A cluster parameter group to associate with the cluster | `string` | `null` | no |
 | <a name="input_db_instance_tags"></a> [db\_instance\_tags](#input\_db\_instance\_tags) | Additional tags for the DB instance | `map(string)` | `{}` | no |
 | <a name="input_db_name"></a> [db\_name](#input\_db\_name) | The DB name to create. If omitted, no database is created initially | `string` | `null` | no |
 | <a name="input_db_option_group_tags"></a> [db\_option\_group\_tags](#input\_db\_option\_group\_tags) | Additional tags for the DB option group | `map(string)` | `{}` | no |
@@ -269,6 +279,7 @@ Users have the ability to:
 | <a name="input_domain_iam_role_name"></a> [domain\_iam\_role\_name](#input\_domain\_iam\_role\_name) | (Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service | `string` | `null` | no |
 | <a name="input_enabled_cloudwatch_logs_exports"></a> [enabled\_cloudwatch\_logs\_exports](#input\_enabled\_cloudwatch\_logs\_exports) | List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine): alert, audit, error, general, listener, slowquery, trace, postgresql (PostgreSQL), upgrade (PostgreSQL) | `list(string)` | `[]` | no |
 | <a name="input_engine"></a> [engine](#input\_engine) | The database engine to use | `string` | `null` | no |
+| <a name="input_engine_mode"></a> [engine\_mode](#input\_engine\_mode) | The database engine mode. Valid values: `global`, `multimaster`, `parallelquery`, `provisioned`, `serverless`. Defaults to: `provisioned` | `string` | `null` | no |
 | <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The engine version to use | `string` | `null` | no |
 | <a name="input_family"></a> [family](#input\_family) | The family of the DB parameter group | `string` | `null` | no |
 | <a name="input_final_snapshot_identifier_prefix"></a> [final\_snapshot\_identifier\_prefix](#input\_final\_snapshot\_identifier\_prefix) | The name which is prefixed to the final snapshot on cluster destroy | `string` | `"final"` | no |
@@ -317,6 +328,7 @@ Users have the ability to:
 | <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 | <a name="input_timeouts"></a> [timeouts](#input\_timeouts) | Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times | `map(string)` | `{}` | no |
 | <a name="input_timezone"></a> [timezone](#input\_timezone) | Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information | `string` | `null` | no |
+| <a name="input_use_cluster_identifier_prefix"></a> [use\_cluster\_identifier\_prefix](#input\_use\_cluster\_identifier\_prefix) | Determines whether to use `identifier` as is or create a unique identifier beginning with `identifier` as the specified prefix | `bool` | `false` | no |
 | <a name="input_username"></a> [username](#input\_username) | Username for the master DB user | `string` | `null` | no |
 | <a name="input_vpc_security_group_ids"></a> [vpc\_security\_group\_ids](#input\_vpc\_security\_group\_ids) | List of VPC security groups to associate | `list(string)` | `[]` | no |
 
@@ -350,6 +362,21 @@ Users have the ability to:
 | <a name="output_db_subnet_group_id"></a> [db\_subnet\_group\_id](#output\_db\_subnet\_group\_id) | The db subnet group name |
 | <a name="output_enhanced_monitoring_iam_role_arn"></a> [enhanced\_monitoring\_iam\_role\_arn](#output\_enhanced\_monitoring\_iam\_role\_arn) | The Amazon Resource Name (ARN) specifying the monitoring role |
 | <a name="output_enhanced_monitoring_iam_role_name"></a> [enhanced\_monitoring\_iam\_role\_name](#output\_enhanced\_monitoring\_iam\_role\_name) | The name of the monitoring role |
+| <a name="output_rds_cluster_arn"></a> [rds\_cluster\_arn](#output\_rds\_cluster\_arn) | Amazon Resource Name (ARN) of cluster |
+| <a name="output_rds_cluster_cloudwatch_log_groups"></a> [rds\_cluster\_cloudwatch\_log\_groups](#output\_rds\_cluster\_cloudwatch\_log\_groups) | Map of CloudWatch log groups created and their attributes |
+| <a name="output_rds_cluster_database_name"></a> [rds\_cluster\_database\_name](#output\_rds\_cluster\_database\_name) | Name for an automatically created database on cluster creation |
+| <a name="output_rds_cluster_endpoint"></a> [rds\_cluster\_endpoint](#output\_rds\_cluster\_endpoint) | Writer endpoint for the cluster |
+| <a name="output_rds_cluster_engine_version_actual"></a> [rds\_cluster\_engine\_version\_actual](#output\_rds\_cluster\_engine\_version\_actual) | The running version of the cluster database |
+| <a name="output_rds_cluster_hosted_zone_id"></a> [rds\_cluster\_hosted\_zone\_id](#output\_rds\_cluster\_hosted\_zone\_id) | The Route53 Hosted Zone ID of the endpoint |
+| <a name="output_rds_cluster_id"></a> [rds\_cluster\_id](#output\_rds\_cluster\_id) | The RDS Cluster Identifier |
+| <a name="output_rds_cluster_master_password"></a> [rds\_cluster\_master\_password](#output\_rds\_cluster\_master\_password) | The database master password |
+| <a name="output_rds_cluster_master_username"></a> [rds\_cluster\_master\_username](#output\_rds\_cluster\_master\_username) | The database master username |
+| <a name="output_rds_cluster_members"></a> [rds\_cluster\_members](#output\_rds\_cluster\_members) | List of RDS Instances that are a part of this cluster |
+| <a name="output_rds_cluster_parameter_group_arn"></a> [rds\_cluster\_parameter\_group\_arn](#output\_rds\_cluster\_parameter\_group\_arn) | The ARN of the rds cluster parameter group |
+| <a name="output_rds_cluster_parameter_group_id"></a> [rds\_cluster\_parameter\_group\_id](#output\_rds\_cluster\_parameter\_group\_id) | The rds cluster parameter group id |
+| <a name="output_rds_cluster_port"></a> [rds\_cluster\_port](#output\_rds\_cluster\_port) | The database port |
+| <a name="output_rds_cluster_reader_endpoint"></a> [rds\_cluster\_reader\_endpoint](#output\_rds\_cluster\_reader\_endpoint) | A read-only endpoint for the cluster, automatically load-balanced across replicas |
+| <a name="output_rds_cluster_resource_id"></a> [rds\_cluster\_resource\_id](#output\_rds\_cluster\_resource\_id) | The RDS Cluster Resource ID |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Authors

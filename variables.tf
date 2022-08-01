@@ -502,3 +502,37 @@ variable "putin_khuylo" {
   type        = bool
   default     = true
 }
+
+################################################################################
+# RDS Cluster
+################################################################################
+
+variable "create_rds_cluster" {
+  description = "Whether to create an rds cluster"
+  type        = bool
+  default     = false
+}
+
+variable "create_rds_cluster_parameter_group" {
+  description = "Whether to create an rds cluster parameter group"
+  type        = bool
+  default     = false
+}
+
+variable "db_cluster_parameter_group_name" {
+  description = "A cluster parameter group to associate with the cluster"
+  type        = string
+  default     = null
+}
+
+variable "engine_mode" {
+  description = "The database engine mode. Valid values: `global`, `multimaster`, `parallelquery`, `provisioned`, `serverless`. Defaults to: `provisioned`"
+  type        = string
+  default     = null
+}
+
+variable "use_cluster_identifier_prefix" {
+  description = "Determines whether to use `identifier` as is or create a unique identifier beginning with `identifier` as the specified prefix"
+  type        = bool
+  default     = false
+}
