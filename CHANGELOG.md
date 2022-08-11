@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.0.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.0.1...v5.0.2) (2022-08-11)
+
+
+### Bug Fixes
+
+* Replace deprecated name property in outputs ([#426](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/426)) ([c6e87d1](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/c6e87d1c47b0b556000719a969dd8ab62322085e))
+
 ### [5.0.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.0.0...v5.0.1) (2022-07-25)
 
 
