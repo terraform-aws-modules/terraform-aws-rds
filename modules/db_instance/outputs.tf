@@ -60,7 +60,7 @@ output "db_instance_status" {
 
 output "db_instance_name" {
   description = "The database name"
-  value       = try(aws_db_instance.this[0].name, "")
+  value       = try(aws_db_instance.this[0].db_name, "")
 }
 
 output "db_instance_username" {
