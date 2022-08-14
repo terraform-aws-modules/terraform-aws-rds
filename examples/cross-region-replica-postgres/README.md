@@ -24,12 +24,15 @@ Note that this example may create resources which cost money. Run `terraform des
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.6 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_kms"></a> [kms](#module\_kms) | terraform-aws-modules/kms/aws | ~> 1.0 |
 | <a name="module_master"></a> [master](#module\_master) | ../../ | n/a |
 | <a name="module_replica"></a> [replica](#module\_replica) | ../../ | n/a |
 | <a name="module_security_group_region1"></a> [security\_group\_region1](#module\_security\_group\_region1) | terraform-aws-modules/security-group/aws | ~> 4.0 |
@@ -39,7 +42,9 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 
 ## Inputs
 

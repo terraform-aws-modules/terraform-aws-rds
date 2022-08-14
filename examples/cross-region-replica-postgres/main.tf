@@ -7,10 +7,13 @@ provider "aws" {
   region = local.region2
 }
 
+data "aws_caller_identity" "current" {}
+
 locals {
-  name    = "replica-postgresql"
-  region1 = "eu-west-1"
-  region2 = "eu-central-1"
+  name             = "replica-postgresql"
+  region1          = "eu-west-1"
+  region2          = "eu-central-1"
+  current_identity = data.aws_caller_identity.current.id
   tags = {
     Owner       = "user"
     Environment = "dev"
@@ -158,6 +161,23 @@ module "master" {
 ################################################################################
 # Replica DB
 ################################################################################
+module "kms" {
+  source      = "terraform-aws-modules/kms/aws"
+  version     = "~> 1.0"
+  description = "KMS key for cross region replica DB"
+
+  # Aliases
+  aliases                 = [local.name]
+  aliases_use_name_prefix = true
+
+  key_owners = [local.current_identity]
+
+  tags = local.tags
+
+  providers = {
+    aws = aws.region2
+  }
+}
 
 module "replica" {
   source = "../../"
@@ -177,6 +197,7 @@ module "replica" {
   family               = local.family
   major_engine_version = local.major_engine_version
   instance_class       = local.instance_class
+  kms_key_id           = module.kms.key_arn
 
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
