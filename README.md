@@ -201,7 +201,7 @@ Users have the ability to:
 ## Notes
 
 1. This module does not create RDS security group. Use [terraform-aws-security-group](https://github.com/terraform-aws-modules/terraform-aws-security-group) module for this.
-2. By default, the variable `password` is set to true. Therefore, even if the user provides a password, it will not be read. The `create_random_password` variable should be set to false and the password should have a non null value to be read and used.
+2. By default, the variable `create_random_password` is set to true. Therefore, even if the user provides a password, it will not be read. The `create_random_password` variable should be set to false and the `password` variable should have a non-null value to be read and used.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
