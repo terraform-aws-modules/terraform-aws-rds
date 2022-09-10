@@ -478,6 +478,12 @@ variable "random_password_length" {
   default     = 16
 }
 
+variable "network_type" {
+  description = "The type of network stack to use"
+  type        = string
+  default     = "IPV4"
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################
