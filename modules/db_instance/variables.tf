@@ -349,7 +349,7 @@ variable "restore_to_point_in_time" {
 variable "network_type" {
   description = "The type of network stack"
   type        = string
-  default     = "IPV4"
+  default     = null
 }
 
 ################################################################################

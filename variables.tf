@@ -481,7 +481,7 @@ variable "random_password_length" {
 variable "network_type" {
   description = "The type of network stack to use"
   type        = string
-  default     = "IPV4"
+  default     = null
 }
 
 ################################################################################
