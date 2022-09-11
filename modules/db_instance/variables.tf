@@ -346,6 +346,12 @@ variable "restore_to_point_in_time" {
   default     = null
 }
 
+variable "network_type" {
+  description = "The type of network stack"
+  type        = string
+  default     = null
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################
