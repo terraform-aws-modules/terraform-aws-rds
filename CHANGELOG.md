@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.1.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.0.3...v5.1.0) (2022-09-11)
+
+
+### Features
+
+* Add support for `network_type` ([#431](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/431)) ([a277924](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/a27792484f9634462827baf2feb663a8800e2ce4))
+
 ### [5.0.3](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.0.2...v5.0.3) (2022-08-15)
 
 
