@@ -437,7 +437,7 @@ variable "performance_insights_enabled" {
 }
 
 variable "performance_insights_retention_period" {
-  description = "The amount of time in days to retain Performance Insights data. Either 7 (7 days) or 731 (2 years)"
+  description = "The amount of time in days to retain Performance Insights data. Valid values are `7`, `731` (2 years) or a multiple of `31`"
   type        = number
   default     = 7
 }
