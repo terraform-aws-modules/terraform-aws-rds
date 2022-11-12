@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.1.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.1.0...v5.1.1) (2022-11-12)
+
+
+### Bug Fixes
+
+* Update CI configuration files to use latest version ([#438](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/438)) ([113a08b](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/113a08b0d4972b953b105879a487c71c9a542b3c))
+
 ## [5.1.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.0.3...v5.1.0) (2022-09-11)
 
 
