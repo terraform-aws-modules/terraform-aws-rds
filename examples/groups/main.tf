@@ -5,9 +5,11 @@ provider "aws" {
 locals {
   name   = "option-groups"
   region = "eu-west-1"
+
   tags = {
-    Owner       = "user"
-    Environment = "dev"
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-rds"
   }
 }
 

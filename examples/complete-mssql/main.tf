@@ -6,116 +6,12 @@ locals {
   name    = "complete-mssql"
   region  = "eu-west-1"
   region2 = "eu-central-1"
+
   tags = {
-    Owner       = "user"
-    Environment = "dev"
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-rds"
   }
-}
-
-################################################################################
-# Supporting Resources
-################################################################################
-
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
-
-  name = local.name
-  cidr = "10.99.0.0/18"
-
-  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
-  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
-  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
-  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
-
-  create_database_subnet_group = true
-
-  tags = local.tags
-}
-
-module "security_group" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
-
-  name        = local.name
-  description = "Complete SqlServer example security group"
-  vpc_id      = module.vpc.vpc_id
-
-  # ingress
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 1433
-      to_port     = 1433
-      protocol    = "tcp"
-      description = "SqlServer access from within VPC"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    },
-  ]
-
-  # egress
-  egress_with_source_security_group_id = [
-    {
-      from_port                = 0
-      to_port                  = 0
-      protocol                 = -1
-      description              = "Allow outbound communication to Directory Services security group"
-      source_security_group_id = aws_directory_service_directory.demo.security_group_id
-    },
-  ]
-
-  tags = local.tags
-}
-
-################################################################################
-# IAM Role for Windows Authentication
-################################################################################
-
-data "aws_iam_policy_document" "rds_assume_role" {
-  statement {
-    sid = "AssumeRole"
-
-    actions = [
-      "sts:AssumeRole",
-    ]
-
-    principals {
-      type        = "Service"
-      identifiers = ["rds.amazonaws.com"]
-    }
-  }
-}
-
-resource "aws_iam_role" "rds_ad_auth" {
-  name                  = "demo-rds-ad-auth"
-  description           = "Role used by RDS for Active Directory authentication and authorization"
-  force_detach_policies = true
-  assume_role_policy    = data.aws_iam_policy_document.rds_assume_role.json
-
-  tags = local.tags
-}
-
-resource "aws_iam_role_policy_attachment" "rds_directory_services" {
-  role       = aws_iam_role.rds_ad_auth.id
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSDirectoryServiceAccess"
-}
-
-################################################################################
-# AWS Directory Service (Acitve Directory)
-################################################################################
-
-resource "aws_directory_service_directory" "demo" {
-  name     = "corp.demo.com"
-  password = "SuperSecretPassw0rd"
-  edition  = "Standard"
-  type     = "MicrosoftAD"
-
-  vpc_settings {
-    vpc_id = module.vpc.vpc_id
-    # Only 2 subnets, must be in different AZs
-    subnet_ids = slice(tolist(module.vpc.database_subnets), 0, 2)
-  }
-
-  tags = local.tags
 }
 
 ################################################################################
@@ -198,4 +94,110 @@ module "db_automated_backups_replication" {
   providers = {
     aws = aws.region2
   }
+}
+
+################################################################################
+# IAM Role for Windows Authentication
+################################################################################
+
+data "aws_iam_policy_document" "rds_assume_role" {
+  statement {
+    sid = "AssumeRole"
+
+    actions = [
+      "sts:AssumeRole",
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["rds.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "rds_ad_auth" {
+  name                  = "demo-rds-ad-auth"
+  description           = "Role used by RDS for Active Directory authentication and authorization"
+  force_detach_policies = true
+  assume_role_policy    = data.aws_iam_policy_document.rds_assume_role.json
+
+  tags = local.tags
+}
+
+resource "aws_iam_role_policy_attachment" "rds_directory_services" {
+  role       = aws_iam_role.rds_ad_auth.id
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSDirectoryServiceAccess"
+}
+
+################################################################################
+# AWS Directory Service (Acitve Directory)
+################################################################################
+
+resource "aws_directory_service_directory" "demo" {
+  name     = "corp.demo.com"
+  password = "SuperSecretPassw0rd"
+  edition  = "Standard"
+  type     = "MicrosoftAD"
+
+  vpc_settings {
+    vpc_id = module.vpc.vpc_id
+    # Only 2 subnets, must be in different AZs
+    subnet_ids = slice(tolist(module.vpc.database_subnets), 0, 2)
+  }
+
+  tags = local.tags
+}
+
+################################################################################
+# Supporting Resources
+################################################################################
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 3.0"
+
+  name = local.name
+  cidr = "10.99.0.0/18"
+
+  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
+  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
+  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+
+  create_database_subnet_group = true
+
+  tags = local.tags
+}
+
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 4.0"
+
+  name        = local.name
+  description = "Complete SqlServer example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 1433
+      to_port     = 1433
+      protocol    = "tcp"
+      description = "SqlServer access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  # egress
+  egress_with_source_security_group_id = [
+    {
+      from_port                = 0
+      to_port                  = 0
+      protocol                 = -1
+      description              = "Allow outbound communication to Directory Services security group"
+      source_security_group_id = aws_directory_service_directory.demo.security_group_id
+    },
+  ]
+
+  tags = local.tags
 }

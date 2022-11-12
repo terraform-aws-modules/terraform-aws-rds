@@ -5,58 +5,15 @@ provider "aws" {
 data "aws_caller_identity" "current" {}
 
 locals {
-  name             = "complete-postgresql"
-  region           = "eu-west-1"
-  region2          = "eu-central-1"
-  current_identity = data.aws_caller_identity.current.arn
+  name    = "complete-postgresql"
+  region  = "eu-west-1"
+  region2 = "eu-central-1"
+
   tags = {
-    Owner       = "user"
-    Environment = "dev"
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-rds"
   }
-}
-
-################################################################################
-# Supporting Resources
-################################################################################
-
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 3.0"
-
-  name = local.name
-  cidr = "10.99.0.0/18"
-
-  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
-  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
-  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
-  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
-
-  create_database_subnet_group       = true
-  create_database_subnet_route_table = true
-
-  tags = local.tags
-}
-
-module "security_group" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
-
-  name        = local.name
-  description = "Complete PostgreSQL example security group"
-  vpc_id      = module.vpc.vpc_id
-
-  # ingress
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 5432
-      to_port     = 5432
-      protocol    = "tcp"
-      description = "PostgreSQL access from within VPC"
-      cidr_blocks = module.vpc.vpc_cidr_block
-    },
-  ]
-
-  tags = local.tags
 }
 
 ################################################################################
@@ -188,7 +145,7 @@ module "kms" {
   aliases                 = [local.name]
   aliases_use_name_prefix = true
 
-  key_owners = [local.current_identity]
+  key_owners = [data.aws_caller_identity.current.arn]
 
   tags = local.tags
 
@@ -206,4 +163,48 @@ module "db_automated_backups_replication" {
   providers = {
     aws = aws.region2
   }
+}
+
+################################################################################
+# Supporting Resources
+################################################################################
+
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 3.0"
+
+  name = local.name
+  cidr = "10.99.0.0/18"
+
+  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
+  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
+  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
+  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+
+  create_database_subnet_group       = true
+  create_database_subnet_route_table = true
+
+  tags = local.tags
+}
+
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 4.0"
+
+  name        = local.name
+  description = "Complete PostgreSQL example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      description = "PostgreSQL access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  tags = local.tags
 }
