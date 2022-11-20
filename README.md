@@ -20,7 +20,7 @@ module "db" {
   identifier = "demodb"
 
   engine            = "mysql"
-  engine_version    = "5.7.25"
+  engine_version    = "5.7.40"
   instance_class    = "db.t3a.large"
   allocated_storage = 5
 
