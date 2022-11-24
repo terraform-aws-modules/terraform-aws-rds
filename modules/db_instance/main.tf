@@ -126,6 +126,13 @@ resource "aws_db_instance" "this" {
     delete = lookup(var.timeouts, "delete", null)
     update = lookup(var.timeouts, "update", null)
   }
+
+  lifecycle {
+    ignore_changes = concat(
+      (contains(var.lifecycle_ignore_changes, "engine_version") ? ["engine_version"] : []),
+      (contains(var.lifecycle_ignore_changes, "snapshot_version") ? ["snapshot_version"] : [])
+    )
+  }
 }
 
 ################################################################################

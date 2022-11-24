@@ -283,6 +283,19 @@ variable "db_subnet_group_tags" {
   default     = {}
 }
 
+variable "lifecycle_ignore_changes" {
+  description = "Changes to any of these elements are ignored. Choose from: [\"engine_version\", \"password\"]"
+  type = list(string)
+  default = []
+  validation {
+    condition     = alltrue([
+      for x in var.lifecycle_ignore_changes
+        : contains(["engine_version", "password"], x)
+      ])
+    error_message = "Valid list elements: [\"engine_version\", \"password\"]."
+  }
+}
+
 # DB subnet group
 variable "create_db_subnet_group" {
   description = "Whether to create a database subnet group"
