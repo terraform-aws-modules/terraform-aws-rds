@@ -285,13 +285,13 @@ variable "db_subnet_group_tags" {
 
 variable "lifecycle_ignore_changes" {
   description = "Changes to any of these elements are ignored. Choose from: [\"engine_version\", \"password\"]"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
   validation {
-    condition     = alltrue([
+    condition = alltrue([
       for x in var.lifecycle_ignore_changes
-        : contains(["engine_version", "password"], x)
-      ])
+      : contains(["engine_version", "password"], x)
+    ])
     error_message = "Valid list elements: [\"engine_version\", \"password\"]."
   }
 }
