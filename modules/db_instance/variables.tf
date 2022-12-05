@@ -22,8 +22,14 @@ variable "allocated_storage" {
 }
 
 variable "storage_type" {
-  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'standard' if not. Note that this behaviour is different from the AWS web console, where the default is 'gp2'."
+  description = "One of 'standard' (magnetic), 'gp2' (general purpose SSD), 'gp3' (new generation of general purpose SSD), or 'io1' (provisioned IOPS SSD). The default is 'io1' if iops is specified, 'gp2' if not. If you specify 'io1' or 'gp3' , you must also include a value for the 'iops' parameter"
   type        = string
+  default     = null
+}
+
+variable "storage_throughput" {
+  description = "Storage throughput value for the DB instance. This setting applies only to the `gp3` storage type."
+  type        = number
   default     = null
 }
 
