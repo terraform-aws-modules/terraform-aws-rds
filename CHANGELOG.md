@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.2.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.1.1...v5.2.0) (2022-12-05)
+
+
+### Features
+
+* Add support for `storage_throughput` ([#453](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/453)) ([d81bf1f](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/d81bf1f351be2d4939f7aae4625f20cc047de7a5))
+
 ### [5.1.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.1.0...v5.1.1) (2022-11-12)
 
 
