@@ -61,6 +61,7 @@ resource "aws_db_instance" "this" {
   availability_zone   = var.availability_zone
   multi_az            = var.multi_az
   iops                = var.iops
+  storage_throughput  = var.storage_throughput
   publicly_accessible = var.publicly_accessible
   ca_cert_identifier  = var.ca_cert_identifier
 
