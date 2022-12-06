@@ -70,6 +70,11 @@ resource "aws_db_instance" "this" {
   apply_immediately           = var.apply_immediately
   maintenance_window          = var.maintenance_window
 
+  # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+  blue_green_update {
+    enabled = var.blue_green_update_enabled
+  }
+
   snapshot_identifier       = var.snapshot_identifier
   copy_tags_to_snapshot     = var.copy_tags_to_snapshot
   skip_final_snapshot       = var.skip_final_snapshot

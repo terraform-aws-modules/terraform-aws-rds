@@ -249,6 +249,12 @@ variable "maintenance_window" {
   default     = null
 }
 
+variable "blue_green_update_enabled" {
+  description = "Enables low-downtime updates using RRDS Blue/Green deployments."
+  type        = bool
+  default     = false
+}
+
 variable "backup_retention_period" {
   description = "The days to retain backups for"
   type        = number
