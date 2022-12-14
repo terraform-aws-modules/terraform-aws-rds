@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.2.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.2.0...v5.2.1) (2022-12-14)
+
+
+### Bug Fixes
+
+* Change RDS variable `iops` default value from `0` to `null` ([#456](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/456)) ([9c8d21f](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/9c8d21fc07d798203b1e96fa893e68d1fa04058e))
+
 ## [5.2.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.1.1...v5.2.0) (2022-12-05)
 
 
