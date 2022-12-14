@@ -180,7 +180,7 @@ variable "multi_az" {
 variable "iops" {
   description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1'"
   type        = number
-  default     = 0
+  default     = null
 }
 
 variable "publicly_accessible" {
