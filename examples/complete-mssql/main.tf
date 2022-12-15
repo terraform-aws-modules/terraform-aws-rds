@@ -2,10 +2,15 @@ provider "aws" {
   region = local.region
 }
 
+data "aws_availability_zones" "available" {}
+
 locals {
   name    = "complete-mssql"
   region  = "eu-west-1"
   region2 = "eu-central-1"
+
+  vpc_cidr = "10.0.0.0/16"
+  azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
     Name       = local.name
@@ -24,7 +29,7 @@ module "db" {
   identifier = local.name
 
   engine               = "sqlserver-ex"
-  engine_version       = "15.00.4153.1.v1"
+  engine_version       = "15.00"
   family               = "sqlserver-ex-15.0" # DB parameter group
   major_engine_version = "15.00"             # DB option group
   instance_class       = "db.t3.large"
@@ -42,7 +47,7 @@ module "db" {
   domain_iam_role_name = aws_iam_role.rds_ad_auth.name
 
   multi_az               = false
-  subnet_ids             = module.vpc.database_subnets
+  db_subnet_group_name   = module.vpc.database_subnet_group
   vpc_security_group_ids = [module.security_group.security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
@@ -81,6 +86,7 @@ module "db_disabled" {
 ################################################################################
 # RDS Automated Backups Replication Module
 ################################################################################
+
 provider "aws" {
   alias  = "region2"
   region = local.region2
@@ -157,12 +163,12 @@ module "vpc" {
   version = "~> 3.0"
 
   name = local.name
-  cidr = "10.99.0.0/18"
+  cidr = local.vpc_cidr
 
-  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
-  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
-  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
-  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+  azs              = local.azs
+  public_subnets   = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
+  private_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 3)]
+  database_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 6)]
 
   create_database_subnet_group = true
 

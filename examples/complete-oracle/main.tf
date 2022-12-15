@@ -8,11 +8,15 @@ provider "aws" {
 }
 
 data "aws_caller_identity" "current" {}
+data "aws_availability_zones" "available" {}
 
 locals {
   name    = "complete-oracle"
   region  = "eu-west-1"
   region2 = "eu-central-1"
+
+  vpc_cidr = "10.0.0.0/16"
+  azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
     Name       = local.name
@@ -31,7 +35,7 @@ module "db" {
   identifier = "demodb-oracle"
 
   engine               = "oracle-ee"
-  engine_version       = "19.0.0.0.ru-2021-10.rur-2021-10.r1"
+  engine_version       = "19"
   family               = "oracle-ee-19" # DB parameter group
   major_engine_version = "19"           # DB option group
   instance_class       = "db.t3.large"
@@ -47,7 +51,7 @@ module "db" {
   port     = 1521
 
   multi_az               = true
-  subnet_ids             = module.vpc.database_subnets
+  db_subnet_group_name   = module.vpc.database_subnet_group
   vpc_security_group_ids = [module.security_group.security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
@@ -121,12 +125,12 @@ module "vpc" {
   version = "~> 3.0"
 
   name = local.name
-  cidr = "10.99.0.0/18"
+  cidr = local.vpc_cidr
 
-  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
-  public_subnets   = ["10.99.0.0/24", "10.99.1.0/24", "10.99.2.0/24"]
-  private_subnets  = ["10.99.3.0/24", "10.99.4.0/24", "10.99.5.0/24"]
-  database_subnets = ["10.99.7.0/24", "10.99.8.0/24", "10.99.9.0/24"]
+  azs              = local.azs
+  public_subnets   = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
+  private_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 3)]
+  database_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 6)]
 
   create_database_subnet_group = true
 
