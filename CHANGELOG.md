@@ -157,11 +157,7 @@ All notable changes to this project will be documented in this file.
 
 * update CI/CD process to align auto-release workflow ([#366](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/366)) ([e38aace](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/e38aaced17278567973dad4980fae8757d6a1265))
 
-# Changelog
-
-All notable changes to this project will be documented in this file
-
-## [3.4.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.4.0...v3.4.1) (2021-11-07)
+### [3.4.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v3.4.0...v3.4.1) (2021-11-07)
 
 
 ### Bug Fixes
