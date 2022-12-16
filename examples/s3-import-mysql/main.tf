@@ -2,9 +2,14 @@ provider "aws" {
   region = local.region
 }
 
+data "aws_availability_zones" "available" {}
+
 locals {
   name   = "s3-import"
   region = "eu-west-1"
+
+  vpc_cidr = "10.0.0.0/16"
+  azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
     Name       = local.name
@@ -44,7 +49,7 @@ module "db" {
   }
 
   multi_az               = true
-  db_subnet_group_name   = module.vpc.database_subnet_group_name
+  db_subnet_group_name   = module.vpc.database_subnet_group
   vpc_security_group_ids = [module.security_group.security_group_id]
 
   maintenance_window              = "Mon:00:00-Mon:03:00"
@@ -71,12 +76,12 @@ module "vpc" {
   version = "~> 3.0"
 
   name = local.name
-  cidr = "10.0.0.0/18"
+  cidr = local.vpc_cidr
 
-  azs              = ["${local.region}a", "${local.region}b", "${local.region}c"]
-  public_subnets   = ["10.0.0.0/24", "10.0.1.0/24", "10.0.2.0/24"]
-  private_subnets  = ["10.0.3.0/24", "10.0.4.0/24", "10.0.5.0/24"]
-  database_subnets = ["10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24"]
+  azs              = local.azs
+  public_subnets   = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
+  private_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 3)]
+  database_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 6)]
 
   create_database_subnet_group = true
 

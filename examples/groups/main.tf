@@ -30,7 +30,7 @@ module "default_postgres" {
 
   create_db_instance   = false
   engine               = "postgres"
-  engine_version       = "14.1"
+  engine_version       = "14"
   family               = "postgres14" # DB parameter group
   major_engine_version = "14"         # DB option group
   instance_class       = "db.t4g.large"
@@ -61,7 +61,7 @@ module "default_mysql" {
 
   create_db_instance   = false
   engine               = "mysql"
-  engine_version       = "8.0.27"
+  engine_version       = "8.0"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t4g.large"
@@ -96,7 +96,7 @@ module "default_mysql_name" {
 
   create_db_instance   = false
   engine               = "mysql"
-  engine_version       = "8.0.27"
+  engine_version       = "8.0"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t4g.large"
@@ -128,7 +128,7 @@ module "default_mysql_default_aws" {
 
   create_db_instance   = false
   engine               = "mysql"
-  engine_version       = "8.0.27"
+  engine_version       = "8.0"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t4g.large"
@@ -163,7 +163,7 @@ module "byo_mysql" {
 
   create_db_instance   = false
   engine               = "mysql"
-  engine_version       = "8.0.27"
+  engine_version       = "8.0"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t4g.large"
