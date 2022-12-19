@@ -28,7 +28,7 @@ variable "storage_type" {
 }
 
 variable "storage_throughput" {
-  description = "Storage throughput value for the DB instance. This setting applies only to the `gp3` storage type. See `notes` for limitations regarding this variable for `gp3`"
+  description = "Storage throughput value for the DB instance. This setting applies only to the `gp3` storage type. See `notes` for limitations regarding this variable for `gp3`."
   type        = number
   default     = null
 }
@@ -178,7 +178,7 @@ variable "multi_az" {
 }
 
 variable "iops" {
-  description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1' or `gp3`. See `notes` for limitations regarding this variable for `gp3`"
+  description = "The amount of provisioned IOPS. Setting this implies a storage_type of 'io1' or `gp3`. See `notes` for limitations regarding this variable for `gp3`."
   type        = number
   default     = null
 }
