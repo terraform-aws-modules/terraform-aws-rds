@@ -250,7 +250,7 @@ variable "maintenance_window" {
 }
 
 variable "blue_green_update_enabled" {
-  description = "Enables low-downtime updates using RRDS Blue/Green deployments."
+  description = "Enables low-downtime updates using RDS Blue/Green deployments."
   type        = bool
   default     = false
 }

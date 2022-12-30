@@ -51,7 +51,7 @@ module "db" {
   create_cloudwatch_log_group     = true
   blue_green_update_enabled       = true
 
-  backup_retention_period = 0
+  backup_retention_period = 1
   skip_final_snapshot     = true
   deletion_protection     = false
 
