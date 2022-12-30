@@ -35,6 +35,7 @@ Note that this example may create resources which cost money. Run `terraform des
 | <a name="module_db"></a> [db](#module\_db) | ../../ | n/a |
 | <a name="module_db_automated_backups_replication"></a> [db\_automated\_backups\_replication](#module\_db\_automated\_backups\_replication) | ../../modules/db_instance_automated_backups_replication | n/a |
 | <a name="module_db_default"></a> [db\_default](#module\_db\_default) | ../../ | n/a |
+| <a name="module_db_default_option_group"></a> [db\_default\_option\_group](#module\_db\_default\_option\_group) | ../../ | n/a |
 | <a name="module_db_disabled"></a> [db\_disabled](#module\_db\_disabled) | ../../ | n/a |
 | <a name="module_kms"></a> [kms](#module\_kms) | terraform-aws-modules/kms/aws | ~> 1.0 |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 4.0 |
