@@ -8,6 +8,7 @@ on:
 
 env:
   TERRAFORM_DOCS_VERSION: v0.16.0
+  TFLINT_VERSION: v0.44.1
 
 jobs:
   collectInputs:
@@ -46,6 +47,7 @@ jobs:
         uses: clowdhaus/terraform-composite-actions/pre-commit@v1.8.3
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
+          tflint-version: ${{ env.TFLINT_VERSION }}
           args: 'terraform_validate --color=always --show-diff-on-failure --files ${{ matrix.directory }}/*'
 
       - name: Pre-commit Terraform ${{ steps.minMax.outputs.minVersion }}
@@ -54,6 +56,7 @@ jobs:
         uses: clowdhaus/terraform-composite-actions/pre-commit@v1.8.3
         with:
           terraform-version: ${{ steps.minMax.outputs.minVersion }}
+          tflint-version: ${{ env.TFLINT_VERSION }}
           args: 'terraform_validate --color=always --show-diff-on-failure --files $(ls *.tf)'
 
   preCommitMaxVersion:
@@ -75,5 +78,6 @@ jobs:
         uses: clowdhaus/terraform-composite-actions/pre-commit@v1.8.3
         with:
           terraform-version: ${{ steps.minMax.outputs.maxVersion }}
+          tflint-version: ${{ env.TFLINT_VERSION }}
           terraform-docs-version: ${{ env.TERRAFORM_DOCS_VERSION }}
           install-hcledit: true
