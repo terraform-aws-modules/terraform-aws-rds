@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.2.3](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.2.2...v5.2.3) (2023-01-03)
+
+
+### Bug Fixes
+
+* Ensure that passing values for option group with PostgreSQL does not cause errors ([#467](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/467)) ([696acbb](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/696acbb237352988562f78b30897f29cfe8da58a))
+
 ### [5.2.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.2.1...v5.2.2) (2022-12-20)
 
 

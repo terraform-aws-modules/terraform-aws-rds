@@ -93,7 +93,7 @@ module "db_instance" {
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = local.db_subnet_group_name
   parameter_group_name   = local.parameter_group_name_id
-  option_group_name      = local.option_group
+  option_group_name      = var.engine != "postgres" ? local.option_group : null
   network_type           = var.network_type
 
   availability_zone   = var.availability_zone
