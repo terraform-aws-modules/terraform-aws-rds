@@ -8,6 +8,11 @@ variable "identifier" {
   description = "The name of the RDS instance"
   type        = string
 }
+variable "custom_iam_instance_profile" {
+  description = "RDS custom iam instance profile"
+  type        = string
+  default     = null
+}
 
 variable "use_identifier_prefix" {
   description = "Determines whether to use `identifier` as is or create a unique identifier beginning with `identifier` as the specified prefix"
