@@ -68,7 +68,7 @@ module "db_option_group" {
 
 module "db_instance" {
   source = "./modules/db_instance"
-
+  
   create                = local.create_db_instance
   identifier            = var.identifier
   use_identifier_prefix = var.instance_use_identifier_prefix
@@ -81,7 +81,7 @@ module "db_instance" {
   storage_encrypted = var.storage_encrypted
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
-
+  custom_iam_instance_profile = var.custom_iam_instance_profile
   db_name                             = var.db_name
   username                            = var.username
   password                            = local.password
