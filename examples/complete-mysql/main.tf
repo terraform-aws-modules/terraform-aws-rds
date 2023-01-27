@@ -49,10 +49,10 @@ module "db" {
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["general"]
   create_cloudwatch_log_group     = true
-  blue_green_update_enabled       = true
+  blue_green_update = {
+    enabled = true
+  }
 
-  # Backups must be enabled for Blue Green Deployments
-  backup_retention_period = 1
   skip_final_snapshot     = true
   deletion_protection     = false
 

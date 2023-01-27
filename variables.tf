@@ -235,10 +235,10 @@ variable "maintenance_window" {
   default     = null
 }
 
-variable "blue_green_update_enabled" {
+variable "blue_green_update" {
   description = "Enables low-downtime updates using RDS Blue/Green deployments."
-  type        = bool
-  default     = false
+  type        = map(string)
+  default     = null
 }
 
 variable "backup_retention_period" {
