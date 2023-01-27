@@ -53,8 +53,8 @@ module "db" {
     enabled = true
   }
 
-  skip_final_snapshot     = true
-  deletion_protection     = false
+  skip_final_snapshot = true
+  deletion_protection = false
 
   performance_insights_enabled          = true
   performance_insights_retention_period = 7
