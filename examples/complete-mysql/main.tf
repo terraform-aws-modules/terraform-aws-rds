@@ -49,10 +49,12 @@ module "db" {
   backup_window                   = "03:00-06:00"
   enabled_cloudwatch_logs_exports = ["general"]
   create_cloudwatch_log_group     = true
+  blue_green_update = {
+    enabled = true
+  }
 
-  backup_retention_period = 0
-  skip_final_snapshot     = true
-  deletion_protection     = false
+  skip_final_snapshot = true
+  deletion_protection = false
 
   performance_insights_enabled          = true
   performance_insights_retention_period = 7

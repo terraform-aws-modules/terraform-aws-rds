@@ -70,6 +70,15 @@ resource "aws_db_instance" "this" {
   apply_immediately           = var.apply_immediately
   maintenance_window          = var.maintenance_window
 
+  # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
+  dynamic "blue_green_update" {
+    for_each = length(var.blue_green_update) > 0 ? [var.blue_green_update] : []
+
+    content {
+      enabled = try(blue_green_update.value.enabled, null)
+    }
+  }
+
   snapshot_identifier       = var.snapshot_identifier
   copy_tags_to_snapshot     = var.copy_tags_to_snapshot
   skip_final_snapshot       = var.skip_final_snapshot
@@ -81,7 +90,7 @@ resource "aws_db_instance" "this" {
 
   replicate_source_db     = var.replicate_source_db
   replica_mode            = var.replica_mode
-  backup_retention_period = var.backup_retention_period
+  backup_retention_period = length(var.blue_green_update) > 0 ? coalesce(var.backup_retention_period, 1) : var.backup_retention_period
   backup_window           = var.backup_window
   max_allocated_storage   = var.max_allocated_storage
   monitoring_interval     = var.monitoring_interval
