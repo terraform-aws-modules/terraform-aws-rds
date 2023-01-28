@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.3.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.2.3...v5.3.0) (2023-01-28)
+
+
+### Features
+
+* Support blue/green updates ([#468](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/468)) ([af8c0ec](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/af8c0ec726ab84ef34a4a6cab0f1dc45a65ebdc5))
+
 ### [5.2.3](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.2.2...v5.2.3) (2023-01-03)
 
 
