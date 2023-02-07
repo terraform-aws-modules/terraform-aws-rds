@@ -43,7 +43,6 @@ resource "aws_db_instance" "this" {
   storage_encrypted = var.storage_encrypted
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
-  custom_iam_instance_profile = var.custom_iam_instance_profile
 
   db_name                             = var.db_name
   username                            = local.username
@@ -52,6 +51,7 @@ resource "aws_db_instance" "this" {
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
+  custom_iam_instance_profile         = var.custom_iam_instance_profile
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = var.db_subnet_group_name
