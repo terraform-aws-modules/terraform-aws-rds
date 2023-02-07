@@ -9,6 +9,12 @@ variable "instance_use_identifier_prefix" {
   default     = false
 }
 
+variable "custom_iam_instance_profile" {
+  description = "RDS custom iam instance profile"
+  type        = string
+  default     = null
+}
+
 variable "allocated_storage" {
   description = "The allocated storage in gigabytes"
   type        = string
