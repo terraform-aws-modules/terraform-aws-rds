@@ -136,6 +136,12 @@ resource "aws_db_instance" "this" {
     delete = lookup(var.timeouts, "delete", null)
     update = lookup(var.timeouts, "update", null)
   }
+
+  lifecycle {
+    ignore_changes = [
+      latest_restorable_time
+    ]
+  }
 }
 
 ################################################################################
