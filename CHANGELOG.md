@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.4.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.3.1...v5.4.0) (2023-02-07)
+
+
+### Features
+
+* Add support for custom iam instance profile ([#473](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/473)) ([2795d5a](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/2795d5adb78643e77a2cd842670bbd4464d12003))
+
 ### [5.3.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.3.0...v5.3.1) (2023-02-07)
 
 
