@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.4.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.4.0...v5.4.1) (2023-02-08)
+
+
+### Bug Fixes
+
+* Revert `ignore_changes` for instance `latest_restorable_time` ([#479](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/479)) ([b80ec03](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/b80ec0399348c889f54d30a11fa7c4f58f320ca5))
+
 ## [5.4.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.3.1...v5.4.0) (2023-02-07)
 
 
