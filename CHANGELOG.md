@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [5.4.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.4.1...v5.4.2) (2023-02-12)
+
+
+### Bug Fixes
+
+* Update cloudwatch log group creation conditional ([#481](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/481)) ([927b714](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/927b714cdad3c8b1f8e28c3b0fb35f962916630f))
+
 ### [5.4.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.4.0...v5.4.1) (2023-02-08)
 
 
