@@ -177,10 +177,11 @@ data "aws_iam_policy_document" "enhanced_monitoring" {
 resource "aws_iam_role" "enhanced_monitoring" {
   count = var.create_monitoring_role ? 1 : 0
 
-  name               = local.monitoring_role_name
-  name_prefix        = local.monitoring_role_name_prefix
-  assume_role_policy = data.aws_iam_policy_document.enhanced_monitoring.json
-  description        = var.monitoring_role_description
+  name                 = local.monitoring_role_name
+  name_prefix          = local.monitoring_role_name_prefix
+  assume_role_policy   = data.aws_iam_policy_document.enhanced_monitoring.json
+  description          = var.monitoring_role_description
+  permissions_boundary = var.monitoring_role_permissions_boundary
 
   tags = merge(
     {
