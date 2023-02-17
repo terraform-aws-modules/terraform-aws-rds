@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.5.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.4.2...v5.5.0) (2023-02-17)
+
+
+### Features
+
+* Add support for permissions boundary on enhanced monitoring role ([#482](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/482)) ([0500e12](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/0500e12acf5ab9b100fbe995915461df43e94b38))
+
 ### [5.4.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.4.1...v5.4.2) (2023-02-12)
 
 
