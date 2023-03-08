@@ -431,7 +431,14 @@ variable "character_set_name" {
 }
 
 variable "enabled_cloudwatch_logs_exports" {
-  description = "List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine): alert, audit, error, general, listener, slowquery, trace, postgresql (PostgreSQL), upgrade (PostgreSQL)"
+  description = <<EOF
+  Set of log types to enable for exporting to CloudWatch logs. 
+  If omitted, no logs will be exported. Valid values (depending on engine). 
+  MySQL and MariaDB: audit, error, general, slowquery.
+  PostgreSQL: postgresql, upgrade. 
+  MSSQL: agent , error. 
+  Oracle: alert, audit, listener, trace.
+  EOF
   type        = list(string)
   default     = []
 }
