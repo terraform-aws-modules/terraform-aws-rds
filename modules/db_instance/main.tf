@@ -13,7 +13,7 @@ locals {
   username       = var.replicate_source_db != null ? null : var.username
   password       = var.replicate_source_db != null ? null : var.password
   engine         = var.replicate_source_db != null ? null : var.engine
-  engine_version = var.replicate_source_db != null ? null : var.engine_version
+  engine_version = (var.replicate_source_db != null && var.engine_version == null) ? null : var.engine_version
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
