@@ -28,6 +28,11 @@ output "db_instance_endpoint" {
   value       = module.db_instance.db_instance_endpoint
 }
 
+output "db_listener_endpoint" {
+  description = "Specifies the listener connection endpoint for SQL Server Always On"
+  value       = module.db_instance.db_listener_endpoint
+}
+
 output "db_instance_engine" {
   description = "The database engine"
   value       = module.db_instance.db_instance_engine
