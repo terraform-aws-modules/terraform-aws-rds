@@ -28,6 +28,11 @@ output "db_instance_endpoint" {
   value       = try(aws_db_instance.this[0].endpoint, "")
 }
 
+output "db_listener_endpoint" {
+  description = "Specifies the listener connection endpoint for SQL Server Always On"
+  value       = try(aws_db_instance.this[0].listener_endpoint, "")
+}
+
 output "db_instance_engine" {
   description = "The database engine"
   value       = try(aws_db_instance.this[0].engine, "")
