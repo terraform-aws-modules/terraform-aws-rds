@@ -98,6 +98,7 @@ resource "aws_db_instance" "this" {
   monitoring_role_arn     = var.monitoring_interval > 0 ? local.monitoring_role_arn : null
 
   character_set_name              = var.character_set_name
+  nchar_character_set_name        = var.nchar_character_set_name
   timezone                        = var.timezone
   enabled_cloudwatch_logs_exports = var.enabled_cloudwatch_logs_exports
 
