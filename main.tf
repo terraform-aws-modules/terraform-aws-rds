@@ -84,12 +84,14 @@ module "db_instance" {
 
   db_name                             = var.db_name
   username                            = var.username
-  password                            = local.password
+  password                            = !var.manage_master_user_password ? local.password : null
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   custom_iam_instance_profile         = var.custom_iam_instance_profile
+  manage_master_user_password         = var.manage_master_user_password
+  master_user_secret_kms_key_id       = var.master_user_secret_kms_key_id
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = local.db_subnet_group_name

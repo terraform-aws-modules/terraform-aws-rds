@@ -138,11 +138,26 @@ variable "username" {
 variable "password" {
   description = <<EOF
   Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file.
-  The password provided will not be used if the variable create_random_password is set to true.
+  The password provided will not be used if the variable create_random_password or manage_master_user_password are set to true.
   EOF
   type        = string
   default     = null
   sensitive   = true
+}
+
+variable "manage_master_user_password" {
+  description = "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided"
+  type        = bool
+  default     = false
+}
+
+variable "master_user_secret_kms_key_id" {
+  description = <<EOF
+  The key ARN, key ID, alias ARN or alias name for the KMS key to ecnrypt the master user password secret in Secrets Manager.
+  If not specified, the default KMS key for your Amazon Web Services account is used.
+  EOF
+  type        = string
+  default     = null
 }
 
 variable "port" {
