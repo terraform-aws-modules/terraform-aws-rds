@@ -132,8 +132,9 @@ module "db_instance" {
   create_monitoring_role               = var.create_monitoring_role
   monitoring_role_permissions_boundary = var.monitoring_role_permissions_boundary
 
-  character_set_name = var.character_set_name
-  timezone           = var.timezone
+  character_set_name       = var.character_set_name
+  nchar_character_set_name = var.nchar_character_set_name
+  timezone                 = var.timezone
 
   enabled_cloudwatch_logs_exports        = var.enabled_cloudwatch_logs_exports
   create_cloudwatch_log_group            = var.create_cloudwatch_log_group
