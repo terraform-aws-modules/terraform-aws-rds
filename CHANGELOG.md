@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.7.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.6.0...v5.7.0) (2023-05-02)
+
+
+### Features
+
+* Add support for Oracle `nchar_character_set_name` ([#487](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/487)) ([c7fd6c5](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/c7fd6c53680236e5afd2562cdfad7d050175b713))
+
 ## [5.6.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.5.0...v5.6.0) (2023-02-17)
 
 
