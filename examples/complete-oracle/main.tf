@@ -68,7 +68,8 @@ module "db" {
   create_monitoring_role                = true
 
   # See here for support character sets https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.OracleCharacterSets.html
-  character_set_name = "AL32UTF8"
+  character_set_name       = "AL32UTF8"
+  nchar_character_set_name = "AL16UTF16"
 
   tags = local.tags
 }
