@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.9.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.8.0...v5.9.0) (2023-05-03)
+
+
+### Features
+
+* Add output for SQL Server `listener_endpoint` ([#486](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/486)) ([564fae2](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/564fae2f62400e5fd149ed8c34c53d64bf96f9d7))
+
 ## [5.8.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.7.0...v5.8.0) (2023-05-03)
 
 
