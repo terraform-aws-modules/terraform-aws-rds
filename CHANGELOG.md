@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [5.8.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.7.0...v5.8.0) (2023-05-03)
+
+
+### Features
+
+* Allow replicas to have a different version than primary ([#491](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/491)) ([7a0542d](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/7a0542d0281b91ee72835ad430edb64dcdb26f51))
+
 ## [5.7.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.6.0...v5.7.0) (2023-05-02)
 
 
