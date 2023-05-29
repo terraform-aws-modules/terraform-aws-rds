@@ -117,9 +117,13 @@ variable "username" {
 }
 
 variable "password" {
-  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
+  description = <<EOF
+  Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file.
+  The password provided will not be used if the variable create_random_password is set to true.
+  EOF
   type        = string
   default     = null
+  sensitive   = true
 }
 
 variable "port" {
