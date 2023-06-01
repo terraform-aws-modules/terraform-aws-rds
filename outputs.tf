@@ -53,6 +53,11 @@ output "db_instance_id" {
   value       = module.db_instance.db_instance_id
 }
 
+output "db_instance_identifier" {
+  description = "The RDS instance ID"
+  value       = module.db_instance.db_instance_identifier
+}
+
 output "db_instance_resource_id" {
   description = "The RDS Resource ID of this instance"
   value       = module.db_instance.db_instance_resource_id

@@ -53,6 +53,11 @@ output "db_instance_id" {
   value       = try(aws_db_instance.this[0].id, "")
 }
 
+output "db_instance_identifier" {
+  description = "The RDS instance identifier"
+  value       = try(aws_db_instance.this[0].identifier, "")
+}
+
 output "db_instance_resource_id" {
   description = "The RDS Resource ID of this instance"
   value       = try(aws_db_instance.this[0].resource_id, "")
