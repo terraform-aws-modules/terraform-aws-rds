@@ -50,7 +50,7 @@ output "db_instance_hosted_zone_id" {
 
 output "db_instance_id" {
   description = "The RDS instance ID"
-  value       = try(aws_db_instance.this[0].id, "")
+  value       = try(aws_db_instance.this[0].identifier, "")
 }
 
 output "db_instance_resource_id" {
