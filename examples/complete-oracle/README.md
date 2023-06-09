@@ -37,7 +37,7 @@ Note that this example may create resources which cost money. Run `terraform des
 | <a name="module_db_disabled"></a> [db\_disabled](#module\_db\_disabled) | ../../ | n/a |
 | <a name="module_kms"></a> [kms](#module\_kms) | terraform-aws-modules/kms/aws | ~> 1.0 |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 4.0 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 3.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 4.0 |
 
 ## Resources
 
