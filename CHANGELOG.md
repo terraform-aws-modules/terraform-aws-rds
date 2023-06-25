@@ -394,7 +394,7 @@ All notable changes to this project will be documented in this file
 ## [v2.19.0] - 2020-10-15
 
 - fix: Added tflint and fixes in README ([#265](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/265))
-- docs: Change accound to account ([#261](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/261))
+- docs: Change account to account ([#261](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/261))
 
 
 <a name="v2.18.0"></a>
@@ -814,7 +814,7 @@ All notable changes to this project will be documented in this file
 <a name="v1.14.0"></a>
 ## [v1.14.0] - 2018-03-14
 
-- Updated readme with conditional creatino section
+- Updated readme with conditional creation section
 - Enable db_parameter_group_name variable ([#47](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/47))
 
 
@@ -852,7 +852,7 @@ All notable changes to this project will be documented in this file
 <a name="v1.8.0"></a>
 ## [v1.8.0] - 2018-01-23
 
-- Add availability zone to instance ressource module ([#35](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/35))
+- Add availability zone to instance resource module ([#35](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/35))
 
 
 <a name="v1.7.0"></a>
@@ -922,7 +922,7 @@ All notable changes to this project will be documented in this file
 - Merge branch 'master' of https://github.com/terraform-aws-modules/terraform-aws-rds
 - Updated README.md for MySQL RDS example
 - Updated README.md for Postgres RDS example
-- fianl-snapshot_identifier should default to nothing
+- final-snapshot_identifier should default to nothing
 - Add enhanced monitoring example to README, and add current contributors link
 - Merge branch 'master' into final_snapshot_identifier
 - Updated links using upstream path
@@ -952,7 +952,7 @@ All notable changes to this project will be documented in this file
 - Removed unused variable
 - Improved kms_key_id description
 - Cleaned duplicated attributes & variables
-- Merge branch 'encryption' of github.com:fmartingr/terraform-aws-rds into encryption
+- Merge branch 'encryption' of github.com:formatting/terraform-aws-rds into encryption
 - Added parameters to example
 - Added kms_key_id parameter
 - Using `encrypted` to set the db_instance.storage_encrypted

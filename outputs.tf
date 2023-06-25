@@ -48,9 +48,9 @@ output "db_instance_hosted_zone_id" {
   value       = module.db_instance.db_instance_hosted_zone_id
 }
 
-output "db_instance_id" {
-  description = "The RDS instance ID"
-  value       = module.db_instance.db_instance_id
+output "db_instance_identifier" {
+  description = "The RDS instance identifier"
+  value       = module.db_instance.db_instance_identifier
 }
 
 output "db_instance_resource_id" {
@@ -74,19 +74,13 @@ output "db_instance_username" {
   sensitive   = true
 }
 
-output "db_instance_password" {
-  description = "The database password (this password may be old, because Terraform doesn't track it after initial creation)"
-  value       = local.password
-  sensitive   = true
-}
-
 output "db_instance_domain" {
   description = "The ID of the Directory Service Active Directory domain the instance is joined to"
   value       = module.db_instance.db_instance_domain
 }
 
 output "db_instance_domain_iam_role_name" {
-  description = "The name of the IAM role to be used when making API calls to the Directory Service. "
+  description = "The name of the IAM role to be used when making API calls to the Directory Service"
   value       = module.db_instance.db_instance_domain_iam_role_name
 }
 
