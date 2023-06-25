@@ -100,8 +100,7 @@ module "replica" {
   identifier = "${local.name}-replica"
 
   # Source database. For cross-region use db_instance_arn
-  replicate_source_db    = module.master.db_instance_arn
-  create_random_password = false
+  replicate_source_db = module.master.db_instance_arn
 
   engine               = local.engine
   engine_version       = local.engine_version
@@ -141,7 +140,7 @@ module "replica" {
 
 module "vpc_region1" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name = local.name
   cidr = "10.100.0.0/18"
@@ -158,7 +157,7 @@ module "vpc_region1" {
 
 module "security_group_region1" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name        = local.name
   description = "Replica PostgreSQL example security group"
@@ -180,7 +179,7 @@ module "security_group_region1" {
 
 module "vpc_region2" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   providers = {
     aws = aws.region2
@@ -201,7 +200,7 @@ module "vpc_region2" {
 
 module "security_group_region2" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   providers = {
     aws = aws.region2

@@ -67,13 +67,9 @@ module "db" {
 # Supporting Resources
 ################################################################################
 
-resource "random_pet" "this" {
-  length = 2
-}
-
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name = local.name
   cidr = local.vpc_cidr
@@ -85,15 +81,12 @@ module "vpc" {
 
   create_database_subnet_group = true
 
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-
   tags = local.tags
 }
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name        = local.name
   description = "S3 import VPC example security group"
@@ -136,7 +129,7 @@ module "import_s3_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "~> 3.0"
 
-  bucket        = "${local.name}-${random_pet.this.id}"
+  bucket_prefix = "${local.name}-"
   acl           = "private"
   force_destroy = true
 
@@ -157,7 +150,7 @@ data "aws_iam_policy_document" "s3_import_assume" {
 }
 
 resource "aws_iam_role" "s3_import" {
-  name                  = "${local.name}-${random_pet.this.id}"
+  name_prefix           = "${local.name}-"
   description           = "IAM role to allow RDS to import MySQL backup from S3"
   assume_role_policy    = data.aws_iam_policy_document.s3_import_assume.json
   force_detach_policies = true
@@ -189,9 +182,9 @@ data "aws_iam_policy_document" "s3_import" {
 }
 
 resource "aws_iam_role_policy" "s3_import" {
-  name   = "${local.name}-${random_pet.this.id}"
-  role   = aws_iam_role.s3_import.id
-  policy = data.aws_iam_policy_document.s3_import.json
+  name_prefix = "${local.name}-"
+  role        = aws_iam_role.s3_import.id
+  policy      = data.aws_iam_policy_document.s3_import.json
 
   # We need the files uploaded before the RDS instance is created, and the instance
   # also needs this role so this is an easy way of ensuring the backup is uploaded before

@@ -130,7 +130,7 @@ variable "manage_master_user_password" {
 
 variable "master_user_secret_kms_key_id" {
   description = <<EOF
-  The key ARN, key ID, alias ARN or alias name for the KMS key to ecnrypt the master user password secret in Secrets Manager.
+  The key ARN, key ID, alias ARN or alias name for the KMS key to encrypt the master user password secret in Secrets Manager.
   If not specified, the default KMS key for your Amazon Web Services account is used.
   EOF
   type        = string

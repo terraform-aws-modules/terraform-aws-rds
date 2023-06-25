@@ -75,8 +75,7 @@ module "replica" {
   identifier = "${local.name}-replica"
 
   # Source database. For cross-region use db_instance_arn
-  replicate_source_db    = module.master.db_instance_id
-  create_random_password = false
+  replicate_source_db = module.master.db_instance_identifier
 
   engine               = local.engine
   engine_version       = local.engine_version
@@ -109,7 +108,7 @@ module "replica" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name = local.name
   cidr = local.vpc_cidr
@@ -126,7 +125,7 @@ module "vpc" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 5.0"
 
   name        = local.name
   description = "Replica MySQL example security group"

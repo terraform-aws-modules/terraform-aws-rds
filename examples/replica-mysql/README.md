@@ -20,13 +20,13 @@ Note that this example may create resources which cost money. Run `terraform des
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 4.65 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.00 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.65 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.00 |
 
 ## Modules
 
@@ -34,8 +34,8 @@ Note that this example may create resources which cost money. Run `terraform des
 |------|--------|---------|
 | <a name="module_master"></a> [master](#module\_master) | ../../ | n/a |
 | <a name="module_replica"></a> [replica](#module\_replica) | ../../ | n/a |
-| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 4.0 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 4.0 |
+| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 
 ## Resources
 
@@ -59,9 +59,8 @@ No inputs.
 | <a name="output_master_db_instance_engine"></a> [master\_db\_instance\_engine](#output\_master\_db\_instance\_engine) | The database engine |
 | <a name="output_master_db_instance_engine_version_actual"></a> [master\_db\_instance\_engine\_version\_actual](#output\_master\_db\_instance\_engine\_version\_actual) | The running version of the database |
 | <a name="output_master_db_instance_hosted_zone_id"></a> [master\_db\_instance\_hosted\_zone\_id](#output\_master\_db\_instance\_hosted\_zone\_id) | The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record) |
-| <a name="output_master_db_instance_id"></a> [master\_db\_instance\_id](#output\_master\_db\_instance\_id) | The RDS instance ID |
+| <a name="output_master_db_instance_identifier"></a> [master\_db\_instance\_identifier](#output\_master\_db\_instance\_identifier) | The RDS instance identifier |
 | <a name="output_master_db_instance_name"></a> [master\_db\_instance\_name](#output\_master\_db\_instance\_name) | The database name |
-| <a name="output_master_db_instance_password"></a> [master\_db\_instance\_password](#output\_master\_db\_instance\_password) | The database password (this password may be old, because Terraform doesn't track it after initial creation) |
 | <a name="output_master_db_instance_port"></a> [master\_db\_instance\_port](#output\_master\_db\_instance\_port) | The database port |
 | <a name="output_master_db_instance_resource_id"></a> [master\_db\_instance\_resource\_id](#output\_master\_db\_instance\_resource\_id) | The RDS Resource ID of this instance |
 | <a name="output_master_db_instance_status"></a> [master\_db\_instance\_status](#output\_master\_db\_instance\_status) | The RDS instance status |
@@ -76,7 +75,7 @@ No inputs.
 | <a name="output_replica_db_instance_engine"></a> [replica\_db\_instance\_engine](#output\_replica\_db\_instance\_engine) | The database engine |
 | <a name="output_replica_db_instance_engine_version_actual"></a> [replica\_db\_instance\_engine\_version\_actual](#output\_replica\_db\_instance\_engine\_version\_actual) | The running version of the database |
 | <a name="output_replica_db_instance_hosted_zone_id"></a> [replica\_db\_instance\_hosted\_zone\_id](#output\_replica\_db\_instance\_hosted\_zone\_id) | The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record) |
-| <a name="output_replica_db_instance_id"></a> [replica\_db\_instance\_id](#output\_replica\_db\_instance\_id) | The RDS instance ID |
+| <a name="output_replica_db_instance_identifier"></a> [replica\_db\_instance\_identifier](#output\_replica\_db\_instance\_identifier) | The RDS instance identifier |
 | <a name="output_replica_db_instance_name"></a> [replica\_db\_instance\_name](#output\_replica\_db\_instance\_name) | The database name |
 | <a name="output_replica_db_instance_port"></a> [replica\_db\_instance\_port](#output\_replica\_db\_instance\_port) | The database port |
 | <a name="output_replica_db_instance_resource_id"></a> [replica\_db\_instance\_resource\_id](#output\_replica\_db\_instance\_resource\_id) | The RDS Resource ID of this instance |

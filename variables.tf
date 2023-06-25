@@ -138,7 +138,7 @@ variable "username" {
 variable "password" {
   description = <<EOF
   Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file.
-  The password provided will not be used if the variable create_random_password or manage_master_user_password are set to true.
+  The password provided will not be used if `manage_master_user_password` is set to true.
   EOF
   type        = string
   default     = null
@@ -146,14 +146,14 @@ variable "password" {
 }
 
 variable "manage_master_user_password" {
-  description = "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided"
+  description = "Set to true to allow RDS to manage the master user password in Secrets Manager"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "master_user_secret_kms_key_id" {
   description = <<EOF
-  The key ARN, key ID, alias ARN or alias name for the KMS key to ecnrypt the master user password secret in Secrets Manager.
+  The key ARN, key ID, alias ARN or alias name for the KMS key to encrypt the master user password secret in Secrets Manager.
   If not specified, the default KMS key for your Amazon Web Services account is used.
   EOF
   type        = string
@@ -509,18 +509,6 @@ variable "delete_automated_backups" {
   description = "Specifies whether to remove automated backups immediately after the DB instance is deleted"
   type        = bool
   default     = true
-}
-
-variable "create_random_password" {
-  description = "Whether to create random password for RDS primary cluster"
-  type        = bool
-  default     = true
-}
-
-variable "random_password_length" {
-  description = "Length of random password to create"
-  type        = number
-  default     = 16
 }
 
 variable "network_type" {
