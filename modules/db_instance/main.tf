@@ -10,9 +10,7 @@ locals {
   monitoring_role_name_prefix = var.monitoring_role_use_name_prefix ? "${var.monitoring_role_name}-" : null
 
   # Replicas will use source metadata
-  username = var.replicate_source_db != null ? null : var.username
-  password = var.replicate_source_db != null || var.manage_master_user_password ? null : var.password
-  engine   = var.replicate_source_db != null ? null : var.engine
+  is_replica = var.replicate_source_db != null
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
@@ -34,25 +32,25 @@ resource "aws_db_instance" "this" {
   identifier        = local.identifier
   identifier_prefix = local.identifier_prefix
 
-  engine            = local.engine
+  engine            = local.is_replica ? null : var.engine
   engine_version    = var.engine_version
   instance_class    = var.instance_class
-  allocated_storage = var.allocated_storage
+  allocated_storage = local.is_replica ? null : var.allocated_storage
   storage_type      = var.storage_type
   storage_encrypted = var.storage_encrypted
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
 
   db_name                             = var.db_name
-  username                            = local.username
-  password                            = local.password
+  username                            = !local.is_replica ? var.username : null
+  password                            = !local.is_replica && var.manage_master_user_password ? null : var.password
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   custom_iam_instance_profile         = var.custom_iam_instance_profile
-  manage_master_user_password         = var.manage_master_user_password
-  master_user_secret_kms_key_id       = var.master_user_secret_kms_key_id
+  manage_master_user_password         = !local.is_replica && var.manage_master_user_password ? var.manage_master_user_password : null
+  master_user_secret_kms_key_id       = !local.is_replica && var.manage_master_user_password ? var.master_user_secret_kms_key_id : null
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = var.db_subnet_group_name

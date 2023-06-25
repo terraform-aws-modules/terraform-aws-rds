@@ -88,6 +88,10 @@ module "replica" {
 
   port = local.port
 
+  password = "UberSecretPassword"
+  # Not supported with replicas
+  manage_master_user_password = false
+
   multi_az               = false
   vpc_security_group_ids = [module.security_group.security_group_id]
 
