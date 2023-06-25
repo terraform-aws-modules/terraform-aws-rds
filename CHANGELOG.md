@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.9.0...v6.0.0) (2023-06-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* Replace random password generation with manage master password, min AWS provider version increased to 5.0, `id` output replaced with `identifier` (#489)
+
+### Features
+
+* Replace random password generation with manage master password, min AWS provider version increased to 5.0, `id` output replaced with `identifier` ([#489](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/489)) ([c66cd73](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/c66cd738f86b9cd0742d9838635970ef7b5743e4))
+
 ## [5.9.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.8.0...v5.9.0) (2023-05-03)
 
 
