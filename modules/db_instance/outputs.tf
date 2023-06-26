@@ -96,7 +96,7 @@ output "db_instance_domain_iam_role_name" {
 
 output "db_instance_master_user_secret_arn" {
   description = "The ARN of the master user secret (Only available when manage_master_user_password is set to true)"
-  value       = try(aws_db_instance.this[0].master_user_secret.secret_arn, null)
+  value       = try(aws_db_instance.this[0].master_user_secret[0].secret_arn, null)
 }
 
 ################################################################################

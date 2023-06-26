@@ -52,6 +52,7 @@ No inputs.
 | <a name="output_byo_mysql_option_group_id"></a> [byo\_mysql\_option\_group\_id](#output\_byo\_mysql\_option\_group\_id) | The ID of the BYO MySQL option group (should be blank) |
 | <a name="output_byo_mysql_parameter_group_arn"></a> [byo\_mysql\_parameter\_group\_arn](#output\_byo\_mysql\_parameter\_group\_arn) | The ARN of the db parameter group |
 | <a name="output_byo_mysql_parameter_group_id"></a> [byo\_mysql\_parameter\_group\_id](#output\_byo\_mysql\_parameter\_group\_id) | The db parameter group id |
+| <a name="output_db_instance_master_user_secret_arn"></a> [db\_instance\_master\_user\_secret\_arn](#output\_db\_instance\_master\_user\_secret\_arn) | The ARN of the master user secret (Only available when manage\_master\_user\_password is set to true) |
 | <a name="output_default_mysql_default_aws_option_group_arn"></a> [default\_mysql\_default\_aws\_option\_group\_arn](#output\_default\_mysql\_default\_aws\_option\_group\_arn) | The ARN of the default MySQL option group |
 | <a name="output_default_mysql_default_aws_option_group_id"></a> [default\_mysql\_default\_aws\_option\_group\_id](#output\_default\_mysql\_default\_aws\_option\_group\_id) | The ID of the default MySQL option group |
 | <a name="output_default_mysql_default_aws_parameter_group_arn"></a> [default\_mysql\_default\_aws\_parameter\_group\_arn](#output\_default\_mysql\_default\_aws\_parameter\_group\_arn) | The ARN of the db parameter group |
