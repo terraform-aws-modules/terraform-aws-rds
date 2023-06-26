@@ -94,6 +94,11 @@ output "db_instance_ca_cert_identifier" {
   value       = module.db_instance.db_instance_ca_cert_identifier
 }
 
+output "db_instance_master_user_secret_arn" {
+  description = "The ARN of the master user secret (Only available when manage_master_user_password is set to true)"
+  value       = module.db_instance.db_instance_master_user_secret_arn
+}
+
 output "db_subnet_group_id" {
   description = "The db subnet group name"
   value       = module.db_subnet_group.db_subnet_group_id
