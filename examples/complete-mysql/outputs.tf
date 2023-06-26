@@ -94,6 +94,11 @@ output "db_instance_cloudwatch_log_groups" {
   value       = module.db.db_instance_cloudwatch_log_groups
 }
 
+output "db_instance_master_user_secret_arn" {
+  description = "The ARN of the master user secret (Only available when manage_master_user_password is set to true)"
+  value       = module.db.db_instance_master_user_secret_arn
+}
+
 # Default
 output "db_default_instance_address" {
   description = "The address of the RDS instance"
@@ -186,7 +191,7 @@ output "db_default_cloudwatch_log_groups" {
   value       = module.db_default.db_instance_cloudwatch_log_groups
 }
 
-output "db_instance_master_user_secret_arn" {
+output "db_default_instance_master_user_secret_arn" {
   description = "The ARN of the master user secret (Only available when manage_master_user_password is set to true)"
-  value       = module.db.db_instance_master_user_secret_arn
+  value       = module.db_default.db_instance_master_user_secret_arn
 }
