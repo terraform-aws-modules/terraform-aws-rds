@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.1.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.0.0...v6.1.0) (2023-07-11)
+
+
+### Features
+
+* Pass through db_instance_master_user_secret_arn ([#502](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/502)) ([f0eb9f3](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/f0eb9f3e14b61478a772dc8bb5d3f83bb0da3294))
+
 ## [6.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v5.9.0...v6.0.0) (2023-06-25)
 
 
