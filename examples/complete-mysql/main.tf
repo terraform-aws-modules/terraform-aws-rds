@@ -102,7 +102,7 @@ module "db_default" {
   major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t4g.large"
 
-  allocated_storage = 20
+  allocated_storage = 200
 
   db_name  = "completeMysql"
   username = "complete_mysql"

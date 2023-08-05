@@ -22,7 +22,7 @@ variable "use_identifier_prefix" {
 
 variable "allocated_storage" {
   description = "The allocated storage in gigabytes"
-  type        = string
+  type        = number
   default     = null
 }
 
