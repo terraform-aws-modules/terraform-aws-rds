@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [6.1.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.1.0...v6.1.1) (2023-08-05)
+
+
+### Bug Fixes
+
+* Change `allocated_storage` type from string to number ([#507](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/507)) ([5939ddf](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/5939ddf85ef740db8896fd475cac8f1c3fae8e8f))
+
 ## [6.1.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.0.0...v6.1.0) (2023-07-11)
 
 
