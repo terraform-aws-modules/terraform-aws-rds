@@ -544,3 +544,13 @@ variable "putin_khuylo" {
   type        = bool
   default     = true
 }
+
+################################################################################
+# DB Instance Role Association
+################################################################################
+
+variable "db_instance_role_association_role_arns" {
+  description = "A map of DB instance supported feature name to role association ARNs."
+  type        = map(any)
+  default     = {}
+}
