@@ -2,6 +2,8 @@
 
 Configuration in this directory creates a DB instance role association to invoke a lambda function.
 
+Further database configurations for creating extension and invoking from postgres: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL-Lambda.html
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
