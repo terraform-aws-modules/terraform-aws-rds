@@ -6,7 +6,7 @@ data "aws_caller_identity" "current" {}
 data "aws_availability_zones" "available" {}
 
 locals {
-  name   = "postgresql-invoke-lambda"
+  name   = "role-association-invoke-lambda"
   region = "eu-west-1"
 
   vpc_cidr = "10.0.0.0/16"
@@ -40,8 +40,8 @@ module "db" {
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  db_name  = "PostgresqlInvokeLambda"
-  username = "postgresql_invoke_lambda"
+  db_name  = "RoleAssociationInvokeLambda"
+  username = "role_association_invoke_lambda"
   port     = 5432
 
   multi_az               = true
