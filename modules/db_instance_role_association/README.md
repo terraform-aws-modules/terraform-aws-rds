@@ -1,4 +1,4 @@
-# aws_db_instance
+# aws_db_instance_role_association
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
