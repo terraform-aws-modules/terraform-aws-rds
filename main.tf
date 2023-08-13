@@ -147,7 +147,7 @@ module "db_instance" {
 module "db_instance_role_association" {
   source = "./modules/db_instance_role_association"
 
-  for_each = { for k, v in var.db_instance_role_association_role_arns : k => v if var.create_db_instance }
+  for_each = { for k, v in var.db_instance_role_associations : k => v if var.create_db_instance }
 
   db_instance_role_association_feature_name = each.key
   db_instance_role_association_role_arn     = each.value

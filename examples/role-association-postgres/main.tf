@@ -55,7 +55,7 @@ module "db" {
   deletion_protection = false
 
   # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL-Lambda.html
-  db_instance_role_association_role_arns = {
+  db_instance_role_associations = {
     Lambda = module.lambda_invoke_role.iam_role_arn
   }
 

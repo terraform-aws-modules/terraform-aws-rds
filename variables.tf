@@ -549,7 +549,7 @@ variable "putin_khuylo" {
 # DB Instance Role Association
 ################################################################################
 
-variable "db_instance_role_association_role_arns" {
+variable "db_instance_role_associations" {
   description = "A map of DB instance supported feature name to role association ARNs."
   type        = map(any)
   default     = {}
