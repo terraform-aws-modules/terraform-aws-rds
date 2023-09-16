@@ -24,8 +24,8 @@ Further database configurations for creating extension and invoking from postgre
 |------|--------|---------|
 | <a name="module_db"></a> [db](#module\_db) | ../../ | n/a |
 | <a name="module_lambda"></a> [lambda](#module\_lambda) | terraform-aws-modules/lambda/aws | ~> 6.0 |
-| <a name="module_lambda_invoke_policy"></a> [lambda\_invoke\_policy](#module\_lambda\_invoke\_policy) | terraform-aws-modules/iam/aws//modules/iam-policy | ~> 5.28.0 |
-| <a name="module_lambda_invoke_role"></a> [lambda\_invoke\_role](#module\_lambda\_invoke\_role) | terraform-aws-modules/iam/aws//modules/iam-assumable-role | ~> 5.28.0 |
+| <a name="module_rds_invoke_lambda_policy"></a> [rds\_invoke\_lambda\_policy](#module\_rds\_invoke\_lambda\_policy) | terraform-aws-modules/iam/aws//modules/iam-policy | ~> 5.28.0 |
+| <a name="module_rds_invoke_lambda_role"></a> [rds\_invoke\_lambda\_role](#module\_rds\_invoke\_lambda\_role) | terraform-aws-modules/iam/aws//modules/iam-assumable-role | ~> 5.28.0 |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 4.0 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 
@@ -35,8 +35,8 @@ Further database configurations for creating extension and invoking from postgre
 |------|------|
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_iam_policy_document.lambda_invoke](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
-| [aws_iam_policy_document.lambda_invoke_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.rds_invoke_lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_iam_policy_document.rds_invoke_lambda_assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 

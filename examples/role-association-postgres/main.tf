@@ -56,7 +56,7 @@ module "db" {
 
   # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/PostgreSQL-Lambda.html
   db_instance_role_associations = {
-    Lambda = module.lambda_invoke_role.iam_role_arn
+    Lambda = module.rds_invoke_lambda_role.iam_role_arn
   }
 
   parameters = [
@@ -125,7 +125,7 @@ module "security_group" {
   tags = local.tags
 }
 
-module "lambda_invoke_role" {
+module "rds_invoke_lambda_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
   version = "~> 5.28.0"
 
@@ -135,12 +135,12 @@ module "lambda_invoke_role" {
   role_name_prefix = local.name
 
   custom_role_policy_arns = [
-    module.lambda_invoke_policy.arn
+    module.rds_invoke_lambda_policy.arn
   ]
-  custom_role_trust_policy = data.aws_iam_policy_document.lambda_invoke_assume_role.json
+  custom_role_trust_policy = data.aws_iam_policy_document.rds_invoke_lambda_assume_role.json
 }
 
-module "lambda_invoke_policy" {
+module "rds_invoke_lambda_policy" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-policy"
   version = "~> 5.28.0"
 
@@ -148,10 +148,10 @@ module "lambda_invoke_policy" {
   path        = "/"
   description = "Invoke Lambda from RDS Postgresql policy"
 
-  policy = data.aws_iam_policy_document.lambda_invoke.json
+  policy = data.aws_iam_policy_document.rds_invoke_lambda.json
 }
 
-data "aws_iam_policy_document" "lambda_invoke" {
+data "aws_iam_policy_document" "rds_invoke_lambda" {
   statement {
     sid = "InvokeLambda"
     actions = [
@@ -163,7 +163,7 @@ data "aws_iam_policy_document" "lambda_invoke" {
   }
 }
 
-data "aws_iam_policy_document" "lambda_invoke_assume_role" {
+data "aws_iam_policy_document" "rds_invoke_lambda_assume_role" {
   statement {
     sid = "AssumeRole"
 
