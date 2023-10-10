@@ -23,10 +23,10 @@ resource "aws_db_parameter_group" "this" {
   }
 
   tags = merge(
-    var.tags,
     {
       "Name" = var.name
     },
+    var.tags,
   )
 
   lifecycle {

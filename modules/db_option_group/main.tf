@@ -34,10 +34,10 @@ resource "aws_db_option_group" "this" {
   }
 
   tags = merge(
-    var.tags,
     {
       "Name" = var.name
     },
+    var.tags,
   )
 
   timeouts {
