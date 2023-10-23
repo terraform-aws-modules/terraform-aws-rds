@@ -143,3 +143,13 @@ module "db_instance" {
 
   tags = merge(var.tags, var.db_instance_tags)
 }
+
+module "db_instance_role_association" {
+  source = "./modules/db_instance_role_association"
+
+  for_each = { for k, v in var.db_instance_role_associations : k => v if var.create_db_instance }
+
+  feature_name           = each.key
+  role_arn               = each.value
+  db_instance_identifier = module.db_instance.db_instance_identifier
+}

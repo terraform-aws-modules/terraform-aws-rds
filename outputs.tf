@@ -138,3 +138,12 @@ output "db_instance_cloudwatch_log_groups" {
   description = "Map of CloudWatch log groups created and their attributes"
   value       = module.db_instance.db_instance_cloudwatch_log_groups
 }
+
+################################################################################
+# DB Instance Role Association
+################################################################################
+
+output "db_instance_role_associations" {
+  description = "A map of DB Instance Identifiers and IAM Role ARNs separated by a comma"
+  value       = module.db_instance_role_association
+}
