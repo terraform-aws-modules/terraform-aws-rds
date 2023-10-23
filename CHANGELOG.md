@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.1.1...v6.2.0) (2023-10-23)
+
+
+### Features
+
+* Add `db_instance_role_association` functionality ([#508](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/508)) ([ed027d7](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/ed027d7daa2a03df909479c3becc6bb621b7193f))
+
 ### [6.1.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.1.0...v6.1.1) (2023-08-05)
 
 
