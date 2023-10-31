@@ -6,7 +6,7 @@ data "aws_availability_zones" "available" {}
 
 locals {
   name   = "complete-mysql"
-  region = "eu-west-1"
+  region = "us-west-2"
 
   vpc_cidr = "10.0.0.0/16"
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -15,6 +15,8 @@ locals {
     Name       = local.name
     Example    = local.name
     Repository = "https://github.com/terraform-aws-modules/terraform-aws-rds"
+    Owner      =  "joshua rds anton"
+    Duration   =  "4"
   }
 }
 
@@ -90,7 +92,7 @@ module "db" {
 
 module "aws-mysql-parameter-group" {
   source  = "intel/aws-mysql-parameter-group/intel"
-  version = "1.0.0"
+  version = "2.0.0"
 }
 
 module "db_default" {
@@ -100,14 +102,15 @@ module "db_default" {
 
   create_db_option_group    = false
   create_db_parameter_group = false
-  parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
   ## adding in Intel's parameter group
+  parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
+
   # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
   engine               = "mysql"
   engine_version       = "8.0"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.m5i.large"
+  instance_class       = "db.m6i.large"
 
 
 

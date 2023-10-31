@@ -1,4 +1,4 @@
-# Complete RDS example for MySQL
+# Enhanced Optimizations RDS example for MySQL
 
 Configuration in this directory creates a set of RDS resources including DB instance, DB subnet group and DB parameter group.
 
