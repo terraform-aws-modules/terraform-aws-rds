@@ -85,7 +85,7 @@ module "mysql" {
 
   identifier = "${local.name}-mysql"
 
-  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+  # All blue/green deployment compatible versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.BlueGreenDeployments.html
   engine               = "mysql"
   engine_version       = "8.0.33"
   family               = "mysql8.0" # DB parameter group
