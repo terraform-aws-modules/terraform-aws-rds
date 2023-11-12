@@ -65,7 +65,7 @@ module "postgres" {
   deletion_protection     = false
 
   parameters = [
-    # required for blue-green update
+    # required for blue-green deployment
     {
       name         = "rds.logical_replication"
       value        = 1
@@ -100,7 +100,7 @@ module "mysql" {
   port     = 3306
 
   password = "UberSecretPassword"
-  # Not supported with replicas
+  # Not supported with blue/green deployment
   manage_master_user_password = false
 
   multi_az               = true
