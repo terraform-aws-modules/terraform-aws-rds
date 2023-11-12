@@ -12,7 +12,7 @@ $ terraform plan
 $ terraform apply
 ```
 
-To see blue/green deployment, update the `engine_version` argument in `module.db` to 15.4 after initial apply then execute:
+To see blue/green deployment, update the `engine_version` argument in `module.postgres` to 15.4 and/or `engine_version` in module.mysql to 8.0.34 after initial apply then execute:
 
 ```bash
 $ terraform plan
