@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.3.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.2.0...v6.3.0) (2023-11-13)
+
+
+### Features
+
+* Blue/green deployment for postgres ([#517](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/517)) ([9c18851](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/9c188514304cba0c05bfd88d219e676cb518e710))
+
 ## [6.2.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.1.1...v6.2.0) (2023-10-23)
 
 
