@@ -197,6 +197,7 @@ Users have the ability to:
 - [Replica RDS example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/replica-mysql)
 - [Replica RDS example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/replica-postgres)
 - [S3 import example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/s3-import-mysql)
+- [Blue/Green Deployment example for MySQL and PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/blue-green-deployment)
 
 ## Notes
 
