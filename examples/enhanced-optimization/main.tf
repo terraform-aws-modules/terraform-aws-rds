@@ -102,6 +102,7 @@ module "db_default" {
 
   create_db_option_group    = false
   create_db_parameter_group = false
+
   ## adding in Intel's parameter group
   parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
 
@@ -110,9 +111,7 @@ module "db_default" {
   engine_version       = "8.0"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
-  instance_class       = "db.m6i.large"
-
-
+  instance_class       = "db.m6i.large"  #Intel specific instance
 
   allocated_storage = 200
 
