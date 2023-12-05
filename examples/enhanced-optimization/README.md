@@ -2,7 +2,7 @@
   <img src="https://github.com/terraform-aws-modules/terraform-aws-rds/blob/enhanced-optimization-Intel/examples/enhanced-optimization/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
 </p>
 
-## Intel's Enhanced Optimizations RDS example for MySQL
+## Intel Enhanced Optimizations RDS example for MySQL
 
 This example creates an Intel Enhanced Amazon RDS instance for MySQL. The instance is created on Intel Xeon 3rd Generation Scalable processors  m6i.xlarge by default. 
 
