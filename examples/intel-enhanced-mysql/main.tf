@@ -15,20 +15,14 @@ locals {
     Name       = local.name
     Example    = local.name
     Repository = "https://github.com/terraform-aws-modules/terraform-aws-rds"
-    Owner      =  "application team"
+    Owner      =  "Application Team X"
     Duration   =  "4"
   }
 }
 
 ################################################################################
-# Intel
+# Intel Xeon MySQL Enhanced Parameter Group
 ################################################################################
-
-# Intel based 6i Instances running Intel Xeon 3rd Generation Scalable processors (code-named Ice Lake) are recommended for optimal price/performance
-# General Purpose: db.m6i.large, db.m6i.xlarge, db.m6i.2xlarge, db.m6i.4xlarge, db.m6i.8xlarge, db.m6i.12xlarge, db.m6i.16xlarge, db.m6i.24xlarge, db.m6i.32xlarge
-# Memory Optimized: db.r6i.large, db.r6i.xlarge, db.r6i.2xlarge, db.r6i.4xlarge, db.r6i.8xlarge, db.r6i.12xlarge, db.r6i.16xlarge, db.r6i.24xlarge, db.r6i.32xlarge
-
-# Intel Xeon MySQL Optimizations Parameter Group 
 # https://github.com/intel/terraform-intel-aws-mysql-parameter-group
 # Intel Xeon Tuning Guide https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html
 
@@ -51,7 +45,14 @@ module "db" {
   engine_version       = "8.0"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
- 
+  
+  ################################################################################
+  # Intel
+  ################################################################################
+  # Intel based 6i Instances running Intel Xeon 3rd Generation Scalable processors (code-named Ice Lake) are recommended for optimal price/performance
+  # General Purpose: db.m6i.large, db.m6i.xlarge, db.m6i.2xlarge, db.m6i.4xlarge, db.m6i.8xlarge, db.m6i.12xlarge, db.m6i.16xlarge, db.m6i.24xlarge, db.m6i.32xlarge
+  # Memory Optimized: db.r6i.large, db.r6i.xlarge, db.r6i.2xlarge, db.r6i.4xlarge, db.r6i.8xlarge, db.r6i.12xlarge, db.r6i.16xlarge, db.r6i.24xlarge, db.r6i.32xlarge
+
   # Intel Instance
   instance_class       = "db.m6i.large"
   # Intel's parameter group

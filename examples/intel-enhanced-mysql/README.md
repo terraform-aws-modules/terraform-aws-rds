@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/terraform-aws-modules/terraform-aws-rds/blob/enhanced-optimization-Intel/examples/enhanced-optimization/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
+  <img src="https://github.com/terraform-aws-modules/terraform-aws-rds/blob/intel-enhanced-mysql/examples/enhanced-optimization/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
 </p>
 
 ## Intel Enhanced Optimizations RDS example for MySQL
@@ -17,14 +17,8 @@ main.tf updates:
 
 ```hcl
 ################################################################################
-# Intel
+# Intel Xeon MySQL Enhanced Parameter Group
 ################################################################################
-
-# Intel based 6i Instances running Intel Xeon 3rd Generation Scalable processors (code-named Ice Lake) are recommended for optimal price/performance
-# General Purpose: db.m6i.large, db.m6i.xlarge, db.m6i.2xlarge, db.m6i.4xlarge, db.m6i.8xlarge, db.m6i.12xlarge, db.m6i.16xlarge, db.m6i.24xlarge, db.m6i.32xlarge
-# Memory Optimized: db.r6i.large, db.r6i.xlarge, db.r6i.2xlarge, db.r6i.4xlarge, db.r6i.8xlarge, db.r6i.12xlarge, db.r6i.16xlarge, db.r6i.24xlarge, db.r6i.32xlarge
-
-# Intel Xeon MySQL Optimizations Parameter Group 
 # https://github.com/intel/terraform-intel-aws-mysql-parameter-group
 # Intel Xeon Tuning Guide https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html
 
@@ -33,9 +27,17 @@ module "aws-mysql-parameter-group" {
   version = "2.0.0"
 }
 
-  # Intel instance
-  instance_class       = "db.m6i.large"  
+... 
 
+  ################################################################################
+  # Intel
+  ################################################################################
+  # Intel based 6i Instances running Intel Xeon 3rd Generation Scalable processors (code-named Ice Lake) are recommended for optimal price/performance
+  # General Purpose: db.m6i.large, db.m6i.xlarge, db.m6i.2xlarge, db.m6i.4xlarge, db.m6i.8xlarge, db.m6i.12xlarge, db.m6i.16xlarge, db.m6i.24xlarge, db.m6i.32xlarge
+  # Memory Optimized: db.r6i.large, db.r6i.xlarge, db.r6i.2xlarge, db.r6i.4xlarge, db.r6i.8xlarge, db.r6i.12xlarge, db.r6i.16xlarge, db.r6i.24xlarge, db.r6i.32xlarge
+
+  # Intel Instance
+  instance_class       = "db.m6i.large"
   # Intel's parameter group
   parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
 
