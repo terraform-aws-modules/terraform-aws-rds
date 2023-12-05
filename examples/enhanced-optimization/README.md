@@ -1,30 +1,43 @@
 <p align="center">
-  <img src="https://github.com/intel/terraform-intel-aws-mysql/blob/main/images/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
+  <img src="https://github.com/terraform-aws-modules/terraform-aws-rds/blob/enhanced-optimization-Intel/examples/enhanced-optimization/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
 </p>
 
-## Enhanced Optimizations RDS example for MySQL
+## Intel's Enhanced Optimizations RDS example for MySQL
 
-Configuration in this directory creates an Amazon RDS instance for MySQL. The instance is created on an Intel Icelake instance M6i.xlarge by default. The instance is pre-configured with parameters within the database parameter group that is optimized for Intel architecture. The goal of this module is to get you started with a database configured to run best on Intel architecture.
+This example creates an Intel Enhanced Amazon RDS instance for MySQL. The instance is created on Intel Xeon 3rd Generation Scalable processors  m6i.xlarge by default. 
 
-As you configure your application's environment, choose the configurations for your infrastructure that matches your application's requirements.
+Additionally, the instance is pre-configured with parameters within the database parameter group that is optimized for Intel architectures. The goal of this module is to get you started with a database configured to optimally run on Intel.
 
 The MySQL Optimizations were based off [Intel Xeon Tuning Guide](<https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html>)
 
 We have included a new sub module that brings in all the optimizations from a stand alone module at https://github.com/intel/terraform-intel-aws-mysql-parameter-group/. Within the enhanced optimization code we have made a few updates:
 
-```main.tf
 
-## setting intel's paremeter group
+main.tf updates:
+
+```hcl
+################################################################################
+# Intel
+################################################################################
+
+# Intel based 6i Instances running Intel Xeon 3rd Generation Scalable processors (code-named Ice Lake) are recommended for optimal price/performance
+# General Purpose: db.m6i.large, db.m6i.xlarge, db.m6i.2xlarge, db.m6i.4xlarge, db.m6i.8xlarge, db.m6i.12xlarge, db.m6i.16xlarge, db.m6i.24xlarge, db.m6i.32xlarge
+# Memory Optimized: db.r6i.large, db.r6i.xlarge, db.r6i.2xlarge, db.r6i.4xlarge, db.r6i.8xlarge, db.r6i.12xlarge, db.r6i.16xlarge, db.r6i.24xlarge, db.r6i.32xlarge
+
+# Intel Xeon MySQL Optimizations Parameter Group 
+# https://github.com/intel/terraform-intel-aws-mysql-parameter-group
+# Intel Xeon Tuning Guide https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html
 
 module "aws-mysql-parameter-group" {
   source  = "intel/aws-mysql-parameter-group/intel"
   version = "2.0.0"
 }
 
-  ## adding in Intel's parameter group
-  parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
+  # Intel instance
+  instance_class       = "db.m6i.large"  
 
-  instance_class       = "db.m6i.large"  #Intel specific instance
+  # Intel's parameter group
+  parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
 
 ```
 
