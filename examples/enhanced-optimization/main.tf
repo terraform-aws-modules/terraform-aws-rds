@@ -15,7 +15,7 @@ locals {
     Name       = local.name
     Example    = local.name
     Repository = "https://github.com/terraform-aws-modules/terraform-aws-rds"
-    Owner      =  "Intel Enhaced Optimization" 
+    Owner      =  "application team"
     Duration   =  "4"
   }
 }
