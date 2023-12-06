@@ -5,7 +5,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 locals {
-  name   = "complete-mysql"
+  name   = "intel-enhanced-mysql"
   region = "us-west-2"
 
   vpc_cidr = "10.0.0.0/16"
@@ -15,8 +15,8 @@ locals {
     Name       = local.name
     Example    = local.name
     Repository = "https://github.com/terraform-aws-modules/terraform-aws-rds"
-    Owner      =  "Application Team X"
-    Duration   =  "4"
+    Owner      = "Application Team X"
+    Duration   = "4"
   }
 }
 
@@ -26,9 +26,9 @@ locals {
 # https://github.com/intel/terraform-intel-aws-mysql-parameter-group
 # Intel Xeon Tuning Guide https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html
 
-module "aws-mysql-parameter-group" {
+module "intel_parameter_group" {
   source  = "intel/aws-mysql-parameter-group/intel"
-  version = "2.0.0"
+  version = "~> 2.0"
 }
 
 ################################################################################
@@ -38,14 +38,6 @@ module "aws-mysql-parameter-group" {
 module "db" {
   source = "../.."
 
-  identifier = local.name
-
-  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-  engine               = "mysql"
-  engine_version       = "8.0"
-  family               = "mysql8.0" # DB parameter group
-  major_engine_version = "8.0"      # DB option group
-  
   ################################################################################
   # Intel
   ################################################################################
@@ -53,11 +45,22 @@ module "db" {
   # General Purpose: db.m6i.large, db.m6i.xlarge, db.m6i.2xlarge, db.m6i.4xlarge, db.m6i.8xlarge, db.m6i.12xlarge, db.m6i.16xlarge, db.m6i.24xlarge, db.m6i.32xlarge
   # Memory Optimized: db.r6i.large, db.r6i.xlarge, db.r6i.2xlarge, db.r6i.4xlarge, db.r6i.8xlarge, db.r6i.12xlarge, db.r6i.16xlarge, db.r6i.24xlarge, db.r6i.32xlarge
 
-  # Intel Instance
-  instance_class       = "db.m6i.large"
-  # Intel's parameter group
+  # Intel Instance selection
+  instance_class = "db.m6i.large"
+  # Intel parameter group selection
   parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
 
+  ################################################################################
+  # Database
+  ################################################################################
+
+  identifier                      = local.name
+  monitoring_role_use_name_prefix = true
+  # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+  engine                = "mysql"
+  engine_version        = "8.0"
+  family                = "mysql8.0" # DB parameter group
+  major_engine_version  = "8.0"      # DB option group
   allocated_storage     = 20
   max_allocated_storage = 100
 

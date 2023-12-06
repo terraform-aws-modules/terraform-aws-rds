@@ -2,16 +2,20 @@
   <img src="https://github.com/terraform-aws-modules/terraform-aws-rds/blob/intel-enhanced-mysql/examples/enhanced-optimization/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
 </p>
 
-## Intel Enhanced Optimizations RDS example for MySQL
+## Intel Enhanced Optimizations Example for RDS MySQL
 
-This example creates an Intel Enhanced Amazon RDS instance for MySQL. The instance is created on Intel Xeon 3rd Generation Scalable processors  m6i.xlarge by default. 
+This example creates an Intel Enhanced Optimizations Example for RDS MySQL. The example implements two optimizations:
 
-Additionally, the instance is pre-configured with parameters within the database parameter group that is optimized for Intel architectures. The goal of this module is to get you started with a database configured to optimally run on Intel.
+- Intel Xeon Instance Selection
+- Intel Xeon MySQL Optimizations using parameter groups
+
+The RDS database server is created on Intel Xeon 3rd Generation Scalable processors **m6i.xlarge instances by default. Other recommendations can be found on main.tf**
+
+Additionally, the database is pre-configured with parameters within the database parameter group that is optimized for Intel architectures. The goal simplify getting started with an optimally configured database.
 
 The MySQL Optimizations were based off [Intel Xeon Tuning Guide](<https://www.intel.com/content/www/us/en/developer/articles/guide/open-source-database-tuning-guide-on-xeon-systems.html>)
 
-We have included a new sub module that brings in all the optimizations from a stand alone module at https://github.com/intel/terraform-intel-aws-mysql-parameter-group/. Within the enhanced optimization code we have made a few updates:
-
+We have included a new sub module that brings in all the optimizations from a stand alone module at <https://github.com/intel/terraform-intel-aws-mysql-parameter-group/>. Within the enhanced optimization code we have made a few updates.
 
 main.tf updates:
 
@@ -36,22 +40,21 @@ module "aws-mysql-parameter-group" {
   # General Purpose: db.m6i.large, db.m6i.xlarge, db.m6i.2xlarge, db.m6i.4xlarge, db.m6i.8xlarge, db.m6i.12xlarge, db.m6i.16xlarge, db.m6i.24xlarge, db.m6i.32xlarge
   # Memory Optimized: db.r6i.large, db.r6i.xlarge, db.r6i.2xlarge, db.r6i.4xlarge, db.r6i.8xlarge, db.r6i.12xlarge, db.r6i.16xlarge, db.r6i.24xlarge, db.r6i.32xlarge
 
-  # Intel Instance
+  # Intel Instance selection
   instance_class       = "db.m6i.large"
-  # Intel's parameter group
+  # Intel parameter group selection
   parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
 
 ```
-
 
 ## Usage
 
 To run this example you need to execute:
 
 ```bash
-$ terraform init
-$ terraform plan
-$ terraform apply
+terraform init
+terraform plan
+terraform apply
 ```
 
 Note that this example may create resources which cost money. Run `terraform destroy` when you don't need these resources.
@@ -98,9 +101,7 @@ Note that this example may create resources which cost money. Run `terraform des
   </a>
 </p>
 
-
 </center>
-
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -108,21 +109,20 @@ Note that this example may create resources which cost money. Run `terraform des
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.00 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.25 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.00 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.25 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_db"></a> [db](#module\_db) | ../../ | n/a |
-| <a name="module_db_default"></a> [db\_default](#module\_db\_default) | ../../ | n/a |
-| <a name="module_db_disabled"></a> [db\_disabled](#module\_db\_disabled) | ../../ | n/a |
+| <a name="module_db"></a> [db](#module\_db) | ../.. | n/a |
+| <a name="module_intel_parameter_group"></a> [intel\_parameter\_group](#module\_intel\_parameter\_group) | intel/aws-mysql-parameter-group/intel | ~> 2.0 |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform-aws-modules/vpc/aws | ~> 5.0 |
 
@@ -140,25 +140,6 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_db_default_cloudwatch_log_groups"></a> [db\_default\_cloudwatch\_log\_groups](#output\_db\_default\_cloudwatch\_log\_groups) | Map of CloudWatch log groups created and their attributes |
-| <a name="output_db_default_instance_address"></a> [db\_default\_instance\_address](#output\_db\_default\_instance\_address) | The address of the RDS instance |
-| <a name="output_db_default_instance_arn"></a> [db\_default\_instance\_arn](#output\_db\_default\_instance\_arn) | The ARN of the RDS instance |
-| <a name="output_db_default_instance_availability_zone"></a> [db\_default\_instance\_availability\_zone](#output\_db\_default\_instance\_availability\_zone) | The availability zone of the RDS instance |
-| <a name="output_db_default_instance_endpoint"></a> [db\_default\_instance\_endpoint](#output\_db\_default\_instance\_endpoint) | The connection endpoint |
-| <a name="output_db_default_instance_engine"></a> [db\_default\_instance\_engine](#output\_db\_default\_instance\_engine) | The database engine |
-| <a name="output_db_default_instance_engine_version"></a> [db\_default\_instance\_engine\_version](#output\_db\_default\_instance\_engine\_version) | The running version of the database |
-| <a name="output_db_default_instance_hosted_zone_id"></a> [db\_default\_instance\_hosted\_zone\_id](#output\_db\_default\_instance\_hosted\_zone\_id) | The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record) |
-| <a name="output_db_default_instance_identifier"></a> [db\_default\_instance\_identifier](#output\_db\_default\_instance\_identifier) | The RDS instance identifier |
-| <a name="output_db_default_instance_master_user_secret_arn"></a> [db\_default\_instance\_master\_user\_secret\_arn](#output\_db\_default\_instance\_master\_user\_secret\_arn) | The ARN of the master user secret (Only available when manage\_master\_user\_password is set to true) |
-| <a name="output_db_default_instance_name"></a> [db\_default\_instance\_name](#output\_db\_default\_instance\_name) | The database name |
-| <a name="output_db_default_instance_port"></a> [db\_default\_instance\_port](#output\_db\_default\_instance\_port) | The database port |
-| <a name="output_db_default_instance_resource_id"></a> [db\_default\_instance\_resource\_id](#output\_db\_default\_instance\_resource\_id) | The RDS Resource ID of this instance |
-| <a name="output_db_default_instance_status"></a> [db\_default\_instance\_status](#output\_db\_default\_instance\_status) | The RDS instance status |
-| <a name="output_db_default_instance_username"></a> [db\_default\_instance\_username](#output\_db\_default\_instance\_username) | The master username for the database |
-| <a name="output_db_default_parameter_group_arn"></a> [db\_default\_parameter\_group\_arn](#output\_db\_default\_parameter\_group\_arn) | The ARN of the db parameter group |
-| <a name="output_db_default_parameter_group_id"></a> [db\_default\_parameter\_group\_id](#output\_db\_default\_parameter\_group\_id) | The db parameter group id |
-| <a name="output_db_default_subnet_group_arn"></a> [db\_default\_subnet\_group\_arn](#output\_db\_default\_subnet\_group\_arn) | The ARN of the db subnet group |
-| <a name="output_db_default_subnet_group_id"></a> [db\_default\_subnet\_group\_id](#output\_db\_default\_subnet\_group\_id) | The db subnet group name |
 | <a name="output_db_enhanced_monitoring_iam_role_arn"></a> [db\_enhanced\_monitoring\_iam\_role\_arn](#output\_db\_enhanced\_monitoring\_iam\_role\_arn) | The Amazon Resource Name (ARN) specifying the monitoring role |
 | <a name="output_db_instance_address"></a> [db\_instance\_address](#output\_db\_instance\_address) | The address of the RDS instance |
 | <a name="output_db_instance_arn"></a> [db\_instance\_arn](#output\_db\_instance\_arn) | The ARN of the RDS instance |
