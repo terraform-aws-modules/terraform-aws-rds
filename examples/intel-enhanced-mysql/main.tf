@@ -48,7 +48,7 @@ module "db" {
   # Intel Instance selection
   instance_class = "db.m6i.large"
   # Intel parameter group selection
-  parameter_group_name = module.aws-mysql-parameter-group.db_parameter_group_name
+  parameter_group_name = module.intel_parameter_group.db_parameter_group_name
 
   ################################################################################
   # Database
