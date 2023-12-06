@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/terraform-aws-modules/terraform-aws-rds/blob/intel-enhanced-mysql/examples/enhanced-optimization/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
+  <img src="https://github.com/terraform-aws-modules/terraform-aws-rds/blob/main/examples/intel-enhanced-mysql/logo-classicblue-800px.png?raw=true" alt="Intel Logo" width="250"/>
 </p>
 
 ## Intel Enhanced Optimizations Example for RDS MySQL
