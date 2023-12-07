@@ -43,7 +43,7 @@ resource "aws_db_instance" "this" {
 
   db_name                             = var.db_name
   username                            = !local.is_replica ? var.username : null
-  password                            = !local.is_replica && var.manage_master_user_password ? null : var.password
+  password                            = !local.is_replica && !var.manage_master_user_password && var.snapshot_identifier != null ? var.password : null
   port                                = var.port
   domain                              = var.domain
   domain_iam_role_name                = var.domain_iam_role_name
