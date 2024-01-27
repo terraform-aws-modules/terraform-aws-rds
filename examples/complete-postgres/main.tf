@@ -46,6 +46,10 @@ module "db" {
   username = "complete_postgresql"
   port     = 5432
 
+  manage_master_user_password_rotation              = true
+  master_user_password_rotate_immediately           = true
+  master_user_password_rotation_schedule_expression = "rate(15 days)"
+
   multi_az               = true
   db_subnet_group_name   = module.vpc.database_subnet_group
   vpc_security_group_ids = [module.security_group.security_group_id]

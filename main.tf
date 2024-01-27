@@ -72,16 +72,21 @@ module "db_instance" {
   kms_key_id        = var.kms_key_id
   license_model     = var.license_model
 
-  db_name                             = var.db_name
-  username                            = var.username
-  password                            = var.manage_master_user_password ? null : var.password
-  port                                = var.port
-  domain                              = var.domain
-  domain_iam_role_name                = var.domain_iam_role_name
-  iam_database_authentication_enabled = var.iam_database_authentication_enabled
-  custom_iam_instance_profile         = var.custom_iam_instance_profile
-  manage_master_user_password         = var.manage_master_user_password
-  master_user_secret_kms_key_id       = var.master_user_secret_kms_key_id
+  db_name                                           = var.db_name
+  username                                          = var.username
+  password                                          = var.manage_master_user_password ? null : var.password
+  port                                              = var.port
+  domain                                            = var.domain
+  domain_iam_role_name                              = var.domain_iam_role_name
+  iam_database_authentication_enabled               = var.iam_database_authentication_enabled
+  custom_iam_instance_profile                       = var.custom_iam_instance_profile
+  manage_master_user_password                       = var.manage_master_user_password
+  master_user_secret_kms_key_id                     = var.master_user_secret_kms_key_id
+  manage_master_user_password_rotation              = var.manage_master_user_password_rotation
+  master_user_password_rotate_immediately           = var.master_user_password_rotate_immediately
+  master_user_password_rotation_in_days             = var.master_user_password_rotation_in_days
+  master_user_password_rotation_duration            = var.master_user_password_rotation_duration
+  master_user_password_rotation_schedule_expression = var.master_user_password_rotation_schedule_expression
 
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = local.db_subnet_group_name
