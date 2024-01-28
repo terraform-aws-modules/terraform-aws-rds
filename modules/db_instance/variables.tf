@@ -442,7 +442,7 @@ variable "master_user_password_rotation_in_days" {
 
 variable "master_user_password_rotation_duration" {
   description = "The length of the rotation window in hours. For example, 3h for a three hour window."
-  type        = number
+  type        = string
   default     = null
 }
 
