@@ -434,7 +434,7 @@ variable "master_user_password_rotate_immediately" {
   default     = null
 }
 
-variable "master_user_password_rotation_in_days" {
+variable "master_user_password_rotation_automatically_after_days" {
   description = "Specifies the number of days between automatic scheduled rotations of the secret. Either automatically_after_days or schedule_expression must be specified."
   type        = number
   default     = null

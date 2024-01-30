@@ -47,7 +47,7 @@ module "db" {
   port     = 5432
 
   manage_master_user_password_rotation              = true
-  master_user_password_rotate_immediately           = true
+  master_user_password_rotate_immediately           = false
   master_user_password_rotation_schedule_expression = "rate(15 days)"
 
   multi_az               = true

@@ -209,7 +209,7 @@ resource "aws_secretsmanager_secret_rotation" "this" {
   rotate_immediately = var.master_user_password_rotate_immediately
 
   rotation_rules {
-    automatically_after_days = var.master_user_password_rotation_in_days
+    automatically_after_days = var.master_user_password_rotation_automatically_after_days
     duration                 = var.master_user_password_rotation_duration
     schedule_expression      = var.master_user_password_rotation_schedule_expression
   }
