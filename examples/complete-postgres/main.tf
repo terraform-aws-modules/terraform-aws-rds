@@ -46,6 +46,8 @@ module "db" {
   username = "complete_postgresql"
   port     = 5432
 
+  # setting manage_master_user_password_rotation to false after it
+  # has been set to true previously disables automatic rotation
   manage_master_user_password_rotation              = true
   master_user_password_rotate_immediately           = false
   master_user_password_rotation_schedule_expression = "rate(15 days)"

@@ -423,13 +423,13 @@ variable "cloudwatch_log_group_kms_key_id" {
 ################################################################################
 
 variable "manage_master_user_password_rotation" {
-  description = "Whether to manage the master user password rotation"
+  description = "Whether to manage the master user password rotation. Setting this value to false after previously having been set to true will disable automatic rotation."
   type        = bool
   default     = false
 }
 
 variable "master_user_password_rotate_immediately" {
-  description = "Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window"
+  description = "Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window."
   type        = bool
   default     = null
 }
