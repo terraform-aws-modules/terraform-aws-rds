@@ -107,3 +107,12 @@ output "db_instance_cloudwatch_log_groups" {
   description = "Map of CloudWatch log groups created and their attributes"
   value       = aws_cloudwatch_log_group.this
 }
+
+################################################################################
+# Managed Secret Rotation
+################################################################################
+
+output "db_instance_secretsmanager_secret_rotation_enabled" {
+  description = "Specifies whether automatic rotation is enabled for the secret"
+  value       = try(aws_secretsmanager_secret_rotation.this[0].rotation_enabled, null)
+}

@@ -83,6 +83,12 @@ module "db_instance" {
   manage_master_user_password         = var.manage_master_user_password
   master_user_secret_kms_key_id       = var.master_user_secret_kms_key_id
 
+  manage_master_user_password_rotation                   = var.manage_master_user_password_rotation
+  master_user_password_rotate_immediately                = var.master_user_password_rotate_immediately
+  master_user_password_rotation_automatically_after_days = var.master_user_password_rotation_automatically_after_days
+  master_user_password_rotation_duration                 = var.master_user_password_rotation_duration
+  master_user_password_rotation_schedule_expression      = var.master_user_password_rotation_schedule_expression
+
   vpc_security_group_ids = var.vpc_security_group_ids
   db_subnet_group_name   = local.db_subnet_group_name
   parameter_group_name   = local.parameter_group_name_id

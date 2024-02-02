@@ -147,3 +147,12 @@ output "db_instance_role_associations" {
   description = "A map of DB Instance Identifiers and IAM Role ARNs separated by a comma"
   value       = module.db_instance_role_association
 }
+
+################################################################################
+# Managed Secret Rotation
+################################################################################
+
+output "db_instance_secretsmanager_secret_rotation_enabled" {
+  description = "Specifies whether automatic rotation is enabled for the secret"
+  value       = module.db_instance.db_instance_secretsmanager_secret_rotation_enabled
+}
