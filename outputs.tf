@@ -79,9 +79,29 @@ output "db_instance_domain" {
   value       = module.db_instance.db_instance_domain
 }
 
+output "db_instance_domain_auth_secret_arn" {
+  description = "The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain"
+  value       = module.db_instance.db_instance_domain_auth_secret_arn
+}
+
+output "db_instance_domain_dns_ips" {
+  description = "The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers"
+  value       = module.db_instance.db_instance_domain_dns_ips
+}
+
+output "db_instance_domain_fqdn" {
+  description = "The fully qualified domain name (FQDN) of an self managed Active Directory domain"
+  value       = module.db_instance.db_instance_domain_fqdn
+}
+
 output "db_instance_domain_iam_role_name" {
   description = "The name of the IAM role to be used when making API calls to the Directory Service"
   value       = module.db_instance.db_instance_domain_iam_role_name
+}
+
+output "db_instance_domain_ou" {
+  description = "The self managed Active Directory organizational unit for your DB instance to join"
+  value       = module.db_instance.db_instance_domain_ou
 }
 
 output "db_instance_port" {
