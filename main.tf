@@ -77,7 +77,11 @@ module "db_instance" {
   password                            = var.manage_master_user_password ? null : var.password
   port                                = var.port
   domain                              = var.domain
+  domain_auth_secret_arn              = var.domain_auth_secret_arn
+  domain_dns_ips                      = var.domain_dns_ips
+  domain_fqdn                         = var.domain_fqdn
   domain_iam_role_name                = var.domain_iam_role_name
+  domain_ou                           = var.domain_ou
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   custom_iam_instance_profile         = var.custom_iam_instance_profile
   manage_master_user_password         = var.manage_master_user_password

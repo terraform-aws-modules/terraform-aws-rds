@@ -210,7 +210,7 @@ Users have the ability to:
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.33 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.36 |
 
 ## Providers
 
@@ -266,7 +266,11 @@ No resources.
 | <a name="input_delete_automated_backups"></a> [delete\_automated\_backups](#input\_delete\_automated\_backups) | Specifies whether to remove automated backups immediately after the DB instance is deleted | `bool` | `true` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | The database can't be deleted when this value is set to true | `bool` | `false` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | The ID of the Directory Service Active Directory domain to create the instance in | `string` | `null` | no |
+| <a name="input_domain_auth_secret_arn"></a> [domain\_auth\_secret\_arn](#input\_domain\_auth\_secret\_arn) | (Optional, but required if domain\_fqdn is provided) The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain. Conflicts with domain and domain\_iam\_role\_name. | `string` | `null` | no |
+| <a name="input_domain_dns_ips"></a> [domain\_dns\_ips](#input\_domain\_dns\_ips) | (Optional, but required if domain\_fqdn is provided) The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain\_iam\_role\_name. | `list(string)` | `null` | no |
+| <a name="input_domain_fqdn"></a> [domain\_fqdn](#input\_domain\_fqdn) | The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain\_iam\_role\_name. | `string` | `null` | no |
 | <a name="input_domain_iam_role_name"></a> [domain\_iam\_role\_name](#input\_domain\_iam\_role\_name) | (Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service | `string` | `null` | no |
+| <a name="input_domain_ou"></a> [domain\_ou](#input\_domain\_ou) | (Optional, but required if domain\_fqdn is provided) The self managed Active Directory organizational unit for your DB instance to join. Conflicts with domain and domain\_iam\_role\_name. | `string` | `null` | no |
 | <a name="input_enabled_cloudwatch_logs_exports"></a> [enabled\_cloudwatch\_logs\_exports](#input\_enabled\_cloudwatch\_logs\_exports) | List of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine): alert, audit, error, general, listener, slowquery, trace, postgresql (PostgreSQL), upgrade (PostgreSQL) | `list(string)` | `[]` | no |
 | <a name="input_engine"></a> [engine](#input\_engine) | The database engine to use | `string` | `null` | no |
 | <a name="input_engine_version"></a> [engine\_version](#input\_engine\_version) | The engine version to use | `string` | `null` | no |
@@ -340,7 +344,11 @@ No resources.
 | <a name="output_db_instance_ca_cert_identifier"></a> [db\_instance\_ca\_cert\_identifier](#output\_db\_instance\_ca\_cert\_identifier) | Specifies the identifier of the CA certificate for the DB instance |
 | <a name="output_db_instance_cloudwatch_log_groups"></a> [db\_instance\_cloudwatch\_log\_groups](#output\_db\_instance\_cloudwatch\_log\_groups) | Map of CloudWatch log groups created and their attributes |
 | <a name="output_db_instance_domain"></a> [db\_instance\_domain](#output\_db\_instance\_domain) | The ID of the Directory Service Active Directory domain the instance is joined to |
+| <a name="output_db_instance_domain_auth_secret_arn"></a> [db\_instance\_domain\_auth\_secret\_arn](#output\_db\_instance\_domain\_auth\_secret\_arn) | The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain |
+| <a name="output_db_instance_domain_dns_ips"></a> [db\_instance\_domain\_dns\_ips](#output\_db\_instance\_domain\_dns\_ips) | The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers |
+| <a name="output_db_instance_domain_fqdn"></a> [db\_instance\_domain\_fqdn](#output\_db\_instance\_domain\_fqdn) | The fully qualified domain name (FQDN) of an self managed Active Directory domain |
 | <a name="output_db_instance_domain_iam_role_name"></a> [db\_instance\_domain\_iam\_role\_name](#output\_db\_instance\_domain\_iam\_role\_name) | The name of the IAM role to be used when making API calls to the Directory Service |
+| <a name="output_db_instance_domain_ou"></a> [db\_instance\_domain\_ou](#output\_db\_instance\_domain\_ou) | The self managed Active Directory organizational unit for your DB instance to join |
 | <a name="output_db_instance_endpoint"></a> [db\_instance\_endpoint](#output\_db\_instance\_endpoint) | The connection endpoint |
 | <a name="output_db_instance_engine"></a> [db\_instance\_engine](#output\_db\_instance\_engine) | The database engine |
 | <a name="output_db_instance_engine_version_actual"></a> [db\_instance\_engine\_version\_actual](#output\_db\_instance\_engine\_version\_actual) | The running version of the database |

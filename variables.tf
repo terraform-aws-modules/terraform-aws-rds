@@ -75,8 +75,32 @@ variable "domain" {
   default     = null
 }
 
+variable "domain_auth_secret_arn" {
+  description = "(Optional, but required if domain_fqdn is provided) The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain. Conflicts with domain and domain_iam_role_name."
+  type        = string
+  default     = null
+}
+
+variable "domain_dns_ips" {
+  description = "(Optional, but required if domain_fqdn is provided) The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name."
+  type        = list(string)
+  default     = null
+}
+
+variable "domain_fqdn" {
+  description = "The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name."
+  type        = string
+  default     = null
+}
+
 variable "domain_iam_role_name" {
   description = "(Required if domain is provided) The name of the IAM role to be used when making API calls to the Directory Service"
+  type        = string
+  default     = null
+}
+
+variable "domain_ou" {
+  description = "(Optional, but required if domain_fqdn is provided) The self managed Active Directory organizational unit for your DB instance to join. Conflicts with domain and domain_iam_role_name."
   type        = string
   default     = null
 }
