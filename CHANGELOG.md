@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [6.5.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.0...v6.5.1) (2024-03-04)
+
+
+### Bug Fixes
+
+* Allow managing `allocated_storage` for replicas ([#534](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/534)) ([7b02569](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/7b02569468142ee054441ccaeaad9a196da74bb6))
+
 ## [6.5.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.4.0...v6.5.0) (2024-03-02)
 
 
