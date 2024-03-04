@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.5.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.4.0...v6.5.0) (2024-03-02)
+
+
+### Features
+
+* Self managed active directory arguments ([#541](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/541)) ([c85d3b0](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/c85d3b0e372c725f2953b180d12b917f72df360f))
+
 ## [6.4.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.3.1...v6.4.0) (2024-02-02)
 
 

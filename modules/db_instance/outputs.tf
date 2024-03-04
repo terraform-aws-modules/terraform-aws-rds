@@ -89,9 +89,29 @@ output "db_instance_domain" {
   value       = try(aws_db_instance.this[0].domain, null)
 }
 
+output "db_instance_domain_auth_secret_arn" {
+  description = "The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain"
+  value       = try(aws_db_instance.this[0].domain_auth_secret_arn, null)
+}
+
+output "db_instance_domain_dns_ips" {
+  description = "The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers"
+  value       = try(aws_db_instance.this[0].domain_dns_ips, null)
+}
+
+output "db_instance_domain_fqdn" {
+  description = "The fully qualified domain name (FQDN) of an self managed Active Directory domain"
+  value       = try(aws_db_instance.this[0].domain_fqdn, null)
+}
+
 output "db_instance_domain_iam_role_name" {
   description = "The name of the IAM role to be used when making API calls to the Directory Service"
   value       = try(aws_db_instance.this[0].domain_iam_role_name, null)
+}
+
+output "db_instance_domain_ou" {
+  description = "The self managed Active Directory organizational unit for your DB instance to join"
+  value       = try(aws_db_instance.this[0].domain_ou, null)
 }
 
 output "db_instance_master_user_secret_arn" {
