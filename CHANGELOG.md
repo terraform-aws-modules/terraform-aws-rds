@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.5.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.1...v6.5.2) (2024-03-07)
+
+
+### Bug Fixes
+
+* Update CI workflow versions to remove deprecated runtime warnings ([#542](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/542)) ([079605a](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/079605ad6b55d201393bb8225f142129e2fc2195))
+
 ### [6.5.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.0...v6.5.1) (2024-03-04)
 
 
