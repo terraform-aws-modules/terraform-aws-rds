@@ -324,7 +324,7 @@ variable "tags" {
 }
 
 variable "db_instance_tags" {
-  description = "A mapping of tags to assign to all resources"
+  description = "A map of additional tags for the DB instance"
   type        = map(string)
   default     = {}
 }
