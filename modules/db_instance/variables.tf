@@ -323,6 +323,12 @@ variable "tags" {
   default     = {}
 }
 
+variable "db_instance_tags" {
+  description = "A mapping of tags to assign to all resources"
+  type        = map(string)
+  default     = {}
+}
+
 variable "option_group_name" {
   description = "Name of the DB option group to associate."
   type        = string
