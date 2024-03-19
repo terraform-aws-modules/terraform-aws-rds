@@ -152,7 +152,7 @@ module "db_instance" {
   s3_import                = var.s3_import
 
   db_instance_tags = var.db_instance_tags
-  tags = var.tags
+  tags             = var.tags
 }
 
 module "db_instance_role_association" {
