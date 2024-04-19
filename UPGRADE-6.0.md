@@ -95,6 +95,8 @@ module "rds_after" {
   # Only the affected attributes are shown
   create_db_instance = true
 
+  manage_master_user_password = false
+
   password = random_password.master_password.result
 
   tags = {
@@ -107,5 +109,5 @@ module "rds_after" {
 A state move must be done to preserve the previously used random password.
 
 ```
-terraform state mv 'module.db.random_password.master_password[0]'  random_password.master_password
+terraform state mv 'module.db.random_password.master_password[0]' random_password.master_password
 ```
