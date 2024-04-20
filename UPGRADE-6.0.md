@@ -43,7 +43,7 @@ With RDS now supporting the integration with SecretsManager to manage the master
 ### Before 5.x Example
 
 ```hcl
-module "rds_before" {
+module "rds" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 5.0"
 
@@ -63,7 +63,7 @@ module "rds_before" {
 ### After 6.x Example
 
 ```hcl
-module "rds_after" {
+module "rds" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 6.0"
 
@@ -90,7 +90,7 @@ resource "random_password" "master_password" {
   special = false
 }
 
-module "rds_after" {
+module "rds" {
   source  = "terraform-aws-modules/rds/aws"
   version = "~> 5.0"
 
@@ -111,5 +111,5 @@ module "rds_after" {
 A state move must be done to preserve the previously used random password. Example:
 
 ```
-terraform state mv 'module.db.random_password.master_password[0]' random_password.master_password
+terraform state mv 'module.rds.random_password.master_password[0]' random_password.master_password
 ```
