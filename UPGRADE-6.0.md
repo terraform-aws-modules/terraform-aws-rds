@@ -80,7 +80,9 @@ module "rds_after" {
 
 ### Retaining use of random password
 
-The following example demonstrates the changes that users can elect to make to avoid any potential disruptions when upgrading if electing not to use RDS password management with SecretsManager `manage_master_user_password`.
+The following example demonstrates the changes that users can elect to make to avoid any potential disruptions when upgrading if electing not to use RDS password management with SecretsManager `manage_master_user_password` when previously using `create_random_password`.
+
+In this example, the `random_password` resource is added alongside the existing module to preserve the existing password.
 
 ```hcl
 resource "random_password" "master_password" {
@@ -106,7 +108,7 @@ module "rds_after" {
 }
 ```
 
-A state move must be done to preserve the previously used random password.
+A state move must be done to preserve the previously used random password. Example:
 
 ```
 terraform state mv 'module.db.random_password.master_password[0]' random_password.master_password
