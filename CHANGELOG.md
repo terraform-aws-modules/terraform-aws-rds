@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.5.5](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.4...v6.5.5) (2024-04-22)
+
+
+### Bug Fixes
+
+* Add upgrade doc and fix variable description ([#548](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/548)) ([97f6261](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/97f6261ac90c6c271964185538d8d9e19728bd54))
+
 ## [6.5.4](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.3...v6.5.4) (2024-03-21)
 
 
