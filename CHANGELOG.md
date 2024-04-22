@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.5.4](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.3...v6.5.4) (2024-03-21)
+
+
+### Bug Fixes
+
+* Restore aws to required providers ([#546](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/546)) ([7f37ff8](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/7f37ff8c160e819ae6766d6bf25f0fb8cec978f5))
+
+## [6.5.3](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.2...v6.5.3) (2024-03-19)
+
+
+### Bug Fixes
+
+* Separate `db_instance_tags` from merged `tags` sub-module input ([#544](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/544)) ([89a5763](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/89a5763625cc60ad1d8b9afd13cfda916e88996a))
+
 ## [6.5.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.1...v6.5.2) (2024-03-07)
 
 
