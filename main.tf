@@ -99,12 +99,13 @@ module "db_instance" {
   option_group_name      = var.engine != "postgres" ? local.option_group : null
   network_type           = var.network_type
 
-  availability_zone   = var.availability_zone
-  multi_az            = var.multi_az
-  iops                = var.iops
-  storage_throughput  = var.storage_throughput
-  publicly_accessible = var.publicly_accessible
-  ca_cert_identifier  = var.ca_cert_identifier
+  availability_zone    = var.availability_zone
+  multi_az             = var.multi_az
+  iops                 = var.iops
+  storage_throughput   = var.storage_throughput
+  publicly_accessible  = var.publicly_accessible
+  ca_cert_identifier   = var.ca_cert_identifier
+  dedicated_log_volume = var.dedicated_log_volume
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade

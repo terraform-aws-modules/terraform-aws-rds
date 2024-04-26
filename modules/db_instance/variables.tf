@@ -426,6 +426,12 @@ variable "network_type" {
   default     = null
 }
 
+variable "dedicated_log_volume" {
+  description = "Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS."
+  type        = bool
+  default     = false
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################
