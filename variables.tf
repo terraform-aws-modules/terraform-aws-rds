@@ -316,6 +316,12 @@ variable "s3_import" {
   default     = null
 }
 
+variable "dedicated_log_volume" {
+  description = "Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS."
+  type        = bool
+  default     = false
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to all resources"
   type        = map(string)
