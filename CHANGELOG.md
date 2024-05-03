@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.6.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.5...v6.6.0) (2024-05-03)
+
+
+### Features
+
+* Support `dedicated_log_volume` ([#549](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/549)) ([49f87e0](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/49f87e0d35a4cebafb1b2a123abf21d0909c4bf1))
+
 ## [6.5.5](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.4...v6.5.5) (2024-04-22)
 
 
