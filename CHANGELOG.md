@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.7.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.6.0...v6.7.0) (2024-06-12)
+
+
+### Features
+
+* Added cloudwatch log group `skip_destroy` and `log_group_class` ([#553](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/553)) ([12f4e91](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/12f4e91f1a4f3ee48b91d222fcae5c51bbe7ab29))
+
 ## [6.6.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.5.5...v6.6.0) (2024-05-03)
 
 
