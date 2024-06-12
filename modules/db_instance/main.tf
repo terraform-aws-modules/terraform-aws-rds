@@ -158,6 +158,8 @@ resource "aws_cloudwatch_log_group" "this" {
   name              = "/aws/rds/instance/${var.identifier}/${each.value}"
   retention_in_days = var.cloudwatch_log_group_retention_in_days
   kms_key_id        = var.cloudwatch_log_group_kms_key_id
+  skip_destroy      = var.cloudwatch_log_group_skip_destroy
+  log_group_class   = var.cloudwatch_log_group_class
 
   tags = var.tags
 }
