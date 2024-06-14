@@ -112,12 +112,14 @@ module "replica" {
   allocated_storage     = local.allocated_storage
   max_allocated_storage = local.max_allocated_storage
 
-  password = "UberSecretPassword"
   # Not supported with replicas
   manage_master_user_password = false
 
   # Username and password should not be set for replicas
   port = local.port
+
+  # parameter group for replica is inherited from the source database
+  create_db_parameter_group = false
 
   multi_az               = false
   vpc_security_group_ids = [module.security_group_region2.security_group_id]
