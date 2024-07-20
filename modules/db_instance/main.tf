@@ -32,14 +32,15 @@ resource "aws_db_instance" "this" {
   identifier        = local.identifier
   identifier_prefix = local.identifier_prefix
 
-  engine            = local.is_replica ? null : var.engine
-  engine_version    = var.engine_version
-  instance_class    = var.instance_class
-  allocated_storage = var.allocated_storage
-  storage_type      = var.storage_type
-  storage_encrypted = var.storage_encrypted
-  kms_key_id        = var.kms_key_id
-  license_model     = var.license_model
+  engine                   = local.is_replica ? null : var.engine
+  engine_version           = var.engine_version
+  engine_lifecycle_support = var.engine_lifecycle_support
+  instance_class           = var.instance_class
+  allocated_storage        = var.allocated_storage
+  storage_type             = var.storage_type
+  storage_encrypted        = var.storage_encrypted
+  kms_key_id               = var.kms_key_id
+  license_model            = var.license_model
 
   db_name                             = var.db_name
   username                            = !local.is_replica ? var.username : null

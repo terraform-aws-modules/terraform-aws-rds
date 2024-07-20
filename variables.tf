@@ -117,6 +117,12 @@ variable "engine_version" {
   default     = null
 }
 
+variable "engine_lifecycle_support" {
+  description = "The life cycle type for this DB instance. This setting applies only to RDS for MySQL and RDS for PostgreSQL. Valid values are `open-source-rds-extended-support`, `open-source-rds-extended-support-disabled`. Default value is `open-source-rds-extended-support`."
+  type        = string
+  default     = null
+}
+
 variable "skip_final_snapshot" {
   description = "Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted"
   type        = bool
