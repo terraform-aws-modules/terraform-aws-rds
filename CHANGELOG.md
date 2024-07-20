@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.8.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.7.0...v6.8.0) (2024-07-20)
+
+
+### Features
+
+* Support `engine_lifecycle_support` ([#558](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/558)) ([eae7230](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/eae723015b139311eb7785fa4f4a02d8fa9d55b2))
+
 ## [6.7.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.6.0...v6.7.0) (2024-06-12)
 
 
