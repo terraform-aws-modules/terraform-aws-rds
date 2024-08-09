@@ -33,6 +33,8 @@ resource "aws_db_option_group" "this" {
     }
   }
 
+  skip_destroy = var.skip_destroy
+
   tags = merge(
     var.tags,
     {

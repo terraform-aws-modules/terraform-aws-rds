@@ -63,13 +63,14 @@ resource "aws_db_instance" "this" {
   option_group_name      = var.option_group_name
   network_type           = var.network_type
 
-  availability_zone    = var.availability_zone
-  multi_az             = var.multi_az
-  iops                 = var.iops
-  storage_throughput   = var.storage_throughput
-  publicly_accessible  = var.publicly_accessible
-  ca_cert_identifier   = var.ca_cert_identifier
-  dedicated_log_volume = var.dedicated_log_volume
+  availability_zone      = var.availability_zone
+  multi_az               = var.multi_az
+  iops                   = var.iops
+  storage_throughput     = var.storage_throughput
+  publicly_accessible    = var.publicly_accessible
+  ca_cert_identifier     = var.ca_cert_identifier
+  dedicated_log_volume   = var.dedicated_log_volume
+  upgrade_storage_config = var.upgrade_storage_config
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade

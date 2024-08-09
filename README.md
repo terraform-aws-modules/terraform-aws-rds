@@ -210,7 +210,7 @@ Users have the ability to:
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.59 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.62 |
 
 ## Providers
 
@@ -308,11 +308,13 @@ No resources.
 | <a name="input_network_type"></a> [network\_type](#input\_network\_type) | The type of network stack to use | `string` | `null` | no |
 | <a name="input_option_group_description"></a> [option\_group\_description](#input\_option\_group\_description) | The description of the option group | `string` | `null` | no |
 | <a name="input_option_group_name"></a> [option\_group\_name](#input\_option\_group\_name) | Name of the option group | `string` | `null` | no |
+| <a name="input_option_group_skip_destroy"></a> [option\_group\_skip\_destroy](#input\_option\_group\_skip\_destroy) | Set to true if you do not wish the option group to be deleted at destroy time, and instead just remove the option group from the Terraform state | `bool` | `false` | no |
 | <a name="input_option_group_timeouts"></a> [option\_group\_timeouts](#input\_option\_group\_timeouts) | Define maximum timeout for deletion of `aws_db_option_group` resource | `map(string)` | `{}` | no |
 | <a name="input_option_group_use_name_prefix"></a> [option\_group\_use\_name\_prefix](#input\_option\_group\_use\_name\_prefix) | Determines whether to use `option_group_name` as is or create a unique name beginning with the `option_group_name` as the prefix | `bool` | `true` | no |
 | <a name="input_options"></a> [options](#input\_options) | A list of Options to apply | `any` | `[]` | no |
 | <a name="input_parameter_group_description"></a> [parameter\_group\_description](#input\_parameter\_group\_description) | Description of the DB parameter group to create | `string` | `null` | no |
 | <a name="input_parameter_group_name"></a> [parameter\_group\_name](#input\_parameter\_group\_name) | Name of the DB parameter group to associate or create | `string` | `null` | no |
+| <a name="input_parameter_group_skip_destroy"></a> [parameter\_group\_skip\_destroy](#input\_parameter\_group\_skip\_destroy) | Set to true if you do not wish the parameter group to be deleted at destroy time, and instead just remove the parameter group from the Terraform state | `bool` | `false` | no |
 | <a name="input_parameter_group_use_name_prefix"></a> [parameter\_group\_use\_name\_prefix](#input\_parameter\_group\_use\_name\_prefix) | Determines whether to use `parameter_group_name` as is or create a unique name beginning with the `parameter_group_name` as the prefix | `bool` | `true` | no |
 | <a name="input_parameters"></a> [parameters](#input\_parameters) | A list of DB parameters (map) to apply | `list(map(string))` | `[]` | no |
 | <a name="input_password"></a> [password](#input\_password) | Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file.<br>  The password provided will not be used if `manage_master_user_password` is set to true. | `string` | `null` | no |
@@ -335,6 +337,7 @@ No resources.
 | <a name="input_tags"></a> [tags](#input\_tags) | A mapping of tags to assign to all resources | `map(string)` | `{}` | no |
 | <a name="input_timeouts"></a> [timeouts](#input\_timeouts) | Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times | `map(string)` | `{}` | no |
 | <a name="input_timezone"></a> [timezone](#input\_timezone) | Time zone of the DB instance. timezone is currently only supported by Microsoft SQL Server. The timezone can only be set on creation. See MSSQL User Guide for more information | `string` | `null` | no |
+| <a name="input_upgrade_storage_config"></a> [upgrade\_storage\_config](#input\_upgrade\_storage\_config) | Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate\_source\_db. | `bool` | `null` | no |
 | <a name="input_username"></a> [username](#input\_username) | Username for the master DB user | `string` | `null` | no |
 | <a name="input_vpc_security_group_ids"></a> [vpc\_security\_group\_ids](#input\_vpc\_security\_group\_ids) | List of VPC security groups to associate | `list(string)` | `[]` | no |
 
