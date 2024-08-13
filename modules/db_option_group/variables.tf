@@ -43,7 +43,7 @@ variable "options" {
 variable "skip_destroy" {
   description = "Set to true if you do not wish the option group to be deleted at destroy time, and instead just remove the option group from the Terraform state"
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "timeouts" {

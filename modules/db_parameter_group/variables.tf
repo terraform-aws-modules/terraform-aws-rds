@@ -37,7 +37,7 @@ variable "parameters" {
 variable "skip_destroy" {
   description = "Set to true if you do not wish the parameter group to be deleted at destroy time, and instead just remove the parameter group from the Terraform state"
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "tags" {
