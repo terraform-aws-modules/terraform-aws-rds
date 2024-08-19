@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.9.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.8.0...v6.9.0) (2024-08-19)
+
+
+### Features
+
+* Support `skip_destroy` for option and param groups and add `upgrade_storage_config` for replicas ([#559](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/559)) ([3f73565](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/3f73565f673d38bffac3c339f436782cd79f01fb))
+
 ## [6.8.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.7.0...v6.8.0) (2024-07-20)
 
 
