@@ -438,6 +438,12 @@ variable "dedicated_log_volume" {
   default     = false
 }
 
+variable "upgrade_storage_config" {
+  description = "Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db."
+  type        = bool
+  default     = null
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################

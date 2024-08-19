@@ -33,7 +33,8 @@ module "db_parameter_group" {
   description     = var.parameter_group_description
   family          = var.family
 
-  parameters = var.parameters
+  parameters   = var.parameters
+  skip_destroy = var.parameter_group_skip_destroy
 
   tags = merge(var.tags, var.db_parameter_group_tags)
 }
@@ -49,7 +50,8 @@ module "db_option_group" {
   engine_name              = var.engine
   major_engine_version     = var.major_engine_version
 
-  options = var.options
+  options      = var.options
+  skip_destroy = var.option_group_skip_destroy
 
   timeouts = var.option_group_timeouts
 
@@ -100,13 +102,14 @@ module "db_instance" {
   option_group_name      = var.engine != "postgres" ? local.option_group : null
   network_type           = var.network_type
 
-  availability_zone    = var.availability_zone
-  multi_az             = var.multi_az
-  iops                 = var.iops
-  storage_throughput   = var.storage_throughput
-  publicly_accessible  = var.publicly_accessible
-  ca_cert_identifier   = var.ca_cert_identifier
-  dedicated_log_volume = var.dedicated_log_volume
+  availability_zone      = var.availability_zone
+  multi_az               = var.multi_az
+  iops                   = var.iops
+  storage_throughput     = var.storage_throughput
+  publicly_accessible    = var.publicly_accessible
+  ca_cert_identifier     = var.ca_cert_identifier
+  dedicated_log_volume   = var.dedicated_log_volume
+  upgrade_storage_config = var.upgrade_storage_config
 
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade

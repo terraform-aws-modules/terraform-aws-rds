@@ -426,6 +426,12 @@ variable "parameters" {
   default     = []
 }
 
+variable "parameter_group_skip_destroy" {
+  description = "Set to true if you do not wish the parameter group to be deleted at destroy time, and instead just remove the parameter group from the Terraform state"
+  type        = bool
+  default     = null
+}
+
 # DB option group
 variable "create_db_option_group" {
   description = "Create a database option group"
@@ -461,6 +467,12 @@ variable "options" {
   description = "A list of Options to apply"
   type        = any
   default     = []
+}
+
+variable "option_group_skip_destroy" {
+  description = "Set to true if you do not wish the option group to be deleted at destroy time, and instead just remove the option group from the Terraform state"
+  type        = bool
+  default     = null
 }
 
 variable "create_db_instance" {
@@ -550,6 +562,12 @@ variable "delete_automated_backups" {
 variable "network_type" {
   description = "The type of network stack to use"
   type        = string
+  default     = null
+}
+
+variable "upgrade_storage_config" {
+  description = "Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db."
+  type        = bool
   default     = null
 }
 

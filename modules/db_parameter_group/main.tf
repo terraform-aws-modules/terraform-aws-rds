@@ -22,6 +22,8 @@ resource "aws_db_parameter_group" "this" {
     }
   }
 
+  skip_destroy = var.skip_destroy
+
   tags = merge(
     var.tags,
     {

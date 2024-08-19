@@ -34,6 +34,12 @@ variable "parameters" {
   default     = []
 }
 
+variable "skip_destroy" {
+  description = "Set to true if you do not wish the parameter group to be deleted at destroy time, and instead just remove the parameter group from the Terraform state"
+  type        = bool
+  default     = null
+}
+
 variable "tags" {
   description = "A mapping of tags to assign to the resource"
   type        = map(string)
