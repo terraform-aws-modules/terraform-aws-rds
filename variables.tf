@@ -429,7 +429,7 @@ variable "parameters" {
 variable "parameter_group_skip_destroy" {
   description = "Set to true if you do not wish the parameter group to be deleted at destroy time, and instead just remove the parameter group from the Terraform state"
   type        = bool
-  default     = false
+  default     = null
 }
 
 # DB option group
@@ -472,7 +472,7 @@ variable "options" {
 variable "option_group_skip_destroy" {
   description = "Set to true if you do not wish the option group to be deleted at destroy time, and instead just remove the option group from the Terraform state"
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "create_db_instance" {
