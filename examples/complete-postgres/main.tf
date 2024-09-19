@@ -1,75 +1,226 @@
 provider "aws" {
-  region = "us-west-1"
+  region = local.region
 }
 
-##############################################################
-# Data sources to get VPC, subnets and security group details
-##############################################################
-data "aws_vpc" "default" {
-  default = true
+data "aws_caller_identity" "current" {}
+data "aws_availability_zones" "available" {}
+
+locals {
+  name    = "complete-postgresql"
+  region  = "eu-west-1"
+  region2 = "eu-central-1"
+
+  vpc_cidr = "10.0.0.0/16"
+  azs      = slice(data.aws_availability_zones.available.names, 0, 3)
+
+  tags = {
+    Name       = local.name
+    Example    = local.name
+    Repository = "https://github.com/terraform-aws-modules/terraform-aws-rds"
+  }
 }
 
-data "aws_subnet_ids" "all" {
-  vpc_id = data.aws_vpc.default.id
-}
+################################################################################
+# RDS Module
+################################################################################
 
-data "aws_security_group" "default" {
-  vpc_id = data.aws_vpc.default.id
-  name   = "default"
-}
-
-#####
-# DB
-#####
 module "db" {
   source = "../../"
 
-  identifier = "demodb-postgres"
+  identifier = local.name
 
-  engine            = "postgres"
-  engine_version    = "9.6.9"
-  instance_class    = "db.t2.large"
-  allocated_storage = 5
-  storage_encrypted = false
+  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+  engine                   = "postgres"
+  engine_version           = "14"
+  engine_lifecycle_support = "open-source-rds-extended-support-disabled"
+  family                   = "postgres14" # DB parameter group
+  major_engine_version     = "14"         # DB option group
+  instance_class           = "db.t4g.large"
 
-  # kms_key_id        = "arm:aws:kms:<region>:<account id>:key/<kms key id>"
-  name = "demodb"
+  allocated_storage     = 20
+  max_allocated_storage = 100
 
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  username = "demouser"
+  db_name  = "completePostgresql"
+  username = "complete_postgresql"
+  port     = 5432
 
-  password = "YourPwdShouldBeLongAndSecure!"
-  port     = "5432"
+  # Setting manage_master_user_password_rotation to false after it
+  # has previously been set to true disables automatic rotation
+  # however using an initial value of false (default) does not disable
+  # automatic rotation and rotation will be handled by RDS.
+  # manage_master_user_password_rotation allows users to configure
+  # a non-default schedule and is not meant to disable rotation
+  # when initially creating / enabling the password management feature
+  manage_master_user_password_rotation              = true
+  master_user_password_rotate_immediately           = false
+  master_user_password_rotation_schedule_expression = "rate(15 days)"
 
-  vpc_security_group_ids = [data.aws_security_group.default.id]
+  multi_az               = true
+  db_subnet_group_name   = module.vpc.database_subnet_group
+  vpc_security_group_ids = [module.security_group.security_group_id]
 
-  maintenance_window = "Mon:00:00-Mon:03:00"
-  backup_window      = "03:00-06:00"
+  maintenance_window              = "Mon:00:00-Mon:03:00"
+  backup_window                   = "03:00-06:00"
+  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+  create_cloudwatch_log_group     = true
 
-  # disable backups to create DB faster
+  backup_retention_period = 1
+  skip_final_snapshot     = true
+  deletion_protection     = false
+
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  create_monitoring_role                = true
+  monitoring_interval                   = 60
+  monitoring_role_name                  = "example-monitoring-role-name"
+  monitoring_role_use_name_prefix       = true
+  monitoring_role_description           = "Description for monitoring role"
+
+  parameters = [
+    {
+      name  = "autovacuum"
+      value = 1
+    },
+    {
+      name  = "client_encoding"
+      value = "utf8"
+    }
+  ]
+
+  tags = local.tags
+  db_option_group_tags = {
+    "Sensitive" = "low"
+  }
+  db_parameter_group_tags = {
+    "Sensitive" = "low"
+  }
+}
+
+module "db_default" {
+  source = "../../"
+
+  identifier                     = "${local.name}-default"
+  instance_use_identifier_prefix = true
+
+  create_db_option_group    = false
+  create_db_parameter_group = false
+
+  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+  engine               = "postgres"
+  engine_version       = "14"
+  family               = "postgres14" # DB parameter group
+  major_engine_version = "14"         # DB option group
+  instance_class       = "db.t4g.large"
+
+  allocated_storage = 20
+
+  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
+  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
+  # user cannot be used as it is a reserved word used by the engine"
+  db_name  = "completePostgresql"
+  username = "complete_postgresql"
+  port     = 5432
+
+  db_subnet_group_name   = module.vpc.database_subnet_group
+  vpc_security_group_ids = [module.security_group.security_group_id]
+
+  maintenance_window      = "Mon:00:00-Mon:03:00"
+  backup_window           = "03:00-06:00"
   backup_retention_period = 0
 
-  tags = {
-    Owner       = "user"
-    Environment = "dev"
+  tags = local.tags
+}
+
+module "db_disabled" {
+  source = "../../"
+
+  identifier = "${local.name}-disabled"
+
+  create_db_instance        = false
+  create_db_parameter_group = false
+  create_db_option_group    = false
+}
+
+################################################################################
+# RDS Automated Backups Replication Module
+################################################################################
+
+provider "aws" {
+  alias  = "region2"
+  region = local.region2
+}
+
+module "kms" {
+  source      = "terraform-aws-modules/kms/aws"
+  version     = "~> 1.0"
+  description = "KMS key for cross region automated backups replication"
+
+  # Aliases
+  aliases                 = [local.name]
+  aliases_use_name_prefix = true
+
+  key_owners = [data.aws_caller_identity.current.arn]
+
+  tags = local.tags
+
+  providers = {
+    aws = aws.region2
   }
+}
 
-  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+module "db_automated_backups_replication" {
+  source = "../../modules/db_instance_automated_backups_replication"
 
-  # DB subnet group
-  subnet_ids = data.aws_subnet_ids.all.ids
+  source_db_instance_arn = module.db.db_instance_arn
+  kms_key_arn            = module.kms.key_arn
 
-  # DB parameter group
-  family = "postgres9.6"
+  providers = {
+    aws = aws.region2
+  }
+}
 
-  # DB option group
-  major_engine_version = "9.6"
+################################################################################
+# Supporting Resources
+################################################################################
 
-  # Snapshot name upon DB deletion
-  final_snapshot_identifier = "demodb"
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 5.0"
 
-  # Database Deletion Protection
-  deletion_protection = false
+  name = local.name
+  cidr = local.vpc_cidr
+
+  azs              = local.azs
+  public_subnets   = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k)]
+  private_subnets  = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 3)]
+  database_subnets = [for k, v in local.azs : cidrsubnet(local.vpc_cidr, 8, k + 6)]
+
+  create_database_subnet_group = true
+
+  tags = local.tags
+}
+
+module "security_group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 5.0"
+
+  name        = local.name
+  description = "Complete PostgreSQL example security group"
+  vpc_id      = module.vpc.vpc_id
+
+  # ingress
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      description = "PostgreSQL access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    },
+  ]
+
+  tags = local.tags
 }

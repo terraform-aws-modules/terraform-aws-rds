@@ -4,20 +4,22 @@ variable "create" {
   default     = true
 }
 
-variable "name_prefix" {
-  description = "Creates a unique name beginning with the specified prefix"
+variable "name" {
+  description = "The name of the DB subnet group"
   type        = string
+  default     = ""
 }
 
 variable "use_name_prefix" {
-  description = "Whether to use name_prefix or not"
+  description = "Determines whether to use `name` as is or create a unique name beginning with `name` as the specified prefix"
   type        = bool
   default     = true
 }
 
-variable "identifier" {
-  description = "The identifier of the resource"
+variable "description" {
+  description = "The description of the DB subnet group"
   type        = string
+  default     = null
 }
 
 variable "subnet_ids" {
@@ -31,4 +33,3 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
-

@@ -8,99 +8,171 @@ output "enhanced_monitoring_iam_role_arn" {
   value       = module.db_instance.enhanced_monitoring_iam_role_arn
 }
 
-output "this_db_instance_address" {
+output "db_instance_address" {
   description = "The address of the RDS instance"
-  value       = module.db_instance.this_db_instance_address
+  value       = module.db_instance.db_instance_address
 }
 
-output "this_db_instance_arn" {
+output "db_instance_arn" {
   description = "The ARN of the RDS instance"
-  value       = module.db_instance.this_db_instance_arn
+  value       = module.db_instance.db_instance_arn
 }
 
-output "this_db_instance_availability_zone" {
+output "db_instance_availability_zone" {
   description = "The availability zone of the RDS instance"
-  value       = module.db_instance.this_db_instance_availability_zone
+  value       = module.db_instance.db_instance_availability_zone
 }
 
-output "this_db_instance_endpoint" {
+output "db_instance_endpoint" {
   description = "The connection endpoint"
-  value       = module.db_instance.this_db_instance_endpoint
+  value       = module.db_instance.db_instance_endpoint
 }
 
-output "this_db_instance_hosted_zone_id" {
+output "db_listener_endpoint" {
+  description = "Specifies the listener connection endpoint for SQL Server Always On"
+  value       = module.db_instance.db_listener_endpoint
+}
+
+output "db_instance_engine" {
+  description = "The database engine"
+  value       = module.db_instance.db_instance_engine
+}
+
+output "db_instance_engine_version_actual" {
+  description = "The running version of the database"
+  value       = module.db_instance.db_instance_engine_version_actual
+}
+
+output "db_instance_hosted_zone_id" {
   description = "The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record)"
-  value       = module.db_instance.this_db_instance_hosted_zone_id
+  value       = module.db_instance.db_instance_hosted_zone_id
 }
 
-output "this_db_instance_id" {
-  description = "The RDS instance ID"
-  value       = module.db_instance.this_db_instance_id
+output "db_instance_identifier" {
+  description = "The RDS instance identifier"
+  value       = module.db_instance.db_instance_identifier
 }
 
-output "this_db_instance_resource_id" {
+output "db_instance_resource_id" {
   description = "The RDS Resource ID of this instance"
-  value       = module.db_instance.this_db_instance_resource_id
+  value       = module.db_instance.db_instance_resource_id
 }
 
-output "this_db_instance_status" {
+output "db_instance_status" {
   description = "The RDS instance status"
-  value       = module.db_instance.this_db_instance_status
+  value       = module.db_instance.db_instance_status
 }
 
-output "this_db_instance_name" {
+output "db_instance_name" {
   description = "The database name"
-  value       = module.db_instance.this_db_instance_name
+  value       = module.db_instance.db_instance_name
 }
 
-output "this_db_instance_username" {
+output "db_instance_username" {
   description = "The master username for the database"
-  value       = module.db_instance.this_db_instance_username
-}
-
-output "this_db_instance_password" {
-  description = "The database password (this password may be old, because Terraform doesn't track it after initial creation)"
-  value       = var.password
+  value       = module.db_instance.db_instance_username
   sensitive   = true
 }
 
-output "this_db_instance_port" {
+output "db_instance_domain" {
+  description = "The ID of the Directory Service Active Directory domain the instance is joined to"
+  value       = module.db_instance.db_instance_domain
+}
+
+output "db_instance_domain_auth_secret_arn" {
+  description = "The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain"
+  value       = module.db_instance.db_instance_domain_auth_secret_arn
+}
+
+output "db_instance_domain_dns_ips" {
+  description = "The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers"
+  value       = module.db_instance.db_instance_domain_dns_ips
+}
+
+output "db_instance_domain_fqdn" {
+  description = "The fully qualified domain name (FQDN) of an self managed Active Directory domain"
+  value       = module.db_instance.db_instance_domain_fqdn
+}
+
+output "db_instance_domain_iam_role_name" {
+  description = "The name of the IAM role to be used when making API calls to the Directory Service"
+  value       = module.db_instance.db_instance_domain_iam_role_name
+}
+
+output "db_instance_domain_ou" {
+  description = "The self managed Active Directory organizational unit for your DB instance to join"
+  value       = module.db_instance.db_instance_domain_ou
+}
+
+output "db_instance_port" {
   description = "The database port"
-  value       = module.db_instance.this_db_instance_port
+  value       = module.db_instance.db_instance_port
 }
 
-output "this_db_instance_ca_cert_identifier" {
+output "db_instance_ca_cert_identifier" {
   description = "Specifies the identifier of the CA certificate for the DB instance"
-  value       = module.db_instance.this_db_instance_ca_cert_identifier
+  value       = module.db_instance.db_instance_ca_cert_identifier
 }
 
-output "this_db_subnet_group_id" {
+output "db_instance_master_user_secret_arn" {
+  description = "The ARN of the master user secret (Only available when manage_master_user_password is set to true)"
+  value       = module.db_instance.db_instance_master_user_secret_arn
+}
+
+output "db_subnet_group_id" {
   description = "The db subnet group name"
-  value       = module.db_subnet_group.this_db_subnet_group_id
+  value       = module.db_subnet_group.db_subnet_group_id
 }
 
-output "this_db_subnet_group_arn" {
+output "db_subnet_group_arn" {
   description = "The ARN of the db subnet group"
-  value       = module.db_subnet_group.this_db_subnet_group_arn
+  value       = module.db_subnet_group.db_subnet_group_arn
 }
 
-output "this_db_parameter_group_id" {
+output "db_parameter_group_id" {
   description = "The db parameter group id"
-  value       = module.db_parameter_group.this_db_parameter_group_id
+  value       = module.db_parameter_group.db_parameter_group_id
 }
 
-output "this_db_parameter_group_arn" {
+output "db_parameter_group_arn" {
   description = "The ARN of the db parameter group"
-  value       = module.db_parameter_group.this_db_parameter_group_arn
+  value       = module.db_parameter_group.db_parameter_group_arn
 }
 
 # DB option group
-output "this_db_option_group_id" {
+output "db_option_group_id" {
   description = "The db option group id"
-  value       = module.db_option_group.this_db_option_group_id
+  value       = module.db_option_group.db_option_group_id
 }
 
-output "this_db_option_group_arn" {
+output "db_option_group_arn" {
   description = "The ARN of the db option group"
-  value       = module.db_option_group.this_db_option_group_arn
+  value       = module.db_option_group.db_option_group_arn
+}
+
+################################################################################
+# CloudWatch Log Group
+################################################################################
+
+output "db_instance_cloudwatch_log_groups" {
+  description = "Map of CloudWatch log groups created and their attributes"
+  value       = module.db_instance.db_instance_cloudwatch_log_groups
+}
+
+################################################################################
+# DB Instance Role Association
+################################################################################
+
+output "db_instance_role_associations" {
+  description = "A map of DB Instance Identifiers and IAM Role ARNs separated by a comma"
+  value       = module.db_instance_role_association
+}
+
+################################################################################
+# Managed Secret Rotation
+################################################################################
+
+output "db_instance_secretsmanager_secret_rotation_enabled" {
+  description = "Specifies whether automatic rotation is enabled for the secret"
+  value       = module.db_instance.db_instance_secretsmanager_secret_rotation_enabled
 }

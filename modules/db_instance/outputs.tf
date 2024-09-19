@@ -1,86 +1,138 @@
-locals {
-  enhanced_monitoring_iam_role_name   = element(concat(aws_iam_role.enhanced_monitoring.*.name, [""]), 0)
-  enhanced_monitoring_iam_role_arn    = element(concat(aws_iam_role.enhanced_monitoring.*.arn, [""]), 0)
-  this_db_instance_address            = element(concat(aws_db_instance.this_mssql.*.address, aws_db_instance.this.*.address, [""]), 0)
-  this_db_instance_arn                = element(concat(aws_db_instance.this_mssql.*.arn, aws_db_instance.this.*.arn, [""]), 0)
-  this_db_instance_availability_zone  = element(concat(aws_db_instance.this_mssql.*.availability_zone, aws_db_instance.this.*.availability_zone, [""]), 0)
-  this_db_instance_endpoint           = element(concat(aws_db_instance.this_mssql.*.endpoint, aws_db_instance.this.*.endpoint, [""]), 0)
-  this_db_instance_hosted_zone_id     = element(concat(aws_db_instance.this_mssql.*.hosted_zone_id, aws_db_instance.this.*.hosted_zone_id, [""]), 0)
-  this_db_instance_id                 = element(concat(aws_db_instance.this_mssql.*.id, aws_db_instance.this.*.id, [""]), 0)
-  this_db_instance_resource_id        = element(concat(aws_db_instance.this_mssql.*.resource_id, aws_db_instance.this.*.resource_id, [""]), 0)
-  this_db_instance_status             = element(concat(aws_db_instance.this_mssql.*.status, aws_db_instance.this.*.status, [""]), 0)
-  this_db_instance_name               = element(concat(aws_db_instance.this_mssql.*.name, aws_db_instance.this.*.name, [""]), 0)
-  this_db_instance_username           = element(concat(aws_db_instance.this_mssql.*.username, aws_db_instance.this.*.username, [""]), 0)
-  this_db_instance_port               = element(concat(aws_db_instance.this_mssql.*.port, aws_db_instance.this.*.port, [""]), 0)
-  this_db_instance_ca_cert_identifier = element(concat(aws_db_instance.this_mssql.*.ca_cert_identifier, aws_db_instance.this.*.ca_cert_identifier, [""]), 0)
-}
-
 output "enhanced_monitoring_iam_role_name" {
   description = "The name of the monitoring role"
-  value       = local.enhanced_monitoring_iam_role_name
+  value       = try(aws_iam_role.enhanced_monitoring[0].name, null)
 }
 
 output "enhanced_monitoring_iam_role_arn" {
   description = "The Amazon Resource Name (ARN) specifying the monitoring role"
-  value       = local.enhanced_monitoring_iam_role_arn
+  value       = try(aws_iam_role.enhanced_monitoring[0].arn, null)
 }
 
-output "this_db_instance_address" {
+output "db_instance_address" {
   description = "The address of the RDS instance"
-  value       = local.this_db_instance_address
+  value       = try(aws_db_instance.this[0].address, null)
 }
 
-output "this_db_instance_arn" {
+output "db_instance_arn" {
   description = "The ARN of the RDS instance"
-  value       = local.this_db_instance_arn
+  value       = try(aws_db_instance.this[0].arn, null)
 }
 
-output "this_db_instance_availability_zone" {
+output "db_instance_availability_zone" {
   description = "The availability zone of the RDS instance"
-  value       = local.this_db_instance_availability_zone
+  value       = try(aws_db_instance.this[0].availability_zone, null)
 }
 
-output "this_db_instance_endpoint" {
+output "db_instance_endpoint" {
   description = "The connection endpoint"
-  value       = local.this_db_instance_endpoint
+  value       = try(aws_db_instance.this[0].endpoint, null)
 }
 
-output "this_db_instance_hosted_zone_id" {
+output "db_listener_endpoint" {
+  description = "Specifies the listener connection endpoint for SQL Server Always On"
+  value       = try(aws_db_instance.this[0].listener_endpoint, null)
+}
+
+output "db_instance_engine" {
+  description = "The database engine"
+  value       = try(aws_db_instance.this[0].engine, null)
+}
+
+output "db_instance_engine_version_actual" {
+  description = "The running version of the database"
+  value       = try(aws_db_instance.this[0].engine_version_actual, null)
+}
+
+output "db_instance_hosted_zone_id" {
   description = "The canonical hosted zone ID of the DB instance (to be used in a Route 53 Alias record)"
-  value       = local.this_db_instance_hosted_zone_id
+  value       = try(aws_db_instance.this[0].hosted_zone_id, null)
 }
 
-output "this_db_instance_id" {
-  description = "The RDS instance ID"
-  value       = local.this_db_instance_id
+output "db_instance_identifier" {
+  description = "The RDS instance identifier"
+  value       = try(aws_db_instance.this[0].identifier, null)
 }
 
-output "this_db_instance_resource_id" {
+output "db_instance_resource_id" {
   description = "The RDS Resource ID of this instance"
-  value       = local.this_db_instance_resource_id
+  value       = try(aws_db_instance.this[0].resource_id, null)
 }
 
-output "this_db_instance_status" {
+output "db_instance_status" {
   description = "The RDS instance status"
-  value       = local.this_db_instance_status
+  value       = try(aws_db_instance.this[0].status, null)
 }
 
-output "this_db_instance_name" {
+output "db_instance_name" {
   description = "The database name"
-  value       = local.this_db_instance_name
+  value       = try(aws_db_instance.this[0].db_name, null)
 }
 
-output "this_db_instance_username" {
+output "db_instance_username" {
   description = "The master username for the database"
-  value       = local.this_db_instance_username
+  value       = try(aws_db_instance.this[0].username, null)
+  sensitive   = true
 }
 
-output "this_db_instance_port" {
+output "db_instance_port" {
   description = "The database port"
-  value       = local.this_db_instance_port
+  value       = try(aws_db_instance.this[0].port, null)
 }
 
-output "this_db_instance_ca_cert_identifier" {
+output "db_instance_ca_cert_identifier" {
   description = "Specifies the identifier of the CA certificate for the DB instance"
-  value       = local.this_db_instance_ca_cert_identifier
+  value       = try(aws_db_instance.this[0].ca_cert_identifier, null)
+}
+
+output "db_instance_domain" {
+  description = "The ID of the Directory Service Active Directory domain the instance is joined to"
+  value       = try(aws_db_instance.this[0].domain, null)
+}
+
+output "db_instance_domain_auth_secret_arn" {
+  description = "The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain"
+  value       = try(aws_db_instance.this[0].domain_auth_secret_arn, null)
+}
+
+output "db_instance_domain_dns_ips" {
+  description = "The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers"
+  value       = try(aws_db_instance.this[0].domain_dns_ips, null)
+}
+
+output "db_instance_domain_fqdn" {
+  description = "The fully qualified domain name (FQDN) of an self managed Active Directory domain"
+  value       = try(aws_db_instance.this[0].domain_fqdn, null)
+}
+
+output "db_instance_domain_iam_role_name" {
+  description = "The name of the IAM role to be used when making API calls to the Directory Service"
+  value       = try(aws_db_instance.this[0].domain_iam_role_name, null)
+}
+
+output "db_instance_domain_ou" {
+  description = "The self managed Active Directory organizational unit for your DB instance to join"
+  value       = try(aws_db_instance.this[0].domain_ou, null)
+}
+
+output "db_instance_master_user_secret_arn" {
+  description = "The ARN of the master user secret (Only available when manage_master_user_password is set to true)"
+  value       = try(aws_db_instance.this[0].master_user_secret[0].secret_arn, null)
+}
+
+################################################################################
+# CloudWatch Log Group
+################################################################################
+
+output "db_instance_cloudwatch_log_groups" {
+  description = "Map of CloudWatch log groups created and their attributes"
+  value       = aws_cloudwatch_log_group.this
+}
+
+################################################################################
+# Managed Secret Rotation
+################################################################################
+
+output "db_instance_secretsmanager_secret_rotation_enabled" {
+  description = "Specifies whether automatic rotation is enabled for the secret"
+  value       = try(aws_secretsmanager_secret_rotation.this[0].rotation_enabled, null)
 }
