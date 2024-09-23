@@ -32,11 +32,11 @@ variable "kms_key_id" {
   default     = ""
 }
 
-variable "replicate_source_db" {
-  description = "Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate."
-  type        = string
-  default     = ""
-}
+//variable "replicate_source_db" {
+//  description = "Specifies that this resource is a Replicate database, and to use this value as the source database. This correlates to the identifier of another Amazon RDS Database to replicate."
+//  type        = string
+//  default     = ""
+//}
 
 variable "snapshot_identifier" {
   description = "Specifies whether or not to create this database from a snapshot. This correlates to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05."

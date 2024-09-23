@@ -56,7 +56,7 @@ resource "aws_db_instance" "this" {
   port                                = var.port
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  replicate_source_db = var.replicate_source_db
+//replicate_source_db = var.replicate_source_db
 
   snapshot_identifier = var.snapshot_identifier
 
@@ -129,7 +129,7 @@ resource "aws_db_instance" "this_mssql" {
   port                                = var.port
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
 
-  replicate_source_db = var.replicate_source_db
+ // replicate_source_db = var.replicate_source_db
 
   snapshot_identifier = var.snapshot_identifier
 
