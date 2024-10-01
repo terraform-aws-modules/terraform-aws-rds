@@ -6,8 +6,9 @@ locals {
   db_subnet_group_name    = var.create_db_subnet_group ? module.db_subnet_group.db_subnet_group_id : var.db_subnet_group_name
   parameter_group_name_id = var.create_db_parameter_group ? module.db_parameter_group.db_parameter_group_id : var.parameter_group_name
 
-  create_db_option_group = var.create_db_option_group && var.engine != "postgres"
-  option_group           = local.create_db_option_group ? module.db_option_group.db_option_group_id : var.option_group_name
+  create_db_option_group             = var.create_db_option_group && var.engine != "postgres"
+  option_group                       = local.create_db_option_group ? module.db_option_group.db_option_group_id : var.option_group_name
+  should_manage_master_user_password = var.password != null ? false : var.manage_master_user_password
 }
 
 module "db_subnet_group" {
@@ -77,7 +78,7 @@ module "db_instance" {
 
   db_name                             = var.db_name
   username                            = var.username
-  password                            = var.manage_master_user_password ? null : var.password
+  password                            = local.should_manage_master_user_password ? null : var.password
   port                                = var.port
   domain                              = var.domain
   domain_auth_secret_arn              = var.domain_auth_secret_arn
@@ -87,7 +88,7 @@ module "db_instance" {
   domain_ou                           = var.domain_ou
   iam_database_authentication_enabled = var.iam_database_authentication_enabled
   custom_iam_instance_profile         = var.custom_iam_instance_profile
-  manage_master_user_password         = var.manage_master_user_password
+  manage_master_user_password         = local.should_manage_master_user_password
   master_user_secret_kms_key_id       = var.master_user_secret_kms_key_id
 
   manage_master_user_password_rotation                   = var.manage_master_user_password_rotation

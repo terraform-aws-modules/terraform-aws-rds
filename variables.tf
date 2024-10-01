@@ -167,8 +167,8 @@ variable "username" {
 
 variable "password" {
   description = <<EOF
-  Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file.
-  The password provided will not be used if `manage_master_user_password` is set to true.
+  Password for the master DB user. If a password is provided, `manage_master_user_password` will be automatically set to false, and the password will be used.
+  Note that this may show up in logs, and it will be stored in the state file.
   EOF
   type        = string
   default     = null
@@ -176,7 +176,9 @@ variable "password" {
 }
 
 variable "manage_master_user_password" {
-  description = "Set to true to allow RDS to manage the master user password in Secrets Manager"
+  description = <<EOF
+  Set to true to allow RDS to manage the master user password in Secrets Manager. If a password is provided in the `password` variable, this value will be automatically set to false to allow the provided password to be used.
+  EOF
   type        = bool
   default     = true
 }
