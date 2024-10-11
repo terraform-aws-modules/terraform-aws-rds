@@ -1,6 +1,6 @@
 # aws_db_instance_role_association
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -38,4 +38,4 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_db_instance_role_association_id"></a> [db\_instance\_role\_association\_id](#output\_db\_instance\_role\_association\_id) | DB Instance Identifier and IAM Role ARN separated by a comma |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

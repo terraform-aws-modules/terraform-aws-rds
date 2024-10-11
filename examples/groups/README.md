@@ -14,7 +14,7 @@ $ terraform apply
 
 Note that this example may create resources which cost money. Run `terraform destroy` when you don't need these resources.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -68,4 +68,4 @@ No inputs.
 | <a name="output_default_postgres_option_group_id"></a> [default\_postgres\_option\_group\_id](#output\_default\_postgres\_option\_group\_id) | The ID of the default PostgreSQL option group (should be blank) |
 | <a name="output_default_postgres_parameter_group_arn"></a> [default\_postgres\_parameter\_group\_arn](#output\_default\_postgres\_parameter\_group\_arn) | The ARN of the db parameter group |
 | <a name="output_default_postgres_parameter_group_id"></a> [default\_postgres\_parameter\_group\_id](#output\_default\_postgres\_parameter\_group\_id) | The db parameter group id |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
