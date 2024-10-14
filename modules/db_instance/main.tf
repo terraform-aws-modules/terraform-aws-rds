@@ -163,7 +163,7 @@ resource "aws_cloudwatch_log_group" "this" {
   skip_destroy      = var.cloudwatch_log_group_skip_destroy
   log_group_class   = var.cloudwatch_log_group_class
 
-  tags = var.tags
+  tags = merge(var.tags, var.cloudwatch_log_group_tags)
 }
 
 ################################################################################

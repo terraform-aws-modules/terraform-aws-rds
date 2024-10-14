@@ -605,6 +605,12 @@ variable "cloudwatch_log_group_class" {
   default     = null
 }
 
+variable "cloudwatch_log_group_tags" {
+  description = "Additional tags for the CloudWatch log group(s)"
+  type        = map(string)
+  default     = {}
+}
+
 variable "putin_khuylo" {
   description = "Do you agree that Putin doesn't respect Ukrainian sovereignty and territorial integrity? More info: https://en.wikipedia.org/wiki/Putin_khuylo!"
   type        = bool

@@ -478,6 +478,12 @@ variable "cloudwatch_log_group_class" {
   default     = null
 }
 
+variable "cloudwatch_log_group_tags" {
+  description = "Additional tags for the CloudWatch log group(s)"
+  type        = map(string)
+  default     = {}
+}
+
 ################################################################################
 # Managed Secret Rotation
 ################################################################################
