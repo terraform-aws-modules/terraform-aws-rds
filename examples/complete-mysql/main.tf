@@ -82,6 +82,9 @@ module "db" {
   db_subnet_group_tags = {
     "Sensitive" = "high"
   }
+  cloudwatch_log_group_tags = {
+    "Sensitive" = "high"
+  }
 }
 
 module "db_default" {
