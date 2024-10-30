@@ -145,6 +145,17 @@ resource "aws_db_instance" "this" {
     update = lookup(var.timeouts, "update", null)
   }
 
+  dynamic "lifecycle" {
+    for_each = var.password != null ? toset([1]) : toset([0])
+
+    content {
+      ignore_changes = [
+        password,
+        username,
+      ]
+    }
+  }
+
   # Note: do not add `latest_restorable_time` to `ignore_changes`
   # https://github.com/terraform-aws-modules/terraform-aws-rds/issues/478
 }
