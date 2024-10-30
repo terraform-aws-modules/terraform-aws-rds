@@ -40,7 +40,9 @@ module "db" {
   # Encryption at rest is not available for DB instances running SQL Server Express Edition
   storage_encrypted = false
 
+  manage_master_user_password = false
   username = "complete_mssql"
+  password = "complete_mssql_password"
   port     = 1433
 
   domain               = aws_directory_service_directory.demo.id
