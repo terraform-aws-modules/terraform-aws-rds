@@ -137,7 +137,10 @@ resource "aws_db_instance" "this" {
 
   tags = merge(var.tags, var.db_instance_tags)
 
-  depends_on = [aws_cloudwatch_log_group.this]
+  depends_on = [
+    aws_cloudwatch_log_group.this,
+    aws_cloudwatch_log_group.rdsosmetrics,
+  ]
 
   timeouts {
     create = lookup(var.timeouts, "create", null)
@@ -222,4 +225,13 @@ resource "aws_secretsmanager_secret_rotation" "this" {
     duration                 = var.master_user_password_rotation_duration
     schedule_expression      = var.master_user_password_rotation_schedule_expression
   }
+}
+
+resource "aws_cloudwatch_log_group" "rdsosmetrics" {
+  count = var.create_cloudwatch_log_group_rdsosmetrics ? 1 : 0
+
+  name              = "RDSOSMetrics"
+  retention_in_days = var.cloudwatch_log_group_rdsosmetrics_retention_in_days
+
+  tags = var.tags
 }

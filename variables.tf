@@ -571,6 +571,18 @@ variable "upgrade_storage_config" {
   default     = null
 }
 
+variable "create_cloudwatch_log_group_rdsosmetrics" {
+  description = "Determines whether a RDSOSMetrics CloudWatch log group is created by and managed by Terraform (otherwise it's created by RDS). This is useful only if monitoring_interval > 0"
+  type        = bool
+  default     = false
+}
+
+variable "cloudwatch_log_group_rdsosmetrics_retention_in_days" {
+  description = "The number of days to retain CloudWatch logs for RDSOSMetrics log group"
+  type        = number
+  default     = 30
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################

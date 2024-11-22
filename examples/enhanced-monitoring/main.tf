@@ -57,6 +57,8 @@ module "db" {
   monitoring_interval = 30
   monitoring_role_arn = aws_iam_role.rds_enhanced_monitoring.arn
 
+  create_cloudwatch_log_group_rdsosmetrics = true
+
   performance_insights_enabled          = true
   performance_insights_retention_period = 7
   create_monitoring_role                = true
