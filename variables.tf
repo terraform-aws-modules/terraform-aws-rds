@@ -426,6 +426,12 @@ variable "parameters" {
   default     = []
 }
 
+variable "parameter_group_skip_destroy" {
+  description = "Set to true if you do not wish the parameter group to be deleted at destroy time, and instead just remove the parameter group from the Terraform state"
+  type        = bool
+  default     = null
+}
+
 # DB option group
 variable "create_db_option_group" {
   description = "Create a database option group"
@@ -461,6 +467,12 @@ variable "options" {
   description = "A list of Options to apply"
   type        = any
   default     = []
+}
+
+variable "option_group_skip_destroy" {
+  description = "Set to true if you do not wish the option group to be deleted at destroy time, and instead just remove the option group from the Terraform state"
+  type        = bool
+  default     = null
 }
 
 variable "create_db_instance" {
@@ -553,6 +565,12 @@ variable "network_type" {
   default     = null
 }
 
+variable "upgrade_storage_config" {
+  description = "Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db."
+  type        = bool
+  default     = null
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################
@@ -585,6 +603,12 @@ variable "cloudwatch_log_group_class" {
   description = "Specified the log class of the log group. Possible values are: STANDARD or INFREQUENT_ACCESS"
   type        = string
   default     = null
+}
+
+variable "cloudwatch_log_group_tags" {
+  description = "Additional tags for the CloudWatch log group(s)"
+  type        = map(string)
+  default     = {}
 }
 
 variable "putin_khuylo" {

@@ -438,6 +438,12 @@ variable "dedicated_log_volume" {
   default     = false
 }
 
+variable "upgrade_storage_config" {
+  description = "Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db."
+  type        = bool
+  default     = null
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################
@@ -470,6 +476,12 @@ variable "cloudwatch_log_group_class" {
   description = "Specified the log class of the log group. Possible values are: STANDARD or INFREQUENT_ACCESS"
   type        = string
   default     = null
+}
+
+variable "cloudwatch_log_group_tags" {
+  description = "Additional tags for the CloudWatch log group(s)"
+  type        = map(string)
+  default     = {}
 }
 
 ################################################################################

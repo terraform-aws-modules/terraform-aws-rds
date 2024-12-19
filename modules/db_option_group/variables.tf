@@ -40,6 +40,12 @@ variable "options" {
   default     = []
 }
 
+variable "skip_destroy" {
+  description = "Set to true if you do not wish the option group to be deleted at destroy time, and instead just remove the option group from the Terraform state"
+  type        = bool
+  default     = null
+}
+
 variable "timeouts" {
   description = "Define maximum timeout for deletion of `aws_db_option_group` resource"
   type        = map(string)

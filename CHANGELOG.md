@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.10.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.9.0...v6.10.0) (2024-10-16)
+
+
+### Features
+
+* Support `cloudwatch_log_group_tags` parameter ([#571](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/571)) ([73e33fe](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/73e33feba5d907801791168ebf6d3132fbd646f5))
+
+
+### Bug Fixes
+
+* Update CI workflow versions to latest ([#570](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/570)) ([220cc85](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/220cc85dcdc8eb63772e25526db693dd563d40a1))
+
+## [6.9.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.8.0...v6.9.0) (2024-08-19)
+
+
+### Features
+
+* Support `skip_destroy` for option and param groups and add `upgrade_storage_config` for replicas ([#559](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/559)) ([3f73565](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/3f73565f673d38bffac3c339f436782cd79f01fb))
+
 ## [6.8.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.7.0...v6.8.0) (2024-07-20)
 
 

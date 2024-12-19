@@ -97,6 +97,9 @@ module "db" {
   db_parameter_group_tags = {
     "Sensitive" = "low"
   }
+  cloudwatch_log_group_tags = {
+    "Sensitive" = "high"
+  }
 }
 
 module "db_default" {
