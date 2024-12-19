@@ -489,7 +489,7 @@ variable "cloudwatch_log_group_tags" {
 ################################################################################
 
 variable "manage_master_user_password_rotation" {
-  description = "Whether to manage the master user password rotation. By default, false on creation, rotation is managed by RDS. Setting this value to false after previously having been set to true will disable automatic rotation."
+  description = "Whether to manage the master user password rotation. By default, false on creation, rotation is managed by RDS. There is not currently a way to disable this on initial creation even when set to false. Setting this value to false after previously having been set to true will disable automatic rotation."
   type        = bool
   default     = false
 }
