@@ -147,6 +147,54 @@ module "db_disabled" {
   create_db_option_group    = false
 }
 
+ephemeral "random_password" "db_password" {
+  length           = 16
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+resource "aws_secretsmanager_secret" "db_password" {
+  name = "db_password"
+}
+
+resource "aws_secretsmanager_secret_version" "db_password" {
+  secret_id                = aws_secretsmanager_secret.db_password.id
+  secret_string_wo         = ephemeral.random_password.db_password.result
+  secret_string_wo_version = 1
+}
+
+ephemeral "aws_secretsmanager_secret_version" "db_password" {
+  secret_id = aws_secretsmanager_secret_version.db_password.secret_id
+}
+
+module "db_write_only" {
+  source = "../../"
+
+  identifier = local.name
+
+  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+  engine                   = "postgres"
+  engine_version           = "14"
+  engine_lifecycle_support = "open-source-rds-extended-support-disabled"
+  family                   = "postgres14" # DB parameter group
+  major_engine_version     = "14"         # DB option group
+  instance_class           = "db.t4g.large"
+
+  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
+  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
+  # user cannot be used as it is a reserved word used by the engine"
+  db_name  = "writeOnlyPostgresql"
+  username = "write_only_postgresql"
+  port     = 5432
+
+  password_wo                 = ephemeral.aws_secretsmanager_secret_version.db_password.secret_string
+  password_wo_version         = aws_secretsmanager_secret_version.db_password.secret_string_wo_version
+  manage_master_user_password = false
+
+  multi_az               = false
+  db_subnet_group_name   = module.vpc.database_subnet_group
+  vpc_security_group_ids = [module.security_group.security_group_id]
+}
+
 ################################################################################
 # RDS Automated Backups Replication Module
 ################################################################################
