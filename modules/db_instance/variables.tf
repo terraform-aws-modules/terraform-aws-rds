@@ -152,6 +152,19 @@ variable "password" {
   default     = null
 }
 
+variable "password_wo" {
+  description = "Write-Only password for the master DB user."
+  type        = string
+  default     = null
+  ephemeral   = true
+}
+
+variable "password_wo_version" {
+  description = "Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required."
+  type        = number
+  default     = null
+}
+
 variable "manage_master_user_password" {
   description = "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if password is provided"
   type        = bool

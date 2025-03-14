@@ -78,6 +78,8 @@ module "db_instance" {
   db_name                             = var.db_name
   username                            = var.username
   password                            = var.manage_master_user_password ? null : var.password
+  password_wo                         = !var.manage_master_user_password && var.password == null ? var.password_wo : null
+  password_wo_version                 = var.password_wo_version
   port                                = var.port
   domain                              = var.domain
   domain_auth_secret_arn              = var.domain_auth_secret_arn
