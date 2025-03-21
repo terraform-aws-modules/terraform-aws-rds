@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.11.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.10.0...v6.11.0) (2025-03-21)
+
+
+### Features
+
+* Support `db_insights_mode` ([#590](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/590)) ([5ea5035](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/5ea5035e825f13da17793ee193131ab3587770d7))
+
 ## [6.10.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.9.0...v6.10.0) (2024-10-16)
 
 
