@@ -268,6 +268,12 @@ variable "monitoring_role_permissions_boundary" {
   default     = null
 }
 
+variable "database_insights_mode" {
+  description = "The mode of Database Insights that is enabled for the instance. Valid values: standard, advanced"
+  type        = string
+  default     = null
+}
+
 variable "allow_major_version_upgrade" {
   description = "Indicates that major version upgrades are allowed. Changing this parameter does not result in an outage and the change is asynchronously applied as soon as possible"
   type        = bool

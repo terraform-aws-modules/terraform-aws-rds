@@ -102,6 +102,7 @@ resource "aws_db_instance" "this" {
   max_allocated_storage   = var.max_allocated_storage
   monitoring_interval     = var.monitoring_interval
   monitoring_role_arn     = var.monitoring_interval > 0 ? local.monitoring_role_arn : null
+  database_insights_mode  = var.database_insights_mode
 
   character_set_name              = var.character_set_name
   nchar_character_set_name        = var.nchar_character_set_name

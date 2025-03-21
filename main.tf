@@ -138,6 +138,7 @@ module "db_instance" {
   monitoring_role_description          = var.monitoring_role_description
   create_monitoring_role               = var.create_monitoring_role
   monitoring_role_permissions_boundary = var.monitoring_role_permissions_boundary
+  database_insights_mode               = var.database_insights_mode
 
   character_set_name       = var.character_set_name
   nchar_character_set_name = var.nchar_character_set_name
