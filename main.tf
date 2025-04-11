@@ -128,8 +128,8 @@ module "db_instance" {
 
   replicate_source_db                  = var.replicate_source_db
   replica_mode                         = var.replica_mode
-  backup_retention_period = var.backup_retention_period != null ? var.backup_retention_period : 1
-  backup_window           = var.backup_window != null ? var.backup_window : "00:00-01:00"
+  backup_retention_period              = var.backup_retention_period != null ? var.backup_retention_period : 1
+  backup_window                        = var.backup_window != null ? var.backup_window : "00:00-01:00"
   max_allocated_storage                = var.max_allocated_storage
   monitoring_interval                  = var.monitoring_interval
   monitoring_role_arn                  = var.monitoring_role_arn
