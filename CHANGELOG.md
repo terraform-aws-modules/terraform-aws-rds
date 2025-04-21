@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.12.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.11.0...v6.12.0) (2025-04-21)
+
+
+### Features
+
+* Change `final_snapshot_identifier` when `snapshot_identifier` changes ([#591](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/591)) ([9122d19](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/9122d19b2ff1e9114ae328fec988715cdd56bf5f))
+
 ## [6.11.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.10.0...v6.11.0) (2025-03-21)
 
 
