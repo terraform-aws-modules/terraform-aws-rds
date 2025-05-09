@@ -341,6 +341,12 @@ variable "db_instance_tags" {
   default     = {}
 }
 
+variable "copy_db_instance_tags" {
+  description = "If true, merge db_instance_tags with the common tags"
+  type        = bool
+  default     = true
+}
+
 variable "option_group_name" {
   description = "Name of the DB option group to associate."
   type        = string
