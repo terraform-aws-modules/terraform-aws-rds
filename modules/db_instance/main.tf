@@ -137,7 +137,7 @@ resource "aws_db_instance" "this" {
     }
   }
 
-  tags = merge(var.tags, var.db_instance_tags)
+  tags = merge(var.tags, var.copy_db_instance_tags ? var.db_instance_tags : {})
 
   depends_on = [aws_cloudwatch_log_group.this]
 
