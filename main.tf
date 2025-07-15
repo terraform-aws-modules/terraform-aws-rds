@@ -125,6 +125,7 @@ module "db_instance" {
   performance_insights_enabled          = var.performance_insights_enabled
   performance_insights_retention_period = var.performance_insights_retention_period
   performance_insights_kms_key_id       = var.performance_insights_enabled ? var.performance_insights_kms_key_id : null
+  performance_insights_mode             = var.performance_insights_enabled ? var.performance_insights_mode : null
 
   replicate_source_db                  = var.replicate_source_db
   replica_mode                         = var.replica_mode
