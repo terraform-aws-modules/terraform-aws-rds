@@ -401,6 +401,12 @@ variable "performance_insights_kms_key_id" {
   default     = null
 }
 
+variable "performance_insights_mode" {
+  description = "The mode of Performance Insights that is enabled for the instance. Valid values: standard, advanced"
+  type        = string
+  default     = "standard"
+}
+
 variable "max_allocated_storage" {
   description = "Specifies the value for Storage Autoscaling"
   type        = number
