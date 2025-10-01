@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.13.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.12.0...v6.13.0) (2025-10-01)
+
+
+### Features
+
+* Add Terragrunt wrappers ([#607](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/607)) ([b34450e](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/b34450e7a6712f61353e94e45de34bab6e95f272))
+
 ## [6.12.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.11.0...v6.12.0) (2025-04-21)
 
 
