@@ -136,7 +136,7 @@ resource "aws_iam_role_policy_attachment" "rds_directory_services" {
 }
 
 ################################################################################
-# AWS Directory Service (Acitve Directory)
+# AWS Directory Service (Active Directory)
 ################################################################################
 
 resource "aws_directory_service_directory" "demo" {
