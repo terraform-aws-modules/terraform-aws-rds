@@ -76,7 +76,7 @@ module "db" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = local.name
   cidr = local.vpc_cidr
@@ -186,7 +186,7 @@ data "aws_iam_policy_document" "rds_invoke_lambda_assume_role" {
 
 module "lambda" {
   source  = "terraform-aws-modules/lambda/aws"
-  version = "~> 6.0"
+  version = "~> 8.0"
 
   function_name = local.name
   handler       = "lambda_function.lambda_handler"

@@ -45,7 +45,8 @@ resource "aws_db_instance" "this" {
 
   db_name                             = var.db_name
   username                            = !local.is_replica ? var.username : null
-  password                            = !local.is_replica && var.manage_master_user_password ? null : var.password
+  password_wo                         = !local.is_replica && var.manage_master_user_password ? null : var.password_wo
+  password_wo_version                 = !local.is_replica && var.manage_master_user_password ? null : var.password_wo_version
   port                                = var.port
   domain                              = var.domain
   domain_auth_secret_arn              = var.domain_auth_secret_arn
@@ -80,10 +81,10 @@ resource "aws_db_instance" "this" {
 
   # https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html
   dynamic "blue_green_update" {
-    for_each = length(var.blue_green_update) > 0 ? [var.blue_green_update] : []
+    for_each = var.blue_green_update != null ? [var.blue_green_update] : []
 
     content {
-      enabled = try(blue_green_update.value.enabled, null)
+      enabled = blue_green_update.value.enabled
     }
   }
 
@@ -98,7 +99,7 @@ resource "aws_db_instance" "this" {
 
   replicate_source_db     = var.replicate_source_db
   replica_mode            = var.replica_mode
-  backup_retention_period = length(var.blue_green_update) > 0 ? coalesce(var.backup_retention_period, 1) : var.backup_retention_period
+  backup_retention_period = var.blue_green_update != null ? coalesce(var.backup_retention_period, 1) : var.backup_retention_period
   backup_window           = var.backup_window
   max_allocated_storage   = var.max_allocated_storage
   monitoring_interval     = var.monitoring_interval
@@ -113,15 +114,17 @@ resource "aws_db_instance" "this" {
   deletion_protection      = var.deletion_protection
   delete_automated_backups = var.delete_automated_backups
 
+  region = var.region
+
   dynamic "restore_to_point_in_time" {
     for_each = var.restore_to_point_in_time != null ? [var.restore_to_point_in_time] : []
 
     content {
-      restore_time                             = lookup(restore_to_point_in_time.value, "restore_time", null)
-      source_db_instance_automated_backups_arn = lookup(restore_to_point_in_time.value, "source_db_instance_automated_backups_arn", null)
-      source_db_instance_identifier            = lookup(restore_to_point_in_time.value, "source_db_instance_identifier", null)
-      source_dbi_resource_id                   = lookup(restore_to_point_in_time.value, "source_dbi_resource_id", null)
-      use_latest_restorable_time               = lookup(restore_to_point_in_time.value, "use_latest_restorable_time", null)
+      restore_time                             = restore_to_point_in_time.value.restore_time
+      source_db_instance_automated_backups_arn = restore_to_point_in_time.value.source_db_instance_automated_backups_arn
+      source_db_instance_identifier            = restore_to_point_in_time.value.source_db_instance_identifier
+      source_dbi_resource_id                   = restore_to_point_in_time.value.source_dbi_resource_id
+      use_latest_restorable_time               = restore_to_point_in_time.value.use_latest_restorable_time
     }
   }
 
@@ -132,7 +135,7 @@ resource "aws_db_instance" "this" {
       source_engine         = "mysql"
       source_engine_version = s3_import.value.source_engine_version
       bucket_name           = s3_import.value.bucket_name
-      bucket_prefix         = lookup(s3_import.value, "bucket_prefix", null)
+      bucket_prefix         = s3_import.value.bucket_prefix
       ingestion_role        = s3_import.value.ingestion_role
     }
   }
@@ -141,10 +144,14 @@ resource "aws_db_instance" "this" {
 
   depends_on = [aws_cloudwatch_log_group.this]
 
-  timeouts {
-    create = lookup(var.timeouts, "create", null)
-    delete = lookup(var.timeouts, "delete", null)
-    update = lookup(var.timeouts, "update", null)
+  dynamic "timeouts" {
+    for_each = var.timeouts != null ? [var.timeouts] : []
+
+    content {
+      create = timeouts.value.create
+      update = timeouts.value.update
+      delete = timeouts.value.delete
+    }
   }
 
   # Note: do not add `latest_restorable_time` to `ignore_changes`
@@ -164,6 +171,7 @@ resource "aws_cloudwatch_log_group" "this" {
   kms_key_id        = var.cloudwatch_log_group_kms_key_id
   skip_destroy      = var.cloudwatch_log_group_skip_destroy
   log_group_class   = var.cloudwatch_log_group_class
+  region            = var.region
 
   tags = merge(var.tags, var.cloudwatch_log_group_tags)
 }
@@ -223,6 +231,7 @@ resource "aws_secretsmanager_secret_rotation" "this" {
 
   secret_id          = aws_db_instance.this[0].master_user_secret[0].secret_arn
   rotate_immediately = var.master_user_password_rotate_immediately
+  region             = var.region
 
   rotation_rules {
     automatically_after_days = var.master_user_password_rotation_automatically_after_days

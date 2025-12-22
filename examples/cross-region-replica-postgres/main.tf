@@ -144,7 +144,7 @@ module "replica" {
 
 module "vpc_region1" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = local.name
   cidr = "10.100.0.0/18"
@@ -183,7 +183,7 @@ module "security_group_region1" {
 
 module "vpc_region2" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   providers = {
     aws = aws.region2

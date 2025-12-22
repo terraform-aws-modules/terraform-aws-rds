@@ -18,6 +18,7 @@ module "db_subnet_group" {
   name            = coalesce(var.db_subnet_group_name, var.identifier)
   use_name_prefix = var.db_subnet_group_use_name_prefix
   description     = var.db_subnet_group_description
+  region          = var.region
   subnet_ids      = var.subnet_ids
 
   tags = merge(var.tags, var.db_subnet_group_tags)
@@ -34,6 +35,7 @@ module "db_parameter_group" {
   family          = var.family
 
   parameters   = var.parameters
+  region       = var.region
   skip_destroy = var.parameter_group_skip_destroy
 
   tags = merge(var.tags, var.db_parameter_group_tags)
@@ -51,6 +53,7 @@ module "db_option_group" {
   major_engine_version     = var.major_engine_version
 
   options      = var.options
+  region       = var.region
   skip_destroy = var.option_group_skip_destroy
 
   timeouts = var.option_group_timeouts
@@ -77,7 +80,8 @@ module "db_instance" {
 
   db_name                             = var.db_name
   username                            = var.username
-  password                            = var.manage_master_user_password ? null : var.password
+  password_wo                         = var.manage_master_user_password ? null : var.password_wo
+  password_wo_version                 = var.manage_master_user_password ? null : var.password_wo_version
   port                                = var.port
   domain                              = var.domain
   domain_auth_secret_arn              = var.domain_auth_secret_arn
@@ -161,6 +165,7 @@ module "db_instance" {
   s3_import                = var.s3_import
 
   db_instance_tags = var.db_instance_tags
+  region           = var.region
   tags             = var.tags
 }
 
@@ -172,4 +177,5 @@ module "db_instance_role_association" {
   feature_name           = each.key
   role_arn               = each.value
   db_instance_identifier = module.db_instance.db_instance_identifier
+  region                 = var.region
 }

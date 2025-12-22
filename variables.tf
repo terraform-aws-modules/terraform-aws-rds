@@ -165,14 +165,16 @@ variable "username" {
   default     = null
 }
 
-variable "password" {
-  description = <<EOF
-  Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file.
-  The password provided will not be used if `manage_master_user_password` is set to true.
-  EOF
+variable "password_wo" {
+  description = "Write-Only required unless `manage_master_user_password` is set to `true`, `snapshot_identifier`, or `replicate_source_db` is provided). Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
   default     = null
-  sensitive   = true
+}
+
+variable "password_wo_version" {
+  description = "Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required."
+  type        = number
+  default     = null
 }
 
 variable "manage_master_user_password" {
@@ -300,8 +302,10 @@ variable "maintenance_window" {
 
 variable "blue_green_update" {
   description = "Enables low-downtime updates using RDS Blue/Green deployments."
-  type        = map(string)
-  default     = {}
+  type = object({
+    enabled = optional(bool)
+  })
+  default = {}
 }
 
 variable "backup_retention_period" {
@@ -318,14 +322,25 @@ variable "backup_window" {
 
 variable "restore_to_point_in_time" {
   description = "Restore to a point in time (MySQL is NOT supported)"
-  type        = map(string)
-  default     = null
+  type = object({
+    restore_time                             = optional(string)
+    source_db_instance_automated_backups_arn = optional(string)
+    source_db_instance_identifier            = optional(string)
+    source_dbi_resource_id                   = optional(string)
+    use_latest_restorable_time               = optional(bool)
+  })
+  default = null
 }
 
 variable "s3_import" {
   description = "Restore from a Percona Xtrabackup in S3 (only MySQL is supported)"
-  type        = map(string)
-  default     = null
+  type = object({
+    source_engine_version = string
+    bucket_name           = string
+    bucket_prefix         = optional(string)
+    ingestion_role        = string
+  })
+  default = null
 }
 
 variable "dedicated_log_volume" {
@@ -428,13 +443,23 @@ variable "family" {
 
 variable "parameters" {
   description = "A list of DB parameters (map) to apply"
-  type        = list(map(string))
-  default     = []
+  type = list(object({
+    name         = string
+    value        = string
+    apply_method = optional(string)
+  }))
+  default = null
 }
 
 variable "parameter_group_skip_destroy" {
   description = "Set to true if you do not wish the parameter group to be deleted at destroy time, and instead just remove the parameter group from the Terraform state"
   type        = bool
+  default     = null
+}
+
+variable "region" {
+  description = "Region where this resource will be managed. Defaults to the Region set in the provider configuration"
+  type        = string
   default     = null
 }
 
@@ -471,8 +496,18 @@ variable "major_engine_version" {
 
 variable "options" {
   description = "A list of Options to apply"
-  type        = any
-  default     = []
+  type = list(object({
+    option_name                    = string
+    port                           = optional(number)
+    version                        = optional(string)
+    db_security_group_memberships  = optional(list(string))
+    vpc_security_group_memberships = optional(list(string))
+    option_settings = optional(map(object({
+      name  = string
+      value = string
+    })))
+  }))
+  default = null
 }
 
 variable "option_group_skip_destroy" {
@@ -513,14 +548,22 @@ variable "enabled_cloudwatch_logs_exports" {
 
 variable "timeouts" {
   description = "Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
-  type        = map(string)
-  default     = {}
+  type = object({
+    create = optional(string)
+    update = optional(string)
+    delete = optional(string)
+  })
+  default = null
 }
 
 variable "option_group_timeouts" {
   description = "Define maximum timeout for deletion of `aws_db_option_group` resource"
-  type        = map(string)
-  default     = {}
+  type = object({
+    create = optional(string)
+    update = optional(string)
+    delete = optional(string)
+  })
+  default = null
 }
 
 variable "deletion_protection" {
@@ -629,7 +672,7 @@ variable "putin_khuylo" {
 
 variable "db_instance_role_associations" {
   description = "A map of DB instance supported feature name to role association ARNs."
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
 

@@ -49,7 +49,8 @@ module "master" {
   username = "replica_postgresql"
   port     = local.port
 
-  password = "UberSecretPassword"
+  password_wo         = "UberSecretPassword"
+  password_wo_version = 1
   # Not supported with replicas
   manage_master_user_password = false
 
@@ -114,7 +115,7 @@ module "replica" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = local.name
   cidr = local.vpc_cidr

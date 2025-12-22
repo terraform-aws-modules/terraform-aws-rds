@@ -56,7 +56,8 @@ module "postgres" {
     enabled = true
   }
 
-  password = "UberSecretPassword"
+  password_wo         = "UberSecretPassword"
+  password_wo_version = 1
   # Not supported with blue/green deployment
   manage_master_user_password = false
 
@@ -99,7 +100,8 @@ module "mysql" {
   username = "blue_green_example_mysql"
   port     = 3306
 
-  password = "UberSecretPassword"
+  password_wo         = "UberSecretPassword"
+  password_wo_version = 1
   # Not supported with blue/green deployment
   manage_master_user_password = false
 
@@ -127,7 +129,7 @@ module "mysql" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = local.name
   cidr = local.vpc_cidr

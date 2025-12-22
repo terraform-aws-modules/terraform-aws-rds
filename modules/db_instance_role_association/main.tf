@@ -3,5 +3,6 @@ resource "aws_db_instance_role_association" "this" {
 
   db_instance_identifier = var.db_instance_identifier
   feature_name           = var.feature_name
+  region                 = var.region
   role_arn               = var.role_arn
 }

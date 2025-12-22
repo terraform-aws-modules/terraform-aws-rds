@@ -22,6 +22,12 @@ variable "description" {
   default     = null
 }
 
+variable "region" {
+  description = "Region where this resource will be managed. Defaults to the Region set in the provider configuration"
+  type        = string
+  default     = null
+}
+
 variable "subnet_ids" {
   description = "A list of VPC subnet IDs"
   type        = list(string)
