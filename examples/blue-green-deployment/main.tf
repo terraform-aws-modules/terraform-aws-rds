@@ -29,9 +29,9 @@ module "postgres" {
 
   # All blue/green deployment compatible versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.BlueGreenDeployments.html
   engine               = "postgres"
-  engine_version       = "14.9"
-  family               = "postgres14" # DB parameter group
-  major_engine_version = "14"         # DB option group
+  engine_version       = "17.6"
+  family               = "postgres17" # DB parameter group
+  major_engine_version = "17"         # DB option group
   instance_class       = "db.t4g.large"
 
   allocated_storage     = 20
@@ -88,7 +88,7 @@ module "mysql" {
 
   # All blue/green deployment compatible versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.BlueGreenDeployments.html
   engine               = "mysql"
-  engine_version       = "8.0.33"
+  engine_version       = "8.0.43"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t4g.large"
