@@ -29,7 +29,7 @@ module "db" {
 
   # All available versions: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
   engine               = "mysql"
-  engine_version       = "8.0.28"
+  engine_version       = "8.0.43"
   family               = "mysql8.0" # DB parameter group
   major_engine_version = "8.0"      # DB option group
   instance_class       = "db.t4g.large"
@@ -43,7 +43,7 @@ module "db" {
 
   # S3 import https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html
   s3_import = {
-    source_engine_version = "8.0.28"
+    source_engine_version = "8.0.43"
     bucket_name           = module.import_s3_bucket.s3_bucket_id
     ingestion_role        = aws_iam_role.s3_import.arn
   }
