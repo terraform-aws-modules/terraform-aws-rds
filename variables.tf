@@ -305,7 +305,7 @@ variable "blue_green_update" {
   type = object({
     enabled = optional(bool)
   })
-  default = {}
+  default = null
 }
 
 variable "backup_retention_period" {

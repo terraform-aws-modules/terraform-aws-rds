@@ -10,7 +10,7 @@ module "wrapper" {
   availability_zone                                      = try(each.value.availability_zone, var.defaults.availability_zone, null)
   backup_retention_period                                = try(each.value.backup_retention_period, var.defaults.backup_retention_period, null)
   backup_window                                          = try(each.value.backup_window, var.defaults.backup_window, null)
-  blue_green_update                                      = try(each.value.blue_green_update, var.defaults.blue_green_update, {})
+  blue_green_update                                      = try(each.value.blue_green_update, var.defaults.blue_green_update, null)
   ca_cert_identifier                                     = try(each.value.ca_cert_identifier, var.defaults.ca_cert_identifier, null)
   character_set_name                                     = try(each.value.character_set_name, var.defaults.character_set_name, null)
   cloudwatch_log_group_class                             = try(each.value.cloudwatch_log_group_class, var.defaults.cloudwatch_log_group_class, null)
