@@ -394,7 +394,7 @@ variable "timeouts" {
     update = optional(string)
     delete = optional(string)
   })
-  default = {}
+  default = null
 }
 
 variable "deletion_protection" {

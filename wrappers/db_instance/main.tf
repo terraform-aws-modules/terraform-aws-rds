@@ -85,7 +85,7 @@ module "wrapper" {
   storage_throughput                                     = try(each.value.storage_throughput, var.defaults.storage_throughput, null)
   storage_type                                           = try(each.value.storage_type, var.defaults.storage_type, null)
   tags                                                   = try(each.value.tags, var.defaults.tags, {})
-  timeouts                                               = try(each.value.timeouts, var.defaults.timeouts, {})
+  timeouts                                               = try(each.value.timeouts, var.defaults.timeouts, null)
   timezone                                               = try(each.value.timezone, var.defaults.timezone, null)
   upgrade_storage_config                                 = try(each.value.upgrade_storage_config, var.defaults.upgrade_storage_config, null)
   use_identifier_prefix                                  = try(each.value.use_identifier_prefix, var.defaults.use_identifier_prefix, false)

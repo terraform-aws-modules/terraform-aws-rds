@@ -168,6 +168,8 @@ variable "username" {
 variable "password_wo" {
   description = "Write-Only required unless `manage_master_user_password` is set to `true`, `snapshot_identifier`, or `replicate_source_db` is provided). Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
+  sensitive   = true
+  ephemeral   = true
   default     = null
 }
 
@@ -559,8 +561,6 @@ variable "timeouts" {
 variable "option_group_timeouts" {
   description = "Define maximum timeout for deletion of `aws_db_option_group` resource"
   type = object({
-    create = optional(string)
-    update = optional(string)
     delete = optional(string)
   })
   default = null
