@@ -18,7 +18,7 @@ module "wrapper" {
   cloudwatch_log_group_retention_in_days                 = try(each.value.cloudwatch_log_group_retention_in_days, var.defaults.cloudwatch_log_group_retention_in_days, 7)
   cloudwatch_log_group_skip_destroy                      = try(each.value.cloudwatch_log_group_skip_destroy, var.defaults.cloudwatch_log_group_skip_destroy, null)
   cloudwatch_log_group_tags                              = try(each.value.cloudwatch_log_group_tags, var.defaults.cloudwatch_log_group_tags, {})
-  copy_tags_to_snapshot                                  = try(each.value.copy_tags_to_snapshot, var.defaults.copy_tags_to_snapshot, false)
+  copy_tags_to_snapshot                                  = try(each.value.copy_tags_to_snapshot, var.defaults.copy_tags_to_snapshot, true)
   create                                                 = try(each.value.create, var.defaults.create, true)
   create_cloudwatch_log_group                            = try(each.value.create_cloudwatch_log_group, var.defaults.create_cloudwatch_log_group, false)
   create_monitoring_role                                 = try(each.value.create_monitoring_role, var.defaults.create_monitoring_role, false)

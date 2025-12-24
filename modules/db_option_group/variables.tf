@@ -42,7 +42,7 @@ variable "options" {
     version                        = optional(string)
     db_security_group_memberships  = optional(list(string))
     vpc_security_group_memberships = optional(list(string))
-    option_settings = optional(map(object({
+    option_settings = optional(list(object({
       name  = string
       value = string
     })))

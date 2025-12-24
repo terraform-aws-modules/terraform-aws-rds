@@ -138,7 +138,7 @@ variable "snapshot_identifier" {
 variable "copy_tags_to_snapshot" {
   description = "On delete, copy all Instance tags to the final snapshot"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "final_snapshot_identifier_prefix" {
@@ -504,7 +504,7 @@ variable "options" {
     version                        = optional(string)
     db_security_group_memberships  = optional(list(string))
     vpc_security_group_memberships = optional(list(string))
-    option_settings = optional(map(object({
+    option_settings = optional(list(object({
       name  = string
       value = string
     })))

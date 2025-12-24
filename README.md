@@ -10,6 +10,7 @@ Root module calls these modules which can also be used separately to create inde
 - [db_subnet_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_subnet_group) - creates RDS DB subnet group
 - [db_parameter_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_parameter_group) - creates RDS DB parameter group
 - [db_option_group](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_option_group) - creates RDS DB option group
+- [db_instance_role_association](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/modules/db_instance_role_association) - creates RDS DB instance role association resources
 
 ## Usage
 
@@ -20,7 +21,7 @@ module "db" {
   identifier = "demodb"
 
   engine            = "mysql"
-  engine_version    = "5.7"
+  engine_version    = "8.0"
   instance_class    = "db.t3a.large"
   allocated_storage = 5
 
@@ -51,10 +52,10 @@ module "db" {
   subnet_ids             = ["subnet-12345678", "subnet-87654321"]
 
   # DB parameter group
-  family = "mysql5.7"
+  family = "mysql8.0"
 
   # DB option group
-  major_engine_version = "5.7"
+  major_engine_version = "8.0"
 
   # Database Deletion Protection
   deletion_protection = true
@@ -193,9 +194,12 @@ Users have the ability to:
 - [Complete RDS example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-mysql)
 - [Complete RDS example for Oracle](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-oracle)
 - [Complete RDS example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/complete-postgres)
+- [Cross Region Replica example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/cross-region-replica-postgres)
 - [Enhanced monitoring example](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/enhanced-monitoring)
+- [Parameter and Option Groups example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/groups)
 - [Replica RDS example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/replica-mysql)
 - [Replica RDS example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/replica-postgres)
+- [Role association example for PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/role-association-postgres)
 - [S3 import example for MySQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/s3-import-mysql)
 - [Blue/Green Deployment example for MySQL and PostgreSQL](https://github.com/terraform-aws-modules/terraform-aws-rds/tree/master/examples/blue-green-deployment)
 
@@ -249,7 +253,7 @@ No resources.
 | <a name="input_cloudwatch_log_group_retention_in_days"></a> [cloudwatch\_log\_group\_retention\_in\_days](#input\_cloudwatch\_log\_group\_retention\_in\_days) | The number of days to retain CloudWatch logs for the DB instance | `number` | `7` | no |
 | <a name="input_cloudwatch_log_group_skip_destroy"></a> [cloudwatch\_log\_group\_skip\_destroy](#input\_cloudwatch\_log\_group\_skip\_destroy) | Set to true if you do not wish the log group (and any logs it may contain) to be deleted at destroy time, and instead just remove the log group from the Terraform state | `bool` | `null` | no |
 | <a name="input_cloudwatch_log_group_tags"></a> [cloudwatch\_log\_group\_tags](#input\_cloudwatch\_log\_group\_tags) | Additional tags for the CloudWatch log group(s) | `map(string)` | `{}` | no |
-| <a name="input_copy_tags_to_snapshot"></a> [copy\_tags\_to\_snapshot](#input\_copy\_tags\_to\_snapshot) | On delete, copy all Instance tags to the final snapshot | `bool` | `false` | no |
+| <a name="input_copy_tags_to_snapshot"></a> [copy\_tags\_to\_snapshot](#input\_copy\_tags\_to\_snapshot) | On delete, copy all Instance tags to the final snapshot | `bool` | `true` | no |
 | <a name="input_create_cloudwatch_log_group"></a> [create\_cloudwatch\_log\_group](#input\_create\_cloudwatch\_log\_group) | Determines whether a CloudWatch log group is created for each `enabled_cloudwatch_logs_exports` | `bool` | `false` | no |
 | <a name="input_create_db_instance"></a> [create\_db\_instance](#input\_create\_db\_instance) | Whether to create a database instance | `bool` | `true` | no |
 | <a name="input_create_db_option_group"></a> [create\_db\_option\_group](#input\_create\_db\_option\_group) | Create a database option group | `bool` | `true` | no |
@@ -313,7 +317,7 @@ No resources.
 | <a name="input_option_group_skip_destroy"></a> [option\_group\_skip\_destroy](#input\_option\_group\_skip\_destroy) | Set to true if you do not wish the option group to be deleted at destroy time, and instead just remove the option group from the Terraform state | `bool` | `null` | no |
 | <a name="input_option_group_timeouts"></a> [option\_group\_timeouts](#input\_option\_group\_timeouts) | Define maximum timeout for deletion of `aws_db_option_group` resource | <pre>object({<br/>    delete = optional(string)<br/>  })</pre> | `null` | no |
 | <a name="input_option_group_use_name_prefix"></a> [option\_group\_use\_name\_prefix](#input\_option\_group\_use\_name\_prefix) | Determines whether to use `option_group_name` as is or create a unique name beginning with the `option_group_name` as the prefix | `bool` | `true` | no |
-| <a name="input_options"></a> [options](#input\_options) | A list of Options to apply | <pre>list(object({<br/>    option_name                    = string<br/>    port                           = optional(number)<br/>    version                        = optional(string)<br/>    db_security_group_memberships  = optional(list(string))<br/>    vpc_security_group_memberships = optional(list(string))<br/>    option_settings = optional(map(object({<br/>      name  = string<br/>      value = string<br/>    })))<br/>  }))</pre> | `null` | no |
+| <a name="input_options"></a> [options](#input\_options) | A list of Options to apply | <pre>list(object({<br/>    option_name                    = string<br/>    port                           = optional(number)<br/>    version                        = optional(string)<br/>    db_security_group_memberships  = optional(list(string))<br/>    vpc_security_group_memberships = optional(list(string))<br/>    option_settings = optional(list(object({<br/>      name  = string<br/>      value = string<br/>    })))<br/>  }))</pre> | `null` | no |
 | <a name="input_parameter_group_description"></a> [parameter\_group\_description](#input\_parameter\_group\_description) | Description of the DB parameter group to create | `string` | `null` | no |
 | <a name="input_parameter_group_name"></a> [parameter\_group\_name](#input\_parameter\_group\_name) | Name of the DB parameter group to associate or create | `string` | `null` | no |
 | <a name="input_parameter_group_skip_destroy"></a> [parameter\_group\_skip\_destroy](#input\_parameter\_group\_skip\_destroy) | Set to true if you do not wish the parameter group to be deleted at destroy time, and instead just remove the parameter group from the Terraform state | `bool` | `null` | no |

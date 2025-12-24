@@ -24,7 +24,7 @@ resource "aws_db_option_group" "this" {
       vpc_security_group_memberships = option.value.vpc_security_group_memberships
 
       dynamic "option_settings" {
-        for_each = option.value.option_settings != null ? option.value.option_settings : {}
+        for_each = option.value.option_settings != null ? option.value.option_settings : []
         content {
           name  = option_settings.value.name
           value = option_settings.value.value
