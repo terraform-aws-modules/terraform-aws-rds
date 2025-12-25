@@ -18,7 +18,7 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 ### Modified
 
 - Variable definitions now contain detailed object types in place of the previously used `any` type
-- `copy_tags_to_snapshot` default value is now `true` ([#521](https://github.com/terraform-aws-modules/terraform-aws-rds-aurora/issues/521))
+- `copy_tags_to_snapshot` default value is now `true`
 
 ### Removed
 
