@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.13.1...v7.0.0) (2025-12-29)
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade min required AWS provider and Terraform version to `6.27` and `1.11` respectively (#612)
+
+### Features
+
+* Upgrade min required AWS provider and Terraform version to `6.27` and `1.11` respectively ([#612](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/612)) ([90914f4](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/90914f4d9d7fc801a24361a34130734ba1cb645e))
+
 ## [6.13.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.13.0...v6.13.1) (2025-10-21)
 
 ### Bug Fixes
