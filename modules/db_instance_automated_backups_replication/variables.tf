@@ -16,6 +16,12 @@ variable "pre_signed_url" {
   default     = null
 }
 
+variable "region" {
+  description = "Region where this resource will be managed. Defaults to the Region set in the provider configuration"
+  type        = string
+  default     = null
+}
+
 variable "retention_period" {
   description = "The retention period for the replicated automated backups"
   type        = number

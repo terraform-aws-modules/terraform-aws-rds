@@ -36,8 +36,24 @@ variable "major_engine_version" {
 
 variable "options" {
   description = "A list of Options to apply"
-  type        = any
-  default     = []
+  type = list(object({
+    option_name                    = string
+    port                           = optional(number)
+    version                        = optional(string)
+    db_security_group_memberships  = optional(list(string))
+    vpc_security_group_memberships = optional(list(string))
+    option_settings = optional(list(object({
+      name  = string
+      value = string
+    })))
+  }))
+  default = null
+}
+
+variable "region" {
+  description = "Region where this resource will be managed. Defaults to the Region set in the provider configuration"
+  type        = string
+  default     = null
 }
 
 variable "skip_destroy" {
@@ -48,8 +64,10 @@ variable "skip_destroy" {
 
 variable "timeouts" {
   description = "Define maximum timeout for deletion of `aws_db_option_group` resource"
-  type        = map(string)
-  default     = {}
+  type = object({
+    delete = optional(string)
+  })
+  default = null
 }
 
 variable "tags" {

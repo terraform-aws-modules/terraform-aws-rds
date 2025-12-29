@@ -119,6 +119,11 @@ output "db_instance_master_user_secret_arn" {
   value       = module.db_instance.db_instance_master_user_secret_arn
 }
 
+output "db_instance_upgrade_rollout_order" {
+  description = "Order in which the instances are upgraded (first, second, last)"
+  value       = module.db_instance.db_instance_upgrade_rollout_order
+}
+
 output "db_subnet_group_id" {
   description = "The db subnet group name"
   value       = module.db_subnet_group.db_subnet_group_id

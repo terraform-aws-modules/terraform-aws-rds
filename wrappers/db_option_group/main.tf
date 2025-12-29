@@ -8,9 +8,10 @@ module "wrapper" {
   major_engine_version     = try(each.value.major_engine_version, var.defaults.major_engine_version, null)
   name                     = try(each.value.name, var.defaults.name, "")
   option_group_description = try(each.value.option_group_description, var.defaults.option_group_description, null)
-  options                  = try(each.value.options, var.defaults.options, [])
+  options                  = try(each.value.options, var.defaults.options, null)
+  region                   = try(each.value.region, var.defaults.region, null)
   skip_destroy             = try(each.value.skip_destroy, var.defaults.skip_destroy, null)
   tags                     = try(each.value.tags, var.defaults.tags, {})
-  timeouts                 = try(each.value.timeouts, var.defaults.timeouts, {})
+  timeouts                 = try(each.value.timeouts, var.defaults.timeouts, null)
   use_name_prefix          = try(each.value.use_name_prefix, var.defaults.use_name_prefix, true)
 }

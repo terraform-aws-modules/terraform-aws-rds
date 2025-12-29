@@ -15,24 +15,25 @@ resource "aws_db_option_group" "this" {
   major_engine_version     = var.major_engine_version
 
   dynamic "option" {
-    for_each = var.options
+    for_each = var.options != null ? var.options : []
     content {
       option_name                    = option.value.option_name
-      port                           = lookup(option.value, "port", null)
-      version                        = lookup(option.value, "version", null)
-      db_security_group_memberships  = lookup(option.value, "db_security_group_memberships", null)
-      vpc_security_group_memberships = lookup(option.value, "vpc_security_group_memberships", null)
+      port                           = option.value.port
+      version                        = option.value.version
+      db_security_group_memberships  = option.value.db_security_group_memberships
+      vpc_security_group_memberships = option.value.vpc_security_group_memberships
 
       dynamic "option_settings" {
-        for_each = lookup(option.value, "option_settings", [])
+        for_each = option.value.option_settings != null ? option.value.option_settings : []
         content {
-          name  = lookup(option_settings.value, "name", null)
-          value = lookup(option_settings.value, "value", null)
+          name  = option_settings.value.name
+          value = option_settings.value.value
         }
       }
     }
   }
 
+  region       = var.region
   skip_destroy = var.skip_destroy
 
   tags = merge(
@@ -42,8 +43,12 @@ resource "aws_db_option_group" "this" {
     },
   )
 
-  timeouts {
-    delete = lookup(var.timeouts, "delete", null)
+  dynamic "timeouts" {
+    for_each = var.timeouts != null ? [var.timeouts] : []
+
+    content {
+      delete = timeouts.value.delete
+    }
   }
 
   lifecycle {

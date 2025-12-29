@@ -18,9 +18,9 @@ locals {
   }
 
   engine                = "postgres"
-  engine_version        = "14"
-  family                = "postgres14" # DB parameter group
-  major_engine_version  = "14"         # DB option group
+  engine_version        = "17"
+  family                = "postgres17" # DB parameter group
+  major_engine_version  = "17"         # DB option group
   instance_class        = "db.t4g.large"
   allocated_storage     = 20
   max_allocated_storage = 100
@@ -49,7 +49,8 @@ module "master" {
   username = "replica_postgresql"
   port     = local.port
 
-  password = "UberSecretPassword"
+  password_wo         = "UberSecretPassword"
+  password_wo_version = 1
   # Not supported with replicas
   manage_master_user_password = false
 
@@ -114,7 +115,7 @@ module "replica" {
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = local.name
   cidr = local.vpc_cidr

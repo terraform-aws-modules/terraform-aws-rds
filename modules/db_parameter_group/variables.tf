@@ -30,8 +30,18 @@ variable "family" {
 
 variable "parameters" {
   description = "A list of DB parameter maps to apply"
-  type        = list(map(string))
-  default     = []
+  type = list(object({
+    name         = string
+    value        = string
+    apply_method = optional(string)
+  }))
+  default = null
+}
+
+variable "region" {
+  description = "Region where this resource will be managed. Defaults to the Region set in the provider configuration"
+  type        = string
+  default     = null
 }
 
 variable "skip_destroy" {

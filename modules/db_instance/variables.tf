@@ -4,6 +4,12 @@ variable "create" {
   default     = true
 }
 
+variable "region" {
+  description = "Region where this resource will be managed. Defaults to the Region set in the provider configuration"
+  type        = string
+  default     = null
+}
+
 variable "identifier" {
   description = "The name of the RDS instance"
   type        = string
@@ -146,9 +152,17 @@ variable "username" {
   default     = null
 }
 
-variable "password" {
-  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
+variable "password_wo" {
+  description = "Write-Only required unless `manage_master_user_password` is set to `true`, `snapshot_identifier`, or `replicate_source_db` is provided). Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file"
   type        = string
+  sensitive   = true
+  ephemeral   = true
+  default     = null
+}
+
+variable "password_wo_version" {
+  description = "Used together with password_wo to trigger an update. Increment this value when an update to password_wo is required."
+  type        = number
   default     = null
 }
 
@@ -188,7 +202,7 @@ variable "snapshot_identifier" {
 variable "copy_tags_to_snapshot" {
   description = "On delete, copy all Instance tags to the final snapshot"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "final_snapshot_identifier_prefix" {
@@ -313,8 +327,10 @@ variable "maintenance_window" {
 
 variable "blue_green_update" {
   description = "Enables low-downtime updates using RDS Blue/Green deployments."
-  type        = map(string)
-  default     = {}
+  type = object({
+    enabled = optional(bool)
+  })
+  default = null
 }
 
 variable "backup_retention_period" {
@@ -373,8 +389,12 @@ variable "enabled_cloudwatch_logs_exports" {
 
 variable "timeouts" {
   description = "Updated Terraform resource management timeouts. Applies to `aws_db_instance` in particular to permit resource management times"
-  type        = map(string)
-  default     = {}
+  type = object({
+    create = optional(string)
+    update = optional(string)
+    delete = optional(string)
+  })
+  default = null
 }
 
 variable "deletion_protection" {
@@ -421,15 +441,26 @@ variable "delete_automated_backups" {
 
 variable "s3_import" {
   description = "Restore from a Percona Xtrabackup in S3 (only MySQL is supported)"
-  type        = map(string)
-  default     = null
+  type = object({
+    source_engine_version = string
+    bucket_name           = string
+    bucket_prefix         = optional(string)
+    ingestion_role        = string
+  })
+  default = null
 }
 
 
 variable "restore_to_point_in_time" {
   description = "Restore to a point in time (MySQL is NOT supported)"
-  type        = map(string)
-  default     = null
+  type = object({
+    restore_time                             = optional(string)
+    source_db_instance_automated_backups_arn = optional(string)
+    source_db_instance_identifier            = optional(string)
+    source_dbi_resource_id                   = optional(string)
+    use_latest_restorable_time               = optional(bool)
+  })
+  default = null
 }
 
 variable "network_type" {

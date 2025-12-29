@@ -119,6 +119,11 @@ output "db_instance_master_user_secret_arn" {
   value       = try(aws_db_instance.this[0].master_user_secret[0].secret_arn, null)
 }
 
+output "db_instance_upgrade_rollout_order" {
+  description = "Order in which the instances are upgraded (first, second, last)"
+  value       = try(aws_db_instance.this[0].upgrade_rollout_order, null)
+}
+
 ################################################################################
 # CloudWatch Log Group
 ################################################################################

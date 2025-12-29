@@ -104,6 +104,11 @@ output "db_instance_secretsmanager_secret_rotation_enabled" {
   value       = module.db.db_instance_secretsmanager_secret_rotation_enabled
 }
 
+output "db_instance_upgrade_rollout_order" {
+  description = "Order in which the instances are upgraded (first, second, last)"
+  value       = module.db.db_instance_upgrade_rollout_order
+}
+
 # Default
 output "db_default_instance_address" {
   description = "The address of the RDS instance"
@@ -204,4 +209,9 @@ output "db_default_master_user_secret_arn" {
 output "db_default_secretsmanager_secret_rotation_enabled" {
   description = "Specifies whether automatic rotation is enabled for the secret"
   value       = module.db_default.db_instance_secretsmanager_secret_rotation_enabled
+}
+
+output "db_default_instance_upgrade_rollout_order" {
+  description = "Order in which the instances are upgraded (first, second, last)"
+  value       = module.db_default.db_instance_upgrade_rollout_order
 }
