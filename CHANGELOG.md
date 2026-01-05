@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.0.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v7.0.0...v7.0.1) (2026-01-05)
+
+### Bug Fixes
+
+* Update min required terraform version to 1.11.1 ([#614](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/614)) ([41bbb39](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/41bbb39acf2778401eec3020039c40352e826e8c))
+
 ## [7.0.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v6.13.1...v7.0.0) (2025-12-29)
 
 ### ⚠ BREAKING CHANGES
