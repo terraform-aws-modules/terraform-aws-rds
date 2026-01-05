@@ -5,7 +5,7 @@ If you find a bug, please open an issue with supporting configuration to reprodu
 
 ## List of backwards incompatible changes
 
-- Terraform `v1.11` is now minimum supported version to support write-only (`wo_*`) attributes.
+- Terraform `v1.11.1` is now minimum supported version to support write-only (`wo_*`) attributes.
 - AWS provider `v6.27` is now minimum supported version
 - `password` is no longer supported and only the write-only equivalent is supported (`password_wo` and `password_wo_version`)
 
