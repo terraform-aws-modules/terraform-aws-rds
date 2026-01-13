@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.1.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v7.0.1...v7.1.0) (2026-01-13)
+
+### Features
+
+* Add provider meta user-agent ([#615](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/615)) ([0701643](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/070164300e28ede10b623ddb7fd8e185687e6c5a))
+
 ## [7.0.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v7.0.0...v7.0.1) (2026-01-05)
 
 ### Bug Fixes
