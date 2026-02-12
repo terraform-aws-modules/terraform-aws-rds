@@ -111,6 +111,6 @@ module "wrapper" {
   timeouts                                               = try(each.value.timeouts, var.defaults.timeouts, null)
   timezone                                               = try(each.value.timezone, var.defaults.timezone, null)
   upgrade_storage_config                                 = try(each.value.upgrade_storage_config, var.defaults.upgrade_storage_config, null)
-  username                                               = try(each.value.username, var.defaults.username, null)
+  username                                               = try(each.value.username, var.defaults.username)
   vpc_security_group_ids                                 = try(each.value.vpc_security_group_ids, var.defaults.vpc_security_group_ids, [])
 }
