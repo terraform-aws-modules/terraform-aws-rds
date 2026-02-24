@@ -150,6 +150,16 @@ variable "username" {
   description = "Username for the master DB user"
   type        = string
   default     = null
+
+  validation {
+    condition = !(
+      var.snapshot_identifier == null && 
+      var.replicate_source_db == null && 
+      var.restore_to_point_in_time == null &&
+      (var.username == null || var.username == "")
+    )
+    error_message = "username must be provided when creating a new DB instance (not restoring from snapshot, replica, or point-in-time restore)."
+  }
 }
 
 variable "password_wo" {

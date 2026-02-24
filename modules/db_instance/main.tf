@@ -11,6 +11,8 @@ locals {
 
   # Replicas will use source metadata
   is_replica = var.replicate_source_db != null
+
+  is_fresh_create = var.snapshot_identifier == null && var.replicate_source_db == null && var.restore_to_point_in_time == null
 }
 
 # Ref. https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces
@@ -44,7 +46,7 @@ resource "aws_db_instance" "this" {
   license_model            = var.license_model
 
   db_name                             = var.db_name
-  username                            = !local.is_replica ? var.username : null
+  username                            = local.is_fresh_create ? var.username : null
   password_wo                         = !local.is_replica && var.manage_master_user_password ? null : var.password_wo
   password_wo_version                 = !local.is_replica && var.manage_master_user_password ? null : var.password_wo_version
   port                                = var.port
