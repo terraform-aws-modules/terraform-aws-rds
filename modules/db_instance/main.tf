@@ -43,8 +43,12 @@ resource "aws_db_instance" "this" {
   kms_key_id               = var.kms_key_id
   license_model            = var.license_model
 
-  db_name                             = var.db_name
-  username                            = !local.is_replica ? var.username : null
+  db_name = var.db_name
+  username = (
+    !local.is_replica &&
+    var.snapshot_identifier == null &&
+    var.restore_to_point_in_time == null
+  ) ? var.username : null
   password_wo                         = !local.is_replica && var.manage_master_user_password ? null : var.password_wo
   password_wo_version                 = !local.is_replica && var.manage_master_user_password ? null : var.password_wo_version
   port                                = var.port

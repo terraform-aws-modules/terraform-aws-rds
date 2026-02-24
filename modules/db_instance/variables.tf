@@ -150,6 +150,17 @@ variable "username" {
   description = "Username for the master DB user"
   type        = string
   default     = null
+
+  validation {
+    condition = (
+      var.create == false ||
+      var.replicate_source_db != null ||
+      var.snapshot_identifier != null ||
+      var.restore_to_point_in_time != null ||
+      var.username != null
+    )
+    error_message = "username must be provided when creating a fresh DB instance."
+  }
 }
 
 variable "password_wo" {
