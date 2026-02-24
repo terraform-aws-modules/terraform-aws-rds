@@ -83,8 +83,8 @@ module "db" {
   version = "~> 7.0"
 
   # Only the affected attributes are shown
-  master_password_wo         = random_password.master_password.result
-  master_password_wo_version = 1
+  password_wo         = random_password.master_password.result
+  password_wo_version = 1
 }
 ```
 
