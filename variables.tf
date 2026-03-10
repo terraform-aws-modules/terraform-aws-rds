@@ -303,9 +303,10 @@ variable "maintenance_window" {
 }
 
 variable "blue_green_update" {
-  description = "Enables low-downtime updates using RDS Blue/Green deployments."
+  description = "Enables low-downtime updates using RDS Blue/Green deployments. When `auto_switchover` is `false`, the green environment is created but switchover is deferred to a subsequent apply where `auto_switchover` is `true`."
   type = object({
-    enabled = optional(bool)
+    enabled         = optional(bool)
+    auto_switchover = optional(bool, true)
   })
   default = null
 }
