@@ -217,6 +217,12 @@ variable "vpc_security_group_ids" {
   default     = []
 }
 
+variable "customer_owned_ip_enabled" {
+  description = "Indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance"
+  type        = bool
+  default     = null
+}
+
 variable "db_subnet_group_name" {
   description = "Name of DB subnet group. DB instance will be created in the VPC associated with the DB subnet group. If unspecified, will be created in the default VPC"
   type        = string

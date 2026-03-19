@@ -23,6 +23,7 @@ module "wrapper" {
   create_cloudwatch_log_group                            = try(each.value.create_cloudwatch_log_group, var.defaults.create_cloudwatch_log_group, false)
   create_monitoring_role                                 = try(each.value.create_monitoring_role, var.defaults.create_monitoring_role, false)
   custom_iam_instance_profile                            = try(each.value.custom_iam_instance_profile, var.defaults.custom_iam_instance_profile, null)
+  customer_owned_ip_enabled                              = try(each.value.customer_owned_ip_enabled, var.defaults.customer_owned_ip_enabled, null)
   database_insights_mode                                 = try(each.value.database_insights_mode, var.defaults.database_insights_mode, null)
   db_instance_tags                                       = try(each.value.db_instance_tags, var.defaults.db_instance_tags, {})
   db_name                                                = try(each.value.db_name, var.defaults.db_name, null)

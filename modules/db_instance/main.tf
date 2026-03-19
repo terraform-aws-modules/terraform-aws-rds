@@ -59,11 +59,12 @@ resource "aws_db_instance" "this" {
   manage_master_user_password         = !local.is_replica && var.manage_master_user_password ? var.manage_master_user_password : null
   master_user_secret_kms_key_id       = !local.is_replica && var.manage_master_user_password ? var.master_user_secret_kms_key_id : null
 
-  vpc_security_group_ids = var.vpc_security_group_ids
-  db_subnet_group_name   = var.db_subnet_group_name
-  parameter_group_name   = var.parameter_group_name
-  option_group_name      = var.option_group_name
-  network_type           = var.network_type
+  vpc_security_group_ids    = var.vpc_security_group_ids
+  customer_owned_ip_enabled = var.customer_owned_ip_enabled
+  db_subnet_group_name      = var.db_subnet_group_name
+  parameter_group_name      = var.parameter_group_name
+  option_group_name         = var.option_group_name
+  network_type              = var.network_type
 
   availability_zone      = var.availability_zone
   multi_az               = var.multi_az
