@@ -100,11 +100,12 @@ module "db_instance" {
   master_user_password_rotation_duration                 = var.master_user_password_rotation_duration
   master_user_password_rotation_schedule_expression      = var.master_user_password_rotation_schedule_expression
 
-  vpc_security_group_ids = var.vpc_security_group_ids
-  db_subnet_group_name   = local.db_subnet_group_name
-  parameter_group_name   = local.parameter_group_name_id
-  option_group_name      = var.engine != "postgres" ? local.option_group : null
-  network_type           = var.network_type
+  vpc_security_group_ids    = var.vpc_security_group_ids
+  customer_owned_ip_enabled = var.customer_owned_ip_enabled
+  db_subnet_group_name      = local.db_subnet_group_name
+  parameter_group_name      = local.parameter_group_name_id
+  option_group_name         = var.engine != "postgres" ? local.option_group : null
+  network_type              = var.network_type
 
   availability_zone      = var.availability_zone
   multi_az               = var.multi_az

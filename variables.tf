@@ -206,6 +206,12 @@ variable "vpc_security_group_ids" {
   default     = []
 }
 
+variable "customer_owned_ip_enabled" {
+  description = "Indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance"
+  type        = bool
+  default     = null
+}
+
 variable "availability_zone" {
   description = "The Availability Zone of the RDS instance"
   type        = string
