@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.2.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v7.1.0...v7.2.0) (2026-03-19)
+
+### Features
+
+* Add support for `customer_owned_ip_enabled` parameter ([#625](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/625)) ([1cbf077](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/1cbf0778baf7533b0e271112679fb1c4626b099f))
+
 ## [7.1.0](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v7.0.1...v7.1.0) (2026-01-13)
 
 ### Features
