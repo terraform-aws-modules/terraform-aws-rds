@@ -124,6 +124,84 @@ module "mysql" {
 }
 
 ################################################################################
+# Postgres (two-apply switchover guard)
+################################################################################
+
+# This example demonstrates the two-apply workflow:
+# Apply 1: auto_switchover = false - creates green environment, traffic stays on blue
+# Apply 2: auto_switchover = true  - performs the switchover within a controlled window
+
+variable "execute_switchover" {
+  description = "Set to true to trigger the blue/green switchover (Apply 2)"
+  type        = bool
+  default     = false
+}
+
+variable "switchover_window_start" {
+  description = "ISO 8601 timestamp for the start of the allowed switchover window"
+  type        = string
+  default     = "2099-01-01T00:00:00Z"
+}
+
+variable "switchover_window_end" {
+  description = "ISO 8601 timestamp for the end of the allowed switchover window"
+  type        = string
+  default     = "2099-01-01T06:00:00Z"
+}
+
+module "postgres_guarded" {
+  source = "../../"
+
+  identifier = "${local.name}-postgres-guarded"
+
+  engine               = "postgres"
+  engine_version       = "17.6"
+  family               = "postgres17"
+  major_engine_version = "17"
+  instance_class       = "db.t4g.large"
+
+  allocated_storage     = 20
+  max_allocated_storage = 100
+
+  db_name  = "blueGreenGuardedPostgresql"
+  username = "blue_green_guarded_postgresql"
+  port     = 5432
+
+  multi_az               = true
+  db_subnet_group_name   = module.vpc.database_subnet_group
+  vpc_security_group_ids = [module.postgres_security_group.security_group_id]
+
+  maintenance_window              = "Mon:00:00-Mon:03:00"
+  backup_window                   = "03:00-06:00"
+  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+  create_cloudwatch_log_group     = true
+
+  blue_green_update = {
+    enabled         = true
+    auto_switchover = var.execute_switchover
+  }
+
+  password_wo         = "UberSecretPassword"
+  password_wo_version = 1
+  # Not supported with blue/green deployment
+  manage_master_user_password = false
+
+  backup_retention_period = 1
+  skip_final_snapshot     = true
+  deletion_protection     = false
+
+  parameters = [
+    {
+      name         = "rds.logical_replication"
+      value        = 1
+      apply_method = "pending-reboot"
+    }
+  ]
+
+  tags = local.tags
+}
+
+################################################################################
 # Supporting Resources
 ################################################################################
 
