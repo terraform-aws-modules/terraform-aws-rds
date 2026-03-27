@@ -85,7 +85,8 @@ resource "aws_db_instance" "this" {
     for_each = var.blue_green_update != null ? [var.blue_green_update] : []
 
     content {
-      enabled = blue_green_update.value.enabled
+      enabled         = blue_green_update.value.enabled
+      auto_switchover = blue_green_update.value.auto_switchover
     }
   }
 
