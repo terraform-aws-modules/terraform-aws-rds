@@ -18,20 +18,20 @@ Note that this example may create resources which cost money. Run `terraform des
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.28 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.28 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_db"></a> [db](#module\_db) | ../../ | n/a |
 | <a name="module_db_automated_backups_replication"></a> [db\_automated\_backups\_replication](#module\_db\_automated\_backups\_replication) | ../../modules/db_instance_automated_backups_replication | n/a |
 | <a name="module_db_disabled"></a> [db\_disabled](#module\_db\_disabled) | ../../ | n/a |
@@ -41,7 +41,7 @@ Note that this example may create resources which cost money. Run `terraform des
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_directory_service_directory.demo](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/directory_service_directory) | resource |
 | [aws_iam_role.rds_ad_auth](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.rds_directory_services](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
@@ -55,7 +55,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_db_enhanced_monitoring_iam_role_arn"></a> [db\_enhanced\_monitoring\_iam\_role\_arn](#output\_db\_enhanced\_monitoring\_iam\_role\_arn) | The Amazon Resource Name (ARN) specifying the monitoring role |
 | <a name="output_db_instance_address"></a> [db\_instance\_address](#output\_db\_instance\_address) | The address of the RDS instance |
 | <a name="output_db_instance_arn"></a> [db\_instance\_arn](#output\_db\_instance\_arn) | The ARN of the RDS instance |

@@ -18,7 +18,7 @@ Note that this example may create resources which cost money. Run `terraform des
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.28 |
 
@@ -29,7 +29,7 @@ No providers.
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_byo_mysql"></a> [byo\_mysql](#module\_byo\_mysql) | ../../ | n/a |
 | <a name="module_default_mysql"></a> [default\_mysql](#module\_default\_mysql) | ../../ | n/a |
 | <a name="module_default_mysql_default_aws"></a> [default\_mysql\_default\_aws](#module\_default\_mysql\_default\_aws) | ../../ | n/a |
@@ -47,7 +47,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_byo_mysql_option_group_arn"></a> [byo\_mysql\_option\_group\_arn](#output\_byo\_mysql\_option\_group\_arn) | The ARN of the BYO MySQL option group (should be blank) |
 | <a name="output_byo_mysql_option_group_id"></a> [byo\_mysql\_option\_group\_id](#output\_byo\_mysql\_option\_group\_id) | The ID of the BYO MySQL option group (should be blank) |
 | <a name="output_byo_mysql_parameter_group_arn"></a> [byo\_mysql\_parameter\_group\_arn](#output\_byo\_mysql\_parameter\_group\_arn) | The ARN of the db parameter group |

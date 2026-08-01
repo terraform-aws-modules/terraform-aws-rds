@@ -25,20 +25,20 @@ Note that this example may create resources which cost money. Run `terraform des
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.1 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.28 |
 
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 6.28 |
 
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_mysql"></a> [mysql](#module\_mysql) | ../../ | n/a |
 | <a name="module_mysql_security_group"></a> [mysql\_security\_group](#module\_mysql\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.0 |
 | <a name="module_postgres"></a> [postgres](#module\_postgres) | ../../ | n/a |
@@ -48,7 +48,7 @@ Note that this example may create resources which cost money. Run `terraform des
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 
 ## Inputs
@@ -58,7 +58,7 @@ No inputs.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_db_instance_status"></a> [db\_instance\_status](#output\_db\_instance\_status) | The RDS instance status |
 | <a name="output_mysql_db_instance_address"></a> [mysql\_db\_instance\_address](#output\_mysql\_db\_instance\_address) | The address of the RDS instance |
 | <a name="output_mysql_db_instance_arn"></a> [mysql\_db\_instance\_arn](#output\_mysql\_db\_instance\_arn) | The ARN of the RDS instance |
