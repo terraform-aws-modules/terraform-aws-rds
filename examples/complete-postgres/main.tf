@@ -47,13 +47,7 @@ module "db" {
   username = "complete_postgresql"
   port     = 5432
 
-  # Setting manage_master_user_password_rotation to false after it
-  # has previously been set to true disables automatic rotation
-  # however using an initial value of false (default) does not disable
-  # automatic rotation and rotation will be handled by RDS.
-  # manage_master_user_password_rotation allows users to configure
-  # a non-default schedule and is not meant to disable rotation
-  # when initially creating / enabling the password management feature
+  # Manage the rotation of the master user secret on a non-default schedule
   manage_master_user_password_rotation              = true
   master_user_password_rotate_immediately           = false
   master_user_password_rotation_schedule_expression = "rate(15 days)"
@@ -126,6 +120,10 @@ module "db_default" {
   db_name  = "completePostgresql"
   username = "complete_postgresql"
   port     = 5432
+
+  # Disable the rotation of the master user secret that RDS enables by default
+  manage_master_user_password_rotation  = true
+  master_user_password_rotation_enabled = false
 
   db_subnet_group_name   = module.vpc.database_subnet_group
   vpc_security_group_ids = [module.security_group.security_group_id]

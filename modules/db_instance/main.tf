@@ -222,21 +222,23 @@ resource "aws_iam_role_policy_attachment" "enhanced_monitoring" {
 # Managed Secret Rotation
 ################################################################################
 
-# There is not currently a way to disable secret rotation on an initial apply.
-# In order to use master password secrets management without a rotation, the following workaround can be used:
-# `manage_master_user_password_rotation` must be set to true first and applied followed by setting it to false and another apply.
-# Note: when setting `manage_master_user_password_rotation` to true, a schedule must also be set using `master_user_password_rotation_schedule_expression` or `master_user_password_rotation_automatically_after_days`.
-# See: https://github.com/hashicorp/terraform-provider-aws/issues/37779
+# Note: when `master_user_password_rotation_enabled` is true, a schedule must also be set using
+# `master_user_password_rotation_schedule_expression` or `master_user_password_rotation_automatically_after_days`.
 resource "aws_secretsmanager_secret_rotation" "this" {
   count = var.create && var.manage_master_user_password && var.manage_master_user_password_rotation ? 1 : 0
 
   secret_id          = aws_db_instance.this[0].master_user_secret[0].secret_arn
   rotate_immediately = var.master_user_password_rotate_immediately
+  rotation_enabled   = var.master_user_password_rotation_enabled
   region             = var.region
 
-  rotation_rules {
-    automatically_after_days = var.master_user_password_rotation_automatically_after_days
-    duration                 = var.master_user_password_rotation_duration
-    schedule_expression      = var.master_user_password_rotation_schedule_expression
+  dynamic "rotation_rules" {
+    for_each = var.master_user_password_rotation_enabled ? [1] : []
+
+    content {
+      automatically_after_days = var.master_user_password_rotation_automatically_after_days
+      duration                 = var.master_user_password_rotation_duration
+      schedule_expression      = var.master_user_password_rotation_schedule_expression
+    }
   }
 }

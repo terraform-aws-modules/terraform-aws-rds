@@ -98,6 +98,7 @@ module "db_instance" {
   master_user_password_rotate_immediately                = var.master_user_password_rotate_immediately
   master_user_password_rotation_automatically_after_days = var.master_user_password_rotation_automatically_after_days
   master_user_password_rotation_duration                 = var.master_user_password_rotation_duration
+  master_user_password_rotation_enabled                  = var.master_user_password_rotation_enabled
   master_user_password_rotation_schedule_expression      = var.master_user_password_rotation_schedule_expression
 
   vpc_security_group_ids    = var.vpc_security_group_ids
