@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [7.2.2](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v7.2.1...v7.2.2) (2026-09-18)
+
+### Bug Fixes
+
+* Document known Terraform/OpenTofu limitations in README ([#635](https://github.com/terraform-aws-modules/terraform-aws-rds/issues/635)) ([23b29c0](https://github.com/terraform-aws-modules/terraform-aws-rds/commit/23b29c095de4dbb2bcd951bae6ce0318df851554))
+
 ## [7.2.1](https://github.com/terraform-aws-modules/terraform-aws-rds/compare/v7.2.0...v7.2.1) (2026-08-06)
 
 ### Bug Fixes
