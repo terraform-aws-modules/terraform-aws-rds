@@ -532,7 +532,7 @@ variable "cloudwatch_log_group_tags" {
 ################################################################################
 
 variable "manage_master_user_password_rotation" {
-  description = "Whether to manage the master user password rotation. By default, false on creation, rotation is managed by RDS. There is not currently a way to disable this on initial creation even when set to false. Setting this value to false after previously having been set to true will disable automatic rotation."
+  description = "Whether to manage the master user password rotation. By default, false on creation, rotation is managed by RDS. Set `master_user_password_rotation_enabled` to false to disable the rotation managed by RDS."
   type        = bool
   default     = false
 }
@@ -553,6 +553,12 @@ variable "master_user_password_rotation_duration" {
   description = "The length of the rotation window in hours. For example, 3h for a three hour window."
   type        = string
   default     = null
+}
+
+variable "master_user_password_rotation_enabled" {
+  description = "Whether automatic rotation is enabled for the master user secret. Set to false to disable the rotation that RDS enables by default; the rotation schedule variables must not be set."
+  type        = bool
+  default     = true
 }
 
 variable "master_user_password_rotation_schedule_expression" {

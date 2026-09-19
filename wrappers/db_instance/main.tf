@@ -54,6 +54,7 @@ module "wrapper" {
   master_user_password_rotate_immediately                = try(each.value.master_user_password_rotate_immediately, var.defaults.master_user_password_rotate_immediately, null)
   master_user_password_rotation_automatically_after_days = try(each.value.master_user_password_rotation_automatically_after_days, var.defaults.master_user_password_rotation_automatically_after_days, null)
   master_user_password_rotation_duration                 = try(each.value.master_user_password_rotation_duration, var.defaults.master_user_password_rotation_duration, null)
+  master_user_password_rotation_enabled                  = try(each.value.master_user_password_rotation_enabled, var.defaults.master_user_password_rotation_enabled, true)
   master_user_password_rotation_schedule_expression      = try(each.value.master_user_password_rotation_schedule_expression, var.defaults.master_user_password_rotation_schedule_expression, null)
   master_user_secret_kms_key_id                          = try(each.value.master_user_secret_kms_key_id, var.defaults.master_user_secret_kms_key_id, null)
   max_allocated_storage                                  = try(each.value.max_allocated_storage, var.defaults.max_allocated_storage, 0)
