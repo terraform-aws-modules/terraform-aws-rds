@@ -14,6 +14,7 @@ module "wrapper" {
   ca_cert_identifier                                     = try(each.value.ca_cert_identifier, var.defaults.ca_cert_identifier, null)
   character_set_name                                     = try(each.value.character_set_name, var.defaults.character_set_name, null)
   cloudwatch_log_group_class                             = try(each.value.cloudwatch_log_group_class, var.defaults.cloudwatch_log_group_class, null)
+  cloudwatch_log_group_deletion_protection_enabled       = try(each.value.cloudwatch_log_group_deletion_protection_enabled, var.defaults.cloudwatch_log_group_deletion_protection_enabled, null)
   cloudwatch_log_group_kms_key_id                        = try(each.value.cloudwatch_log_group_kms_key_id, var.defaults.cloudwatch_log_group_kms_key_id, null)
   cloudwatch_log_group_retention_in_days                 = try(each.value.cloudwatch_log_group_retention_in_days, var.defaults.cloudwatch_log_group_retention_in_days, 7)
   cloudwatch_log_group_skip_destroy                      = try(each.value.cloudwatch_log_group_skip_destroy, var.defaults.cloudwatch_log_group_skip_destroy, null)

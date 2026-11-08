@@ -153,9 +153,10 @@ module "db_instance" {
   create_cloudwatch_log_group            = var.create_cloudwatch_log_group
   cloudwatch_log_group_retention_in_days = var.cloudwatch_log_group_retention_in_days
   cloudwatch_log_group_kms_key_id        = var.cloudwatch_log_group_kms_key_id
-  cloudwatch_log_group_skip_destroy      = var.cloudwatch_log_group_skip_destroy
-  cloudwatch_log_group_class             = var.cloudwatch_log_group_class
-  cloudwatch_log_group_tags              = var.cloudwatch_log_group_tags
+  cloudwatch_log_group_skip_destroy                = var.cloudwatch_log_group_skip_destroy
+  cloudwatch_log_group_class                       = var.cloudwatch_log_group_class
+  cloudwatch_log_group_deletion_protection_enabled = var.cloudwatch_log_group_deletion_protection_enabled
+  cloudwatch_log_group_tags                        = var.cloudwatch_log_group_tags
 
   timeouts = var.timeouts
 
